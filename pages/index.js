@@ -1,6 +1,5 @@
 import Head from "next/head";
-
-import Map from "../components/Map";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -10,7 +9,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Map />
+      <h1>Транспорт</h1>
+
+      <ul>
+        <li><Link href={'/map'}>Карта</Link></li>
+      </ul>
     </>
   );
 }
