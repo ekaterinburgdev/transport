@@ -9,7 +9,7 @@ export enum VehicleType {
 };
 
 export function getWrappedLink(link: string) {
-    return `https://api.allorigins.win/raw?url=${link}`;
+    return `https://allorigins.hexlet.app/raw?disableCache=true&url=${encodeURIComponent(link)}`;
 }
 
 async function loadTransport(vehicle: VehicleType) {
