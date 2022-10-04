@@ -15,7 +15,7 @@ export type MapVehicleProps = {
     velocity: number;
     position: number[];
     routeNumber: number | null;
-    course: number | string;
+    course: number;
     onClick: (routeNumber: number) => void;
 }
 
@@ -43,7 +43,7 @@ export const MapVehicle = ({ iconUrl, boardId, velocity, position, routeNumber, 
             icon={icon}
             position={position}
             eventHandlers={eventHandlers}
-            rotationAngle={course}
+            rotationAngle={course - 90}
             rotationOrigin="center center"
         >
             <Popup>
