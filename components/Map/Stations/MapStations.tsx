@@ -37,6 +37,7 @@ export const MapStations = () => {
                     <Marker
                         position={[Number(lat), Number(lng)]}
                         icon={iconTramOptions}
+                        key={station.ID}
                     >
                         <Popup>
                             <p>{station.NAME}</p>
@@ -59,6 +60,7 @@ export const MapStations = () => {
                     <Marker
                         position={[Number(lat), Number(lng)]}
                         icon={iconTrollOptions}
+                        key={station.ID}
                     >
                         <Popup>
                             <p>{station.NAME}</p>

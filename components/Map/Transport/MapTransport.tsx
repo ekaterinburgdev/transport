@@ -4,6 +4,7 @@ import groupBy from 'lodash/groupBy';
 import { MapVehicle } from '../Vehicle/MapVehicle';
 import { MapRoutes } from "../Routes/MapRoutes";
 import { MapStations } from '../Stations/MapStations';
+import { useCallback } from "react";
 
 export enum VehicleType {
     Tram = 'tram',
@@ -108,12 +109,12 @@ export const RoutesContext = createContext(routesDefault);
 export const MapTransport = () => {
     const [trolls, setTrolls] = useState([]);
     const [trams, setTrams] = useState([]);
-    const [tramsRoutes, setTramsRoutes] = useState([]);
-    const [trollsRoutes, setTrollsRoutes] = useState([]);
-    const [tramsStations, setTramsStations] = useState([]);
-    const [trollsStations, setTrollsStations] = useState([]);
-    const [tramsPoints, setTramsPoints] = useState([]);
-    const [trollsPoints, setTrollsPoints] = useState([]);
+    const [tramsRoutes, setTramsRoutes] = useState({});
+    const [trollsRoutes, setTrollsRoutes] = useState({});
+    const [tramsStations, setTramsStations] = useState({});
+    const [trollsStations, setTrollsStations] = useState({});
+    const [tramsPoints, setTramsPoints] = useState({});
+    const [trollsPoints, setTrollsPoints] = useState({});
     const [showTramsRoute, setShowTramsRoute] = useState(null);
     const [showTrollsRoute, setShowTrollsRoute] = useState(null);
 
@@ -129,21 +130,21 @@ export const MapTransport = () => {
 
         setTramsRoutes(groupBy(trams, 'num'));
         setTrollsRoutes(groupBy(trolls, 'num'));
-    }
+    };
 
     const updateStations = async () => {
         const [trams, trolls] = await Promise.all([loadStations(VehicleType.Tram), loadStations(VehicleType.Troll)]);
 
         setTrollsStations(groupBy(trolls, 'ID'));
         setTramsStations(groupBy(trams, 'ID'));
-    }
+    };
 
     const updatePoints = async () => {
         const [trams, trolls] = await Promise.all([loadPoints(VehicleType.Tram), loadPoints(VehicleType.Troll)]);
 
         setTrollsPoints(groupBy(trolls, 'ID'));
         setTramsPoints(groupBy(trams, 'ID'));
-    }
+    };
 
     useEffect(() => {
         updateRoutes();
@@ -155,7 +156,17 @@ export const MapTransport = () => {
             updateTransport();
         }, 15000);
     }, []);
-  
+
+    const onTrollClick = useCallback((routeNumber: number) => {
+        setShowTrollsRoute(routeNumber);
+        setShowTramsRoute(null);
+    }, []);
+
+    const onTramClick = useCallback((routeNumber: number) => {
+        setShowTramsRoute(routeNumber);
+        setShowTrollsRoute(null);
+    }, []);
+
     return (
         <RoutesContext.Provider
             value={{
@@ -174,13 +185,12 @@ export const MapTransport = () => {
                     routeNumber={Number(troll.ROUTE)}
                     boardId={troll.BOARD_NUM}
                     velocity={troll.VELOCITY}
-                    iconUrl="/icons/troll.svg"
+                    arrowUrl="/icons/troll-arrow.svg"
+                    iconUrl="/icons/troll-light.svg"
                     course={Number(troll.COURSE)}
                     key={troll.BOARD_NUM}
-                    onClick={(routeNumber: number) => {
-                        setShowTrollsRoute(routeNumber);
-                        setShowTramsRoute(null);
-                    }}
+                    color="#0BBBEF"
+                    onClick={onTrollClick}
                 />
             ))}
             {trams.map((tram) => (
@@ -189,13 +199,12 @@ export const MapTransport = () => {
                     routeNumber={Number(tram.ROUTE)}
                     boardId={tram.BOARD_NUM}
                     velocity={tram.VELOCITY}
-                    iconUrl="/icons/tram.svg"
+                    arrowUrl="/icons/tram-arrow.svg"
+                    iconUrl="/icons/tram-light.svg"
                     course={Number(tram.COURSE)}
                     key={tram.BOARD_NUM}
-                    onClick={(routeNumber: number) => {
-                        setShowTramsRoute(routeNumber);
-                        setShowTrollsRoute(null);
-                    }}
+                    color="#EC6608"
+                    onClick={onTramClick}
                 />
             ))}
 

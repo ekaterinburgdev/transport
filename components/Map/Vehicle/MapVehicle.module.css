@@ -1,3 +1,34 @@
 .MapVehicle {
-    
+    position: relative;
+}
+
+.MapVehicleArrow {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.MapVehicleIcon {
+    position: absolute;
+    top: 13.5px;
+    left: 8.5px;
+}
+
+.MapVehicleRoute {
+    position: absolute;
+
+    width: 35px;
+    left: 16px;
+    top: 12px;
+
+    background-color: #fff;
+    border-radius: 3px;
+    color: black;
+    text-align: right;
+    padding: 1px 4px 0;
+
+    font-family: 'Iset Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
 }

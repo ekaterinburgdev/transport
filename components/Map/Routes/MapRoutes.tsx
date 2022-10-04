@@ -39,14 +39,18 @@ export const MapRoutes = ({ routeNumber, type }: MapRoutesProps) => {
             }).filter(Boolean);
         });
         
-    });
+    }, [
+        routeNumber,
+        routes,
+        type,
+    ]);
 
     return (
         <Polyline
             positions={routePositions}
             pathOptions={{
                 color: typeColorMap[type],
-                stroke: 8,
+                weight: 6,
             }}
         />
     );
