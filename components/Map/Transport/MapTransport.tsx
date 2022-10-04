@@ -122,7 +122,7 @@ export const MapTransport = () => {
 
         setInterval(async () => {
             updateTransport();
-        }, 5000);
+        }, 15000);
     }, []);
   
     return (
