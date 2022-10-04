@@ -14,6 +14,7 @@ specifiers:
   husky: ^7.0.0
   leaflet: ^1.9.1
   lint-staged: ^11.1.2
+  lodash: ^4.17.21
   next: 12.3.1
   prettier: 2.4.0
   prop-types: ^15.8.1
@@ -24,6 +25,7 @@ specifiers:
 dependencies:
   classnames: 2.3.2
   leaflet: 1.9.1
+  lodash: 4.17.21
   next: 12.3.1_biqbaboplfbrettd7655fr4n2y
   prop-types: 15.8.1
   react: 18.2.0
@@ -1705,6 +1707,10 @@ packages:
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
+
+  /lodash/4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: false
 
   /log-update/4.0.0:
     resolution: {integrity: sha512-9fkkDevMefjg0mmzWFBW8YkFP91OrizzkW3diF7CpG+S2EYdy4+TVfGwz1zeF8x7hCx1ovSPTOE9Ngib74qqUg==}
