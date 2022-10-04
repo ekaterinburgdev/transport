@@ -176,6 +176,7 @@ export const MapTransport = () => {
                     velocity={troll.VELOCITY}
                     iconUrl="/icons/troll.svg"
                     course={Number(troll.COURSE)}
+                    key={troll.BOARD_NUM}
                     onClick={(routeNumber: number) => {
                         setShowTrollsRoute(routeNumber);
                         setShowTramsRoute(null);
@@ -190,6 +191,7 @@ export const MapTransport = () => {
                     velocity={tram.VELOCITY}
                     iconUrl="/icons/tram.svg"
                     course={Number(tram.COURSE)}
+                    key={tram.BOARD_NUM}
                     onClick={(routeNumber: number) => {
                         setShowTramsRoute(routeNumber);
                         setShowTrollsRoute(null);

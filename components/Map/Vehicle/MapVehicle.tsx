@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, FC } from 'react';
 
 import { Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
@@ -19,7 +19,14 @@ export type MapVehicleProps = {
     onClick: (routeNumber: number) => void;
 }
 
-export const MapVehicle = ({ iconUrl, boardId, velocity, position, routeNumber, onClick, course }: MapVehicleProps) => {
+export const MapVehicle: FC<MapVehicleProps> = ({
+    iconUrl,
+    boardId,
+    position,
+    routeNumber,
+    onClick,
+    course,
+}: MapVehicleProps) => {
     const icon = useMemo(() => new L.Icon({
         iconSize: [32, 37],
         iconAnchor: [16, 18],
@@ -43,7 +50,7 @@ export const MapVehicle = ({ iconUrl, boardId, velocity, position, routeNumber, 
             icon={icon}
             position={position}
             eventHandlers={eventHandlers}
-            rotationAngle={course - 90}
+            rotationAngle={course + 90}
             rotationOrigin="center center"
         >
             <Popup>
