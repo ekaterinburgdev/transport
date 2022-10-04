@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import L from "leaflet";
-import { MapContainer, Marker, Popup, TileLayer, ScaleControl } from "react-leaflet";
+import { MapContainer, TileLayer, ScaleControl } from "react-leaflet";
 import classNames from "classnames/bind";
 
 import iconRetinaUrl from "leaflet/dist/images/marker-icon-2x.png";
@@ -38,12 +38,12 @@ function Map() {
     >
       <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />
 
-      <ScaleControl position="topright" />
+        <ScaleControl position="topright" />
 
-      <MapLocation />
+        <MapLocation />
 
-      <MapTransport />
-    </MapContainer>
+        <MapTransport />
+      </MapContainer>
   );
 }
 

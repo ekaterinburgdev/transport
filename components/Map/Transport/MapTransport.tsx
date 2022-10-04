@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
-import { Marker, Popup } from 'react-leaflet';
-import L from 'leaflet';
+import { useEffect, useState, createContext } from "react";
 import groupBy from 'lodash/groupBy';
+
+import { MapVehicle } from '../Vehicle/MapVehicle';
+import { MapRoutes } from "../Routes/MapRoutes";
+import { MapStations } from '../Stations/MapStations';
 
 export enum VehicleType {
     Tram = 'tram',
@@ -72,19 +74,36 @@ async function loadStations(vehicle: VehicleType) {
     }
 }
 
-const iconTrollOptions = new L.Icon({
-    iconUrl: '/icons/troll.svg',
-    iconSize: [26, 26],
-    iconAnchor: [13, 26],
-    popupAnchor: [0, -26],
-});
+async function loadPoints(vehicle: VehicleType) {
+    try {
+        const res = await fetch(getWrappedLink(`http://map.ettu.ru/api/v2/${vehicle}/points/?apiKey=111&order=1`));
 
-const iconTramOptions = new L.Icon({
-    iconUrl: '/icons/tram.svg',
-    iconSize: [30, 30],
-    iconAnchor: [15, 30],
-    popupAnchor: [0, -30],
-});
+        const resJson = await res.json();
+
+        if (resJson.error.code) {
+            console.error(resJson.error.msg);
+
+            return [];
+        }
+
+        return resJson.points;
+    } catch (e) {
+        console.error(e);
+
+        return [];
+    }
+}
+
+const routesDefault = {
+    tramsRoutes: {},
+    tramsStations: {},
+    tramsPoints: {},
+    trollsRoutes: {},
+    trollsStations: {},
+    trollsPoints: {},
+};
+
+export const RoutesContext = createContext(routesDefault);
 
 export const MapTransport = () => {
     const [trolls, setTrolls] = useState([]);
@@ -93,19 +112,23 @@ export const MapTransport = () => {
     const [trollsRoutes, setTrollsRoutes] = useState([]);
     const [tramsStations, setTramsStations] = useState([]);
     const [trollsStations, setTrollsStations] = useState([]);
+    const [tramsPoints, setTramsPoints] = useState([]);
+    const [trollsPoints, setTrollsPoints] = useState([]);
+    const [showTramsRoute, setShowTramsRoute] = useState(null);
+    const [showTrollsRoute, setShowTrollsRoute] = useState(null);
 
     const updateTransport = async () => {
         const [trams, trolls] = await Promise.all([loadTransport(VehicleType.Tram), loadTransport(VehicleType.Troll)]);
 
-        setTrolls(trolls);
-        setTrams(trams);
+        setTrolls(trolls.filter(troll => Boolean(troll.ROUTE) && Number(troll.ON_ROUTE)));
+        setTrams(trams.filter(tram => Boolean(tram.ROUTE) && Number(tram.ON_ROUTE)));
     };
 
     const updateRoutes = async () => {
         const [trams, trolls] = await Promise.all([loadRoutes(VehicleType.Tram), loadRoutes(VehicleType.Troll)]);
 
-        setTramsRoutes(trams);
-        setTrollsRoutes(trolls);
+        setTramsRoutes(groupBy(trams, 'num'));
+        setTrollsRoutes(groupBy(trolls, 'num'));
     }
 
     const updateStations = async () => {
@@ -115,10 +138,18 @@ export const MapTransport = () => {
         setTramsStations(groupBy(trams, 'ID'));
     }
 
+    const updatePoints = async () => {
+        const [trams, trolls] = await Promise.all([loadPoints(VehicleType.Tram), loadPoints(VehicleType.Troll)]);
+
+        setTrollsPoints(groupBy(trolls, 'ID'));
+        setTramsPoints(groupBy(trams, 'ID'));
+    }
+
     useEffect(() => {
         updateRoutes();
         updateTransport();
         updateStations();
+        updatePoints();
 
         setInterval(async () => {
             updateTransport();
@@ -126,29 +157,52 @@ export const MapTransport = () => {
     }, []);
   
     return (
-        <>
+        <RoutesContext.Provider
+            value={{
+                tramsRoutes,
+                tramsStations,
+                tramsPoints,
+                trollsRoutes,
+                trollsStations,
+                trollsPoints,
+            }}
+        >
+            {/* Render vehicles */}
             {trolls.map((troll) => (
-                <Marker
-                    icon={iconTrollOptions}
+                <MapVehicle
                     position={[Number(troll.LAT), Number(troll.LON)]}
-                >
-                    <Popup>
-                        {troll.ROUTE && <p>Маршрут: {troll.ROUTE}</p>}
-                        <p>Бортовой номер: {troll.BOARD_NUM}</p>
-                    </Popup>
-                </Marker>
+                    routeNumber={Number(troll.ROUTE)}
+                    boardId={troll.BOARD_NUM}
+                    velocity={troll.VELOCITY}
+                    iconUrl="/icons/troll.svg"
+                    course={troll.COURSE}
+                    onClick={(routeNumber: number) => {
+                        setShowTrollsRoute(routeNumber);
+                        setShowTramsRoute(null);
+                    }}
+                />
             ))}
             {trams.map((tram) => (
-                <Marker
-                    icon={iconTramOptions}
+                <MapVehicle
                     position={[Number(tram.LAT), Number(tram.LON)]}
-                >
-                    <Popup>
-                        {tram.ROUTE && <p>Маршрут: {tram.ROUTE}</p>}
-                        <p>Бортовой номер: {tram.BOARD_NUM}</p>
-                    </Popup>
-                </Marker>
+                    routeNumber={Number(tram.ROUTE)}
+                    boardId={tram.BOARD_NUM}
+                    velocity={tram.VELOCITY}
+                    iconUrl="/icons/tram.svg"
+                    course={tram.COURSE}
+                    onClick={(routeNumber: number) => {
+                        setShowTramsRoute(routeNumber);
+                        setShowTrollsRoute(null);
+                    }}
+                />
             ))}
-        </>
+
+            {/* Render selected route */}
+            {showTramsRoute && <MapRoutes routeNumber={showTramsRoute} type={VehicleType.Tram} />}
+            {showTrollsRoute && <MapRoutes routeNumber={showTrollsRoute} type={VehicleType.Troll} />}
+
+            {/* Render stations */}
+            <MapStations />
+        </RoutesContext.Provider>
     );
 };

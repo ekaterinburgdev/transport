@@ -13,6 +13,7 @@ specifiers:
   eslint-plugin-react-hooks: ^4.2.0
   husky: ^7.0.0
   leaflet: ^1.9.1
+  leaflet-rotatedmarker: ^0.2.0
   lint-staged: ^11.1.2
   lodash: ^4.17.21
   next: 12.3.1
@@ -25,6 +26,7 @@ specifiers:
 dependencies:
   classnames: 2.3.2
   leaflet: 1.9.1
+  leaflet-rotatedmarker: 0.2.0
   lodash: 4.17.21
   next: 12.3.1_biqbaboplfbrettd7655fr4n2y
   prop-types: 15.8.1
@@ -1640,6 +1642,10 @@ packages:
     dependencies:
       language-subtag-registry: 0.3.22
     dev: true
+
+  /leaflet-rotatedmarker/0.2.0:
+    resolution: {integrity: sha512-yc97gxLXwbZa+Gk9VCcqI0CkvIBC9oNTTjFsHqq4EQvANrvaboib4UdeQLyTnEqDpaXHCqzwwVIDHtvz2mUiDg==}
+    dev: false
 
   /leaflet/1.9.1:
     resolution: {integrity: sha512-5FcDAMTLAuOq0RisQQbTFatl8Sl4bM0gMrBfuHbl7CYbYJv45BfCS8oU3T644MLjleBq1Ncq541QEA1pqUGTFA==}
