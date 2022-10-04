@@ -36,17 +36,13 @@ function Map() {
       zoom={16}
       className={cn(styles.Map)}
     >
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />
 
       <ScaleControl position="topright" />
 
       <MapLocation />
 
       <MapTransport />
-
-      <Marker position={position}>
-        <Popup>Popup test</Popup>
-      </Marker>
     </MapContainer>
   );
 }

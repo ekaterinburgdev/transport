@@ -1,9 +1,26 @@
-import { useMapEvent } from 'react-leaflet';
+import { useState } from 'react';
+import { useMapEvents, Marker, Popup } from 'react-leaflet';
+
+const yekaterinburg = [54.838011, 60.597465];
 
 export const MapLocation = () => {
-    const map = useMapEvent('load', (e) => {
-        map.locate({ setView: true, maxZoom: 16 });
+    const [position, setPosition] = useState(null);
+
+    const map = useMapEvents({
+        locationfound(e) {
+            if (!position) {
+                map.setView(e.latlng, map.getZoom());
+            }
+
+            setPosition(e.latlng);
+        },
     });
 
-    return null;
+    map.locate({ watch: true, maxZoom: 16 });
+
+    return (
+        <Marker position={position || yekaterinburg}>
+            <Popup>Your location</Popup>
+        </Marker>
+    );
 };
