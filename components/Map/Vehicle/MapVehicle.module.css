@@ -6,7 +6,7 @@
 }
 
 .MapVehicleWrapper {
-    transition: transform 15s ease-in-out;
+    transition: transform 9s linear;
 }
 
 .MapVehicleArrow {

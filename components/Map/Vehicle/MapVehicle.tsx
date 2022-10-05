@@ -62,7 +62,7 @@ export const MapVehicle: FC<MapVehicleProps> = ({
     const isCourseEast = course > 315 || course < 45;
 
     const getDeltaCoords = useCallback(() => {
-        const distance = getDistanceInPixels(15);
+        const distance = getDistanceInPixels(9);
         const angleInRad = course * Math.PI / 180;
 
         return [Math.cos(angleInRad) * distance, Math.sin(angleInRad) * distance];
@@ -121,7 +121,6 @@ export const MapVehicle: FC<MapVehicleProps> = ({
 
     useEffect(() => {
         setTimeout(updateTranslate, 0);
-        setInterval(updateTranslate, 15000);
     }, [updateTranslate]);
 
     useMapEvents({

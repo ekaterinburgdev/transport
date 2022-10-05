@@ -154,7 +154,7 @@ export const MapTransport = () => {
 
         setInterval(async () => {
             updateTransport();
-        }, 15000);
+        }, 8000);
     }, []);
 
     const onTrollClick = useCallback((routeNumber: number) => {
