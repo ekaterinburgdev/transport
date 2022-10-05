@@ -38,12 +38,12 @@ function Map() {
     >
       <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />
 
-        <ScaleControl position="topright" />
+      <ScaleControl position="topright" />
 
-        <MapLocation />
+      <MapLocation />
 
-        <MapTransport />
-      </MapContainer>
+      <MapTransport />
+    </MapContainer>
   );
 }
 

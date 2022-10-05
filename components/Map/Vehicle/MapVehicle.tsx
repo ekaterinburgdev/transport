@@ -1,10 +1,11 @@
-import { useMemo, FC } from 'react';
+import { useMemo, FC, useRef, useEffect } from 'react';
 
-import { Marker, Popup } from 'react-leaflet';
+import { Marker, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import classNames from "classnames/bind";
 
 import styles from "./MapVehicle.module.css";
+import { useCallback } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -31,16 +32,52 @@ export const MapVehicle: FC<MapVehicleProps> = ({
     onClick,
     course,
     color,
+    velocity,
 }: MapVehicleProps) => {
+    const markerRef = useRef<L.Marker>();
+    const map = useMap();
+
+    const scale = useMemo(() => {
+        // Get the y,x dimensions of the map
+        const { x, y } = map.getSize();
+
+        // calculate the distance the one side of the map to the other using the haversine formula
+        const maxMeters = map
+            .containerPointToLatLng([0, y])
+            .distanceTo(map.containerPointToLatLng([x, y]));
+
+        // calculate how many meters each pixel represents
+        return maxMeters / x ;
+    }, [map]);
+
+    const getDistanceInPixels = useCallback((seconds: number) => {
+        const fixedVelocity = velocity;
+
+        const velocityMetersPerSecond = fixedVelocity / 3.6;
+        const velocityPixelsPerSecond = velocityMetersPerSecond / scale;
+
+        return seconds * velocityPixelsPerSecond;
+    }, [velocity, scale]);
+
     const isCourseEast = course > 315 || course < 45;
 
+    const getDeltaCoords = useCallback(() => {
+        const distance = getDistanceInPixels(15);
+        const angleInRad = course * Math.PI / 180;
+
+        return [Math.cos(angleInRad) * distance, Math.sin(angleInRad) * distance];
+    }, [course, getDistanceInPixels]);
+
     const icon = useMemo(() => new L.DivIcon({
-        iconSize: [32, 37],
-        iconAnchor: [16, 18],
-        popupAnchor: [0, -18],
-        className: `vehicle-${boardId}`,
+        iconSize: [37, 32],
+        iconAnchor: [18.5, 16],
+        popupAnchor: [0, -16],
+        className: `${cn(styles.MapVehicle)}`,
         html: `
-            <div class=${cn(styles.MapVehicle)}>
+            <div
+                class="vehicle-${boardId}-${routeNumber} ${cn(styles.MapVehicleWrapper)}"
+                style="transform: translate(0px, 0px)"
+            >
                 <div
                     style="color: ${color}; ${isCourseEast ? leftRoutePanelStyle : ''}"
                     class="${cn(styles.MapVehicleRoute)}"
@@ -48,7 +85,7 @@ export const MapVehicle: FC<MapVehicleProps> = ({
                     ${routeNumber}
                 </div>
                 <img
-                    style="transform: rotate(${course + 90}deg); transform-origin: 16px 21px"
+                    style="transform: rotate(${course}deg); transform-origin: 16px 16px"
                     class="${cn(styles.MapVehicleArrow)}"
                     src="${arrowUrl}"
                 />
@@ -70,15 +107,38 @@ export const MapVehicle: FC<MapVehicleProps> = ({
         },
     }), [routeNumber, onClick]);
 
+    const updateTranslate = useCallback(() => {
+        const marker = document.querySelector(`.vehicle-${boardId}-${routeNumber}`) as HTMLDivElement;
+
+        if (!marker) {
+            return;
+        }
+
+        const [x, y] = getDeltaCoords();
+
+        marker.style.transform = `translate(${x}px, ${y}px)`;
+    }, [boardId, routeNumber, getDeltaCoords]);
+
+    useEffect(() => {
+        setTimeout(updateTranslate, 0);
+        setInterval(updateTranslate, 15000);
+    }, [updateTranslate]);
+
+    useMapEvents({
+        zoomend() {
+            updateTranslate();
+        },
+        moveend() {
+            updateTranslate();
+        },
+    });
+
     return (
         <Marker
             icon={icon}
             position={position}
             eventHandlers={eventHandlers}
-        >
-            <Popup pane="popupPane">
-                {routeNumber && <p>Маршрут: {routeNumber}</p>}
-            </Popup>
-        </Marker>
+            ref={markerRef}
+        />
     );
 };

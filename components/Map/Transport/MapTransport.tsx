@@ -185,7 +185,7 @@ export const MapTransport = () => {
                         position={[Number(troll.LAT), Number(troll.LON)]}
                         routeNumber={Number(troll.ROUTE)}
                         boardId={troll.BOARD_NUM}
-                        velocity={troll.VELOCITY}
+                        velocity={Number(troll.VELOCITY)}
                         arrowUrl="/icons/troll-arrow.svg"
                         iconUrl="/icons/troll-light.svg"
                         course={Number(troll.COURSE)}
