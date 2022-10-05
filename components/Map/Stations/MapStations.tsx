@@ -39,7 +39,7 @@ export const MapStations = () => {
                         icon={iconTramOptions}
                         key={station.ID}
                     >
-                        <Popup>
+                        <Popup pane="popupPane">
                             <p>{station.NAME}</p>
                             <p>{station.DIRECTION}</p>
                         </Popup>
@@ -62,7 +62,7 @@ export const MapStations = () => {
                         icon={iconTrollOptions}
                         key={station.ID}
                     >
-                        <Popup>
+                        <Popup pane="popupPane">
                             <p>{station.NAME}</p>
                             <p>{station.DIRECTION}</p>
                         </Popup>
