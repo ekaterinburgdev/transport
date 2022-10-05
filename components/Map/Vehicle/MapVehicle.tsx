@@ -32,7 +32,7 @@ export const MapVehicle: FC<MapVehicleProps> = ({
     course,
     color,
 }: MapVehicleProps) => {
-    const isCourseEast = Math.abs(course - 45) <= 45;
+    const isCourseEast = course > 315 || course < 45;
 
     const icon = useMemo(() => new L.DivIcon({
         iconSize: [32, 37],
@@ -76,7 +76,7 @@ export const MapVehicle: FC<MapVehicleProps> = ({
             position={position}
             eventHandlers={eventHandlers}
         >
-            <Popup>
+            <Popup pane="popupPane">
                 {routeNumber && <p>Маршрут: {routeNumber}</p>}
             </Popup>
         </Marker>

@@ -1,10 +1,10 @@
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useState, createContext, useCallback } from "react";
+import { Pane } from 'react-leaflet';
 import groupBy from 'lodash/groupBy';
 
 import { MapVehicle } from '../Vehicle/MapVehicle';
 import { MapRoutes } from "../Routes/MapRoutes";
 import { MapStations } from '../Stations/MapStations';
-import { useCallback } from "react";
 
 export enum VehicleType {
     Tram = 'tram',
@@ -179,41 +179,45 @@ export const MapTransport = () => {
             }}
         >
             {/* Render vehicles */}
-            {trolls.map((troll) => (
-                <MapVehicle
-                    position={[Number(troll.LAT), Number(troll.LON)]}
-                    routeNumber={Number(troll.ROUTE)}
-                    boardId={troll.BOARD_NUM}
-                    velocity={troll.VELOCITY}
-                    arrowUrl="/icons/troll-arrow.svg"
-                    iconUrl="/icons/troll-light.svg"
-                    course={Number(troll.COURSE)}
-                    key={troll.BOARD_NUM}
-                    color="#0BBBEF"
-                    onClick={onTrollClick}
-                />
-            ))}
-            {trams.map((tram) => (
-                <MapVehicle
-                    position={[Number(tram.LAT), Number(tram.LON)]}
-                    routeNumber={Number(tram.ROUTE)}
-                    boardId={tram.BOARD_NUM}
-                    velocity={tram.VELOCITY}
-                    arrowUrl="/icons/tram-arrow.svg"
-                    iconUrl="/icons/tram-light.svg"
-                    course={Number(tram.COURSE)}
-                    key={tram.BOARD_NUM}
-                    color="#EC6608"
-                    onClick={onTramClick}
-                />
-            ))}
+            <Pane name="vehicles" style={{ zIndex: 550 }}>
+                {trolls.map((troll) => (
+                    <MapVehicle
+                        position={[Number(troll.LAT), Number(troll.LON)]}
+                        routeNumber={Number(troll.ROUTE)}
+                        boardId={troll.BOARD_NUM}
+                        velocity={troll.VELOCITY}
+                        arrowUrl="/icons/troll-arrow.svg"
+                        iconUrl="/icons/troll-light.svg"
+                        course={Number(troll.COURSE)}
+                        key={troll.BOARD_NUM}
+                        color="#0BBBEF"
+                        onClick={onTrollClick}
+                    />
+                ))}
+                {trams.map((tram) => (
+                    <MapVehicle
+                        position={[Number(tram.LAT), Number(tram.LON)]}
+                        routeNumber={Number(tram.ROUTE)}
+                        boardId={tram.BOARD_NUM}
+                        velocity={tram.VELOCITY}
+                        arrowUrl="/icons/tram-arrow.svg"
+                        iconUrl="/icons/tram-light.svg"
+                        course={Number(tram.COURSE)}
+                        key={tram.BOARD_NUM}
+                        color="#EC6608"
+                        onClick={onTramClick}
+                    />
+                ))}
+            </Pane>
 
             {/* Render selected route */}
             {showTramsRoute && <MapRoutes routeNumber={showTramsRoute} type={VehicleType.Tram} />}
             {showTrollsRoute && <MapRoutes routeNumber={showTrollsRoute} type={VehicleType.Troll} />}
 
             {/* Render stations */}
-            <MapStations />
+            <Pane name="stations" style={{ zIndex: 500 }}>
+                <MapStations />
+            </Pane>
         </RoutesContext.Provider>
     );
 };
