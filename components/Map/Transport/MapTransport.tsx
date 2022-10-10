@@ -109,12 +109,16 @@ export const RoutesContext = createContext(routesDefault);
 export const MapTransport = () => {
     const [trolls, setTrolls] = useState([]);
     const [trams, setTrams] = useState([]);
+
     const [tramsRoutes, setTramsRoutes] = useState({});
     const [trollsRoutes, setTrollsRoutes] = useState({});
+
     const [tramsStations, setTramsStations] = useState({});
     const [trollsStations, setTrollsStations] = useState({});
+
     const [tramsPoints, setTramsPoints] = useState({});
     const [trollsPoints, setTrollsPoints] = useState({});
+
     const [showTramsRoute, setShowTramsRoute] = useState(null);
     const [showTrollsRoute, setShowTrollsRoute] = useState(null);
 
@@ -192,6 +196,7 @@ export const MapTransport = () => {
                         key={troll.BOARD_NUM}
                         color="#0BBBEF"
                         onClick={onTrollClick}
+                        type={VehicleType.Troll}
                     />
                 ))}
                 {trams.map((tram) => (
@@ -199,13 +204,14 @@ export const MapTransport = () => {
                         position={[Number(tram.LAT), Number(tram.LON)]}
                         routeNumber={Number(tram.ROUTE)}
                         boardId={tram.BOARD_NUM}
-                        velocity={tram.VELOCITY}
+                        velocity={Number(tram.VELOCITY)}
                         arrowUrl="/icons/tram-arrow.svg"
                         iconUrl="/icons/tram-light.svg"
                         course={Number(tram.COURSE)}
                         key={tram.BOARD_NUM}
                         color="#EC6608"
                         onClick={onTramClick}
+                        type={VehicleType.Tram}
                     />
                 ))}
             </Pane>

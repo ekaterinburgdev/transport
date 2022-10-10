@@ -3,6 +3,8 @@
 
     border: none;
     background-color: transparent;
+
+    /* transition: transform 500ms linear; */
 }
 
 .MapVehicleWrapper {

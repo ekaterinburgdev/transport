@@ -38,7 +38,6 @@ export const MapRoutes = ({ routeNumber, type }: MapRoutesProps) => {
                 return [lat, lng];
             }).filter(Boolean);
         });
-        
     }, [
         routeNumber,
         routes,
