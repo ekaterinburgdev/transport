@@ -15,6 +15,8 @@
     position: absolute;
     top: 0;
     left: 0;
+
+    transition: transform 1s linear;
 }
 
 .MapVehicleIcon {
@@ -40,4 +42,9 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 19px;
+}
+
+.MapVehicleRoute_left {
+    left: -19px;
+    text-align: left;
 }

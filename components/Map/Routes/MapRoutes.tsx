@@ -1,7 +1,7 @@
-import { useContext, useMemo } from 'react';
-import { Polyline } from 'react-leaflet';
+import React, { useContext, useMemo, useState } from 'react';
+import { Polyline, useMapEvent } from 'react-leaflet';
 
-import { RoutesContext, VehicleType } from "../Transport/MapTransport";
+import { RoutesContext, VehicleType } from '../Transport/MapTransport';
 
 export type MapRoutesProps = {
     routeNumber: number;
@@ -15,6 +15,17 @@ const typeColorMap = {
 
 export const MapRoutes = ({ routeNumber, type }: MapRoutesProps) => {
     const routes = useContext(RoutesContext);
+    const [hidden, setHidden] = useState(false);
+
+    const map = useMapEvent('zoomend', () => {
+        const zoom = map.getZoom();
+
+        if (zoom < 13) {
+            setHidden(true);
+        } else {
+            setHidden(false);
+        }
+    });
 
     const routePositions = useMemo(() => {
         const route = routes[`${type}sRoutes`]?.[routeNumber];
@@ -44,7 +55,7 @@ export const MapRoutes = ({ routeNumber, type }: MapRoutesProps) => {
         type,
     ]);
 
-    return (
+    return !hidden ? (
         <Polyline
             positions={routePositions}
             pathOptions={{
@@ -52,5 +63,5 @@ export const MapRoutes = ({ routeNumber, type }: MapRoutesProps) => {
                 weight: 6,
             }}
         />
-    );
+    ) : null;
 };

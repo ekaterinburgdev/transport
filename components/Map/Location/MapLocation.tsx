@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMapEvents, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
 
-const yekaterinburg = [54.838011, 60.597465];
+const yekaterinburg: [number, number] = [54.838011, 60.597465];
 
 export const MapLocation = () => {
-    const [position, setPosition] = useState(null);
+    const [position, setPosition] = useState<L.LatLng | null>(null);
 
     const map = useMapEvents({
         locationfound(e) {
@@ -14,9 +15,18 @@ export const MapLocation = () => {
 
             setPosition(e.latlng);
         },
+        locationerror(e) {
+            console.error(e);
+        }
     });
 
-    map.locate({ watch: true, maxZoom: 16 });
+    useEffect(() => {
+        map.locate({ watch: true, maxZoom: 16 });
+
+        return () => {
+            map.stopLocate();
+        }
+    }, []);
 
     return (
         <Marker position={position || yekaterinburg}>

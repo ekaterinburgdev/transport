@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { Marker, Popup } from 'react-leaflet';
+import React, { useContext, useState } from 'react';
+import { Marker, Popup, useMapEvent } from 'react-leaflet';
 import L from 'leaflet';
 
 import { RoutesContext } from "../Transport/MapTransport";
@@ -20,55 +20,65 @@ const iconTrollOptions = new L.Icon({
 
 export const MapStations = () => {
     const routes = useContext(RoutesContext);
+    const [hidden, setHidden] = useState(false);
+    const map = useMapEvent('zoomend', () => {
+        const zoom = map.getZoom();
 
-    return (
-        <>
-            {Object.values(routes.tramsStations).map((stationArr: any) => {
-                const station = stationArr[0];
+        if (zoom < 14) {
+            setHidden(true);
+        } else {
+            setHidden(false);
+        }
+    });
 
-                const lat = station?.LAT || station?.LATITUDE;
-                const lng = station?.LON || station?.LONGITUDE;
+    return !hidden ? (
+            <>
+                {Object.values(routes.tramsStations).map((stationArr: any) => {
+                    const station = stationArr[0];
 
-                if (!lng || !lat) {
-                    return null;
-                }
+                    const lat = station?.LAT || station?.LATITUDE;
+                    const lng = station?.LON || station?.LONGITUDE;
 
-                return (
-                    <Marker
-                        position={[Number(lat), Number(lng)]}
-                        icon={iconTramOptions}
-                        key={station.ID}
-                    >
-                        <Popup pane="popupPane">
-                            <p>{station.NAME}</p>
-                            <p>{station.DIRECTION}</p>
-                        </Popup>
-                    </Marker>
-                );
-            })}
-            {Object.values(routes.trollsStations).map((stationArr: any) => {
-                const station = stationArr[0];
+                    if (!lng || !lat) {
+                        return null;
+                    }
 
-                const lat = station.LAT || station.LATITUDE;
-                const lng = station.LON || station.LONGITUDE;
+                    return (
+                        <Marker
+                            position={[Number(lat), Number(lng)]}
+                            icon={iconTramOptions}
+                            key={station.ID}
+                        >
+                            <Popup pane="popupPane">
+                                <p>{station.NAME}</p>
+                                <p>{station.DIRECTION}</p>
+                            </Popup>
+                        </Marker>
+                    );
+                })}
+                {Object.values(routes.trollsStations).map((stationArr: any) => {
+                    const station = stationArr[0];
 
-                if (!lng || !lat) {
-                    return null;
-                }
+                    const lat = station.LAT || station.LATITUDE;
+                    const lng = station.LON || station.LONGITUDE;
 
-                return (
-                    <Marker
-                        position={[Number(lat), Number(lng)]}
-                        icon={iconTrollOptions}
-                        key={station.ID}
-                    >
-                        <Popup pane="popupPane">
-                            <p>{station.NAME}</p>
-                            <p>{station.DIRECTION}</p>
-                        </Popup>
-                    </Marker>
-                );
-            })}
-        </>
-    );
+                    if (!lng || !lat) {
+                        return null;
+                    }
+
+                    return (
+                        <Marker
+                            position={[Number(lat), Number(lng)]}
+                            icon={iconTrollOptions}
+                            key={station.ID}
+                        >
+                            <Popup pane="popupPane">
+                                <p>{station.NAME}</p>
+                                <p>{station.DIRECTION}</p>
+                            </Popup>
+                        </Marker>
+                    );
+                })}
+            </>
+        ) : null;
 };
