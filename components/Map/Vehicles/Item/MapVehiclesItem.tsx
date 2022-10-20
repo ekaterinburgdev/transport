@@ -3,7 +3,6 @@ import { isEqual } from 'lodash';
 import { Marker, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import classNames from 'classnames/bind';
-import 'leaflet.marker.slideto';
 
 import { VehicleType } from '../../Transport/MapTransport';
 
