@@ -2,6 +2,7 @@ import React, { useEffect, useState, createContext, useCallback, memo } from 're
 import { Pane } from 'react-leaflet';
 import groupBy from 'lodash/groupBy';
 
+import { massTransApi } from '../../../api/masstrans/masstrans';
 import { MapRoutes } from '../Routes/MapRoutes';
 import { MapStations } from '../Stations/MapStations';
 import { MapVehicles } from '../Vehicles/MapVehicles';
@@ -10,90 +11,6 @@ export enum VehicleType {
     Tram = 'tram',
     Troll = 'troll',
 };
-
-export function getWrappedLink(link: string) {
-    return `https://allorigins.hexlet.app/raw?disableCache=true&url=${encodeURIComponent(link)}`;
-}
-
-async function loadTransport(vehicle: VehicleType) {
-    try {
-        const res = await fetch(getWrappedLink(`http://map.ettu.ru/api/v2/${vehicle}/boards/?apiKey=111&order=1`));
-
-        const resJson = await res.json();
-
-        if (resJson.error.code) {
-            console.error(resJson.error.msg);
-
-            return [];
-        }
-
-        return resJson.vehicles;
-    } catch (e) {
-        console.error(e);
-
-        return [];
-    }
-}
-
-async function loadRoutes(vehicle: VehicleType) {
-    try {
-        const res = await fetch(getWrappedLink(`http://map.ettu.ru/api/v2/${vehicle}/routes/?apiKey=111`));
-
-        const resJson = await res.json();
-
-        if (resJson.error.code) {
-            console.error(resJson.error.msg);
-
-            return [];
-        }
-
-        return resJson.routes;
-    } catch (e) {
-        console.error(e);
-
-        return [];
-    }
-}
-
-async function loadStations(vehicle: VehicleType) {
-    try {
-        const res = await fetch(getWrappedLink(`http://map.ettu.ru/api/v2/${vehicle}/stations/?apiKey=111&order=1`));
-
-        const resJson = await res.json();
-
-        if (resJson.error.code) {
-            console.error(resJson.error.msg);
-
-            return [];
-        }
-
-        return resJson.points;
-    } catch (e) {
-        console.error(e);
-
-        return [];
-    }
-}
-
-async function loadPoints(vehicle: VehicleType) {
-    try {
-        const res = await fetch(getWrappedLink(`http://map.ettu.ru/api/v2/${vehicle}/points/?apiKey=111&order=1`));
-
-        const resJson = await res.json();
-
-        if (resJson.error.code) {
-            console.error(resJson.error.msg);
-
-            return [];
-        }
-
-        return resJson.points;
-    } catch (e) {
-        console.error(e);
-
-        return [];
-    }
-}
 
 const routesDefault = {
     tramsRoutes: {},
@@ -123,28 +40,40 @@ export const MapTransport = () => {
     const [showTrollsRoute, setShowTrollsRoute] = useState<number | null>(null);
 
     const updateTransport = async () => {
-        const [trams, trolls] = await Promise.all([loadTransport(VehicleType.Tram), loadTransport(VehicleType.Troll)]);
+        const [trams, trolls] = await Promise.all([
+            massTransApi.getVehicles(VehicleType.Tram),
+            massTransApi.getVehicles(VehicleType.Troll),
+        ]);
 
         setTrolls(trolls.filter(troll => Boolean(troll.ROUTE) && Number(troll.ON_ROUTE)));
         setTrams(trams.filter(tram => Boolean(tram.ROUTE) && Number(tram.ON_ROUTE)));
     };
 
     const updateRoutes = async () => {
-        const [trams, trolls] = await Promise.all([loadRoutes(VehicleType.Tram), loadRoutes(VehicleType.Troll)]);
+        const [trams, trolls] = await Promise.all([
+            massTransApi.getRoutes(VehicleType.Tram),
+            massTransApi.getRoutes(VehicleType.Troll),
+        ]);
 
         setTramsRoutes(groupBy(trams, 'num'));
         setTrollsRoutes(groupBy(trolls, 'num'));
     };
 
     const updateStations = async () => {
-        const [trams, trolls] = await Promise.all([loadStations(VehicleType.Tram), loadStations(VehicleType.Troll)]);
+        const [trams, trolls] = await Promise.all([
+            massTransApi.getStations(VehicleType.Tram),
+            massTransApi.getStations(VehicleType.Troll),
+        ]);
 
         setTrollsStations(groupBy(trolls, 'ID'));
         setTramsStations(groupBy(trams, 'ID'));
     };
 
     const updatePoints = async () => {
-        const [trams, trolls] = await Promise.all([loadPoints(VehicleType.Tram), loadPoints(VehicleType.Troll)]);
+        const [trams, trolls] = await Promise.all([
+            massTransApi.getPoints(VehicleType.Tram),
+            massTransApi.getPoints(VehicleType.Troll),
+        ]);
 
         setTrollsPoints(groupBy(trolls, 'ID'));
         setTramsPoints(groupBy(trams, 'ID'));

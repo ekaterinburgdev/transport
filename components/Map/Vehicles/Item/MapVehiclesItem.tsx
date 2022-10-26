@@ -1,9 +1,10 @@
 import React, { Component, createRef } from 'react';
 import { isEqual } from 'lodash';
-import { Marker, useMap } from 'react-leaflet';
+import { Marker } from 'react-leaflet';
 import L from 'leaflet';
 import classNames from 'classnames/bind';
 
+import { withMap } from '../../../hocs/withMap';
 import { VehicleType } from '../../Transport/MapTransport';
 
 import { getDeltaCoords } from './MapVehiclesItem.utils';
@@ -32,7 +33,6 @@ const leftRoutePanelStyle = 'left: -19px; text-align: left;';
 
 export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps, MapVehiclesItemState> {
     private icon: L.DivIcon;
-    private position: L.LatLngExpression;
     private markerRef = createRef<L.Marker>();
 
     constructor(props: MapVehiclesItemProps) {
@@ -147,14 +147,6 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps, Ma
         )
     }
 };
-
-function withMap(Component) {
-    return function WrappedComponent(props) {
-      const map = useMap();
-
-      return <Component {...props} map={map} />;
-    };
-}
 
 export const MapVehiclesItem = withMap(MapVehiclesItemComponent);
   
