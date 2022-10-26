@@ -9,6 +9,6 @@ export function withMap<Props extends { map: L.Map }>(Component: React.Component
 
         // "as Props" needed to work around ts bug:
         // https://github.com/Microsoft/TypeScript/issues/28938#issuecomment-450636046
-        return <Component {...props as Props} map={map} />;
+        return <Component {...(props as Props)} map={map} />;
     };
 }

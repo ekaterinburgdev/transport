@@ -39,23 +39,21 @@ export function MapRoutes({ routeNumber, type }: MapRoutesProps) {
         return route[0].elements.map((element) => {
             const stations = element.full_path;
 
-            return stations.map((station) => {
-                const stationData = routes[`${type}sPoints`][station];
+            return stations
+                .map((station) => {
+                    const stationData = routes[`${type}sPoints`][station];
 
-                if (!stationData) {
-                    return null;
-                }
+                    if (!stationData) {
+                        return null;
+                    }
 
-                const { LAT: lat, LON: lng } = stationData[0];
+                    const { LAT: lat, LON: lng } = stationData[0];
 
-                return [lat, lng];
-            }).filter(Boolean);
+                    return [lat, lng];
+                })
+                .filter(Boolean);
         });
-    }, [
-        routeNumber,
-        routes,
-        type,
-    ]);
+    }, [routeNumber, routes, type]);
 
     return !hidden ? (
         <Polyline

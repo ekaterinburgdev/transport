@@ -29,8 +29,10 @@ export type MapVehiclesItemState = {};
 
 const leftRoutePanelStyle = 'left: -19px; text-align: left;';
 
-export class MapVehiclesItemComponent extends
-    Component<MapVehiclesItemProps, MapVehiclesItemState> {
+export class MapVehiclesItemComponent extends Component<
+    MapVehiclesItemProps,
+    MapVehiclesItemState
+> {
     private icon: L.DivIcon;
 
     private markerRef = createRef<L.Marker>();
@@ -66,9 +68,7 @@ export class MapVehiclesItemComponent extends
     }
 
     getIcon() {
-        const {
-            boardId, routeNumber, course, color, arrowUrl, iconUrl,
-        } = this.props;
+        const { boardId, routeNumber, course, color, arrowUrl, iconUrl } = this.props;
         const isCourseEast = course > 315 || course < 45;
 
         return new L.DivIcon({
@@ -128,12 +128,11 @@ export class MapVehiclesItemComponent extends
     };
 
     updateTranslate = () => {
-        const {
-            boardId, routeNumber, velocity, course,
-        } = this.props;
+        const { boardId, routeNumber, velocity, course } = this.props;
 
-        const marker = document
-            .querySelector(`.vehicle-${boardId}-${routeNumber}`) as HTMLDivElement;
+        const marker = document.querySelector(
+            `.vehicle-${boardId}-${routeNumber}`,
+        ) as HTMLDivElement;
 
         if (!marker) {
             return;

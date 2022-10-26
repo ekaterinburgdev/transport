@@ -25,7 +25,7 @@ function Map() {
                 iconUrl: iconUrl.src,
                 shadowUrl: shadowUrl.src,
             });
-        }());
+        })();
     }, []);
 
     return (

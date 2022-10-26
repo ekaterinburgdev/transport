@@ -2,30 +2,30 @@
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: 'Iset Sans', sans-serif;
+    padding: 0;
+    margin: 0;
+    font-family: 'Iset Sans', sans-serif;
 }
 
 a {
-  color: inherit;
+    color: inherit;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+    html {
+        color-scheme: dark;
+    }
+    body {
+        color: white;
+        background: black;
+    }
 }

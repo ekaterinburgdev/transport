@@ -1,30 +1,34 @@
 {
-  "extends": ["next/core-web-vitals", "airbnb"],
+    "extends": ["next/core-web-vitals", "airbnb"],
 
-  "overrides": [
-    {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["airbnb-typescript"],
-      "parserOptions": {
-        "project": "./tsconfig.json"
-      },
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "extends": ["airbnb-typescript"],
+            "parserOptions": {
+                "project": "./tsconfig.json"
+            },
 
-      "rules": {
-        "@typescript-eslint/indent": ["error", 4]
-      }
+            "rules": {
+                "@typescript-eslint/indent": ["error", 4]
+            }
+        }
+    ],
+
+    "rules": {
+        "indent": ["error", 4],
+        "no-console": ["error", { "allow": ["error"] }],
+
+        "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-props-no-spreading": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+
+        "import/extensions": [
+            "error",
+            "never",
+            { "svg": "always", "json": "always", "css": "always" }
+        ],
+        "import/prefer-default-export": "off"
     }
-  ],
-
-  "rules": {
-    "indent": ["error", 4],
-    "no-console": ["error", { "allow": ["error"] }],
-
-    "react/jsx-indent": ["error", 4],
-    "react/jsx-indent-props": ["error", 4],
-    "react/jsx-props-no-spreading": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
-
-    "import/extensions": ["error", "never", { "svg": "always", "json": "always", "css": "always" }],
-    "import/prefer-default-export": "off"
-  }
 }

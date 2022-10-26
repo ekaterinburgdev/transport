@@ -1,3 +1,4 @@
+import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -12,7 +13,9 @@ export default function Home() {
             <h1>Транспорт</h1>
 
             <ul>
-                <li><Link href={'/map'}>Карта</Link></li>
+                <li>
+                    <Link href="/map">Карта</Link>
+                </li>
             </ul>
         </>
     );

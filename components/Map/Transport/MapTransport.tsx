@@ -1,6 +1,4 @@
-import React, {
-    useEffect, useState, useCallback, useMemo,
-} from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { Pane } from 'react-leaflet';
 import groupBy from 'lodash/groupBy';
 
@@ -89,45 +87,31 @@ export function MapTransport() {
         setShowTrollsRoute(null);
     }, []);
 
-    const routesContextValue = useMemo(() => ({
-        tramsRoutes,
-        tramsStations,
-        tramsPoints,
-        trollsRoutes,
-        trollsStations,
-        trollsPoints,
-    }), [
-        tramsRoutes,
-        tramsStations,
-        tramsPoints,
-        trollsRoutes,
-        trollsStations,
-        trollsPoints,
-    ]);
+    const routesContextValue = useMemo(
+        () => ({
+            tramsRoutes,
+            tramsStations,
+            tramsPoints,
+            trollsRoutes,
+            trollsStations,
+            trollsPoints,
+        }),
+        [tramsRoutes, tramsStations, tramsPoints, trollsRoutes, trollsStations, trollsPoints],
+    );
 
     return (
-        <RoutesContext.Provider
-            value={routesContextValue}
-        >
+        <RoutesContext.Provider value={routesContextValue}>
             {/* Render vehicles */}
             <Pane name="vehicles" style={{ zIndex: 550 }}>
-                <MapVehicles
-                    vehicles={trolls}
-                    type={VehicleType.Troll}
-                    onClick={onTrollClick}
-                />
-                <MapVehicles
-                    vehicles={trams}
-                    type={VehicleType.Tram}
-                    onClick={onTramClick}
-                />
+                <MapVehicles vehicles={trolls} type={VehicleType.Troll} onClick={onTrollClick} />
+                <MapVehicles vehicles={trams} type={VehicleType.Tram} onClick={onTramClick} />
             </Pane>
 
             {/* Render selected route */}
-            {showTramsRoute
-                && <MapRoutes routeNumber={showTramsRoute} type={VehicleType.Tram} />}
-            {showTrollsRoute
-                && <MapRoutes routeNumber={showTrollsRoute} type={VehicleType.Troll} />}
+            {showTramsRoute && <MapRoutes routeNumber={showTramsRoute} type={VehicleType.Tram} />}
+            {showTrollsRoute && (
+                <MapRoutes routeNumber={showTrollsRoute} type={VehicleType.Troll} />
+            )}
 
             {/* Render stations */}
             <Pane name="stations" style={{ zIndex: 500 }}>
