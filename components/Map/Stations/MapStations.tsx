@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Marker, Popup, useMapEvent } from 'react-leaflet';
 import L from 'leaflet';
 
-import { RoutesContext } from 'components/Map/Map.context';
+import { RoutesContext } from 'components/Map/Transport/MapTransport.context';
 
 const iconTramOptions = new L.Icon({
     iconSize: [16, 16],

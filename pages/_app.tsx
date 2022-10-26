@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../styles/globals.css';
+import 'styles/globals.css';
 
 type AppProps<PropsType extends object> = {
     Component: React.ComponentType<PropsType>;

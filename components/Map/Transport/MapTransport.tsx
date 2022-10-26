@@ -10,7 +10,8 @@ import { massTransApi } from 'api/masstrans/masstrans';
 import { MapRoutes } from 'components/Map/Routes/MapRoutes';
 import { MapStations } from 'components/Map/Stations/MapStations';
 import { MapVehicles } from 'components/Map/Vehicles/MapVehicles';
-import { RoutesContext } from 'components/Map/Map.context';
+
+import { RoutesContext } from './MapTransport.context';
 
 export function MapTransport() {
     const [trolls, setTrolls] = useState([]);

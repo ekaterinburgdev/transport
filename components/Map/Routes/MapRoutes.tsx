@@ -3,7 +3,7 @@ import { Polyline, useMapEvent } from 'react-leaflet';
 
 import { VehicleType } from 'common-types/masstrans';
 
-import { RoutesContext } from 'components/Map/Map.context';
+import { RoutesContext } from 'components/Map/Transport/MapTransport.context';
 
 export type MapRoutesProps = {
     routeNumber: number;
