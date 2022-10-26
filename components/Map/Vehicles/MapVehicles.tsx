@@ -1,21 +1,22 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { useMapEvent } from 'react-leaflet';
 
-import { VehicleType } from '../Transport/MapTransport';
+import { VehicleType } from 'common-types/masstrans';
+
 import { MapVehiclesItem } from './Item/MapVehiclesItem';
 
 export type MapVehiclesProps = {
     vehicles: any[];
     type: VehicleType;
     onClick: (routeNumber: number) => void;
-}
+};
 
 export const colorsMap = {
     tram: '#EC6609',
     troll: '#0BBBEF',
-}
+};
 
-export const MapVehicles: FC<MapVehiclesProps> = ({ vehicles, type, onClick }) => {
+export function MapVehicles({ vehicles, type, onClick }: MapVehiclesProps) {
     const [hidden, setHidden] = useState(false);
 
     const map = useMapEvent('zoomend', () => {
@@ -30,9 +31,8 @@ export const MapVehicles: FC<MapVehiclesProps> = ({ vehicles, type, onClick }) =
 
     return !hidden ? (
         <>
-            {vehicles.map(vehicle => (
+            {vehicles.map((vehicle) => (
                 <MapVehiclesItem
-                    type={type}
                     position={[Number(vehicle.LAT), Number(vehicle.LON)]}
                     routeNumber={Number(vehicle.ROUTE)}
                     velocity={Number(vehicle.VELOCITY)}

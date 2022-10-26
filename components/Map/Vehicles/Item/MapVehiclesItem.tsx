@@ -4,8 +4,7 @@ import { Marker } from 'react-leaflet';
 import L from 'leaflet';
 import classNames from 'classnames/bind';
 
-import { withMap } from '../../../hocs/withMap';
-import { VehicleType } from '../../Transport/MapTransport';
+import { withMap } from 'components/hocs/withMap';
 
 import { getDeltaCoords } from './MapVehiclesItem.utils';
 
@@ -23,16 +22,17 @@ export type MapVehiclesItemProps = {
     course: number;
     color: string;
     onClick: (routeNumber: number) => void;
-    type: VehicleType;
     map: L.Map;
 };
 
-export type MapVehiclesItemState = {}
+export type MapVehiclesItemState = {};
 
 const leftRoutePanelStyle = 'left: -19px; text-align: left;';
 
-export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps, MapVehiclesItemState> {
+export class MapVehiclesItemComponent extends
+    Component<MapVehiclesItemProps, MapVehiclesItemState> {
     private icon: L.DivIcon;
+
     private markerRef = createRef<L.Marker>();
 
     constructor(props: MapVehiclesItemProps) {
@@ -40,9 +40,35 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps, Ma
 
         this.icon = this.getIcon();
     }
-    
-    getIcon(props?: MapVehiclesItemProps) {
-        const { boardId, routeNumber, course, color, arrowUrl, iconUrl } = props || this.props;
+
+    componentDidMount(): void {
+        setTimeout(this.updateTranslate, 0);
+
+        const { map } = this.props;
+
+        map.addEventListener('zoomend', () => {
+            this.updateTranslate();
+        });
+    }
+
+    componentDidUpdate(prevProps: Readonly<MapVehiclesItemProps>): void {
+        const { course, position } = this.props;
+
+        if (prevProps.course !== course) {
+            const icon = this.getIcon();
+
+            this.markerRef?.current?.setIcon(icon);
+        }
+
+        if (!isEqual(prevProps.position, position)) {
+            this.updateTranslate();
+        }
+    }
+
+    getIcon() {
+        const {
+            boardId, routeNumber, course, color, arrowUrl, iconUrl,
+        } = this.props;
         const isCourseEast = course > 315 || course < 45;
 
         return new L.DivIcon({
@@ -78,6 +104,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps, Ma
 
     getScale = () => {
         const { map } = this.props;
+
         // Get the y,x dimensions of the map
         const { x, y } = map.getSize();
 
@@ -89,7 +116,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps, Ma
         // calculate how many meters each pixel represents
         return maxMeters / x;
     };
-    
+
     onClickEventHandler = () => {
         const { routeNumber, onClick } = this.props;
 
@@ -98,12 +125,15 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps, Ma
         }
 
         onClick(routeNumber);
-    }
+    };
 
-    updateTranslate = (props?: MapVehiclesItemProps) => {
-        const { boardId, routeNumber, velocity, course } = props || this.props;
+    updateTranslate = () => {
+        const {
+            boardId, routeNumber, velocity, course,
+        } = this.props;
 
-        const marker = document.querySelector(`.vehicle-${boardId}-${routeNumber}`) as HTMLDivElement;
+        const marker = document
+            .querySelector(`.vehicle-${boardId}-${routeNumber}`) as HTMLDivElement;
 
         if (!marker) {
             return;
@@ -111,42 +141,21 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps, Ma
 
         const [x, y] = getDeltaCoords(velocity, this.getScale(), course);
 
-        console.log(marker.style.transform);
-
         marker.style.transform = `translate(${x}px, ${y}px)`;
-    }
-
-    componentDidMount(): void {
-        setTimeout(this.updateTranslate, 0);
-        
-        this.props.map.addEventListener('zoomend', () => {
-            this.updateTranslate();
-        });
-    }
-
-    componentDidUpdate(prevProps: Readonly<MapVehiclesItemProps>, prevState: Readonly<MapVehiclesItemState>, snapshot?: any): void {
-        if (prevProps.course !== this.props.course) {
-            const icon = this.getIcon();
-
-            this.markerRef?.current?.setIcon(icon);
-        }
-
-        if (!isEqual(prevProps.position, this.props.position)) {
-            this.updateTranslate();
-        }
-    }
+    };
 
     render() {
+        const { position } = this.props;
+
         return (
             <Marker
                 icon={this.icon}
-                position={this.props.position}
+                position={position}
                 eventHandlers={{ click: this.onClickEventHandler }}
                 ref={this.markerRef}
             />
-        )
+        );
     }
-};
+}
 
 export const MapVehiclesItem = withMap(MapVehiclesItemComponent);
-  

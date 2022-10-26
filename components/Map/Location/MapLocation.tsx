@@ -4,7 +4,7 @@ import L from 'leaflet';
 
 const yekaterinburg: [number, number] = [54.838011, 60.597465];
 
-export const MapLocation = () => {
+export function MapLocation() {
     const [position, setPosition] = useState<L.LatLng | null>(null);
 
     const map = useMapEvents({
@@ -17,7 +17,7 @@ export const MapLocation = () => {
         },
         locationerror(e) {
             console.error(e);
-        }
+        },
     });
 
     useEffect(() => {
@@ -25,12 +25,12 @@ export const MapLocation = () => {
 
         return () => {
             map.stopLocate();
-        }
-    }, []);
+        };
+    }, [map]);
 
     return (
         <Marker position={position || yekaterinburg}>
             <Popup>Your location</Popup>
         </Marker>
     );
-};
+}

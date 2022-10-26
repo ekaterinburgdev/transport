@@ -1,29 +1,18 @@
-import React, { useEffect, useState, createContext, useCallback, memo } from 'react';
+import React, {
+    useEffect, useState, useCallback, useMemo,
+} from 'react';
 import { Pane } from 'react-leaflet';
 import groupBy from 'lodash/groupBy';
 
-import { massTransApi } from '../../../api/masstrans/masstrans';
-import { MapRoutes } from '../Routes/MapRoutes';
-import { MapStations } from '../Stations/MapStations';
-import { MapVehicles } from '../Vehicles/MapVehicles';
+import { VehicleType } from 'common-types/masstrans';
+import { massTransApi } from 'api/masstrans/masstrans';
 
-export enum VehicleType {
-    Tram = 'tram',
-    Troll = 'troll',
-};
+import { MapRoutes } from 'components/Map/Routes/MapRoutes';
+import { MapStations } from 'components/Map/Stations/MapStations';
+import { MapVehicles } from 'components/Map/Vehicles/MapVehicles';
+import { RoutesContext } from 'components/Map/Map.context';
 
-const routesDefault = {
-    tramsRoutes: {},
-    tramsStations: {},
-    tramsPoints: {},
-    trollsRoutes: {},
-    trollsStations: {},
-    trollsPoints: {},
-};
-
-export const RoutesContext = createContext(routesDefault);
-
-export const MapTransport = () => {
+export function MapTransport() {
     const [trolls, setTrolls] = useState([]);
     const [trams, setTrams] = useState([]);
 
@@ -40,43 +29,43 @@ export const MapTransport = () => {
     const [showTrollsRoute, setShowTrollsRoute] = useState<number | null>(null);
 
     const updateTransport = async () => {
-        const [trams, trolls] = await Promise.all([
+        const [tramsRes, trollsRes] = await Promise.all([
             massTransApi.getVehicles(VehicleType.Tram),
             massTransApi.getVehicles(VehicleType.Troll),
         ]);
 
-        setTrolls(trolls.filter(troll => Boolean(troll.ROUTE) && Number(troll.ON_ROUTE)));
-        setTrams(trams.filter(tram => Boolean(tram.ROUTE) && Number(tram.ON_ROUTE)));
+        setTrolls(tramsRes.filter((troll) => Boolean(troll.ROUTE) && Number(troll.ON_ROUTE)));
+        setTrams(trollsRes.filter((tram) => Boolean(tram.ROUTE) && Number(tram.ON_ROUTE)));
     };
 
     const updateRoutes = async () => {
-        const [trams, trolls] = await Promise.all([
+        const [tramsRes, trollsRes] = await Promise.all([
             massTransApi.getRoutes(VehicleType.Tram),
             massTransApi.getRoutes(VehicleType.Troll),
         ]);
 
-        setTramsRoutes(groupBy(trams, 'num'));
-        setTrollsRoutes(groupBy(trolls, 'num'));
+        setTramsRoutes(groupBy(tramsRes, 'num'));
+        setTrollsRoutes(groupBy(trollsRes, 'num'));
     };
 
     const updateStations = async () => {
-        const [trams, trolls] = await Promise.all([
+        const [tramsRes, trollsRes] = await Promise.all([
             massTransApi.getStations(VehicleType.Tram),
             massTransApi.getStations(VehicleType.Troll),
         ]);
 
-        setTrollsStations(groupBy(trolls, 'ID'));
-        setTramsStations(groupBy(trams, 'ID'));
+        setTramsStations(groupBy(tramsRes, 'ID'));
+        setTrollsStations(groupBy(trollsRes, 'ID'));
     };
 
     const updatePoints = async () => {
-        const [trams, trolls] = await Promise.all([
+        const [tramsRes, trollsRes] = await Promise.all([
             massTransApi.getPoints(VehicleType.Tram),
             massTransApi.getPoints(VehicleType.Troll),
         ]);
 
-        setTrollsPoints(groupBy(trolls, 'ID'));
-        setTramsPoints(groupBy(trams, 'ID'));
+        setTramsPoints(groupBy(tramsRes, 'ID'));
+        setTrollsPoints(groupBy(trollsRes, 'ID'));
     };
 
     useEffect(() => {
@@ -100,16 +89,25 @@ export const MapTransport = () => {
         setShowTrollsRoute(null);
     }, []);
 
+    const routesContextValue = useMemo(() => ({
+        tramsRoutes,
+        tramsStations,
+        tramsPoints,
+        trollsRoutes,
+        trollsStations,
+        trollsPoints,
+    }), [
+        tramsRoutes,
+        tramsStations,
+        tramsPoints,
+        trollsRoutes,
+        trollsStations,
+        trollsPoints,
+    ]);
+
     return (
         <RoutesContext.Provider
-            value={{
-                tramsRoutes,
-                tramsStations,
-                tramsPoints,
-                trollsRoutes,
-                trollsStations,
-                trollsPoints,
-            }}
+            value={routesContextValue}
         >
             {/* Render vehicles */}
             <Pane name="vehicles" style={{ zIndex: 550 }}>
@@ -126,8 +124,10 @@ export const MapTransport = () => {
             </Pane>
 
             {/* Render selected route */}
-            {showTramsRoute && <MapRoutes routeNumber={showTramsRoute} type={VehicleType.Tram} />}
-            {showTrollsRoute && <MapRoutes routeNumber={showTrollsRoute} type={VehicleType.Troll} />}
+            {showTramsRoute
+                && <MapRoutes routeNumber={showTramsRoute} type={VehicleType.Tram} />}
+            {showTrollsRoute
+                && <MapRoutes routeNumber={showTrollsRoute} type={VehicleType.Troll} />}
 
             {/* Render stations */}
             <Pane name="stations" style={{ zIndex: 500 }}>
@@ -135,4 +135,4 @@ export const MapTransport = () => {
             </Pane>
         </RoutesContext.Provider>
     );
-};
+}

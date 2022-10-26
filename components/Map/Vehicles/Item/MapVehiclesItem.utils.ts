@@ -19,15 +19,15 @@ export const getDistanceInPixels2 = (ms: number, velocity: number, scale: number
 
 export const getDeltaCoords = (velocity: number, scale: number, course: number) => {
     const distance = getDistanceInPixels(9, velocity, scale);
-    const angleInRad = course * Math.PI / 180;
+    const angleInRad = (course * Math.PI) / 180;
 
     return [Math.cos(angleInRad) * distance, Math.sin(angleInRad) * distance];
-}
+};
 
 export const getDeltaCoords2 = (velocity: number, scale: number, course: number) => {
     // console.log(scale);
     const distance = getDistanceInPixels2(100, velocity, scale);
-    const angleInRad = course * Math.PI / 180;
+    const angleInRad = (course * Math.PI) / 180;
 
     return [Math.cos(angleInRad) * distance, Math.sin(angleInRad) * distance];
-}
+};

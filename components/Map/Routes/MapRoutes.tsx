@@ -1,7 +1,9 @@
 import React, { useContext, useMemo, useState } from 'react';
 import { Polyline, useMapEvent } from 'react-leaflet';
 
-import { RoutesContext, VehicleType } from '../Transport/MapTransport';
+import { VehicleType } from 'common-types/masstrans';
+
+import { RoutesContext } from 'components/Map/Map.context';
 
 export type MapRoutesProps = {
     routeNumber: number;
@@ -13,7 +15,7 @@ const typeColorMap = {
     troll: '#0BBBEF',
 };
 
-export const MapRoutes = ({ routeNumber, type }: MapRoutesProps) => {
+export function MapRoutes({ routeNumber, type }: MapRoutesProps) {
     const routes = useContext(RoutesContext);
     const [hidden, setHidden] = useState(false);
 
@@ -34,18 +36,18 @@ export const MapRoutes = ({ routeNumber, type }: MapRoutesProps) => {
             return null;
         }
 
-        return route[0].elements.map(element => {
+        return route[0].elements.map((element) => {
             const stations = element.full_path;
 
-            return stations.map(station => {
+            return stations.map((station) => {
                 const stationData = routes[`${type}sPoints`][station];
-    
+
                 if (!stationData) {
                     return null;
                 }
-    
+
                 const { LAT: lat, LON: lng } = stationData[0];
-    
+
                 return [lat, lng];
             }).filter(Boolean);
         });
@@ -64,4 +66,4 @@ export const MapRoutes = ({ routeNumber, type }: MapRoutesProps) => {
             }}
         />
     ) : null;
-};
+}

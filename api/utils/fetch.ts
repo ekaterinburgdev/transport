@@ -1,14 +1,6 @@
+import { HttpMethod, FetchOptions } from 'common-types/requests';
+
 import { getCorsWrapper } from './get-cors-wrapper';
-
-enum HttpMethod {
-    GET = 'GET',
-    POST = 'POST',
-};
-
-type FetchOptions = {
-    method?: HttpMethod;
-    dataField: string;
-};
 
 export async function fetchInternalApi(url: string, options: FetchOptions) {
     const { method = HttpMethod.GET, dataField } = options;
