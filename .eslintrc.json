@@ -1,23 +1,13 @@
 {
-    "extends": ["next/core-web-vitals", "airbnb"],
-
-    "overrides": [
-        {
-            "files": ["*.ts", "*.tsx"],
-            "extends": ["airbnb-typescript"],
-            "parserOptions": {
-                "project": "./tsconfig.json"
-            },
-
-            "rules": {
-                "@typescript-eslint/indent": ["error", 4]
-            }
-        }
-    ],
-
+    "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript"],
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
     "rules": {
         "indent": ["error", 4],
         "no-console": ["error", { "allow": ["error"] }],
+
+        "@typescript-eslint/indent": ["error", 4],
 
         "react/jsx-indent": ["error", 4],
         "react/jsx-indent-props": ["error", 4],
@@ -29,6 +19,12 @@
             "never",
             { "svg": "always", "json": "always", "css": "always" }
         ],
-        "import/prefer-default-export": "off"
+        "import/prefer-default-export": "off",
+        "import/order": [
+            "error",
+            {
+                "groups": ["builtin", "external", "internal", "parent", "sibling", "index"]
+            }
+        ]
     }
 }
