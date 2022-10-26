@@ -35,8 +35,8 @@ export function MapTransport() {
             massTransApi.getVehicles(VehicleType.Troll),
         ]);
 
-        setTrolls(tramsRes.filter((troll) => Boolean(troll.ROUTE) && Number(troll.ON_ROUTE)));
-        setTrams(trollsRes.filter((tram) => Boolean(tram.ROUTE) && Number(tram.ON_ROUTE)));
+        setTrolls(trollsRes.filter((troll) => Boolean(troll.ROUTE) && Number(troll.ON_ROUTE)));
+        setTrams(tramsRes.filter((tram) => Boolean(tram.ROUTE) && Number(tram.ON_ROUTE)));
     };
 
     const updateRoutes = async () => {
