@@ -7,6 +7,7 @@ import classNames from 'classnames/bind';
 import { withMap } from 'components/hocs/withMap';
 
 import { getDeltaCoords } from './MapVehiclesItem.utils';
+import { EAST_COURSE_RANGE } from './MapVehiclesItem.constants';
 
 import styles from './MapVehiclesItem.module.css';
 
@@ -26,8 +27,6 @@ export type MapVehiclesItemProps = {
 };
 
 export type MapVehiclesItemState = {};
-
-const leftRoutePanelStyle = 'left: -19px; text-align: left;';
 
 export class MapVehiclesItemComponent extends Component<
 MapVehiclesItemProps,
@@ -71,7 +70,7 @@ MapVehiclesItemState
         const {
             boardId, routeNumber, course, color, arrowUrl, iconUrl,
         } = this.props;
-        const isCourseEast = course > 315 || course < 45;
+        const isCourseEast = course > EAST_COURSE_RANGE.left || course < EAST_COURSE_RANGE.right;
 
         return new L.DivIcon({
             iconSize: [37, 32],
@@ -84,8 +83,10 @@ MapVehiclesItemState
                     style="transform: translate(0px, 0px)"
                 >
                     <div
-                        style="color: ${color}; ${isCourseEast ? leftRoutePanelStyle : ''}"
-                        class="${cn(styles.MapVehicleRoute)}"
+                        style="color: ${color};"
+                        class="${cn(styles.MapVehicleRoute)} ${
+    isCourseEast ? cn(styles.MapVehicleRoute_course_east) : ''
+}"
                     >
                         ${routeNumber}
                     </div>

@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import { useMapEvent } from 'react-leaflet';
 
-import { VehicleType } from 'common-types/masstrans';
+import { VehicleType } from 'common/types/masstrans';
+import { VEHICLE_TYPE_COLORS } from 'common/constants/colors';
 
 import { MapVehiclesItem } from './Item/MapVehiclesItem';
+import { VISISBILITY_MINIMAL_ZOOM } from './MapVehicles.constants';
 
 export type MapVehiclesProps = {
     vehicles: any[];
     type: VehicleType;
     onClick: (routeNumber: number) => void;
-};
-
-export const colorsMap = {
-    tram: '#EC6609',
-    troll: '#0BBBEF',
 };
 
 export function MapVehicles({ vehicles, type, onClick }: MapVehiclesProps) {
@@ -22,7 +19,7 @@ export function MapVehicles({ vehicles, type, onClick }: MapVehiclesProps) {
     const map = useMapEvent('zoomend', () => {
         const zoom = map.getZoom();
 
-        if (zoom < 13) {
+        if (zoom < VISISBILITY_MINIMAL_ZOOM) {
             setHidden(true);
         } else {
             setHidden(false);
@@ -41,7 +38,7 @@ export function MapVehicles({ vehicles, type, onClick }: MapVehiclesProps) {
                     iconUrl={`/icons/${type}-light.svg`}
                     course={Number(vehicle.COURSE)}
                     key={vehicle.BOARD_ID}
-                    color={colorsMap[type]}
+                    color={VEHICLE_TYPE_COLORS[type]}
                     onClick={onClick}
                 />
             ))}

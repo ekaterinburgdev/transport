@@ -1,4 +1,4 @@
-import { HttpMethod, FetchOptions } from 'common-types/requests';
+import { HttpMethod, FetchOptions } from 'common/types/requests';
 
 import { getCorsWrapper } from './get-cors-wrapper';
 

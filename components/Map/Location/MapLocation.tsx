@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useMapEvents, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
-const yekaterinburg: [number, number] = [54.838011, 60.597465];
+import { COORDS_EKATERINBURG } from 'common/constants/coords';
 
 export function MapLocation() {
     const [position, setPosition] = useState<L.LatLng | null>(null);
@@ -29,7 +29,7 @@ export function MapLocation() {
     }, [map]);
 
     return (
-        <Marker position={position || yekaterinburg}>
+        <Marker position={position || COORDS_EKATERINBURG}>
             <Popup>Your location</Popup>
         </Marker>
     );

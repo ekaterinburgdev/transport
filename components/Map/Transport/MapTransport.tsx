@@ -4,7 +4,7 @@ import React, {
 import { Pane } from 'react-leaflet';
 import groupBy from 'lodash/groupBy';
 
-import { VehicleType } from 'common-types/masstrans';
+import { VehicleType } from 'common/types/masstrans';
 import { massTransApi } from 'api/masstrans/masstrans';
 
 import { MapRoutes } from 'components/Map/Routes/MapRoutes';

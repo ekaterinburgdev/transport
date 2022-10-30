@@ -4,6 +4,8 @@ import L from 'leaflet';
 
 import { RoutesContext } from 'components/Map/Transport/MapTransport.context';
 
+import { VISISBILITY_MINIMAL_ZOOM } from './MapStations.constants';
+
 const iconTramOptions = new L.Icon({
     iconSize: [16, 16],
     iconAnchor: [8, 16],
@@ -24,7 +26,7 @@ export function MapStations() {
     const map = useMapEvent('zoomend', () => {
         const zoom = map.getZoom();
 
-        if (zoom < 14) {
+        if (zoom < VISISBILITY_MINIMAL_ZOOM) {
             setHidden(true);
         } else {
             setHidden(false);
