@@ -1,4 +1,4 @@
-import { VehicleType } from 'common-types/masstrans';
+import { VehicleType } from 'common/types/masstrans';
 import { fetchInternalApi } from 'api/utils/fetch';
 
 export const massTransApi = {

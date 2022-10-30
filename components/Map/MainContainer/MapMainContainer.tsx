@@ -7,16 +7,18 @@ import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
-import { MapLocation } from './Location/MapLocation';
-import { MapTransport } from './Transport/MapTransport';
+import { COORDS_EKATERINBURG } from 'common/constants/coords';
 
-import styles from './Map.module.css';
+import { MapLocation } from 'components/Map/Location/MapLocation';
+import { MapTransport } from 'components/Map/Transport/MapTransport';
+
+import styles from './MapMainContainer.module.css';
 import 'leaflet/dist/leaflet.css';
 
 const cn = classNames.bind(styles);
 
-function Map() {
-    const position: [number, number] = [56.838011, 60.597465];
+function MapMainContainer() {
+    const position: [number, number] = COORDS_EKATERINBURG;
 
     useEffect(() => {
         (async function init() {
@@ -47,4 +49,4 @@ function Map() {
     );
 }
 
-export default Map;
+export default MapMainContainer;

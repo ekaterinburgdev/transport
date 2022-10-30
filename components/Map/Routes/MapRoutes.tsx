@@ -1,18 +1,16 @@
 import React, { useContext, useMemo, useState } from 'react';
 import { Polyline, useMapEvent } from 'react-leaflet';
 
-import { VehicleType } from 'common-types/masstrans';
+import { VehicleType } from 'common/types/masstrans';
+import { VEHICLE_TYPE_COLORS } from 'common/constants/colors';
 
 import { RoutesContext } from 'components/Map/Transport/MapTransport.context';
+
+import { VISISBILITY_MINIMAL_ZOOM } from './MapRoutes.constants';
 
 export type MapRoutesProps = {
     routeNumber: number;
     type: VehicleType;
-};
-
-const typeColorMap = {
-    tram: '#EC6608',
-    troll: '#0BBBEF',
 };
 
 export function MapRoutes({ routeNumber, type }: MapRoutesProps) {
@@ -22,7 +20,7 @@ export function MapRoutes({ routeNumber, type }: MapRoutesProps) {
     const map = useMapEvent('zoomend', () => {
         const zoom = map.getZoom();
 
-        if (zoom < 13) {
+        if (zoom < VISISBILITY_MINIMAL_ZOOM) {
             setHidden(true);
         } else {
             setHidden(false);
@@ -59,7 +57,7 @@ export function MapRoutes({ routeNumber, type }: MapRoutesProps) {
         <Polyline
             positions={routePositions}
             pathOptions={{
-                color: typeColorMap[type],
+                color: VEHICLE_TYPE_COLORS[type],
                 weight: 6,
             }}
         />
