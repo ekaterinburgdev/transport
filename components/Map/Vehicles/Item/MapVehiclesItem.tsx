@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 
 import { withMap } from 'components/hocs/withMap';
 
-import { getDeltaCoords } from './MapVehiclesItem.utils';
+import { startMoveInDirection, clearIntervals } from './MapVehiclesItem.utils';
 import { EAST_COURSE_RANGE } from './MapVehiclesItem.constants';
 
 import styles from './MapVehiclesItem.module.css';
@@ -66,6 +66,10 @@ MapVehiclesItemState
         }
     }
 
+    componentWillUnmount(): void {
+        clearIntervals();
+    }
+
     getIcon() {
         const {
             boardId, routeNumber, course, color, arrowUrl, iconUrl,
@@ -79,8 +83,9 @@ MapVehiclesItemState
             className: `${cn(styles.MapVehicle)}`,
             html: `
                 <div
-                    class="vehicle-${boardId}-${routeNumber} ${cn(styles.MapVehicleWrapper)}"
-                    style="transform: translate(0px, 0px)"
+                    id="vehicle-${boardId}-${routeNumber}"
+                    class="${cn(styles.MapVehicleWrapper)}"
+                    style="transform: translate3d(0px, 0px, 0px)"
                 >
                     <div
                         style="color: ${color};"
@@ -130,22 +135,20 @@ MapVehiclesItemState
         onClick(routeNumber);
     };
 
-    updateTranslate = () => {
+    private updateTranslate = () => {
         const {
             boardId, routeNumber, velocity, course,
         } = this.props;
 
         const marker = document.querySelector(
-            `.vehicle-${boardId}-${routeNumber}`,
+            `#vehicle-${boardId}-${routeNumber}`,
         ) as HTMLDivElement;
 
         if (!marker) {
             return;
         }
 
-        const [x, y] = getDeltaCoords(velocity, this.getScale(), course);
-
-        marker.style.transform = `translate(${x}px, ${y}px)`;
+        startMoveInDirection(course, marker, velocity, this.getScale());
     };
 
     render() {
