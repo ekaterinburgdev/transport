@@ -5,10 +5,6 @@
     background-color: transparent;
 }
 
-.MapVehicleWrapper {
-    transition: transform 9s linear;
-}
-
 .MapVehicleArrow {
     position: absolute;
     top: 0;

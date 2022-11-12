@@ -84,7 +84,6 @@ MapVehiclesItemState
             html: `
                 <div
                     id="vehicle-${boardId}-${routeNumber}"
-                    class="${cn(styles.MapVehicleWrapper)}"
                     style="transform: translate3d(0px, 0px, 0px)"
                 >
                     <div

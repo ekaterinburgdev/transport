@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 
 import { COORDS_EKATERINBURG } from 'common/constants/coords';
 
-export function MapLocation(): React.FC {
+export function MapLocation() {
     const map = useMapEvents({
         locationfound(e) {
             map.setView(e.latlng, map.getZoom());
