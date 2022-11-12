@@ -2,7 +2,7 @@
 
 Ekaterinburg transport ecosystem
 
-**[transport.ekaterinburg.io](https://transport.ekaterinburg.io)**
+**[transport.ekaterinburg.io/map](https://transport.ekaterinburg.io/map)**
 
 ## Tools
 
