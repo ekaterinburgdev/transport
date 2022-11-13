@@ -8,30 +8,13 @@ import { withMap } from 'components/hocs/withMap';
 
 import { startMoveInDirection, clearIntervals } from './MapVehiclesItem.utils';
 import { EAST_COURSE_RANGE } from './MapVehiclesItem.constants';
+import { MapVehiclesItemProps } from './MapVehiclesItem.types';
 
 import styles from './MapVehiclesItem.module.css';
 
 const cn = classNames.bind(styles);
 
-export type MapVehiclesItemProps = {
-    iconUrl: string;
-    arrowUrl: string;
-    boardId: number;
-    velocity: number;
-    position: [number, number];
-    routeNumber: number | null;
-    course: number;
-    color: string;
-    onClick: (routeNumber: number) => void;
-    map: L.Map;
-};
-
-export type MapVehiclesItemState = {};
-
-export class MapVehiclesItemComponent extends Component<
-MapVehiclesItemProps,
-MapVehiclesItemState
-> {
+export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
     private icon: L.DivIcon;
 
     private markerRef = createRef<L.Marker>();
@@ -147,7 +130,12 @@ MapVehiclesItemState
             return;
         }
 
-        startMoveInDirection(course, marker, velocity, this.getScale());
+        startMoveInDirection({
+            direction: course,
+            vehicle: marker,
+            velocity,
+            scale: this.getScale(),
+        });
     };
 
     render() {
