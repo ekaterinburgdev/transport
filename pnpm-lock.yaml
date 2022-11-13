@@ -20,6 +20,7 @@ specifiers:
   eslint-plugin-react-hooks: ^4.6.0
   husky: ^7.0.4
   leaflet: ^1.9.2
+  leaflet.smoothwheelzoom: github:alexatiks/Leaflet.SmoothWheelZoom
   lint-staged: ^11.2.6
   lodash: ^4.17.21
   next: 12.3.1
@@ -33,6 +34,7 @@ specifiers:
 dependencies:
   classnames: 2.3.2
   leaflet: 1.9.2
+  leaflet.smoothwheelzoom: github.com/alexatiks/Leaflet.SmoothWheelZoom/eaa55ab5087454dcf93d6ca2064c782fcbf0aa30
   lodash: 4.17.21
   next: 12.3.1_biqbaboplfbrettd7655fr4n2y
   prop-types: 15.8.1
@@ -2670,3 +2672,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  github.com/alexatiks/Leaflet.SmoothWheelZoom/eaa55ab5087454dcf93d6ca2064c782fcbf0aa30:
+    resolution: {tarball: https://codeload.github.com/alexatiks/Leaflet.SmoothWheelZoom/tar.gz/eaa55ab5087454dcf93d6ca2064c782fcbf0aa30}
+    name: leaflet.smoothwheelzoom
+    version: 0.1.4
+    dev: false

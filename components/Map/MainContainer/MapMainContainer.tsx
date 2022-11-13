@@ -3,6 +3,9 @@ import L from 'leaflet';
 import { MapContainer, TileLayer, ScaleControl } from 'react-leaflet';
 import classNames from 'classnames/bind';
 
+// Extends Leaflet's map with smoothWheelZoom setting
+import 'leaflet.smoothwheelzoom';
+
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
@@ -33,10 +36,15 @@ function MapMainContainer() {
     return (
         <MapContainer
             center={position}
-            scrollWheelZoom
+            // Should be false for smoothWheelZoom to work
+            scrollWheelZoom={false}
             attributionControl={null}
             zoom={16}
             className={cn(styles.Map)}
+            // Setting from leaflet.smoothwheelzoom
+            // @ts-ignore
+            smoothWheelZoom
+            smoothSensitivity={1.5}
         >
             <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />
 
