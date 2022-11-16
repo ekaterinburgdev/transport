@@ -15,30 +15,69 @@
 
 .MapVehicleIcon {
     position: absolute;
-    top: 8.5px;
-    left: 8.5px;
+    top: 6.5px;
+    left: 6.5px;
+}
+
+.MapVehicleInfo {
+    position: absolute;
+    left: 32px;
+    top: 7px;
+    width: 65px;
+
+    display: flex;
+}
+
+.MapVehicleInfo_course_east {
+    left: -69px;
+    flex-direction: row-reverse;
+}
+
+.MapVehicleInfoItem {
+    display: block;
+    background-color: #fff;
+    border-radius: 3px;
 }
 
 .MapVehicleRoute {
-    position: absolute;
+    width: 31px;
 
-    width: 35px;
-    left: 16px;
-    top: 7px;
-
-    background-color: #fff;
-    border-radius: 3px;
-    color: black;
-    text-align: right;
-    padding: 1px 4px 0;
+    text-align: center;
+    padding: 0 4px;
+    box-sizing: border-box;
 
     font-family: 'Iset Sans', sans-serif;
     font-size: 14px;
     font-weight: 500;
-    line-height: 19px;
+    height: 16px;
+    line-height: 18.6px;
 }
 
-.MapVehicleRoute_course_east {
-    left: -19px;
-    text-align: left;
+.MapVehicleDisability {
+    width: 16px;
+    height: 16px;
+    margin: 0 2px;
+}
+
+.MapVehicleDisabilityIcon {
+    display: block;
+    margin: 2.8px auto;
+}
+
+.MapVehicleWarning {
+    width: 16px;
+    height: 16px;
+}
+
+.MapVehicleWarningIcon {
+    display: block;
+    margin: 2.5px auto;
+}
+
+.MapVehicleDisabilityWarning {
+    width: 32px;
+    height: 16px;
+
+    margin: 0 2px;
+    display: flex;
 }

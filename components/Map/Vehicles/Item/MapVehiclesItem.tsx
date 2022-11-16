@@ -55,38 +55,81 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
 
     getIcon() {
         const {
-            boardId, routeNumber, course, color, arrowUrl, iconUrl,
+            boardId, routeNumber, course, color, type, disability, warning,
         } = this.props;
         const isCourseEast = course > EAST_COURSE_RANGE.left || course < EAST_COURSE_RANGE.right;
 
         return new L.DivIcon({
-            iconSize: [37, 32],
-            iconAnchor: [18.5, 16],
-            popupAnchor: [0, -16],
+            iconSize: [33, 28],
+            iconAnchor: [16.5, 14],
+            popupAnchor: [0, -14],
             className: `${cn(styles.MapVehicle)}`,
             html: `
                 <div
                     id="vehicle-${boardId}-${routeNumber}"
                     style="transform: translate3d(0px, 0px, 0px)"
                 >
-                    <div
-                        style="color: ${color};"
-                        class="${cn(styles.MapVehicleRoute)} ${
-    isCourseEast ? cn(styles.MapVehicleRoute_course_east) : ''
-}"
-                    >
-                        ${routeNumber}
-                    </div>
                     <img
                         id="vehicle-icon-${boardId}-${routeNumber}"
-                        style="transform: rotate(${course}deg); transform-origin: 16px 16px"
+                        style="transform: rotate(${course}deg); transform-origin: 14px 14px"
                         class="${cn(styles.MapVehicleArrow)}"
-                        src="${arrowUrl}"
+                        src="/icons/${type}-arrow.svg"
                     />
-                    <img
-                        class="${cn(styles.MapVehicleIcon)}"
-                        src="${iconUrl}"
-                    />
+                    <div class="${cn(styles.MapVehicleCenter)}">
+                        <img
+                            class="${cn(styles.MapVehicleIcon)}"
+                            src="/icons/${type}-light.svg"
+                        />
+                        <div class="${cn(styles.MapVehicleInfo)} ${
+    isCourseEast ? cn(styles.MapVehicleInfo_course_east) : ''
+}"
+                            style="color: ${color};"
+                        >
+                            <div
+                                class="${cn(styles.MapVehicleRoute)} ${cn(
+    styles.MapVehicleInfoItem,
+)}"
+                            >
+                                ${routeNumber}
+                            </div>
+                            ${
+    disability && !warning
+        ? `<div class="${cn(styles.MapVehicleDisability)} ${cn(
+            styles.MapVehicleInfoItem,
+        )}">
+                                <img class="${cn(
+        styles.MapVehicleDisabilityIcon,
+    )}" src="${`/icons/${type}-disability.svg`}" />
+                            </div>`
+        : ''
+}
+                            ${
+    warning && !disability
+        ? `<div class="${cn(styles.MapVehicleWarning)} ${cn(
+            styles.MapVehicleInfoItem,
+        )}">
+                                <img class="${cn(
+        styles.MapVehicleWarningIcon,
+    )}" src="${'/icons/warning.svg'}" />
+                            </div>`
+        : ''
+}
+                            ${
+    warning && disability
+        ? `<div class="${cn(styles.MapVehicleDisabilityWarning)} ${cn(
+            styles.MapVehicleInfoItem,
+        )}">
+                                <img class="${cn(
+        styles.MapVehicleDisabilityIcon,
+    )}" src="${`/icons/${type}-disability.svg`}" />
+                                <img class="${cn(
+        styles.MapVehicleWarningIcon,
+    )}" src="${'/icons/warning.svg'}" />
+                            </div>`
+        : ''
+}
+                        </div>
+                    </div>
                 </div>
             `,
         });
