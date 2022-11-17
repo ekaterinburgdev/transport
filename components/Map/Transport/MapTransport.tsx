@@ -1,7 +1,7 @@
 import React, {
     useEffect, useState, useCallback, useMemo,
 } from 'react';
-import { Pane } from 'react-leaflet';
+import { Pane, useMapEvent } from 'react-leaflet';
 import groupBy from 'lodash/groupBy';
 
 import { VehicleType } from 'common/types/masstrans';
@@ -89,6 +89,11 @@ export function MapTransport() {
         setShowTramsRoute(routeNumber);
         setShowTrollsRoute(null);
     }, []);
+
+    useMapEvent('click', () => {
+        setShowTramsRoute(null);
+        setShowTrollsRoute(null);
+    });
 
     const routesContextValue = useMemo(
         () => ({

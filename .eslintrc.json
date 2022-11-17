@@ -23,5 +23,6 @@
         "groups": ["builtin", "external", "internal", "parent", "sibling", "index"]
       }
     ]
-  }
+  },
+  "ignorePatterns": ["next.config.js"]
 }
