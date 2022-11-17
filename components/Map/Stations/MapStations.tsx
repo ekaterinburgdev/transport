@@ -1,24 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { Marker, Popup, useMapEvent } from 'react-leaflet';
-import L from 'leaflet';
+import { useMapEvent } from 'react-leaflet';
 
+import { VehicleType } from 'common/types/masstrans';
 import { RoutesContext } from 'components/Map/Transport/MapTransport.context';
 
+import { MapStationsItem } from './Item/MapStationsItem';
+
 import { VISISBILITY_MINIMAL_ZOOM } from './MapStations.constants';
-
-const iconTramOptions = new L.Icon({
-    iconSize: [16, 16],
-    iconAnchor: [8, 16],
-    popupAnchor: [0, -16],
-    iconUrl: '/icons/tram-station.svg',
-});
-
-const iconTrollOptions = new L.Icon({
-    iconSize: [16, 16],
-    iconAnchor: [8, 16],
-    popupAnchor: [0, -16],
-    iconUrl: '/icons/troll-station.svg',
-});
 
 export function MapStations() {
     const routes = useContext(RoutesContext);
@@ -38,47 +26,29 @@ export function MapStations() {
             {Object.values(routes.tramsStations).map((stationArr: any) => {
                 const station = stationArr[0];
 
-                const lat = station?.LAT || station?.LATITUDE;
-                const lng = station?.LON || station?.LONGITUDE;
-
-                if (!lng || !lat) {
-                    return null;
-                }
-
                 return (
-                    <Marker
-                        position={[Number(lat), Number(lng)]}
-                        icon={iconTramOptions}
-                        key={station.ID}
-                    >
-                        <Popup pane="popupPane">
-                            <p>{station.NAME}</p>
-                            <p>{station.DIRECTION}</p>
-                        </Popup>
-                    </Marker>
+                    <MapStationsItem
+                        lat={station?.LAT || station?.LATITUDE}
+                        lng={station?.LON || station?.LONGITUDE}
+                        type={VehicleType.Tram}
+                        id={station.ID}
+                        name={station.NAME}
+                        direction={station.DIRECTION}
+                    />
                 );
             })}
             {Object.values(routes.trollsStations).map((stationArr: any) => {
                 const station = stationArr[0];
 
-                const lat = station.LAT || station.LATITUDE;
-                const lng = station.LON || station.LONGITUDE;
-
-                if (!lng || !lat) {
-                    return null;
-                }
-
                 return (
-                    <Marker
-                        position={[Number(lat), Number(lng)]}
-                        icon={iconTrollOptions}
-                        key={station.ID}
-                    >
-                        <Popup pane="popupPane">
-                            <p>{station.NAME}</p>
-                            <p>{station.DIRECTION}</p>
-                        </Popup>
-                    </Marker>
+                    <MapStationsItem
+                        lat={station?.LAT || station?.LATITUDE}
+                        lng={station?.LON || station?.LONGITUDE}
+                        type={VehicleType.Troll}
+                        id={station.ID}
+                        name={station.NAME}
+                        direction={station.DIRECTION}
+                    />
                 );
             })}
         </>
