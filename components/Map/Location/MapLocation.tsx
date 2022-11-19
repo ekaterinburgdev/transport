@@ -43,7 +43,6 @@ function moveTo(map: L.Map, end: L.LatLng, duration: number, marker: L.Marker) {
 export function MapLocation() {
     const userMarkerRef = useRef<L.Marker>();
     const [isFirstFound, setIsFirstFound] = useState<boolean>(true);
-    const [position, setPosition] = useState<[number, number]>(COORDS_EKATERINBURG);
 
     const map = useMapEvents({
         locationfound(e) {
@@ -53,7 +52,6 @@ export function MapLocation() {
             }
 
             moveTo(map, e.latlng, 100, userMarkerRef.current);
-            setPosition([e.latlng.lat, e.latlng.lng]);
         },
         locationerror(e) {
             console.error(e);
@@ -76,5 +74,5 @@ export function MapLocation() {
     const query = new URL(window.location.href).searchParams;
     const icon = query.get('with-text') ? userIconWithText : userIcon;
 
-    return <Marker icon={icon} position={position} ref={userMarkerRef} />;
+    return <Marker icon={icon} position={COORDS_EKATERINBURG} ref={userMarkerRef} />;
 }
