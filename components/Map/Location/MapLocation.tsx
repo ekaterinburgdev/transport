@@ -1,28 +1,80 @@
-import { useEffect } from 'react';
-import { useMapEvents } from 'react-leaflet';
+import React, { useEffect, useRef, useState } from 'react';
+import { useMapEvents, Marker } from 'react-leaflet';
 import L from 'leaflet';
 
 import { COORDS_EKATERINBURG } from 'common/constants/coords';
 
+const userIcon = new L.Icon({
+    iconSize: [36, 36],
+    iconAnchor: [36, 18],
+    iconUrl: '/icons/user-placemark.svg',
+});
+
+const userIconWithText = new L.Icon({
+    iconSize: [58, 54],
+    iconAnchor: [36, 27],
+    iconUrl: '/icons/user-placemark-with-text.svg',
+});
+
+function moveTo(map: L.Map, end: L.LatLng, duration: number, marker: L.Marker) {
+    const endTime = performance.now() + duration;
+    const startPoint = map.latLngToContainerPoint(marker.getLatLng());
+    const endPoint = map.latLngToContainerPoint(end);
+
+    const moveToAnim = () => {
+        const timeRemains = endTime - performance.now();
+
+        if (timeRemains <= 0) {
+            marker.setLatLng(end);
+
+            return;
+        }
+
+        const progress = timeRemains / duration;
+
+        const currentPos = endPoint.multiplyBy(progress).add(startPoint.multiplyBy(1 - progress));
+
+        marker.setLatLng(map.containerPointToLatLng(currentPos));
+    };
+
+    L.Util.requestAnimFrame(moveToAnim);
+}
+
 export function MapLocation() {
+    const userMarkerRef = useRef<L.Marker>();
+    const [isFirstFound, setIsFirstFound] = useState<boolean>(true);
+    const [position, setPosition] = useState<[number, number]>(COORDS_EKATERINBURG);
+
     const map = useMapEvents({
         locationfound(e) {
-            map.setView(e.latlng, map.getZoom());
+            if (isFirstFound) {
+                map.setView(e.latlng, map.getZoom());
+                setIsFirstFound(false);
+            }
+
+            moveTo(map, e.latlng, 100, userMarkerRef.current);
+            setPosition([e.latlng.lat, e.latlng.lng]);
         },
         locationerror(e) {
             console.error(e);
 
-            map.setView(new L.LatLng(...COORDS_EKATERINBURG), map.getZoom());
+            if (isFirstFound) {
+                map.setView(new L.LatLng(...COORDS_EKATERINBURG), map.getZoom());
+                setIsFirstFound(false);
+            }
         },
     });
 
     useEffect(() => {
-        map.locate({ maxZoom: 16 });
+        map.locate({ watch: true });
 
         return () => {
             map.stopLocate();
         };
     }, [map]);
 
-    return null;
+    const query = new URL(window.location.href).searchParams;
+    const icon = query.get('with-text') ? userIconWithText : userIcon;
+
+    return <Marker icon={icon} position={position} ref={userMarkerRef} />;
 }
