@@ -6,7 +6,6 @@ export type MapVehiclesItemProps = {
     position: [number, number];
     routeNumber: number | null;
     course: number;
-    color: string;
     type: VehicleType;
     disability?: boolean;
     warning?: boolean;

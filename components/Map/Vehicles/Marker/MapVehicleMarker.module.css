@@ -1,0 +1,77 @@
+.MapVehicleMarkerMarkerArrow {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    transition: transform 1s linear;
+}
+
+.MapVehicleMarkerIcon {
+    position: absolute;
+    top: 6.5px;
+    left: 6.5px;
+}
+
+.MapVehicleMarkerInfo {
+    position: absolute;
+    left: 32px;
+    top: 7px;
+    width: 65px;
+
+    display: flex;
+}
+
+.MapVehicleMarkerInfo_course_east {
+    left: -69px;
+    flex-direction: row-reverse;
+}
+
+.MapVehicleMarkerInfoItem {
+    display: block;
+    background-color: #fff;
+    border-radius: 3px;
+}
+
+.MapVehicleMarkerRoute {
+    width: 31px;
+
+    text-align: center;
+    padding: 3px 0 3px;
+    box-sizing: border-box;
+
+    font-family: 'Iset Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 16px;
+    line-height: 13px;
+}
+
+.MapVehicleMarkerDisability {
+    width: 16px;
+    height: 16px;
+    margin: 0 2px;
+}
+
+.MapVehicleMarkerDisabilityIcon {
+    display: block;
+    margin: 3px auto;
+}
+
+.MapVehicleMarkerWarning {
+    width: 16px;
+    height: 16px;
+    margin: 0 2px;
+}
+
+.MapVehicleMarkerWarningIcon {
+    display: block;
+    margin: 2.5px auto;
+}
+
+.MapVehicleMarkerDisabilityWarning {
+    width: 32px;
+    height: 16px;
+
+    margin: 0 2px;
+    display: flex;
+}
