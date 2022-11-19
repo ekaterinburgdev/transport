@@ -51,6 +51,8 @@ export function MapLocation() {
             if (isFirstFound) {
                 map.setView(e.latlng, map.getZoom());
                 setIsFirstFound(false);
+
+                return;
             }
 
             moveTo(map, e.latlng, Number(query.get('dur')) || 800, userMarkerRef.current);
