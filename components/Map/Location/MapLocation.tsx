@@ -30,7 +30,7 @@ function moveTo(map: L.Map, end: L.LatLng, duration: number, marker: L.Marker) {
             return;
         }
 
-        const progress = timeRemains / duration;
+        const progress = (duration - timeRemains) / duration;
 
         const currentPos = endPoint.multiplyBy(progress).add(startPoint.multiplyBy(1 - progress));
 
