@@ -35,9 +35,11 @@ function moveTo(map: L.Map, end: L.LatLng, duration: number, marker: L.Marker) {
         const currentPos = endPoint.multiplyBy(progress).add(startPoint.multiplyBy(1 - progress));
 
         marker.setLatLng(map.containerPointToLatLng(currentPos));
+
+        L.Util.requestAnimFrame(moveToAnim);
     };
 
-    L.Util.requestAnimFrame(moveToAnim);
+    moveToAnim();
 }
 
 export function MapLocation() {
@@ -49,6 +51,7 @@ export function MapLocation() {
     const map = useMapEvents({
         locationfound(e) {
             if (isFirstFound) {
+                userMarkerRef.current.setLatLng(e.latlng);
                 map.setView(e.latlng, map.getZoom());
                 setIsFirstFound(false);
 
