@@ -21,11 +21,14 @@ function moveTo(map: L.Map, end: L.LatLng, duration: number, marker: L.Marker) {
     const startPoint = map.latLngToContainerPoint(marker.getLatLng());
     const endPoint = map.latLngToContainerPoint(end);
 
+    map.dragging.disable();
+
     const moveToAnim = () => {
         const timeRemains = endTime - performance.now();
 
         if (timeRemains <= 0) {
             marker.setLatLng(end);
+            map.dragging.enable();
 
             return;
         }
