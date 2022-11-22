@@ -61,11 +61,7 @@ export function MapVehicleMarker({
                         {routeNumber}
                     </div>
                     {disability && !warning && (
-                        <div
-                            className={`${cn(styles.MapVehicleMarkerDisability)} ${cn(
-                                styles.MapVehicleMarkerInfoItem,
-                            )}`}
-                        >
+                        <div className={cn(styles.MapVehicleMarkerInfoItem)}>
                             <picture>
                                 <source srcSet={disabilityIcon} type="image/svg+xml" />
                                 <img
@@ -77,11 +73,7 @@ export function MapVehicleMarker({
                         </div>
                     )}
                     {warning && !disability && (
-                        <div
-                            className={`${cn(styles.MapVehicleMarkerWarning)} ${cn(
-                                styles.MapVehicleMarkerInfoItem,
-                            )}`}
-                        >
+                        <div className={cn(styles.MapVehicleMarkerInfoItem)}>
                             <picture>
                                 <source srcSet={warningIcon} type="image/svg+xml" />
                                 <img
@@ -93,27 +85,27 @@ export function MapVehicleMarker({
                         </div>
                     )}
                     {warning && disability && (
-                        <div
-                            className={`${cn(styles.MapVehicleMarkerDisabilityWarning)} ${cn(
-                                styles.MapVehicleMarkerInfoItem,
-                            )}`}
-                        >
-                            <picture>
-                                <source srcSet={disabilityIcon} type="image/svg+xml" />
-                                <img
-                                    className={cn(styles.MapVehicleMarkerDisabilityIcon)}
-                                    src={disabilityIcon}
-                                    alt="Vehicle low-floor icon"
-                                />
-                            </picture>
-                            <picture>
-                                <source srcSet={warningIcon} type="image/svg+xml" />
-                                <img
-                                    className={cn(styles.MapVehicleMarkerWarningIcon)}
-                                    src={warningIcon}
-                                    alt="Vehicle warning icon"
-                                />
-                            </picture>
+                        <div className={`${cn(styles.MapVehicleMarkerDisabilityWarning)}`}>
+                            <div className={cn(styles.MapVehicleMarkerInfoItem)}>
+                                <picture>
+                                    <source srcSet={disabilityIcon} type="image/svg+xml" />
+                                    <img
+                                        className={cn(styles.MapVehicleMarkerDisabilityIcon)}
+                                        src={disabilityIcon}
+                                        alt="Vehicle low-floor icon"
+                                    />
+                                </picture>
+                            </div>
+                            <div className={cn(styles.MapVehicleMarkerInfoItem)}>
+                                <picture>
+                                    <source srcSet={warningIcon} type="image/svg+xml" />
+                                    <img
+                                        className={cn(styles.MapVehicleMarkerWarningIcon)}
+                                        src={warningIcon}
+                                        alt="Vehicle warning icon"
+                                    />
+                                </picture>
+                            </div>
                         </div>
                     )}
                 </div>

@@ -14,15 +14,15 @@
 
 .MapVehicleMarkerInfo {
     position: absolute;
-    left: 32px;
+    left: 31px;
     top: 7px;
-    width: 65px;
+    width: 66px;
 
     display: flex;
 }
 
 .MapVehicleMarkerInfo_course_east {
-    left: -69px;
+    left: -67px;
     flex-direction: row-reverse;
 }
 
@@ -30,10 +30,14 @@
     display: block;
     background-color: #fff;
     border-radius: 3px;
+    width: 16px;
+    height: 16px;
+    margin-right: 2px;
 }
 
 .MapVehicleMarkerRoute {
-    width: 31px;
+    width: 28px;
+    min-width: 28px;
 
     text-align: center;
     padding: 3px 0 3px;
@@ -46,21 +50,9 @@
     line-height: 13px;
 }
 
-.MapVehicleMarkerDisability {
-    width: 16px;
-    height: 16px;
-    margin: 0 2px;
-}
-
 .MapVehicleMarkerDisabilityIcon {
     display: block;
     margin: 3px auto;
-}
-
-.MapVehicleMarkerWarning {
-    width: 16px;
-    height: 16px;
-    margin: 0 2px;
 }
 
 .MapVehicleMarkerWarningIcon {
@@ -69,9 +61,6 @@
 }
 
 .MapVehicleMarkerDisabilityWarning {
-    width: 32px;
     height: 16px;
-
-    margin: 0 2px;
     display: flex;
 }
