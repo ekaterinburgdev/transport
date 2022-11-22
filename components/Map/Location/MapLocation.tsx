@@ -20,6 +20,7 @@ function moveTo(map: L.Map, end: L.LatLng, duration: number, marker: L.Marker) {
     const endTime = performance.now() + duration;
     const startPoint = map.latLngToContainerPoint(marker.getLatLng());
     const endPoint = map.latLngToContainerPoint(end);
+    let animId: number;
 
     map.dragging.disable();
     map.options.touchZoom = 'center';
@@ -44,10 +45,12 @@ function moveTo(map: L.Map, end: L.LatLng, duration: number, marker: L.Marker) {
 
         marker.setLatLng(map.containerPointToLatLng(currentPos));
 
-        L.Util.requestAnimFrame(moveToAnim);
+        animId = L.Util.requestAnimFrame(moveToAnim);
     };
 
     moveToAnim();
+
+    return () => L.Util.cancelAnimFrame(animId);
 }
 
 export function MapLocation() {
@@ -55,6 +58,7 @@ export function MapLocation() {
     const [isFirstFound, setIsFirstFound] = useState<boolean>(true);
     const [moveToLatLng, setMoveToLatLng] = useState<L.LatLng | null>(null);
     const [isDragging, setIsDragging] = useState<boolean>(false);
+    const [cancelMove, setCancelMove] = useState<() => void | null>(null);
 
     const query = new URL(window.location.href).searchParams;
 
@@ -71,7 +75,14 @@ export function MapLocation() {
             if (isDragging) {
                 setMoveToLatLng(e.latlng);
             } else {
-                moveTo(map, e.latlng, Number(query.get('dur')) || 800, userMarkerRef.current);
+                const cancel = moveTo(
+                    map,
+                    e.latlng,
+                    Number(query.get('dur')) || 800,
+                    userMarkerRef.current,
+                );
+
+                setCancelMove(cancel);
             }
         },
         locationerror(e) {
@@ -83,6 +94,12 @@ export function MapLocation() {
             }
         },
         movestart() {
+            if (cancelMove) {
+                cancelMove();
+
+                setCancelMove(null);
+            }
+
             setIsDragging(true);
         },
         moveend() {
