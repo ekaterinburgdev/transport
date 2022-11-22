@@ -50,7 +50,13 @@ function moveTo(map: L.Map, end: L.LatLng, duration: number, marker: L.Marker) {
 
     moveToAnim();
 
-    return () => L.Util.cancelAnimFrame(animId);
+    return () => {
+        map.dragging.enable();
+        map.options.touchZoom = true;
+        map.options.scrollWheelZoom = true;
+
+        L.Util.cancelAnimFrame(animId);
+    };
 }
 
 export function MapLocation() {
