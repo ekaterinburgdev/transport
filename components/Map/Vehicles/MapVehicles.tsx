@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useMapEvent } from 'react-leaflet';
 
 import { VehicleType } from 'common/types/masstrans';
-import { VEHICLE_TYPE_COLORS } from 'common/constants/colors';
 
 import { MapVehiclesItem } from './Item/MapVehiclesItem';
 import { VISISBILITY_MINIMAL_ZOOM } from './MapVehicles.constants';
@@ -34,11 +33,9 @@ export function MapVehicles({ vehicles, type, onClick }: MapVehiclesProps) {
                     routeNumber={Number(vehicle.ROUTE)}
                     velocity={Number(vehicle.VELOCITY)}
                     boardId={Number(vehicle.BOARD_ID)}
-                    arrowUrl={`/icons/${type}-arrow.svg`}
-                    iconUrl={`/icons/${type}-light.svg`}
+                    type={type}
                     course={Number(vehicle.COURSE)}
                     key={vehicle.BOARD_ID}
-                    color={VEHICLE_TYPE_COLORS[type]}
                     onClick={onClick}
                 />
             ))}
