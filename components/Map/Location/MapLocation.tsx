@@ -22,19 +22,11 @@ function moveTo(map: L.Map, end: L.LatLng, duration: number, marker: L.Marker) {
     const endPoint = map.latLngToContainerPoint(end);
     let animId: number;
 
-    map.dragging.disable();
-    map.options.touchZoom = 'center';
-    map.options.scrollWheelZoom = 'center';
-
     const moveToAnim = () => {
         const timeRemains = endTime - performance.now();
 
         if (timeRemains <= 0) {
             marker.setLatLng(end);
-
-            map.dragging.enable();
-            map.options.touchZoom = true;
-            map.options.scrollWheelZoom = true;
 
             return;
         }
@@ -50,13 +42,7 @@ function moveTo(map: L.Map, end: L.LatLng, duration: number, marker: L.Marker) {
 
     moveToAnim();
 
-    return () => {
-        map.dragging.enable();
-        map.options.touchZoom = true;
-        map.options.scrollWheelZoom = true;
-
-        L.Util.cancelAnimFrame(animId);
-    };
+    return () => L.Util.cancelAnimFrame(animId);
 }
 
 export function MapLocation() {
