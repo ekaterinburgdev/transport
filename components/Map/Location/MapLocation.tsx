@@ -22,13 +22,18 @@ function moveTo(map: L.Map, end: L.LatLng, duration: number, marker: L.Marker) {
     const endPoint = map.latLngToContainerPoint(end);
 
     map.dragging.disable();
+    map.options.touchZoom = 'center';
+    map.options.scrollWheelZoom = 'center';
 
     const moveToAnim = () => {
         const timeRemains = endTime - performance.now();
 
         if (timeRemains <= 0) {
             marker.setLatLng(end);
+
             map.dragging.enable();
+            map.options.touchZoom = true;
+            map.options.scrollWheelZoom = true;
 
             return;
         }
@@ -48,6 +53,8 @@ function moveTo(map: L.Map, end: L.LatLng, duration: number, marker: L.Marker) {
 export function MapLocation() {
     const userMarkerRef = useRef<L.Marker>();
     const [isFirstFound, setIsFirstFound] = useState<boolean>(true);
+    const [moveToLatLng, setMoveToLatLng] = useState<L.LatLng | null>(null);
+    const [isDragging, setIsDragging] = useState<boolean>(false);
 
     const query = new URL(window.location.href).searchParams;
 
@@ -61,7 +68,11 @@ export function MapLocation() {
                 return;
             }
 
-            moveTo(map, e.latlng, Number(query.get('dur')) || 800, userMarkerRef.current);
+            if (isDragging) {
+                setMoveToLatLng(e.latlng);
+            } else {
+                moveTo(map, e.latlng, Number(query.get('dur')) || 800, userMarkerRef.current);
+            }
         },
         locationerror(e) {
             console.error(e);
@@ -69,6 +80,18 @@ export function MapLocation() {
             if (isFirstFound) {
                 map.setView(new L.LatLng(...COORDS_EKATERINBURG), map.getZoom());
                 setIsFirstFound(false);
+            }
+        },
+        movestart() {
+            setIsDragging(true);
+        },
+        moveend() {
+            setIsDragging(false);
+
+            if (moveToLatLng) {
+                moveTo(map, moveToLatLng, Number(query.get('dur')) || 800, userMarkerRef.current);
+
+                setMoveToLatLng(null);
             }
         },
     });
