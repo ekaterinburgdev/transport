@@ -5,6 +5,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: 'Iset Sans', sans-serif;
+    font-weight: 400;
 }
 
 a {
@@ -38,4 +39,139 @@ body {
         color: white;
         background: black;
     }
+}
+
+
+body {
+    font-size: 20px;
+}
+
+h1 {
+    font-size: 70px;
+    margin: .5em 0 .8em;
+}
+
+h2 {
+    font-size: 60px;
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+    line-height: 1.5;
+}
+
+.header {
+    margin-bottom: 4em;
+    background: #8394aa;
+}
+
+.main-list {
+    display: flex;
+    gap: 3em;
+}
+
+.map {
+    display: block;
+    pointer-events: none;
+    border-radius: 18px;
+    border: 0;
+    width: calc(100% - 4em);
+    height: 400px;
+}
+
+.menu {
+    display: flex;
+    gap: 1em;
+    list-style: none;
+    margin: 0;
+    padding: 0 3em;
+}
+
+.menu__item {
+    margin: 0;
+    padding: 1em 1.5em;
+    transition: .1s ease;
+    cursor: pointer;
+    color: white;
+}
+
+.menu__item:hover {
+    background: rgba(0,0,0,.05);
+}
+
+.menu__item_active {
+    background: rgba(0,0,0,.1);
+}
+
+.menu__item a {
+    text-decoration: none;
+}
+
+main {
+    padding: 0 60px;
+}
+
+
+.news {
+    display: flex;
+    flex-direction: column;
+    gap: 1.7em;
+}
+
+.news__item time {
+    display: block;
+    margin-bottom: .5em;
+    font-weight: 600;
+}
+
+.news__item a {
+    display: block;
+    text-decoration: none;
+    line-height: 1.6;
+    font-weight: 100;
+}
+
+.card-list {
+    display: grid;
+    grid-auto-flow: row dense;
+    grid-template-columns: repeat(4,1fr);
+    gap: 1em;
+    margin-top: 6em;
+}
+
+.card {
+    position: relative;
+    box-shadow: 0 15px 25px -5px rgb(17 12 46 / 10%);
+    border-radius: 0.5em;
+    aspect-ratio: 1/1;
+    transition: .2s;
+    background: rgba(0,0,0,.1);
+    color: white;
+    background: #97abc5;
+    background-size: cover;
+}
+
+.card:nth-child(1) {
+    grid-area: span 2/span 2;
+    font-size: 1.6em;
+}
+
+.card:nth-child(3) {
+    grid-area: span 2/span 2;
+    font-size: 1.6em;
+}
+
+.card:nth-child(6) {
+    grid-area: span 2/span 2;
+    font-size: 1.6em;
+}
+
+.card__link {
+    position: absolute;
+    bottom: 1em;
+    left: 1em;
+    display: block;
+    font-size: 1.3em;
+    text-decoration: none;
 }
