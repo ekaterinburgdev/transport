@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useMapEvents, Marker } from 'react-leaflet';
+import { useEffect, useRef, useState } from 'react';
+import { useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 
 import { COORDS_EKATERINBURG } from 'common/constants/coords';
+import { MovingMarker } from 'components/leaflet-extensions/moving-marker';
 
 const userIcon = new L.Icon({
     iconSize: [36, 36],
@@ -16,40 +17,12 @@ const userIconWithText = new L.Icon({
     iconUrl: '/icons/user-placemark-with-text.svg',
 });
 
-function moveTo(map: L.Map, end: L.LatLng, duration: number, marker: L.Marker) {
-    const endTime = performance.now() + duration;
-    const startPoint = map.latLngToContainerPoint(marker.getLatLng());
-    const endPoint = map.latLngToContainerPoint(end);
-    let animId: number;
-
-    const moveToAnim = () => {
-        const timeRemains = endTime - performance.now();
-
-        if (timeRemains <= 0) {
-            marker.setLatLng(end);
-
-            return;
-        }
-
-        const progress = (duration - timeRemains) / duration;
-        const currentPos = endPoint.multiplyBy(progress).add(startPoint.multiplyBy(1 - progress));
-
-        marker.setLatLng(map.containerPointToLatLng(currentPos));
-
-        animId = L.Util.requestAnimFrame(moveToAnim);
-    };
-
-    moveToAnim();
-
-    return () => L.Util.cancelAnimFrame(animId);
-}
-
 export function MapLocation() {
-    const userMarkerRef = useRef<L.Marker>();
+    const userMarkerRef = useRef<MovingMarker>();
     const [isFirstFound, setIsFirstFound] = useState<boolean>(true);
     const [moveToLatLng, setMoveToLatLng] = useState<L.LatLng | null>(null);
     const [isDragging, setIsDragging] = useState<boolean>(false);
-    const [cancelMove, setCancelMove] = useState<() => void | null>(null);
+    const [cancelMove, setCancelMove] = useState<boolean>(false);
 
     const query = new URL(window.location.href).searchParams;
 
@@ -66,14 +39,12 @@ export function MapLocation() {
             if (isDragging) {
                 setMoveToLatLng(e.latlng);
             } else {
-                const cancel = moveTo(
-                    map,
-                    e.latlng,
-                    Number(query.get('dur')) || 800,
-                    userMarkerRef.current,
-                );
+                userMarkerRef.current.moveToWithDuration({
+                    latlng: e.latlng,
+                    duration: Number(query.get('dur')) || 800,
+                });
 
-                setCancelMove(cancel);
+                setCancelMove(true);
             }
         },
         locationerror(e) {
@@ -86,9 +57,9 @@ export function MapLocation() {
         },
         movestart() {
             if (cancelMove) {
-                cancelMove();
+                userMarkerRef.current.cancelMove();
 
-                setCancelMove(null);
+                setCancelMove(false);
             }
 
             setIsDragging(true);
@@ -97,7 +68,10 @@ export function MapLocation() {
             setIsDragging(false);
 
             if (moveToLatLng) {
-                moveTo(map, moveToLatLng, Number(query.get('dur')) || 800, userMarkerRef.current);
+                userMarkerRef.current.moveToWithDuration({
+                    latlng: moveToLatLng,
+                    duration: Number(query.get('dur')) || 800,
+                });
 
                 setMoveToLatLng(null);
             }
@@ -107,12 +81,15 @@ export function MapLocation() {
     useEffect(() => {
         map.locate({ watch: true });
 
+        const icon = query.get('with-text') ? userIconWithText : userIcon;
+        userMarkerRef.current = new MovingMarker(COORDS_EKATERINBURG, {
+            icon,
+        }).addTo(map);
+
         return () => {
             map.stopLocate();
         };
     }, [map]);
 
-    const icon = query.get('with-text') ? userIconWithText : userIcon;
-
-    return <Marker icon={icon} position={COORDS_EKATERINBURG} ref={userMarkerRef} />;
+    return null;
 }
