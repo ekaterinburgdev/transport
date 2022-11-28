@@ -5,17 +5,7 @@ import L from 'leaflet';
 import { COORDS_EKATERINBURG } from 'common/constants/coords';
 import { MovingMarker } from 'components/leaflet-extensions/moving-marker';
 
-const userIcon = new L.Icon({
-    iconSize: [36, 36],
-    iconAnchor: [36, 18],
-    iconUrl: '/icons/user-placemark.svg',
-});
-
-const userIconWithText = new L.Icon({
-    iconSize: [58, 54],
-    iconAnchor: [36, 27],
-    iconUrl: '/icons/user-placemark-with-text.svg',
-});
+import { USER_PLACEMARK_ANIMATION_DURATION, USER_ICON } from './MapLocation.constants';
 
 export function MapLocation() {
     const userMarkerRef = useRef<MovingMarker>();
@@ -23,8 +13,6 @@ export function MapLocation() {
     const [moveToLatLng, setMoveToLatLng] = useState<L.LatLng | null>(null);
     const [isDragging, setIsDragging] = useState<boolean>(false);
     const [cancelMove, setCancelMove] = useState<boolean>(false);
-
-    const query = new URL(window.location.href).searchParams;
 
     const map = useMapEvents({
         locationfound(e) {
@@ -41,7 +29,7 @@ export function MapLocation() {
             } else {
                 userMarkerRef.current.moveToWithDuration({
                     latlng: e.latlng,
-                    duration: Number(query.get('dur')) || 800,
+                    duration: USER_PLACEMARK_ANIMATION_DURATION,
                 });
 
                 setCancelMove(true);
@@ -70,7 +58,7 @@ export function MapLocation() {
             if (moveToLatLng) {
                 userMarkerRef.current.moveToWithDuration({
                     latlng: moveToLatLng,
-                    duration: Number(query.get('dur')) || 800,
+                    duration: USER_PLACEMARK_ANIMATION_DURATION,
                 });
 
                 setMoveToLatLng(null);
@@ -81,9 +69,8 @@ export function MapLocation() {
     useEffect(() => {
         map.locate({ watch: true });
 
-        const icon = query.get('with-text') ? userIconWithText : userIcon;
         userMarkerRef.current = new MovingMarker(COORDS_EKATERINBURG, {
-            icon,
+            icon: USER_ICON,
         }).addTo(map);
 
         return () => {
