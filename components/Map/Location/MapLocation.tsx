@@ -1,23 +1,77 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 
 import { COORDS_EKATERINBURG } from 'common/constants/coords';
+import { MovingMarker } from 'components/leaflet-extensions/moving-marker';
+
+import { USER_PLACEMARK_ANIMATION_DURATION, USER_ICON } from './MapLocation.constants';
 
 export function MapLocation() {
+    const userMarkerRef = useRef<MovingMarker>();
+    const [isFirstFound, setIsFirstFound] = useState<boolean>(true);
+    const [moveToLatLng, setMoveToLatLng] = useState<L.LatLng | null>(null);
+    const [isDragging, setIsDragging] = useState<boolean>(false);
+    const [cancelMove, setCancelMove] = useState<boolean>(false);
+
     const map = useMapEvents({
         locationfound(e) {
-            map.setView(e.latlng, map.getZoom());
+            if (isFirstFound) {
+                userMarkerRef.current.setLatLng(e.latlng);
+                map.setView(e.latlng, map.getZoom());
+                setIsFirstFound(false);
+
+                return;
+            }
+
+            if (isDragging) {
+                setMoveToLatLng(e.latlng);
+            } else {
+                userMarkerRef.current.moveToWithDuration({
+                    latlng: e.latlng,
+                    duration: USER_PLACEMARK_ANIMATION_DURATION,
+                });
+
+                setCancelMove(true);
+            }
         },
         locationerror(e) {
             console.error(e);
 
-            map.setView(new L.LatLng(...COORDS_EKATERINBURG), map.getZoom());
+            if (isFirstFound) {
+                map.setView(new L.LatLng(...COORDS_EKATERINBURG), map.getZoom());
+                setIsFirstFound(false);
+            }
+        },
+        movestart() {
+            if (cancelMove) {
+                userMarkerRef.current.cancelMove();
+
+                setCancelMove(false);
+            }
+
+            setIsDragging(true);
+        },
+        moveend() {
+            setIsDragging(false);
+
+            if (moveToLatLng) {
+                userMarkerRef.current.moveToWithDuration({
+                    latlng: moveToLatLng,
+                    duration: USER_PLACEMARK_ANIMATION_DURATION,
+                });
+
+                setMoveToLatLng(null);
+            }
         },
     });
 
     useEffect(() => {
-        map.locate({ maxZoom: 16 });
+        map.locate({ watch: true });
+
+        userMarkerRef.current = new MovingMarker(COORDS_EKATERINBURG, {
+            icon: USER_ICON,
+        }).addTo(map);
 
         return () => {
             map.stopLocate();

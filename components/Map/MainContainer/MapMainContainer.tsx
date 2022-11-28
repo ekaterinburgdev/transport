@@ -36,6 +36,8 @@ function MapMainContainer() {
             scrollWheelZoom
             attributionControl={null}
             zoom={16}
+            zoomDelta={0.6}
+            zoomSnap={0.4}
             className={cn(styles.Map)}
         >
             <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />
