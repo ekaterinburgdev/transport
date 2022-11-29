@@ -1,0 +1,25 @@
+.ZoomControl {
+    display: flex;
+    flex-direction: column;
+    order: 1;
+
+    padding: 12px 6px;
+
+    background-color: #fff;
+    border-radius: 24px;
+}
+
+.ZoomControlButton {
+    height: 36px;
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+    background: none;
+
+    cursor: pointer;
+}
+
+.ZoomControlButton:not(:last-child) {
+    margin-bottom: 9px;   
+}

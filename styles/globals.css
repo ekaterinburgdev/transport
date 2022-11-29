@@ -20,6 +20,19 @@ body {
     margin: 0;
 }
 
+.leaflet-control-container .leaflet-bottom.leaflet-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 165px;
+
+    margin: 16px;
+}
+
+.leaflet-control-container .leaflet-bottom.leaflet-right > div {
+    margin: 0;
+}
+
 /* TODO Tile server with black Open Street Map */
 .leaflet-tile-pane {
     filter: invert(1) sepia(1) saturate(.2) hue-rotate(270deg) brightness(.7) contrast(1.1);

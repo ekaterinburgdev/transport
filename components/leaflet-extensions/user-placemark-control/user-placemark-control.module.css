@@ -1,0 +1,39 @@
+.UserPlacemarkControl {
+    display: flex;
+    order: 2;
+
+    padding: 6px;
+
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.UserPlacemarkControlCentered {
+    background-color: #00b4ff;
+}
+
+.UserPlacemarkControlButton {
+    display: flex;
+    padding: 0;
+    width: 36px;
+    height: 36px;
+    position: relative;
+
+    border: none;
+    border-radius: 50%;
+    background: none;
+
+    cursor: pointer;
+}
+
+.UserPlacemarkControlIcon {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: none;
+}
+
+.UserPlacemarkControlIcon_active {
+    display: block;
+}
