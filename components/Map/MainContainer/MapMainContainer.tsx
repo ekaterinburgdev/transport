@@ -29,8 +29,6 @@ function MapMainContainer() {
                 shadowUrl: shadowUrl.src,
             });
         }());
-
-        window.scrollTo(0, 1);
     }, []);
 
     return (
