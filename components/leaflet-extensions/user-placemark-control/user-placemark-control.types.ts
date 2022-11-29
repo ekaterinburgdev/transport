@@ -3,8 +3,3 @@ export enum UserPlacemarkControlState {
     Pan = 'pan',
     Centred = 'centred',
 }
-
-export type UserPlacemarkIcons = {
-    buttonIcon: HTMLImageElement;
-    buttonIconCentered: HTMLImageElement;
-};
