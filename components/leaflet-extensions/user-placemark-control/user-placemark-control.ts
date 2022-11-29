@@ -14,13 +14,20 @@ export class UserPlacemarkControl extends L.Control {
 
     private userPlacemark: MovingMarker;
 
+    private map: L.Map;
+
     constructor(userPlacemark: MovingMarker, options: L.ControlOptions) {
         super(options);
 
         this.userPlacemark = userPlacemark;
     }
 
+    onRemove(): void {
+        this.userPlacemark?.removeEventListener('move', this.moveMapCenter);
+    }
+
     onAdd(map: L.Map) {
+        this.map = map;
         const container = L.DomUtil.create('div', cn(styles.UserPlacemarkControl));
 
         const button = L.DomUtil.create('button', cn(styles.UserPlacemarkControlButton), container);
@@ -31,25 +38,22 @@ export class UserPlacemarkControl extends L.Control {
             </svg>
         `;
 
-        L.DomEvent.on(button, 'click', () => this.onClick(map, container), this);
+        L.DomEvent.on(button, 'click', () => this.onClick(container), this);
 
-        map.addEventListener('drag', () => {
-            this.updateStateByUserPlacemark(map, container);
-        });
-
-        this.userPlacemark?.addEventListener('move', () => {
-            this.updateStateByUserPlacemark(map, container);
+        this.map.addEventListener('drag', () => {
+            this.setFreeState(container);
+            this.userPlacemark?.removeEventListener('move', this.moveMapCenter);
         });
 
         if (this.userPlacemark) {
-            this.updateStateByUserPlacemark(map, container);
+            this.updateStateByUserPlacemark(container);
         }
 
         return container;
     }
 
-    private updateStateByUserPlacemark(map: L.Map, control: HTMLDivElement) {
-        if (map.getCenter().equals(this.userPlacemark?.getLatLng(), MARGIN_OF_EQUALS_ERROR)) {
+    private updateStateByUserPlacemark(control: HTMLDivElement) {
+        if (this.map.getCenter().equals(this.userPlacemark?.getLatLng(), MARGIN_OF_EQUALS_ERROR)) {
             this.setCenteredState(control);
         } else {
             this.setFreeState(control);
@@ -57,13 +61,14 @@ export class UserPlacemarkControl extends L.Control {
     }
 
     private setCenteredState(control: HTMLDivElement) {
-        if (this.state === UserPlacemarkControlState.Centred) {
+        if (this.state === UserPlacemarkControlState.Centered) {
             return;
         }
 
-        this.state = UserPlacemarkControlState.Centred;
-
+        this.state = UserPlacemarkControlState.Centered;
         control.classList.add(cn(styles.UserPlacemarkControlCentered));
+
+        this.userPlacemark?.addEventListener('move', this.moveMapCenter);
     }
 
     private setFreeState(control: HTMLDivElement) {
@@ -72,13 +77,16 @@ export class UserPlacemarkControl extends L.Control {
         }
 
         this.state = UserPlacemarkControlState.Free;
-
         control.classList.remove(cn(styles.UserPlacemarkControlCentered));
     }
 
-    private onClick(map: L.Map, control: HTMLDivElement) {
+    private moveMapCenter = () => {
+        this.map.setView(this.userPlacemark?.getLatLng());
+    };
+
+    private onClick(control: HTMLDivElement) {
         if (this.state === UserPlacemarkControlState.Free) {
-            map.setView(this.userPlacemark?.getLatLng());
+            this.moveMapCenter();
 
             this.setCenteredState(control);
         }

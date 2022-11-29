@@ -40,6 +40,7 @@ function MapMainContainer() {
             zoomDelta={0.6}
             zoomSnap={0.4}
             scrollWheelZoom
+            doubleClickZoom={false}
             className={cn(styles.Map)}
         >
             <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />
