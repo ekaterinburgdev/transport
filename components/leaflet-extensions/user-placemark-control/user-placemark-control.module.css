@@ -1,6 +1,7 @@
 .UserPlacemarkControl {
     display: flex;
     order: 2;
+    width: 48px;
 
     padding: 6px;
 

@@ -11,7 +11,9 @@ export default function Map() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <MapComponent />
+            <div>
+                <MapComponent />
+            </div>
         </>
     );
 }
