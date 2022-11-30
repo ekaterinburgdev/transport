@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 
 import { COORDS_EKATERINBURG } from 'common/constants/coords';
 import { MovingMarker } from 'components/leaflet-extensions/moving-marker';
+import { MapUserPlacemarkControl } from 'components/Map/UserPlacemarkControl/MapUserPlacemarkControl';
 
 import { USER_PLACEMARK_ANIMATION_DURATION, USER_ICON } from './MapLocation.constants';
 
@@ -78,5 +79,10 @@ export function MapLocation() {
         };
     }, [map]);
 
-    return null;
+    return (
+        <MapUserPlacemarkControl
+            options={{ position: 'bottomright' }}
+            userPlacemark={userMarkerRef.current}
+        />
+    );
 }

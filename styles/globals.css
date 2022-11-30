@@ -5,6 +5,11 @@ body {
     padding: 0;
     margin: 0;
     font-family: 'Iset Sans', sans-serif;
+    height: 100%;
+}
+
+#__next {
+    height: 100%;
 }
 
 a {
@@ -17,6 +22,19 @@ a {
 
 body {
     padding: 0;
+    margin: 0;
+}
+
+.leaflet-control-container .leaflet-bottom.leaflet-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 165px;
+
+    margin: 16px;
+}
+
+.leaflet-control-container .leaflet-bottom.leaflet-right > div {
     margin: 0;
 }
 
