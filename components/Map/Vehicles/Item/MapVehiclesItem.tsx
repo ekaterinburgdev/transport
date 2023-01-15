@@ -1,15 +1,15 @@
-import React, { Component, createRef } from 'react';
+import React, {
+    useRef, useEffect, useMemo, useCallback, useState,
+} from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { isEqual } from 'lodash';
-import { Marker } from 'react-leaflet';
+import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 import classNames from 'classnames/bind';
 
-import { withMap } from 'components/hocs/withMap';
+import { MovingMarker } from 'components/leaflet-extensions/moving-marker';
 
 import { MapVehicleMarker } from '../Marker/MapVehicleMarker';
 
-import { startMoveInDirection, clearIntervals } from './MapVehiclesItem.utils';
 import { EAST_COURSE_RANGE } from './MapVehiclesItem.constants';
 import { MapVehiclesItemProps } from './MapVehiclesItem.types';
 
@@ -17,49 +17,46 @@ import styles from './MapVehiclesItem.module.css';
 
 const cn = classNames.bind(styles);
 
-export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
-    private icon: L.DivIcon;
+const geoCoordsToEuqlid = (oPoint: [number, number], point: [number, number]) => {
+    const yPoint: [number, number] = [oPoint[0], point[1]];
+    const xPoint: [number, number] = [point[0], oPoint[1]];
 
-    private markerRef = createRef<L.Marker>();
+    let x = new L.LatLng(...xPoint).distanceTo(point);
+    let y = new L.LatLng(...yPoint).distanceTo(point);
 
-    constructor(props: MapVehiclesItemProps) {
-        super(props);
-
-        this.icon = this.getIcon();
+    if (point[0] < oPoint[0]) {
+        x = -x;
     }
 
-    componentDidMount(): void {
-        setTimeout(this.updateTranslate, 0);
-
-        const { map } = this.props;
-
-        map.addEventListener('zoomend', () => {
-            this.updateTranslate();
-        });
+    if (point[1] < oPoint[1]) {
+        y = -y;
     }
 
-    componentDidUpdate(prevProps: Readonly<MapVehiclesItemProps>): void {
-        const { course, position } = this.props;
+    return [x, y];
+};
 
-        if (prevProps.course !== course) {
-            const icon = this.getIcon();
+export function MapVehiclesItem({
+    position,
+    velocity,
+    course,
+    boardId,
+    routeNumber,
+    type,
+    disability,
+    warning,
+    onClick,
+}: MapVehiclesItemProps) {
+    const map = useMap();
+    const vehicleRef = useRef<MovingMarker>();
+    const [isFirstPosition, setIsFirstPosition] = useState(true);
+    const [isActive, setIsActive] = useState(false);
 
-            this.markerRef?.current?.setIcon(icon);
-        }
+    const onClickEventHandler = useCallback(() => {
+        setIsActive(true);
+        onClick(routeNumber);
+    }, [routeNumber, onClick]);
 
-        if (!isEqual(prevProps.position, position)) {
-            this.updateTranslate();
-        }
-    }
-
-    componentWillUnmount(): void {
-        clearIntervals();
-    }
-
-    getIcon() {
-        const {
-            boardId, routeNumber, course, type, disability, warning,
-        } = this.props;
+    const icon = useMemo(() => {
         const isCourseEast = course > EAST_COURSE_RANGE.left || course < EAST_COURSE_RANGE.right;
 
         return new L.DivIcon({
@@ -79,66 +76,92 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
                 />,
             ),
         });
-    }
+    }, [course, boardId, routeNumber, type, disability, warning]);
 
-    getScale = () => {
-        const { map } = this.props;
+    const rotateIcon = useCallback(() => {
+        vehicleRef.current.setIcon(icon);
+    }, [course, icon]);
 
-        // Get the y,x dimensions of the map
-        const { x, y } = map.getSize();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const isNewPositionBehind = useCallback(() => {
+        const prevPosition = vehicleRef.current.getLatLng();
+        const newPosition = new L.LatLng(...position);
+        const center: [number, number] = [prevPosition.lat, prevPosition.lng];
+        const xPosition: [number, number] = [prevPosition.lat, prevPosition.lng + 0.01];
 
-        // calculate the distance the one side of the map to the other using the haversine formula
-        const maxMeters = map
-            .containerPointToLatLng([0, y])
-            .distanceTo(map.containerPointToLatLng([x, y]));
+        const newPositionEuqlid = geoCoordsToEuqlid(center, position);
+        const xPositionEuqlid = geoCoordsToEuqlid(center, xPosition);
 
-        // calculate how many meters each pixel represents
-        return maxMeters / x;
-    };
+        const newPositionDistance = prevPosition.distanceTo(newPosition);
 
-    onClickEventHandler = () => {
-        const { routeNumber, onClick } = this.props;
-
-        if (!routeNumber) {
-            return;
+        if (newPositionDistance > 150) {
+            return false;
         }
 
-        onClick(routeNumber);
-    };
+        const xPositionDistance = prevPosition.distanceTo(xPosition);
 
-    private updateTranslate = () => {
-        const {
-            boardId, routeNumber, velocity, course,
-        } = this.props;
+        const xMult = newPositionEuqlid[0] * xPositionEuqlid[0];
+        const yMult = newPositionEuqlid[1] * xPositionEuqlid[1];
+        const scalarMult = xMult + yMult;
+        const a = Math.acos(scalarMult / (xPositionDistance * newPositionDistance));
+        const angle = (a * 180) / Math.PI;
 
-        const marker = document.querySelector(
-            `#vehicle-${boardId}-${routeNumber}`,
-        ) as HTMLDivElement;
+        const diff = Math.abs(course - angle);
 
-        if (!marker) {
-            return;
+        return diff >= 160 && diff <= 200;
+    }, [position, course]);
+
+    const startVehicleMoving = useCallback(
+        (isFirstMove: boolean) => {
+            if (isActive) {
+                // eslint-disable-next-line no-console
+                console.log('start moving');
+            }
+
+            vehicleRef.current.moveToWithDuration({
+                latlng: new L.LatLng(...position),
+                duration: isFirstMove ? 0 : 2000,
+                inertialMove: {
+                    speed: velocity,
+                    direction: course,
+                    callback: course === 270 || velocity === 0 ? null : rotateIcon,
+                },
+            });
+        },
+        [position, velocity, course, rotateIcon],
+    );
+
+    useEffect(() => {
+        vehicleRef.current?.cancelMove();
+        const prevMap = vehicleRef.current ? vehicleRef.current.getMap() : null;
+
+        if (prevMap !== map) {
+            if (vehicleRef.current) {
+                vehicleRef.current.addTo(map);
+            } else {
+                const vehicle = new MovingMarker(position, {
+                    icon,
+                }).addTo(map);
+
+                vehicle.on('click', onClickEventHandler);
+                vehicleRef.current = vehicle;
+            }
         }
 
-        startMoveInDirection({
-            direction: course,
-            vehicle: marker,
-            velocity,
-            scale: this.getScale(),
-        });
-    };
+        startVehicleMoving(isFirstPosition);
 
-    render() {
-        const { position } = this.props;
+        if (isFirstPosition) {
+            setIsFirstPosition(false);
+        }
 
-        return (
-            <Marker
-                icon={this.icon}
-                position={position}
-                eventHandlers={{ click: this.onClickEventHandler }}
-                ref={this.markerRef}
-            />
-        );
-    }
+        return () => {
+            const prevMapCheck = vehicleRef.current ? vehicleRef.current.getMap() : null;
+
+            if (prevMapCheck !== map) {
+                vehicleRef.current.remove();
+            }
+        };
+    }, [map, position, velocity, course]);
+
+    return null;
 }
-
-export const MapVehiclesItem = withMap(MapVehiclesItemComponent);
