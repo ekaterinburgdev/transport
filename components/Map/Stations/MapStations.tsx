@@ -34,6 +34,7 @@ export function MapStations() {
                         id={station.ID}
                         name={station.NAME}
                         direction={station.DIRECTION}
+                        key={station.ID}
                     />
                 );
             })}
@@ -48,6 +49,7 @@ export function MapStations() {
                         id={station.ID}
                         name={station.NAME}
                         direction={station.DIRECTION}
+                        key={station.ID}
                     />
                 );
             })}
