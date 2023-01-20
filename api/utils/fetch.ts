@@ -2,17 +2,17 @@ import { HttpMethod, FetchOptions } from 'common/types/requests';
 
 import { getCorsWrapper } from './get-cors-wrapper';
 
-export async function fetchInternalApi(url: string, options: FetchOptions) {
+export async function fetchApi(url: string, options: FetchOptions) {
     const { method = HttpMethod.GET, dataField } = options;
 
     try {
-        const res = await fetch(getCorsWrapper(url), {
+        const res = await fetch(url, {
             method,
         });
 
         const resJson = await res.json();
 
-        if (resJson.error.code) {
+        if (resJson.error?.status) {
             const e = new Error(resJson.error.msg);
 
             console.error(e);
@@ -34,4 +34,8 @@ export async function fetchInternalApi(url: string, options: FetchOptions) {
 
         throw e;
     }
+}
+
+export async function fetchInternalApi(url: string, options: FetchOptions) {
+    return fetchApi(getCorsWrapper(url), options);
 }

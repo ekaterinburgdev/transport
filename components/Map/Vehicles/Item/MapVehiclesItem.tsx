@@ -5,7 +5,7 @@ import { Marker } from 'react-leaflet';
 import L from 'leaflet';
 import classNames from 'classnames/bind';
 
-import { withMap } from 'components/hocs/withMap';
+import { withMap } from 'components/Map/hocs/withMap';
 
 import { MapVehicleMarker } from '../Marker/MapVehicleMarker';
 

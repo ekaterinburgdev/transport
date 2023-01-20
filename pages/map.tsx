@@ -7,7 +7,7 @@ export default function Map() {
     return (
         <>
             <Head>
-                <title>Ekaterinburg transport — Map</title>
+                <title>Карта транспорта</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
