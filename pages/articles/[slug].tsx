@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import { articlesApi } from 'api/articles/articles';
 
 function Article({ title, description }: any) {
@@ -12,9 +13,13 @@ function Article({ title, description }: any) {
                     {title}
                 </title>
             </Head>
-            <div>
-                <div>{title}</div>
-                <div>{description}</div>
+
+            <div style={{ maxWidth: 1000, margin: '24px auto' }}>
+                <h1>{title}</h1>
+
+                <ReactMarkdown>
+                    {description}
+                </ReactMarkdown>
             </div>
         </>
     );
