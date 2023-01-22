@@ -2,7 +2,7 @@ import { fetchApi } from 'api/utils/fetch';
 
 export const MainPageApi = {
     getCards: () => (
-        fetchApi('https://transport-cms.ekaterinburg.io/api/cards', { dataField: 'data' })
+        fetchApi('https://transport-cms.ekaterinburg.io/api/cards/?populate=backgroundImage', { dataField: 'data' })
     ),
     getMarqueeItems: () => (
         fetchApi('https://transport-cms.ekaterinburg.io/api/marquees', { dataField: 'data' })

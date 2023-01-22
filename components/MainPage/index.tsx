@@ -46,12 +46,14 @@ export function MainPage({ cards, marqueeItems, notifications }: MainPageTypes) 
                             display: 'inline-block',
                             width: 'calc((100% - 30px) / 3)',
                             height: 400,
-                            padding: 30,
-                            border: '1px solid rgba(0,0,0,.25)',
-                            borderRadius: 16,
+                            padding: 50,
+                            border: 'backgroundImage' in attributes ? '1px solid rgba(0,0,0,.25)' : '',
+                            borderRadius: 64,
                             textDecoration: 'none',
-                            backgroundColor: attributes.backgroundColor || 'rgba(0,0,0,.65)',
-                            backgroundImage: `url(${attributes.buttonBackground})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: '100% 50%',
+                            backgroundColor: attributes.backgroundColor || 'rgba(0,0,0,.15)',
+                            backgroundImage: `url(https://transport-cms.ekaterinburg.io${attributes?.backgroundImage?.data?.attributes?.url})`,
                         }}
                     >
                         <span style={{
@@ -65,7 +67,7 @@ export function MainPage({ cards, marqueeItems, notifications }: MainPageTypes) 
                         <br />
                         <br />
 
-                        <pre style={{ color: attributes.subtitleColor }}>
+                        <pre style={{ color: attributes.subtitleColor, fontSize: 20 }}>
                             {attributes.subtitle}
                         </pre>
 

@@ -2,13 +2,12 @@ import React from 'react';
 import Head from 'next/head';
 import { MainPageApi } from 'api/main-page/main-page';
 import { MainPage } from 'components/MainPage';
-import { MainPageTypes } from '../components/MainPage/index.types';
 
-export default function Home(props: MainPageTypes) {
+export default function Home(props) {
     return (
         <>
             <Head>
-                <title>Транспортная экосистема Екатеринбурга</title>
+                <title>Транспорт Екатеринбурга</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 

@@ -7,6 +7,7 @@ export interface Card {
         url: null | string;
         invert: boolean | null;
         backgroundColor: null | string;
+        backgroundImage: null | string;
         button: null;
         buttonColor: null;
         buttonBackground: null;

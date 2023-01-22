@@ -2,9 +2,9 @@ import { fetchApi } from 'api/utils/fetch';
 
 export const articlesApi = {
     getArticles: () => (
-        fetchApi('https://transport-cms.ekaterinburg.io/api/articles', { dataField: 'data' })
+        fetchApi('https://transport-cms.ekaterinburg.io/api/articles?fields=slug', { dataField: 'data' })
     ),
-    getArticle: (id: number) => (
-        fetchApi(`https://transport-cms.ekaterinburg.io/api/articles/${id}`, { dataField: 'vehicles' })
+    getArticle: (slug: string) => (
+        fetchApi(`https://transport-cms.ekaterinburg.io/api/articles?filters[slug][$eq]=${encodeURIComponent(slug)}`, { dataField: 'data' })
     ),
 };
