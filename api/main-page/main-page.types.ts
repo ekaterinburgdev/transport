@@ -1,5 +1,5 @@
 export interface Card {
-    id: number,
+    id: number;
     attributes: {
         title: string;
         titleColor: string;
@@ -7,7 +7,28 @@ export interface Card {
         url: null | string;
         invert: boolean | null;
         backgroundColor: null | string;
-        backgroundImage: null | string;
+        backgroundImage: {
+            data: {
+                attributes: {
+                    name: string;
+                    alternativeText: string;
+                    caption: string;
+                    width: number;
+                    height: number;
+                    formats: { thumbnail: Thumbnail };
+                    hash: string;
+                    ext: string;
+                    mime: string;
+                    size: number;
+                    url: string;
+                    previewUrl: null;
+                    provider: string;
+                    provider_metadata: null;
+                    createdAt: Date;
+                    updatedAt: Date;
+                };
+            };
+        };
         button: null;
         buttonColor: null;
         buttonBackground: null;
@@ -20,32 +41,44 @@ export interface Card {
         createdAt: Date;
         updatedAt: Date;
         publishedAt: Date;
-    }
+    };
+}
+
+interface Thumbnail {
+    ext: string;
+    url: string;
+    hash: string;
+    mime: string;
+    name: string;
+    path: null;
+    size: number;
+    width: number;
+    height: number;
 }
 
 export interface Notification {
-    id: number,
+    id: number;
     attributes: {
         title: string;
         text: string;
-        image: string,
+        image: string;
         routeNumber: string;
         fromDate: Date;
         untilDate: null;
         createdAt: Date;
         updatedAt: Date;
         publishedAt: Date;
-    }
+    };
 }
 
 export interface Marquee {
-    id: number,
+    id: number;
     attributes: {
         message: string;
         createdAt: Date;
         updatedAt: Date;
         publishedAt: Date;
-    }
+    };
 }
 
 enum CardType {
