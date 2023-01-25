@@ -1,22 +1,30 @@
 import React from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
+import { MainPageApi } from 'api/main-page/main-page';
+import { MainPage } from 'components/MainPage';
 
-export default function Home() {
+export default function Home(props) {
     return (
         <>
             <Head>
-                <title>Ekaterinburg transport</title>
+                <title>Транспорт Екатеринбурга</title>
                 <link rel="icon" href="/favicon.ico" />
+                <meta name="viewport" content="width=1200, initial-scale=1" />
+                <style dangerouslySetInnerHTML={{ __html: 'body { background: #f2f2f2; }' }} />
             </Head>
 
-            <h1>Транспорт</h1>
-
-            <ul>
-                <li>
-                    <Link href="/map">Карта</Link>
-                </li>
-            </ul>
+            <MainPage {...props} />
         </>
     );
+}
+
+export async function getStaticProps() {
+    return {
+        props: {
+            cards: await MainPageApi.getCards(),
+            marqueeItems: await MainPageApi.getMarqueeItems(),
+            notifications: await MainPageApi.getNotifications(),
+        },
+        revalidate: 15,
+    };
 }

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useMap, ZoomControlProps } from 'react-leaflet';
 
-import { ZoomControl } from 'components/leaflet-extensions/zoom-control/zoom-control';
+import { ZoomControl } from 'components/Map/leaflet-extensions/zoom-control/zoom-control';
 
 export function MapZoomControl(props: ZoomControlProps) {
     const map = useMap();

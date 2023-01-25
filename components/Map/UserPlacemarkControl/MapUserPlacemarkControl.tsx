@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useMap } from 'react-leaflet';
 
-import { UserPlacemarkControl } from 'components/leaflet-extensions/user-placemark-control/user-placemark-control';
-import { MovingMarker } from 'components/leaflet-extensions/moving-marker';
+import { UserPlacemarkControl } from 'components/Map/leaflet-extensions/user-placemark-control/user-placemark-control';
+import { MovingMarker } from 'components/Map/leaflet-extensions/moving-marker';
 
 export type MapUserPlacemarkControlProps = {
     userPlacemark: MovingMarker;
