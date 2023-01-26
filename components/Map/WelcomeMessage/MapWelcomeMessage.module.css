@@ -8,7 +8,7 @@
     width: 369px;
 
     border-radius: 16px;
-    background-color: var(--background-secondary);
+    background-color: var(--background-primary);
     color: var(--text-secondary);
 }
 
@@ -38,7 +38,8 @@
 }
 
 .MapWelcomeMessageNotationIcon {
-    border: 1.5px solid #e6e4e0;
+    /* next image hidden border */
+    border: 1.5px solid #e6e4e0 !important;
     border-radius: 32px;
 }
 
