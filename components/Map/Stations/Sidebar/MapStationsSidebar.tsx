@@ -45,56 +45,62 @@ export function MapStationsSidebar({ type, name }: MapStationsSidebarProps) {
                 sidebarStyles.leafletSidebar,
             )}
         >
-            <div className={cn(styles.MapStationsSidebarRow, styles.MapStationsSidebarHeader)}>
-                <div className={cn(styles.MapStationsSidebarHeaderInfo)}>
-                    <Typography variant="h3">
-                        {type
-                            .split('-')
-                            .reverse()
-                            .map((t) => (
-                                <IconFont key={t} name={IconFontCharsNames[t]} />
-                            ))}
-                    </Typography>
-                    <Typography variant="h3">{name}</Typography>
-                </div>
-                <button
-                    type="button"
-                    onClick={() => {
-                        sidebarService.close();
-                    }}
-                    className={cn(styles.MapStationsSidebarCloseButton)}
-                >
-                    <Close className={cn(styles.MapStationsSidebarCloseIcon)} />
-                </button>
-            </div>
-            <Divider />
-            <div className={cn(styles.MapStationsSidebarRow, styles.MapStationsSidebarVehicles)}>
-                {vehicleAwait.map((vehicle) => (
-                    <div key={vehicle.boardId} className={cn(styles.MapStationsSidebarVehicle)}>
-                        <div className={cn(styles.MapStationsSidebarVehicleInfo)}>
-                            <div
-                                className={cn(styles.MapStationsSidebarVehicleRoute)}
-                                style={{ backgroundColor: VEHICLE_TYPE_COLORS[vehicle.type] }}
-                            >
-                                {vehicle.route}
-                            </div>
-                            <div>
-                                <span className={cn(styles.MapStationsSidebarVehicleEndpoint)}>
-                                    {vehicle.to}
-                                </span>
-                                <br />
-                                <span className={cn(styles.MapStationsSidebarVehicleKeypoints)}>
-                                    {`через ${vehicle.through.join(', ')}`}
-                                </span>
-                            </div>
-                        </div>
-                        <div className={cn(styles.MapStationsSidebarVehicleArriveTime)}>
-                            {vehicle.time > 15
-                                ? `${getHHMMFormat(new Date(Date.now() + vehicle.time * 60000))}`
-                                : `${vehicle.time} мин`}
-                        </div>
+            <div className={cn(styles.MapStationsSidebarWrapper)}>
+                <div className={cn(styles.MapStationsSidebarRow, styles.MapStationsSidebarHeader)}>
+                    <div className={cn(styles.MapStationsSidebarHeaderInfo)}>
+                        <Typography variant="h3">
+                            {type
+                                .split('-')
+                                .reverse()
+                                .map((t) => (
+                                    <IconFont key={t} name={IconFontCharsNames[t]} />
+                                ))}
+                        </Typography>
+                        <Typography variant="h3">{name}</Typography>
                     </div>
-                ))}
+                    <button
+                        type="button"
+                        onClick={() => {
+                            sidebarService.close();
+                        }}
+                        className={cn(styles.MapStationsSidebarCloseButton)}
+                    >
+                        <Close className={cn(styles.MapStationsSidebarCloseIcon)} />
+                    </button>
+                </div>
+                <Divider />
+                <div
+                    className={cn(styles.MapStationsSidebarRow, styles.MapStationsSidebarVehicles)}
+                >
+                    {vehicleAwait.map((vehicle) => (
+                        <div key={vehicle.boardId} className={cn(styles.MapStationsSidebarVehicle)}>
+                            <div className={cn(styles.MapStationsSidebarVehicleInfo)}>
+                                <div
+                                    className={cn(styles.MapStationsSidebarVehicleRoute)}
+                                    style={{ backgroundColor: VEHICLE_TYPE_COLORS[vehicle.type] }}
+                                >
+                                    {vehicle.route}
+                                </div>
+                                <div>
+                                    <span className={cn(styles.MapStationsSidebarVehicleEndpoint)}>
+                                        {vehicle.to}
+                                    </span>
+                                    <br />
+                                    <span className={cn(styles.MapStationsSidebarVehicleKeypoints)}>
+                                        {`через ${vehicle.through.join(', ')}`}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className={cn(styles.MapStationsSidebarVehicleArriveTime)}>
+                                {vehicle.time > 15
+                                    ? `${getHHMMFormat(
+                                          new Date(Date.now() + vehicle.time * 60000),
+                                      )}`
+                                    : `${vehicle.time} мин`}
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

@@ -6,7 +6,6 @@
     width: 448px;
 
     border-radius: 16px;
-    background-color: var(--background-primary);
     color: var(--text-secondary);
 
     font-family: 'Iset Sans', sans-serif;
@@ -18,6 +17,11 @@
 
 .MapVehiclesSidebar::-webkit-scrollbar {
     display: none;
+}
+
+.MapVehiclesSidebarWrapper {
+    border-radius: 16px;
+    background-color: var(--background-primary);
 }
 
 .MapVehiclesSidebarCloseButton {
@@ -33,6 +37,11 @@
     border: 0;
     background: none;
     cursor: pointer;
+
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 14px;
+    display: flex;
+    border-radius: 50%;
 }
 
 .MapVehiclesSidebarCloseIcon > path {

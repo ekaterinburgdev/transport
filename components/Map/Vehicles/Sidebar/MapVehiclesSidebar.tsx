@@ -108,228 +108,151 @@ export function MapVehiclesSidebar({
                 sidebarStyles.leafletSidebar,
             )}
         >
-            <button
-                type="button"
-                onClick={() => {
-                    map?.fireEvent?.('click');
-                    sidebarService.close();
-                }}
-                className={cn(styles.MapVehiclesSidebarCloseButton)}
-            >
-                <Close className={cn(styles.MapVehiclesSidebarCloseIcon)} />
-            </button>
-            <div className={cn(styles.MapVehiclesSidebarVehicleImage)}>
-                <Image src={vehiclePic} width="448" height="225" />
-            </div>
-            <div className={cn(styles.MapVehiclesSidebarVehicleInfoWrapper)}>
-                <div className={cn(styles.MapVehiclesSidebarVehicleInfo)}>
-                    <div
-                        className={cn(styles.MapVehiclesSidebarRoute)}
-                        style={{
-                            backgroundColor: VEHICLE_TYPE_COLORS[type],
-                        }}
-                    >
-                        {routeNumber}
-                    </div>
-                    <div className={cn(styles.MapVehiclesSidebarVehicleFeatures)}>
-                        {warning && (
-                            <abbr title={featuresTitle.warning} style={{ fontSize: 0 }}>
-                                <Image src="/icons/warning.svg" width="26" height="24" />
-                            </abbr>
-                        )}
-                        {features.map((feature) => (
-                            <abbr
-                                key={feature}
-                                title={featuresTitle[feature]}
-                                style={{ fontSize: 0 }}
-                            >
-                                {/* TODO: temp solve instead of dinamic import */}
-                                <Image
-                                    src={`/icons/${feature}-${type}.svg`}
-                                    width={32}
-                                    height={32}
-                                />
-                                {/* <IconComponent
+            <div className={cn(styles.MapVehiclesSidebarWrapper)}>
+                <button
+                    type="button"
+                    onClick={() => {
+                        map?.fireEvent?.('click');
+                        sidebarService.close();
+                    }}
+                    className={cn(styles.MapVehiclesSidebarCloseButton)}
+                >
+                    <Close className={cn(styles.MapVehiclesSidebarCloseIcon)} />
+                </button>
+                <div className={cn(styles.MapVehiclesSidebarVehicleImage)}>
+                    <Image src={vehiclePic} width="448" height="225" />
+                </div>
+                <div className={cn(styles.MapVehiclesSidebarVehicleInfoWrapper)}>
+                    <div className={cn(styles.MapVehiclesSidebarVehicleInfo)}>
+                        <div
+                            className={cn(styles.MapVehiclesSidebarRoute)}
+                            style={{
+                                backgroundColor: VEHICLE_TYPE_COLORS[type],
+                            }}
+                        >
+                            {routeNumber}
+                        </div>
+                        <div className={cn(styles.MapVehiclesSidebarVehicleFeatures)}>
+                            {warning && (
+                                <abbr title={featuresTitle.warning} style={{ fontSize: 0 }}>
+                                    <Image src="/icons/warning.svg" width="26" height="24" />
+                                </abbr>
+                            )}
+                            {features.map((feature) => (
+                                <abbr
+                                    key={feature}
+                                    title={featuresTitle[feature]}
+                                    style={{ fontSize: 0 }}
+                                >
+                                    {/* TODO: temp solve instead of dinamic import */}
+                                    <Image
+                                        src={`/icons/${feature}-${type}.svg`}
+                                        width={32}
+                                        height={32}
+                                    />
+                                    {/* <IconComponent
                                     feature={feature}
                                     className={cn(
                                         styles[`MapVehiclesSidebarVehicleFeatureIcon_${type}`],
                                     )}
                                 /> */}
-                            </abbr>
-                        ))}
+                                </abbr>
+                            ))}
+                        </div>
+                    </div>
+                    <div className={cn(styles.MapVehiclesSidebarVelocity)}>
+                        <Velocity className={cn(styles.MapVehiclesSidebarVelocityIcon)} />
+                        <VelocityColor
+                            className={cn(
+                                styles.MapVehiclesSidebarVelocityColorIcon,
+                                styles[`MapVehiclesSidebarVelocityColorIcon_${type}`],
+                            )}
+                        />
+                        <span
+                            className={cn(styles.MapVehiclesSidebarVelocityValue)}
+                            style={{ color: VEHICLE_TYPE_COLORS[type] }}
+                        >
+                            {velocity}
+                        </span>
+                        <span className={cn(styles.MapVehiclesSidebarVelocityMeasure)}>км/ч</span>
                     </div>
                 </div>
-                <div className={cn(styles.MapVehiclesSidebarVelocity)}>
-                    <Velocity className={cn(styles.MapVehiclesSidebarVelocityIcon)} />
-                    <VelocityColor
-                        className={cn(
-                            styles.MapVehiclesSidebarVelocityColorIcon,
-                            styles[`MapVehiclesSidebarVelocityColorIcon_${type}`],
-                        )}
-                    />
-                    <span
-                        className={cn(styles.MapVehiclesSidebarVelocityValue)}
-                        style={{ color: VEHICLE_TYPE_COLORS[type] }}
-                    >
-                        {velocity}
-                    </span>
-                    <span className={cn(styles.MapVehiclesSidebarVelocityMeasure)}>км/ч</span>
-                </div>
-            </div>
-            <div className={cn(styles.MapVehiclesSidebarDirectionInfo)}>
-                <ul className={cn(styles.MapVehiclesSidebarDirection)}>
-                    <li className={cn(styles.MapVehiclesSidebarHeaderStation)}>
-                        <div className={cn(styles.MapVehiclesSidebarHeaderBullet)} />
-                        <Typography variant="h3">{from}</Typography>
-                    </li>
-                    <li className={cn(styles.MapVehiclesSidebarHeaderStation)}>
-                        <div
-                            className={cn(
-                                styles.MapVehiclesSidebarHeaderBullet,
-                                styles.MapVehiclesSidebarHeaderBullet_fill,
-                                {
-                                    [styles.MapVehiclesSidebarHeaderBullet_warning]: warning,
-                                },
-                            )}
-                        />
-                        <Typography
-                            variant="h3"
-                            className={cn({ [styles.MapVehiclesSidebarTo_warning]: warning })}
-                        >
-                            {to}
-                        </Typography>
-                    </li>
-                </ul>
-                {warning && (
-                    <span className={cn(styles.MapVehiclesSidebarWarningInfo)}>
-                        {`${vehiclesName[type]} едет по измененному маршруту`}
-                    </span>
-                )}
-            </div>
-            <div className={cn(styles.MapVehiclesSidebarStationsWrapper)}>
-                <Divider />
-                <ul
-                    className={cn(
-                        styles.MapVehiclesSidebarStations,
-                        styles[`MapVehiclesSidebarStations_${type}`],
-                    )}
-                >
-                    {/* TODO: вытащить li в компонент */}
-                    {nearestStationIndex !== 0 && (
-                        <li className={cn(styles.MapVehiclesSidebarStation)}>
+                <div className={cn(styles.MapVehiclesSidebarDirectionInfo)}>
+                    <ul className={cn(styles.MapVehiclesSidebarDirection)}>
+                        <li className={cn(styles.MapVehiclesSidebarHeaderStation)}>
+                            <div className={cn(styles.MapVehiclesSidebarHeaderBullet)} />
+                            <Typography variant="h3">{from}</Typography>
+                        </li>
+                        <li className={cn(styles.MapVehiclesSidebarHeaderStation)}>
                             <div
                                 className={cn(
-                                    styles.MapVehiclesSidebarBullet,
-                                    styles.MapVehiclesSidebarBullet_big,
+                                    styles.MapVehiclesSidebarHeaderBullet,
+                                    styles.MapVehiclesSidebarHeaderBullet_fill,
+                                    {
+                                        [styles.MapVehiclesSidebarHeaderBullet_warning]: warning,
+                                    },
                                 )}
-                                style={{ borderColor: VEHICLE_TYPE_TRANSLUCENT_COLORS[type] }}
                             />
-                            <PageText
-                                className={cn(
-                                    styles.MapVehiclesSidebarStationName,
-                                    styles.MapVehiclesSidebarStartStation,
-                                )}
+                            <Typography
+                                variant="h3"
+                                className={cn({ [styles.MapVehiclesSidebarTo_warning]: warning })}
                             >
-                                {stations[0].name}
-                            </PageText>
+                                {to}
+                            </Typography>
                         </li>
+                    </ul>
+                    {warning && (
+                        <span className={cn(styles.MapVehiclesSidebarWarningInfo)}>
+                            {`${vehiclesName[type]} едет по измененному маршруту`}
+                        </span>
                     )}
-                    {afterStart.length > 0 && (
-                        <div
-                            className={cn(styles.MapVehiclesSidebarHiddenStationWrapper)}
-                            onClick={() => {
-                                setAfterOpened(!afterOpened);
-                            }}
-                        >
-                            {!afterOpened && (
-                                <div className={cn(styles.MapVehiclesSidebarHiddenCount)}>
-                                    {getPointsRow(afterStart.length)}
-                                </div>
-                            )}
-                            <div className={cn(styles.MapVehiclesSidebarHiddenCountTextWrapper)}>
-                                <PageText>
-                                    {`${afterStart.length} ${getNoun(
-                                        afterStart.length,
-                                        'остановка',
-                                        'остановки',
-                                        'остановок',
-                                    )}`}
-                                </PageText>
-                                <Arrow
-                                    className={cn(styles.MapVehiclesSidebarHiddenArrow, {
-                                        [styles.MapVehiclesSidebarHiddenArrow_opened]: afterOpened,
-                                    })}
-                                />
-                            </div>
-                            {afterOpened
-                                && afterStart.map((station) => (
-                                    <li className={cn(styles.MapVehiclesSidebarStation)}>
-                                        <div
-                                            className={cn(styles.MapVehiclesSidebarBullet)}
-                                            style={{
-                                                borderColor: VEHICLE_TYPE_TRANSLUCENT_COLORS[type],
-                                            }}
-                                        />
-                                        <PageText
-                                            className={cn(styles.MapVehiclesSidebarStationName)}
-                                        >
-                                            {station.name}
-                                        </PageText>
-                                    </li>
-                                ))}
-                        </div>
-                    )}
-                    <div className={cn(styles.MapVehiclesSidebarActiveStations)}>
-                        <div
-                            className={cn(styles.MapVehiclesSidebarActiveBorder)}
-                            style={{ backgroundColor: VEHICLE_TYPE_COLORS[type] }}
-                        />
-                        <li className={cn(styles.MapVehiclesSidebarStation)}>
-                            <div className={cn(styles.MapVehiclesSidebarVehicleMarker)}>
-                                <MapVehicleMarker
-                                    boardId={boardId}
-                                    routeNumber={routeNumber}
-                                    type={type}
-                                    isCourseEast={false}
-                                    additionalInfo={false}
-                                    course={90}
-                                />
-                            </div>
-                            <PageText className={cn(styles.MapVehiclesSidebarStationName)}>
-                                {stations[nearestStationIndex].name}
-                            </PageText>
-                        </li>
-                        {afterNearest.map((station) => (
+                </div>
+                <div className={cn(styles.MapVehiclesSidebarStationsWrapper)}>
+                    <Divider />
+                    <ul
+                        className={cn(
+                            styles.MapVehiclesSidebarStations,
+                            styles[`MapVehiclesSidebarStations_${type}`],
+                        )}
+                    >
+                        {/* TODO: вытащить li в компонент */}
+                        {nearestStationIndex !== 0 && (
                             <li className={cn(styles.MapVehiclesSidebarStation)}>
                                 <div
-                                    className={cn(styles.MapVehiclesSidebarBullet)}
-                                    style={{ borderColor: VEHICLE_TYPE_COLORS[type] }}
+                                    className={cn(
+                                        styles.MapVehiclesSidebarBullet,
+                                        styles.MapVehiclesSidebarBullet_big,
+                                    )}
+                                    style={{ borderColor: VEHICLE_TYPE_TRANSLUCENT_COLORS[type] }}
                                 />
-                                <PageText className={cn(styles.MapVehiclesSidebarStationName)}>
-                                    {station.name}
+                                <PageText
+                                    className={cn(
+                                        styles.MapVehiclesSidebarStationName,
+                                        styles.MapVehiclesSidebarStartStation,
+                                    )}
+                                >
+                                    {stations[0].name}
                                 </PageText>
-
-                                <PageText>{station.arrivalTime}</PageText>
                             </li>
-                        ))}
-                        {beforeEnd.length > 0 && (
+                        )}
+                        {afterStart.length > 0 && (
                             <div
                                 className={cn(styles.MapVehiclesSidebarHiddenStationWrapper)}
                                 onClick={() => {
-                                    setBeforeOpened(!beforeOpened);
+                                    setAfterOpened(!afterOpened);
                                 }}
                             >
-                                {!beforeOpened && (
+                                {!afterOpened && (
                                     <div className={cn(styles.MapVehiclesSidebarHiddenCount)}>
-                                        {getPointsRow(beforeEnd.length)}
+                                        {getPointsRow(afterStart.length)}
                                     </div>
                                 )}
                                 <div
                                     className={cn(styles.MapVehiclesSidebarHiddenCountTextWrapper)}
                                 >
                                     <PageText>
-                                        {`${beforeEnd.length} ${getNoun(
-                                            beforeEnd.length,
+                                        {`${afterStart.length} ${getNoun(
+                                            afterStart.length,
                                             'остановка',
                                             'остановки',
                                             'остановок',
@@ -338,17 +261,18 @@ export function MapVehiclesSidebar({
                                     <Arrow
                                         className={cn(styles.MapVehiclesSidebarHiddenArrow, {
                                             [styles.MapVehiclesSidebarHiddenArrow_opened]:
-                                                beforeOpened,
+                                                afterOpened,
                                         })}
                                     />
                                 </div>
-                                {beforeOpened
-                                    && beforeEnd.map((station) => (
+                                {afterOpened &&
+                                    afterStart.map((station) => (
                                         <li className={cn(styles.MapVehiclesSidebarStation)}>
                                             <div
                                                 className={cn(styles.MapVehiclesSidebarBullet)}
                                                 style={{
-                                                    borderColor: VEHICLE_TYPE_COLORS[type],
+                                                    borderColor:
+                                                        VEHICLE_TYPE_TRANSLUCENT_COLORS[type],
                                                 }}
                                             />
                                             <PageText
@@ -356,114 +280,200 @@ export function MapVehiclesSidebar({
                                             >
                                                 {station.name}
                                             </PageText>
-                                            <PageText>{station.arrivalTime}</PageText>
                                         </li>
                                     ))}
                             </div>
                         )}
-                        {nearestStationIndex !== stations.length - 1 && (
+                        <div className={cn(styles.MapVehiclesSidebarActiveStations)}>
+                            <div
+                                className={cn(styles.MapVehiclesSidebarActiveBorder)}
+                                style={{ backgroundColor: VEHICLE_TYPE_COLORS[type] }}
+                            />
                             <li className={cn(styles.MapVehiclesSidebarStation)}>
-                                <div
-                                    className={cn(
-                                        styles.MapVehiclesSidebarBullet,
-                                        styles.MapVehiclesSidebarBullet_big,
-                                    )}
-                                    style={{ borderColor: VEHICLE_TYPE_COLORS[type] }}
-                                />
+                                <div className={cn(styles.MapVehiclesSidebarVehicleMarker)}>
+                                    <MapVehicleMarker
+                                        boardId={boardId}
+                                        routeNumber={routeNumber}
+                                        type={type}
+                                        isCourseEast={false}
+                                        additionalInfo={false}
+                                        course={90}
+                                    />
+                                </div>
                                 <PageText className={cn(styles.MapVehiclesSidebarStationName)}>
-                                    {stations[stations.length - 1].name}
+                                    {stations[nearestStationIndex].name}
                                 </PageText>
-                                <PageText>{stations[stations.length - 1].arrivalTime}</PageText>
                             </li>
-                        )}
-                    </div>
-                </ul>
-            </div>
-            <Divider />
-            <div className={cn(styles.MapVehiclesSidebarAdditionalWrapper)}>
-                <Typography variant="h3">{`Подробнее ${additionalHeader[type]}`}</Typography>
-                <div className={cn(styles.MapVehiclesSidebarAdditional)}>
-                    <div className={cn(styles.MapVehiclesSidebarOperatorWrapper)}>
-                        <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
-                            Перевозчик
-                        </span>
-                        <Image src={operatorPic} layout="intrinsic" />
-                        <div>
-                            <span className={cn(styles.MapVehiclesSidebarAdditionalTitle)}>
-                                {vehicleOperator.name}
-                            </span>
-                            <br />
-                            <span className={cn(styles.MapVehiclesSidebarAdditionalSubitle)}>
-                                {vehicleOperator.subsidiary}
-                            </span>
+                            {afterNearest.map((station) => (
+                                <li className={cn(styles.MapVehiclesSidebarStation)}>
+                                    <div
+                                        className={cn(styles.MapVehiclesSidebarBullet)}
+                                        style={{ borderColor: VEHICLE_TYPE_COLORS[type] }}
+                                    />
+                                    <PageText className={cn(styles.MapVehiclesSidebarStationName)}>
+                                        {station.name}
+                                    </PageText>
+
+                                    <PageText>{station.arrivalTime}</PageText>
+                                </li>
+                            ))}
+                            {beforeEnd.length > 0 && (
+                                <div
+                                    className={cn(styles.MapVehiclesSidebarHiddenStationWrapper)}
+                                    onClick={() => {
+                                        setBeforeOpened(!beforeOpened);
+                                    }}
+                                >
+                                    {!beforeOpened && (
+                                        <div className={cn(styles.MapVehiclesSidebarHiddenCount)}>
+                                            {getPointsRow(beforeEnd.length)}
+                                        </div>
+                                    )}
+                                    <div
+                                        className={cn(
+                                            styles.MapVehiclesSidebarHiddenCountTextWrapper,
+                                        )}
+                                    >
+                                        <PageText>
+                                            {`${beforeEnd.length} ${getNoun(
+                                                beforeEnd.length,
+                                                'остановка',
+                                                'остановки',
+                                                'остановок',
+                                            )}`}
+                                        </PageText>
+                                        <Arrow
+                                            className={cn(styles.MapVehiclesSidebarHiddenArrow, {
+                                                [styles.MapVehiclesSidebarHiddenArrow_opened]:
+                                                    beforeOpened,
+                                            })}
+                                        />
+                                    </div>
+                                    {beforeOpened &&
+                                        beforeEnd.map((station) => (
+                                            <li className={cn(styles.MapVehiclesSidebarStation)}>
+                                                <div
+                                                    className={cn(styles.MapVehiclesSidebarBullet)}
+                                                    style={{
+                                                        borderColor: VEHICLE_TYPE_COLORS[type],
+                                                    }}
+                                                />
+                                                <PageText
+                                                    className={cn(
+                                                        styles.MapVehiclesSidebarStationName,
+                                                    )}
+                                                >
+                                                    {station.name}
+                                                </PageText>
+                                                <PageText>{station.arrivalTime}</PageText>
+                                            </li>
+                                        ))}
+                                </div>
+                            )}
+                            {nearestStationIndex !== stations.length - 1 && (
+                                <li className={cn(styles.MapVehiclesSidebarStation)}>
+                                    <div
+                                        className={cn(
+                                            styles.MapVehiclesSidebarBullet,
+                                            styles.MapVehiclesSidebarBullet_big,
+                                        )}
+                                        style={{ borderColor: VEHICLE_TYPE_COLORS[type] }}
+                                    />
+                                    <PageText className={cn(styles.MapVehiclesSidebarStationName)}>
+                                        {stations[stations.length - 1].name}
+                                    </PageText>
+                                    <PageText>{stations[stations.length - 1].arrivalTime}</PageText>
+                                </li>
+                            )}
                         </div>
-                    </div>
-                    <div>
-                        <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
-                            Бортномер
-                        </span>
-                        <br />
-                        <span className={cn(styles.MapVehiclesSidebarBoardId)}>{boardId}</span>
-                    </div>
-                    <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
-                        <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
-                            Госномер
-                        </span>
-                        <div className={cn(styles.MapVehiclesSidebarRoadNumberWrapper)}>
-                            <div className={cn(styles.MapVehiclesSidebarRoadNumber)}>
-                                {stateNumber.number.split(' ').map((part) => (
-                                    <span key={part}>{part}</span>
-                                ))}
-                            </div>
-                            <div className={cn(styles.MapVehiclesSidebarRegionWrapper)}>
-                                <span className={cn(styles.MapVehiclesSidebarRegionNumber)}>
-                                    {stateNumber.region}
-                                </span>
-                                <span className={cn(styles.MapVehiclesSidebarRegion)}>RUS</span>
-                            </div>
-                        </div>
-                    </div>
+                    </ul>
                 </div>
                 <Divider />
-                <div className={cn(styles.MapVehiclesSidebarAdditional)}>
-                    <div className={cn(styles.MapVehiclesSidebarModelWrapper)}>
-                        <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
-                            Модель машины
-                        </span>
-                        <Image src={modelPic} layout="intrinsic" />
+                <div className={cn(styles.MapVehiclesSidebarAdditionalWrapper)}>
+                    <Typography variant="h3">{`Подробнее ${additionalHeader[type]}`}</Typography>
+                    <div className={cn(styles.MapVehiclesSidebarAdditional)}>
+                        <div className={cn(styles.MapVehiclesSidebarOperatorWrapper)}>
+                            <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
+                                Перевозчик
+                            </span>
+                            <Image src={operatorPic} layout="intrinsic" />
+                            <div>
+                                <span className={cn(styles.MapVehiclesSidebarAdditionalTitle)}>
+                                    {vehicleOperator.name}
+                                </span>
+                                <br />
+                                <span className={cn(styles.MapVehiclesSidebarAdditionalSubitle)}>
+                                    {vehicleOperator.subsidiary}
+                                </span>
+                            </div>
+                        </div>
                         <div>
-                            <span className={cn(styles.MapVehiclesSidebarAdditionalTitle)}>
-                                {vehicleModel.name}
+                            <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
+                                Бортномер
                             </span>
                             <br />
-                            <span className={cn(styles.MapVehiclesSidebarAdditionalSubitle)}>
-                                {vehicleModel.factory}
+                            <span className={cn(styles.MapVehiclesSidebarBoardId)}>{boardId}</span>
+                        </div>
+                        <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
+                            <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
+                                Госномер
                             </span>
+                            <div className={cn(styles.MapVehiclesSidebarRoadNumberWrapper)}>
+                                <div className={cn(styles.MapVehiclesSidebarRoadNumber)}>
+                                    {stateNumber.number.split(' ').map((part) => (
+                                        <span key={part}>{part}</span>
+                                    ))}
+                                </div>
+                                <div className={cn(styles.MapVehiclesSidebarRegionWrapper)}>
+                                    <span className={cn(styles.MapVehiclesSidebarRegionNumber)}>
+                                        {stateNumber.region}
+                                    </span>
+                                    <span className={cn(styles.MapVehiclesSidebarRegion)}>RUS</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
-                        <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
-                            Заводской номер
-                        </span>
-                        <span className={cn(styles.MapVehiclesSidebarFactoryNumber)}>
-                            {factoryNumber}
-                        </span>
-                    </div>
-                    <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
-                        <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
-                            Год выпуска
-                        </span>
-                        <span className={cn(styles.MapVehiclesSidebarManufactureYear)}>
-                            {manufactureYear}
-                        </span>
-                        <span className={cn(styles.MapVehiclesSidebarManufactureYearDiff)}>
-                            {`${manufactureYearDiff} ${getNoun(
-                                manufactureYearDiff,
-                                'год',
-                                'года',
-                                'лет',
-                            )} назад`}
-                        </span>
+                    <Divider />
+                    <div className={cn(styles.MapVehiclesSidebarAdditional)}>
+                        <div className={cn(styles.MapVehiclesSidebarModelWrapper)}>
+                            <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
+                                Модель машины
+                            </span>
+                            <Image src={modelPic} layout="intrinsic" />
+                            <div>
+                                <span className={cn(styles.MapVehiclesSidebarAdditionalTitle)}>
+                                    {vehicleModel.name}
+                                </span>
+                                <br />
+                                <span className={cn(styles.MapVehiclesSidebarAdditionalSubitle)}>
+                                    {vehicleModel.factory}
+                                </span>
+                            </div>
+                        </div>
+                        <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
+                            <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
+                                Заводской номер
+                            </span>
+                            <span className={cn(styles.MapVehiclesSidebarFactoryNumber)}>
+                                {factoryNumber}
+                            </span>
+                        </div>
+                        <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
+                            <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
+                                Год выпуска
+                            </span>
+                            <span className={cn(styles.MapVehiclesSidebarManufactureYear)}>
+                                {manufactureYear}
+                            </span>
+                            <span className={cn(styles.MapVehiclesSidebarManufactureYearDiff)}>
+                                {`${manufactureYearDiff} ${getNoun(
+                                    manufactureYearDiff,
+                                    'год',
+                                    'года',
+                                    'лет',
+                                )} назад`}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
