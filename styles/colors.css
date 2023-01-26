@@ -1,0 +1,30 @@
+:root {
+    --background-primary: white;
+    --text-primary: black;
+    --background-secondary: #f2f2f2;
+    --text-secondary: #1e2841;
+
+    --functional: #55647d;
+    --functional-tram: #9baac3;
+
+    --divider: rgba(0, 0, 0, 0.12);
+
+    --bus: #00b400;
+    --bus-translucent: #6dc76d;
+    --tram: #ff640f;
+    --tram-translucent: #ed9f74;
+    --troll: #00b4ff;
+    --troll-translucent: #80d9ff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-primary: black;
+        --text-primary: white;
+        --background-secondary: black;
+        --text-secondary: white;
+        --functional: #f2f2f2;
+
+        --divider: #2a2b3c;
+    }
+}

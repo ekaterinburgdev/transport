@@ -77,11 +77,3 @@
     src: url('./fonts/Inter.ttf') format('truetype');
     font-display: swap;
 }
-
-@font-face {
-    font-family: 'Press Start 2P';
-    font-style: normal;
-    font-weight: 700;
-    src: url('./fonts/Press Start 2P.woff2') format('woff2');
-    font-display: swap;
-}
