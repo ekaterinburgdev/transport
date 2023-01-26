@@ -43,7 +43,7 @@ function MapMainContainer() {
             doubleClickZoom={false}
             className={cn(styles.Map)}
         >
-            <TileLayer url="https://tile.osmand.net/hd/{z}/{x}/{y}.png" />
+            <TileLayer url="https://tiles.ekaterinburg.io/styles/basic-white/{z}/{x}/{y}@2x.png" />
 
             <MapLocation />
             <MapZoomControl position="bottomright" />

@@ -38,22 +38,13 @@ body {
     margin: 0;
 }
 
-/* TODO Tile server with black Open Street Map */
-.leaflet-tile-pane {
-    filter: invert(1) sepia(1) saturate(.2) hue-rotate(270deg) brightness(.7) contrast(1.1);
-
-    /* Improve map perfomance with `filter` */
-    transform: translateZ(0);
-    pointer-events: none;
+.leaflet-container {
+	background: rgb(225, 225, 225) !important;
 }
 
+/* TODO dark theme
 @media (prefers-color-scheme: dark) {
     html {
         color-scheme: dark;
     }
-
-    body {
-        color: white;
-        background: black;
-    }
-}
+} */
