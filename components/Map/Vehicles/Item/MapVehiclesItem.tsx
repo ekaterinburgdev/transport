@@ -7,7 +7,10 @@ import classNames from 'classnames/bind';
 
 import { withMap } from 'components/Map/hocs/withMap';
 
+import { sidebarService } from 'services/sidebar/sidebar';
+
 import { MapVehicleMarker } from '../Marker/MapVehicleMarker';
+import { MapVehiclesSidebar } from '../Sidebar/MapVehiclesSidebar';
 
 import { startMoveInDirection, clearIntervals } from './MapVehiclesItem.utils';
 import { EAST_COURSE_RANGE } from './MapVehiclesItem.constants';
@@ -21,6 +24,8 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
     private icon: L.DivIcon;
 
     private markerRef = createRef<L.Marker>();
+
+    private isActive = false;
 
     constructor(props: MapVehiclesItemProps) {
         super(props);
@@ -104,6 +109,13 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
         }
 
         onClick(routeNumber);
+
+        if (!this.isActive) {
+            this.isActive = true;
+            sidebarService.open(<MapVehiclesSidebar {...this.props} />, () => {
+                this.isActive = false;
+            });
+        }
     };
 
     private updateTranslate = () => {

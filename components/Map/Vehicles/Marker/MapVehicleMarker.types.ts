@@ -8,4 +8,5 @@ export type MapVehicleMarkerProps = {
     disability?: boolean;
     warning?: boolean;
     course: number;
+    additionalInfo?: boolean;
 };

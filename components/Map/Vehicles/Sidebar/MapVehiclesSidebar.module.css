@@ -1,0 +1,429 @@
+.MapVehiclesSidebar {
+    bottom: 124px;
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    margin-left: 16px;
+    width: 448px;
+
+    border-radius: 16px;
+    background-color: var(--background-secondary);
+    color: var(--text-secondary);
+
+    font-family: 'Iset Sans', sans-serif;
+
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.MapVehiclesSidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.MapVehiclesSidebarCloseButton {
+    position: sticky;
+    display: flex;
+    padding: 0;
+    justify-content: flex-end;
+    margin-right: 16px;
+    top: 16px;
+    height: 0;
+    z-index: 1;
+
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.MapVehiclesSidebarCloseIcon > path {
+    stroke: white;
+}
+
+.MapVehiclesSidebarVehicleImage {
+    font-size: 0;
+}
+
+.MapVehiclesSidebarVehicleInfoWrapper {
+    padding: 16px 24px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.MapVehiclesSidebarVehicleInfo {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.MapVehiclesSidebarRoute {
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 42px;
+    text-align: center;
+    width: 65px;
+    border-radius: 4px;
+    color: white;
+}
+
+.MapVehiclesSidebarVehicleFeatures {
+    padding: 4px 6px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.MapVehiclesSidebarVehicleFeatureIcon_bus > path {
+    fill: var(--bus);
+}
+
+.MapVehiclesSidebarVehicleFeatureIcon_troll > path {
+    fill: var(--troll);
+}
+
+.MapVehiclesSidebarVehicleFeatureIcon_tram > path {
+    fill: var(--tram);
+}
+
+.MapVehiclesSidebarVelocity {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.MapVehiclesSidebarVelocityIcon {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.MapVehiclesSidebarVelocityColorIcon {
+    position: absolute;
+    right: 26px;
+    top: 2px;
+}
+
+.MapVehiclesSidebarVelocityColorIcon_bus > path {
+    stroke: var(--bus);
+}
+
+.MapVehiclesSidebarVelocityColorIcon_troll > path {
+    stroke: var(--troll);
+}
+
+.MapVehiclesSidebarVelocityColorIcon_tram > path {
+    stroke: var(--tram);
+}
+
+.MapVehiclesSidebarVelocityValue {
+    margin-top: 8px;
+}
+
+.MapVehiclesSidebarVelocityMeasure {
+    font-weight: 500;
+    font-size: 7px;
+    line-height: 8px;
+    color: var(--functional-tram);
+}
+
+.MapVehiclesSidebarDirectionInfo {
+    padding: 16px 16px 16px 24px;
+}
+
+.MapVehiclesSidebarDirection {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    padding-left: 16px;
+}
+
+.MapVehiclesSidebarDirection::before {
+    content: '';
+    width: 3px;
+    position: absolute;
+    left: 2px;
+    top: 18px;
+    bottom: 18px;
+    background-color: #d2d9e8;
+}
+
+.MapVehiclesSidebarHeaderStation {
+    position: relative;
+}
+
+.MapVehiclesSidebarHeaderBullet {
+    position: absolute;
+    top: 50%;
+    border-radius: 50%;
+    height: 11px;
+    width: 11px;
+    background-color: white;
+    left: -18px;
+    border: 3px solid #d2d9e8;
+    transform: translateY(-50%);
+}
+
+.MapVehiclesSidebarHeaderBullet_fill {
+    background-color: #d2d9e8;
+}
+
+.MapVehiclesSidebarHeaderBullet_warning {
+    border-color: var(--tram);
+    background-color: var(--tram);
+}
+
+.MapVehiclesSidebarTo_warning,
+.MapVehiclesSidebarWarningInfo {
+    color: var(--tram);
+}
+
+.MapVehiclesSidebarWarningInfo {
+    margin-top: 4px;
+    padding-left: 18px;
+}
+
+.MapVehiclesSidebarStationsWrapper {
+    padding: 0 24px;
+}
+
+.MapVehiclesSidebarStations {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+}
+
+.MapVehiclesSidebarStations::before {
+    content: '';
+    width: 6px;
+    position: absolute;
+    left: 2px;
+    top: 28px;
+    bottom: 28px;
+}
+
+.MapVehiclesSidebarStations_bus::before {
+    background-color: var(--bus-translucent);
+}
+
+.MapVehiclesSidebarStations_troll::before {
+    background-color: var(--troll-translucent);
+}
+
+.MapVehiclesSidebarStations_tram::before {
+    background-color: var(--tram-translucent);
+}
+
+.MapVehiclesSidebarStation {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0 16px 22px;
+    position: relative;
+}
+
+.MapVehiclesSidebarStartStation {
+    font-weight: 500;
+    color: var(--functional-tram);
+}
+
+.MapVehiclesSidebarVehicleMarker {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: -5px;
+    height: 23px;
+    transform: translateY(-55%) scale(0.7);
+}
+
+.MapVehiclesSidebarBullet {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    border-radius: 50%;
+    height: 12px;
+    width: 12px;
+    background-color: white;
+    left: -1px;
+    border: 3px solid;
+    transform: translateY(-50%);
+}
+
+.MapVehiclesSidebarBullet_big {
+    width: 16px;
+    height: 16px;
+    left: -3px;
+    border-width: 4px;
+}
+
+.MapVehiclesSidebarActiveStations {
+    position: relative;
+}
+
+.MapVehiclesSidebarActiveBorder {
+    width: 6px;
+    position: absolute;
+    left: 2px;
+    top: 26px;
+    bottom: 26px;
+}
+
+.MapVehiclesSidebarStationName {
+    flex: 1;
+}
+
+.MapVehiclesSidebarHiddenStationWrapper {
+    position: relative;
+    color: var(--functional-tram);
+}
+
+.MapVehiclesSidebarHiddenCount {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 3px;
+    top: 50%;
+    transform: translateY(calc(-50% - 3px));
+    font-size: 18px;
+    line-height: 6px;
+    color: white;
+}
+
+.MapVehiclesSidebarHiddenCountTextWrapper {
+    display: flex;
+    gap: 8px;
+    padding: 16px 0 16px 22px;
+    cursor: pointer;
+}
+
+.MapVehiclesSidebarHiddenArrow {
+    transition: transform 0.2s ease-in-out;
+    transform: rotate(0deg);
+}
+
+.MapVehiclesSidebarHiddenArrow_opened {
+    transform: rotate(180deg);
+}
+
+.MapVehiclesSidebarAdditionalWrapper {
+    padding: 40px 24px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.MapVehiclesSidebarAdditional {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+    text-align: center;
+}
+
+.MapVehiclesSidebarOperatorWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.MapVehiclesSidebarAdditionalLabel {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.06em;
+    color: var(--text-primary);
+    opacity: 40%;
+    text-transform: uppercase;
+}
+
+.MapVehiclesSidebarAdditionalTitle {
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 34px;
+}
+
+.MapVehiclesSidebarAdditionalSubitle {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.MapVehiclesSidebarBoardId {
+    color: #cb3100;
+    font: 400 72px/65px Marshrut, sans-serif;
+}
+
+.MapVehiclesSidebarLabelWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.MapVehiclesSidebarRoadNumberWrapper {
+    display: flex;
+    width: 180px;
+    height: 48px;
+    background-color: #1e2841;
+    border-radius: 5px;
+    gap: 2px;
+    padding: 2px;
+}
+
+.MapVehiclesSidebarRoadNumber {
+    font: 400 36px/44px RoadNumbers, sans-serif;
+    background-color: #ffd400;
+    border-radius: 3px;
+    display: flex;
+    gap: 8px;
+    padding: 0 15px;
+}
+
+.MapVehiclesSidebarRegionWrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffd400;
+    border-radius: 3px;
+    flex: 1;
+    justify-content: center;
+}
+
+.MapVehiclesSidebarRegionNumber {
+    font: 400 30px/24px RoadNumbers, sans-serif;
+}
+
+.MapVehiclesSidebarRegion {
+    font: 600 12px/14px Inter, sans-serif;
+}
+
+.MapVehiclesSidebarModelWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.MapVehiclesSidebarFactoryNumber {
+    font: 500 72px/59px Isonorm, sans-serif;
+}
+
+.MapVehiclesSidebarManufactureYear {
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 32px;
+}
+
+.MapVehiclesSidebarManufactureYearDiff {
+    font-size: 18px;
+    line-height: 24px;
+}
