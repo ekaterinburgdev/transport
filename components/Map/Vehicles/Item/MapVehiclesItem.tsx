@@ -62,9 +62,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
     }
 
     getIcon() {
-        const {
-            boardId, routeNumber, course, type, disability, warning,
-        } = this.props;
+        const { boardId, routeNumber, course, type, disability, warning } = this.props;
         const isCourseEast = course > EAST_COURSE_RANGE.left || course < EAST_COURSE_RANGE.right;
 
         return new L.DivIcon({
@@ -103,6 +101,13 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
 
     onClickEventHandler = () => {
         const { routeNumber, onClick } = this.props;
+        console.log('HERE');
+        if (!this.isActive) {
+            this.isActive = true;
+            sidebarService.open(<MapVehiclesSidebar {...this.props} />, () => {
+                this.isActive = false;
+            });
+        }
 
         if (!routeNumber) {
             return;
@@ -110,18 +115,10 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
 
         onClick(routeNumber);
 
-        if (!this.isActive) {
-            this.isActive = true;
-            sidebarService.open(<MapVehiclesSidebar {...this.props} />, () => {
-                this.isActive = false;
-            });
-        }
     };
 
     private updateTranslate = () => {
-        const {
-            boardId, routeNumber, velocity, course,
-        } = this.props;
+        const { boardId, routeNumber, velocity, course } = this.props;
 
         const marker = document.querySelector(
             `#vehicle-${boardId}-${routeNumber}`,

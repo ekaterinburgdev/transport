@@ -30,7 +30,6 @@ import { MapVehicleMarker } from '../Marker/MapVehicleMarker';
 
 import modelPic from './mocks/model.png';
 import operatorPic from './mocks/operator.png';
-import vehiclePic from './mocks/vehicle.png';
 import { stations } from './mocks/stations';
 import { featuresTitle, fixture } from './mocks/main';
 
@@ -120,7 +119,7 @@ export function MapVehiclesSidebar({
                     <Close className={cn(styles.MapVehiclesSidebarCloseIcon)} />
                 </button>
                 <div className={cn(styles.MapVehiclesSidebarVehicleImage)}>
-                    <Image src={vehiclePic} width="448" height="225" />
+                    <Image src={`/${type}.png`} width="448" height="225" />
                 </div>
                 <div className={cn(styles.MapVehiclesSidebarVehicleInfoWrapper)}>
                     <div className={cn(styles.MapVehiclesSidebarVehicleInfo)}>
@@ -265,8 +264,8 @@ export function MapVehiclesSidebar({
                                         })}
                                     />
                                 </div>
-                                {afterOpened
-                                    && afterStart.map((station) => (
+                                {afterOpened &&
+                                    afterStart.map((station) => (
                                         <li className={cn(styles.MapVehiclesSidebarStation)}>
                                             <div
                                                 className={cn(styles.MapVehiclesSidebarBullet)}
@@ -349,8 +348,8 @@ export function MapVehiclesSidebar({
                                             })}
                                         />
                                     </div>
-                                    {beforeOpened
-                                        && beforeEnd.map((station) => (
+                                    {beforeOpened &&
+                                        beforeEnd.map((station) => (
                                             <li className={cn(styles.MapVehiclesSidebarStation)}>
                                                 <div
                                                     className={cn(styles.MapVehiclesSidebarBullet)}

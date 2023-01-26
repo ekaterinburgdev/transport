@@ -16,6 +16,14 @@
 .MapStationsSidebarWrapper {
     border-radius: 16px;
     background-color: var(--background-primary);
+
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.MapStationsSidebarWrapper::-webkit-scrollbar {
+    display: none;
 }
 
 .MapStationsSidebarRow {
