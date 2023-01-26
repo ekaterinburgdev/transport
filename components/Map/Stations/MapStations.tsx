@@ -28,6 +28,7 @@ export function MapStations() {
 
                 return (
                     <MapStationsItem
+                        key={station.ID}
                         lat={station?.LAT || station?.LATITUDE}
                         lng={station?.LON || station?.LONGITUDE}
                         type={VehicleType.Tram}
@@ -42,6 +43,7 @@ export function MapStations() {
 
                 return (
                     <MapStationsItem
+                        key={station.ID}
                         lat={station?.LAT || station?.LATITUDE}
                         lng={station?.LON || station?.LONGITUDE}
                         type={VehicleType.Troll}

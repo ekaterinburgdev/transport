@@ -1,0 +1,109 @@
+.MapStationsSidebar {
+    bottom: 124px;
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    margin-left: 16px;
+    width: 448px;
+
+    border-radius: 16px;
+    background-color: var(--background-secondary);
+    color: var(--text-secondary);
+
+    font-family: 'Iset Sans', sans-serif;
+}
+
+.MapStationsSidebarRow {
+    padding: 16px 24px;
+}
+
+.MapStationsSidebarHeader {
+    display: flex;
+    gap: 16px;
+}
+
+.MapStationsSidebarHeaderInfo {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+}
+
+.MapStationsSidebarCloseButton {
+    border: 0;
+    padding: 0;
+
+    background: none;
+    cursor: pointer;
+}
+
+.MapStationsSidebarCloseIcon > path {
+    stroke: var(--text-primary);
+}
+
+.MapStationsSidebarVehicles {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.MapStationsSidebarVehicles::-webkit-scrollbar {
+    display: none;
+}
+
+.MapStationsSidebarVehicle {
+    display: flex;
+    gap: 32px;
+}
+
+.MapStationsSidebarVehicleInfo {
+    display: flex;
+    gap: 16px;
+    flex: 1;
+}
+
+.MapStationsSidebarVehicleRoute {
+    flex-shrink: 0;
+
+    width: 58px;
+    height: 32px;
+    border-radius: 3px;
+
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 32px;
+    text-align: center;
+
+    color: white;
+}
+
+.MapStationsSidebarVehicleRouteBus {
+    background-color: var(--bus);
+}
+
+.MapStationsSidebarVehicleRouteTram {
+    background-color: var(--tram);
+}
+
+.MapStationsSidebarVehicleRouteTroll {
+    background-color: var(--troll);
+}
+
+.MapStationsSidebarVehicleEndpoint {
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.MapStationsSidebarVehicleKeypoints,
+.MapStationsSidebarVehicleArriveTime {
+    font-size: 16px;
+    line-height: 18px;
+}
+
+.MapStationsSidebarVehicleKeypoints {
+    font-weight: 300;
+}
