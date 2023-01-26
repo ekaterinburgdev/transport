@@ -14,8 +14,8 @@
 
 .MapVehicleMarkerInfo {
     position: absolute;
-    left: 31px;
-    top: 7px;
+    left: 41px;
+    top: 6px;
     width: 66px;
 
     display: flex;
@@ -30,24 +30,23 @@
     display: block;
     background-color: #fff;
     border-radius: 3px;
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     margin-right: 2px;
 }
 
 .MapVehicleMarkerRoute {
-    width: 28px;
-    min-width: 28px;
+    width: 42px;
+    min-width: 42px;
 
     text-align: center;
-    padding: 3px 0 3px;
     box-sizing: border-box;
 
     font-family: 'Iset Sans', sans-serif;
-    font-size: 14px;
+    font-size: 21px;
     font-weight: 500;
-    height: 16px;
-    line-height: 13px;
+    height: 24px;
+    line-height: 24px;
 }
 
 .MapVehicleMarkerDisabilityIcon {
@@ -61,6 +60,6 @@
 }
 
 .MapVehicleMarkerDisabilityWarning {
-    height: 16px;
+    height: 24px;
     display: flex;
 }

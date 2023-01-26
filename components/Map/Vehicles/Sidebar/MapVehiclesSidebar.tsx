@@ -265,8 +265,8 @@ export function MapVehiclesSidebar({
                                         })}
                                     />
                                 </div>
-                                {afterOpened &&
-                                    afterStart.map((station) => (
+                                {afterOpened
+                                    && afterStart.map((station) => (
                                         <li className={cn(styles.MapVehiclesSidebarStation)}>
                                             <div
                                                 className={cn(styles.MapVehiclesSidebarBullet)}
@@ -349,8 +349,8 @@ export function MapVehiclesSidebar({
                                             })}
                                         />
                                     </div>
-                                    {beforeOpened &&
-                                        beforeEnd.map((station) => (
+                                    {beforeOpened
+                                        && beforeEnd.map((station) => (
                                             <li className={cn(styles.MapVehiclesSidebarStation)}>
                                                 <div
                                                     className={cn(styles.MapVehiclesSidebarBullet)}
