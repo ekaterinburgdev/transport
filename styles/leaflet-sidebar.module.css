@@ -1,0 +1,6 @@
+.leafletSidebar {
+    cursor: auto;
+    /* Leaflet disable pointer-events and user-select */
+    pointer-events: auto !important;
+    user-select: text !important;
+}
