@@ -15,6 +15,7 @@ import { MapLocation } from 'components/Map/Location/MapLocation';
 import { MapTransport } from 'components/Map/Transport/MapTransport';
 import { MapZoomControl } from 'components/Map/ZoomControl/MapZoomControl';
 import { MapWelcomeMessage } from 'components/Map/WelcomeMessage/MapWelcomeMessage';
+import { MapWidget } from 'components/Map/Widget/MapWidget';
 
 import styles from './MapMainContainer.module.css';
 import 'leaflet/dist/leaflet.css';
@@ -58,6 +59,7 @@ function MapMainContainer() {
             <MapTransport />
 
             {sidebar}
+            <MapWidget />
         </MapContainer>
     );
 }
