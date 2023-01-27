@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import L from 'leaflet';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import classNames from 'classnames/bind';
+import { ProjectsPanel, PROJECT_TRANSPORT, Theme } from 'ekb';
 
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
@@ -15,7 +16,6 @@ import { MapLocation } from 'components/Map/Location/MapLocation';
 import { MapTransport } from 'components/Map/Transport/MapTransport';
 import { MapZoomControl } from 'components/Map/ZoomControl/MapZoomControl';
 import { MapWelcomeMessage } from 'components/Map/WelcomeMessage/MapWelcomeMessage';
-import { MapWidget } from 'components/Map/Widget/MapWidget';
 
 import styles from './MapMainContainer.module.css';
 import 'leaflet/dist/leaflet.css';
@@ -46,27 +46,29 @@ function MapMainContainer() {
     }, []);
 
     return (
-        <MapContainer
-            center={position}
-            attributionControl={null}
-            zoomControl={false}
-            zoom={16}
-            zoomDelta={0.6}
-            zoomSnap={0.4}
-            scrollWheelZoom
-            doubleClickZoom={false}
-            className={cn(styles.Map)}
-        >
-            <TileLayer url="https://tiles.ekaterinburg.io/styles/basic-white/{z}/{x}/{y}@2x.png" />
+        <>
+            <MapContainer
+                center={position}
+                attributionControl={null}
+                zoomControl={false}
+                zoom={16}
+                zoomDelta={0.6}
+                zoomSnap={0.4}
+                scrollWheelZoom
+                doubleClickZoom={false}
+                className={cn(styles.Map)}
+            >
+                <TileLayer url="https://tiles.ekaterinburg.io/styles/basic-white/{z}/{x}/{y}@2x.png" />
 
-            <MapLocation />
-            <MapZoomControl position="bottomright" />
+                <MapLocation />
+                <MapZoomControl position="bottomright" />
 
-            <MapTransport />
+                <MapTransport />
 
-            {sidebar}
-            <MapWidget />
-        </MapContainer>
+                {sidebar}
+            </MapContainer>
+            <ProjectsPanel activeProjectId={PROJECT_TRANSPORT.id} theme={Theme.LIGHT} />
+        </>
     );
 }
 

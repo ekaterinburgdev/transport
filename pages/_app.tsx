@@ -3,6 +3,7 @@ import React from 'react';
 import Head from 'next/head';
 
 import 'styles/globals.css';
+import 'ekb/style.css';
 
 type AppProps<PropsType extends object> = {
     Component: React.ComponentType<PropsType>;
