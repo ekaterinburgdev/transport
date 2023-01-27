@@ -33,7 +33,7 @@ export function MapVehicleMarker({
             <picture>
                 <source srcSet={arrowImage} type="image/svg+xml" />
                 <img
-                    style={{ transform: `rotate(${course}deg)`, transformOrigin: '19px 19px' }}
+                    style={{ transform: `rotate(${course}deg)`, transformOrigin: '20px 20px' }}
                     className={cn(styles.MapVehicleMarkerArrow)}
                     src={arrowImage}
                     alt="Vehicle arrow icon"
