@@ -6,6 +6,8 @@ body {
     margin: 0;
     font-family: 'Iset Sans', sans-serif;
     height: 100%;
+    color: var(--text-primary);
+    background: var(--background-primary);
 }
 
 #__next {

@@ -1,0 +1,72 @@
+.Card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    background-size: cover;
+    background-position: 100% 50%;
+    background-color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+    .Card {
+        padding: 36px;
+        border-radius: 24px;
+    }
+}
+
+
+.CardTitle {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.05;
+    margin-bottom: 8px;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.2);
+    text-decoration-style: solid;
+    text-underline-offset: 3px;
+    transition: .15s ease text-decoration;
+}
+
+
+@media screen and (min-width: 768px) {
+    .CardTitle {
+        font-size: 28px;
+    }
+}
+
+.Card:hover .CardTitle {
+    text-decoration-color: rgba(255, 255, 255, 0.4);
+}
+
+.CardSubtitle {
+    font-size: 14px;
+    line-height: 1.35;
+    margin-top: .5em;
+}
+
+@media screen and (min-width: 768px) {
+    .CardSubtitle {
+        font-size: 18px;
+    }
+}
+
+.CardButton {
+    display: inline-block;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 1.35;
+    font-weight: 400;
+    padding: 8px;
+    margin-top: auto;
+    transition: .15s ease opacity;
+}
+
+@media screen and (min-width: 768px) {
+    .CardButton {
+        font-size: 18px;
+        padding: 16px 40px;
+    }
+}

@@ -1,0 +1,38 @@
+.Marquee {
+    font-family: 'Press Start 2P';
+    padding: 8px;
+    background: #000000;
+    border-radius: 8px;
+    overflow: hidden;
+    color: rgb(230, 50, 35);
+    text-shadow: 0px 0px 16px #E63223;
+}
+.MarqueeInner {
+    display: flex;
+    gap: 72px;
+    padding: 0 8px;
+    animation: 100s infinite linear marquee;
+}
+
+.Marquee:hover .MarqueeInner {
+    animation-play-state: paused;
+}
+
+
+.MarqueeItem {
+    padding-left: 100%;
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.35;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-1000%);
+    }
+}

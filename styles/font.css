@@ -37,3 +37,51 @@
     src: url('./fonts/IsetSans-Regular-Italic.woff2') format('woff2');
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'Iset Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/IsetIcons.otf') format('opentype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Isonorm';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/Isonorm.otf') format('opentype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Marshrut';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/Marshrut.ttf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RoadNumbers';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/RoadNumbers.ttf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/Inter.ttf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Press Start 2P';
+    font-style: normal;
+    font-weight: 700;
+    src: url('./fonts/Press Start 2P.woff2') format('woff2');
+    font-display: swap;
+}

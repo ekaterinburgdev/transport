@@ -1,0 +1,14 @@
+.Notification {
+
+}
+
+.NotificationTitle {
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 1.05;
+}
+
+.NotificationText {
+    font-size: 22px;
+    line-height: 1.35;
+}

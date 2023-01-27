@@ -1,0 +1,84 @@
+.MainPage {
+    display: flex;
+    justify-content: center;
+    background: #f2f2f2;
+    overflow: hidden;
+}
+
+.MainPageInner {
+    padding-bottom: 72px;
+    max-width: 1800px;
+    margin: auto;
+    padding: 0 5vw;
+}
+
+.MainPageTitle {
+    font-size: 10vw;
+}
+
+@media screen and (min-width: 1200px) {
+    .MainPageTitle {
+        font-size: min(10vw, 160px);
+    }
+}
+
+
+.MainPageLogo {
+    display: flex;
+    align-items: center;
+    font-size: 3.75vw;
+    line-height: 1;
+    margin-top: 0.15em;
+    color: #123;
+    font-weight: 500;
+    margin-bottom: 0.8em;
+}
+
+.MainPageLogo svg {
+    flex-shrink: 0;
+    width: 19.5vw;
+    height: 19.5vw;
+    margin-right: 5vw;
+}
+
+@media screen and (min-width: 768px) {
+    .MainPageLogo svg {
+        flex-shrink: 0;
+        width: 16vw;
+        height: 16vw;
+        margin-right: 3vw;
+    }
+}
+
+.MainPageCardGrid {
+    display: grid;
+    grid-auto-flow: row dense;
+    grid-template-columns: repeat(2,1fr);
+    gap: .9vw;
+}
+    
+.MainPageCardGrid > * {
+    aspect-ratio: 1 / 1;
+}
+
+@media screen and (min-width: 768px) {
+    .MainPageCardGrid {
+        grid-template-columns: repeat(2,1fr);
+        gap: .9vw;
+    }
+    
+    /* TODO Control sizing in CMS */
+    .MainPageCardGrid > *:nth-child(4),
+    .MainPageCardGrid > *:nth-child(5),
+    .MainPageCardGrid > *:nth-child(10) {
+        grid-area: span 1 / span 2;
+        aspect-ratio: 2 / 1;
+    }
+}
+
+
+@media screen and (min-width: 1200px) {
+    .MainPageCardGrid {
+        grid-template-columns: repeat(4,1fr);
+    }
+}
