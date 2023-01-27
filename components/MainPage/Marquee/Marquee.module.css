@@ -1,4 +1,5 @@
 .Marquee {
+    display: none;
     font-family: 'Press Start 2P';
     padding: 8px;
     background: #000000;
@@ -7,6 +8,13 @@
     color: rgb(230, 50, 35);
     text-shadow: 0px 0px 16px #E63223;
 }
+
+@media screen and (min-width: 1440px) {
+    .Marquee {
+        display: block;
+    }
+}
+
 .MarqueeInner {
     display: flex;
     gap: 72px;
