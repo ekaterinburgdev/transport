@@ -4,7 +4,9 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "indent": ["error", 4],
+    // @see https://typescript-eslint.io/rules/indent/
+    // conflict with typescript-eslint
+    "indent": "off",
     "no-console": ["error", { "allow": ["error"] }],
     "no-param-reassign": ["error", { "props": false }],
 

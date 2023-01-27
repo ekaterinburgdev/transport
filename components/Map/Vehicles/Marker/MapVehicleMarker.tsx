@@ -17,6 +17,7 @@ export function MapVehicleMarker({
     disability,
     warning,
     course,
+    additionalInfo = true,
 }: MapVehicleMarkerProps) {
     const arrowImage = `/icons/${type}-arrow.svg`;
     const transportImage = `/icons/${type}-light.svg`;
@@ -32,13 +33,13 @@ export function MapVehicleMarker({
             <picture>
                 <source srcSet={arrowImage} type="image/svg+xml" />
                 <img
-                    style={{ transform: `rotate(${course}deg); transform-origin: 14px 14px` }}
+                    style={{ transform: `rotate(${course}deg)`, transformOrigin: '19px 19px' }}
                     className={cn(styles.MapVehicleMarkerArrow)}
                     src={arrowImage}
                     alt="Vehicle arrow icon"
                 />
             </picture>
-            <div className={cn(styles.MapVehicleMarkerCenter)}>
+            <div>
                 <picture>
                     <source srcSet={transportImage} type="image/svg+xml" />
                     <img
@@ -47,45 +48,21 @@ export function MapVehicleMarker({
                         alt="Vehicle type icon"
                     />
                 </picture>
-                <div
-                    className={`${cn(styles.MapVehicleMarkerInfo)} ${
-                        isCourseEast ? cn(styles.MapVehicleMarkerInfo_course_east) : ''
-                    }`}
-                    style={{ color }}
-                >
+                {additionalInfo && (
                     <div
-                        className={`${cn(styles.MapVehicleMarkerRoute)} ${cn(
-                            styles.MapVehicleMarkerInfoItem,
-                        )}`}
+                        className={`${cn(styles.MapVehicleMarkerInfo)} ${
+                            isCourseEast ? cn(styles.MapVehicleMarkerInfo_course_east) : ''
+                        }`}
+                        style={{ color }}
                     >
-                        {routeNumber}
-                    </div>
-                    {disability && !warning && (
-                        <div className={cn(styles.MapVehicleMarkerInfoItem)}>
-                            <picture>
-                                <source srcSet={disabilityIcon} type="image/svg+xml" />
-                                <img
-                                    className={cn(styles.MapVehicleMarkerDisabilityIcon)}
-                                    src={disabilityIcon}
-                                    alt="Vehicle low-floor icon"
-                                />
-                            </picture>
+                        <div
+                            className={`${cn(styles.MapVehicleMarkerRoute)} ${cn(
+                                styles.MapVehicleMarkerInfoItem,
+                            )}`}
+                        >
+                            {routeNumber}
                         </div>
-                    )}
-                    {warning && !disability && (
-                        <div className={cn(styles.MapVehicleMarkerInfoItem)}>
-                            <picture>
-                                <source srcSet={warningIcon} type="image/svg+xml" />
-                                <img
-                                    className={cn(styles.MapVehicleMarkerWarningIcon)}
-                                    src={warningIcon}
-                                    alt="Vehicle warning icon"
-                                />
-                            </picture>
-                        </div>
-                    )}
-                    {warning && disability && (
-                        <div className={`${cn(styles.MapVehicleMarkerDisabilityWarning)}`}>
+                        {disability && !warning && (
                             <div className={cn(styles.MapVehicleMarkerInfoItem)}>
                                 <picture>
                                     <source srcSet={disabilityIcon} type="image/svg+xml" />
@@ -96,6 +73,8 @@ export function MapVehicleMarker({
                                     />
                                 </picture>
                             </div>
+                        )}
+                        {warning && !disability && (
                             <div className={cn(styles.MapVehicleMarkerInfoItem)}>
                                 <picture>
                                     <source srcSet={warningIcon} type="image/svg+xml" />
@@ -106,9 +85,33 @@ export function MapVehicleMarker({
                                     />
                                 </picture>
                             </div>
-                        </div>
-                    )}
-                </div>
+                        )}
+                        {warning && disability && (
+                            <div className={`${cn(styles.MapVehicleMarkerDisabilityWarning)}`}>
+                                <div className={cn(styles.MapVehicleMarkerInfoItem)}>
+                                    <picture>
+                                        <source srcSet={disabilityIcon} type="image/svg+xml" />
+                                        <img
+                                            className={cn(styles.MapVehicleMarkerDisabilityIcon)}
+                                            src={disabilityIcon}
+                                            alt="Vehicle low-floor icon"
+                                        />
+                                    </picture>
+                                </div>
+                                <div className={cn(styles.MapVehicleMarkerInfoItem)}>
+                                    <picture>
+                                        <source srcSet={warningIcon} type="image/svg+xml" />
+                                        <img
+                                            className={cn(styles.MapVehicleMarkerWarningIcon)}
+                                            src={warningIcon}
+                                            alt="Vehicle warning icon"
+                                        />
+                                    </picture>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );

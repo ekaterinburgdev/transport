@@ -1,0 +1,18 @@
+.MapWidget {
+    display: flex;
+    width: 320px;
+    gap: 8px;
+    padding: 12px;
+    margin-left: 16px;
+    margin-bottom: 16px;
+    border-radius: 106px;
+    font-family: 'Iset Sans', sans-serif;
+    font-size: 20px;
+    line-height: 24px;
+    align-items: center;
+    background-color: var(--background-primary);
+}
+
+.MapWidget > :first-child {
+    cursor: pointer;
+}

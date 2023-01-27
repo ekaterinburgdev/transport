@@ -76,6 +76,7 @@ export function MapLocation() {
 
         return () => {
             map.stopLocate();
+            userMarkerRef.current.remove();
         };
     }, [map]);
 

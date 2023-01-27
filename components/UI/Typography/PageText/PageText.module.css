@@ -1,0 +1,22 @@
+.pageText {
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Iset Sans', sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.large {
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.small {
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.bold {
+    font-weight: 500;
+}
