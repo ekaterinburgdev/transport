@@ -94,8 +94,8 @@ export function MapStationsSidebar({ type, name }: MapStationsSidebarProps) {
                             <div className={cn(styles.MapStationsSidebarVehicleArriveTime)}>
                                 {vehicle.time > 15
                                     ? `${getHHMMFormat(
-                                          new Date(Date.now() + vehicle.time * 60000),
-                                      )}`
+                                        new Date(Date.now() + vehicle.time * 60000),
+                                    )}`
                                     : `${vehicle.time} мин`}
                             </div>
                         </div>

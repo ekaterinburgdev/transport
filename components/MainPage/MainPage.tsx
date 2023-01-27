@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React from 'react';
 import classNames from 'classnames/bind';
 import { MainPageTypes } from './MainPage.types';

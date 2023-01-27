@@ -264,23 +264,22 @@ export function MapVehiclesSidebar({
                                         })}
                                     />
                                 </div>
-                                {afterOpened &&
-                                    afterStart.map((station) => (
-                                        <li className={cn(styles.MapVehiclesSidebarStation)}>
-                                            <div
-                                                className={cn(styles.MapVehiclesSidebarBullet)}
-                                                style={{
-                                                    borderColor:
+                                {afterOpened && afterStart.map((station) => (
+                                    <li className={cn(styles.MapVehiclesSidebarStation)}>
+                                        <div
+                                            className={cn(styles.MapVehiclesSidebarBullet)}
+                                            style={{
+                                                borderColor:
                                                         VEHICLE_TYPE_TRANSLUCENT_COLORS[type],
-                                                }}
-                                            />
-                                            <PageText
-                                                className={cn(styles.MapVehiclesSidebarStationName)}
-                                            >
-                                                {station.name}
-                                            </PageText>
-                                        </li>
-                                    ))}
+                                            }}
+                                        />
+                                        <PageText
+                                            className={cn(styles.MapVehiclesSidebarStationName)}
+                                        >
+                                            {station.name}
+                                        </PageText>
+                                    </li>
+                                ))}
                             </div>
                         )}
                         <div className={cn(styles.MapVehiclesSidebarActiveStations)}>
@@ -348,8 +347,8 @@ export function MapVehiclesSidebar({
                                             })}
                                         />
                                     </div>
-                                    {beforeOpened &&
-                                        beforeEnd.map((station) => (
+                                    {beforeOpened
+                                        && beforeEnd.map((station) => (
                                             <li className={cn(styles.MapVehiclesSidebarStation)}>
                                                 <div
                                                     className={cn(styles.MapVehiclesSidebarBullet)}
