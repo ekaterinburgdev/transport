@@ -68,11 +68,22 @@
     }
     
     /* TODO Control sizing in CMS */
-    .MainPageCardGrid > *:nth-child(4),
-    .MainPageCardGrid > *:nth-child(5),
-    .MainPageCardGrid > *:nth-child(10) {
+    .MainPageCardGrid > *:nth-child(1),
+    .MainPageCardGrid > *:nth-child(6),
+    .MainPageCardGrid > *:nth-child(8),
+    .MainPageCardGrid > *:nth-child(11) {
         grid-area: span 1 / span 2;
         aspect-ratio: 2 / 1;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .MainPageCardGrid > *:nth-child(2) {
+        background-color: transparent !important;
+    }
+
+    .MainPageCardGrid > *:nth-child(2) [class*="CardTitle"] {
+        font-size: 40px;
     }
 }
 
