@@ -17,7 +17,8 @@
     --troll-translucent: #80d9ff;
 }
 
-@media (prefers-color-scheme: dark) {
+/* TODO: dark theme */
+/* @media (prefers-color-scheme: dark) {
     :root {
         --background-primary: black;
         --text-primary: white;
@@ -27,4 +28,4 @@
 
         --divider: #2a2b3c;
     }
-}
+} */
