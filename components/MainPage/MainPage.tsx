@@ -55,7 +55,7 @@ export function MainPage({ cards, marqueeItems, notifications }: MainPageTypes) 
                 <Marquee items={marqueeItems.map(({ attributes: { message } }) => message)} />
                 */}
 
-                <footer className={cn(styles.MainPageFooter)} style={{ marginTop: 40 }}>
+                <footer className={cn(styles.MainPageFooter)} style={{ color: '#2e2e2e', margin: '80px 0 50px' }}>
                     Транспортная экосистема Екатеринбурга &copy; 2023
                 </footer>
             </div>

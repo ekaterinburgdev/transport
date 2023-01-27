@@ -30,10 +30,15 @@
     transition: .15s ease text-decoration;
 }
 
+.CardTitle[style*="background"] {
+    padding: .5em .75em;
+}
+
 
 @media screen and (min-width: 768px) {
     .CardTitle {
         font-size: 28px;
+        border-radius: 8px;
     }
 }
 
