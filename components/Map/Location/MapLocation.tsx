@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+    useCallback, useEffect, useRef, useState,
+} from 'react';
 import { useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 
@@ -18,7 +20,7 @@ export function MapLocation() {
     const map = useMapEvents({
         locationfound(e) {
             if (isFirstFound) {
-                userMarkerRef.current.setLatLng(e.latlng);
+                userMarkerRef?.current?.setLatLng(e.latlng);
                 map.setView(e.latlng, map.getZoom());
                 setIsFirstFound(false);
 
@@ -28,7 +30,7 @@ export function MapLocation() {
             if (isDragging) {
                 setMoveToLatLng(e.latlng);
             } else {
-                userMarkerRef.current.moveToWithDuration({
+                userMarkerRef?.current?.moveToWithDuration({
                     latlng: e.latlng,
                     duration: USER_PLACEMARK_ANIMATION_DURATION,
                 });
@@ -46,7 +48,7 @@ export function MapLocation() {
         },
         movestart() {
             if (cancelMove) {
-                userMarkerRef.current.cancelMove();
+                userMarkerRef?.current?.cancelMove();
 
                 setCancelMove(false);
             }
@@ -57,7 +59,7 @@ export function MapLocation() {
             setIsDragging(false);
 
             if (moveToLatLng) {
-                userMarkerRef.current.moveToWithDuration({
+                userMarkerRef?.current?.moveToWithDuration({
                     latlng: moveToLatLng,
                     duration: USER_PLACEMARK_ANIMATION_DURATION,
                 });
@@ -67,23 +69,36 @@ export function MapLocation() {
         },
     });
 
-    useEffect(() => {
-        map.locate({ watch: true });
+    const startFirstLocate = useCallback(() => {
+        map.locate({ watch: true, enableHighAccuracy: true });
 
         userMarkerRef.current = new MovingMarker(COORDS_EKATERINBURG, {
             icon: USER_ICON,
         }).addTo(map);
+    }, [map]);
+
+    const onClick = useCallback(() => {
+        if (isFirstFound) {
+            startFirstLocate();
+        }
+    }, [map, isFirstFound]);
+
+    useEffect(() => {
+        if (!isFirstFound) {
+            startFirstLocate();
+        }
 
         return () => {
             map.stopLocate();
-            userMarkerRef.current.remove();
+            userMarkerRef?.current?.remove();
         };
     }, [map]);
 
     return (
         <MapUserPlacemarkControl
             options={{ position: 'bottomright' }}
-            userPlacemark={userMarkerRef.current}
+            userPlacemarkRef={userMarkerRef}
+            onClick={onClick}
         />
     );
 }

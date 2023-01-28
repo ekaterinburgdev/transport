@@ -8,7 +8,6 @@ export default function Map() {
         <>
             <Head>
                 <title>Карта транспорта</title>
-                <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <MapComponent />

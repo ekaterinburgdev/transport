@@ -3,7 +3,10 @@ import classNames from 'classnames/bind';
 
 import { MovingMarker } from '../moving-marker';
 import { MARGIN_OF_EQUALS_ERROR } from './user-placemark-control.constants';
-import { UserPlacemarkControlState } from './user-placemark-control.types';
+import {
+    UserPlacemarkControlState,
+    UserPlacemarkControlOptions,
+} from './user-placemark-control.types';
 
 import styles from './user-placemark-control.module.css';
 
@@ -16,14 +19,19 @@ export class UserPlacemarkControl extends L.Control {
 
     private map: L.Map;
 
-    constructor(userPlacemark: MovingMarker, options: L.ControlOptions) {
-        super(options);
+    private onClickHandler: () => void;
+
+    constructor(userPlacemark: MovingMarker, options: UserPlacemarkControlOptions) {
+        const { onClickHandler, ...superOptions } = options;
+        super(superOptions);
 
         this.userPlacemark = userPlacemark;
+        this.onClickHandler = onClickHandler;
     }
 
     onRemove(): void {
         this.userPlacemark?.removeEventListener('move', this.moveMapCenter);
+        this.map.stopLocate();
     }
 
     onAdd(map: L.Map) {
@@ -81,10 +89,18 @@ export class UserPlacemarkControl extends L.Control {
     }
 
     private moveMapCenter = () => {
+        if (!this.userPlacemark) {
+            return;
+        }
+
         this.map.setView(this.userPlacemark?.getLatLng());
     };
 
     private onClick(control: HTMLDivElement) {
+        if (this.onClickHandler) {
+            this.onClickHandler();
+        }
+
         if (this.state === UserPlacemarkControlState.Free) {
             this.moveMapCenter();
 
