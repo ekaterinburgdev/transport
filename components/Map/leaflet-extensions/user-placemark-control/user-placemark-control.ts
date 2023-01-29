@@ -31,7 +31,6 @@ export class UserPlacemarkControl extends L.Control {
 
     onRemove(): void {
         this.userPlacemark?.removeEventListener('move', this.moveMapCenter);
-        this.map.stopLocate();
     }
 
     onAdd(map: L.Map) {
@@ -93,7 +92,7 @@ export class UserPlacemarkControl extends L.Control {
             return;
         }
 
-        this.map.setView(this.userPlacemark?.getLatLng());
+        this.map.setView(this.userPlacemark.getLatLng());
     };
 
     private onClick(control: HTMLDivElement) {
