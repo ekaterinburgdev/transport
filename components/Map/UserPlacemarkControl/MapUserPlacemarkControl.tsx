@@ -5,20 +5,20 @@ import { UserPlacemarkControl } from 'components/Map/leaflet-extensions/user-pla
 import { MovingMarker } from 'components/Map/leaflet-extensions/moving-marker';
 
 export type MapUserPlacemarkControlProps = {
-    userPlacemarkRef: React.RefObject<MovingMarker>;
+    userPlacemark: MovingMarker;
     options: L.ControlOptions;
     onClick: () => void;
 };
 
 export function MapUserPlacemarkControl({
-    userPlacemarkRef,
+    userPlacemark,
     options,
     onClick,
 }: MapUserPlacemarkControlProps) {
     const map = useMap();
 
     useEffect(() => {
-        const userPlacemarkControl = new UserPlacemarkControl(userPlacemarkRef.current, {
+        const userPlacemarkControl = new UserPlacemarkControl(userPlacemark, {
             ...options,
             onClickHandler: onClick,
         }).addTo(map);
@@ -26,7 +26,7 @@ export function MapUserPlacemarkControl({
         return () => {
             userPlacemarkControl.remove();
         };
-    }, [map, userPlacemarkRef.current, options]);
+    }, [map, userPlacemark, options, onClick]);
 
     return null;
 }

@@ -69,7 +69,7 @@ export function MapLocation() {
         },
     });
 
-    const startFirstLocate = useCallback(() => {
+    const startLocate = useCallback(() => {
         map.locate({ watch: true, enableHighAccuracy: true });
 
         userMarkerRef.current = new MovingMarker(COORDS_EKATERINBURG, {
@@ -79,25 +79,25 @@ export function MapLocation() {
 
     const onClick = useCallback(() => {
         if (isFirstFound) {
-            startFirstLocate();
+            startLocate();
         }
-    }, [map, isFirstFound]);
+    }, [isFirstFound, startLocate]);
 
     useEffect(() => {
         if (!isFirstFound) {
-            startFirstLocate();
+            startLocate();
         }
 
         return () => {
             map.stopLocate();
             userMarkerRef?.current?.remove();
         };
-    }, [map]);
+    }, [map, isFirstFound, startLocate]);
 
     return (
         <MapUserPlacemarkControl
             options={{ position: 'bottomright' }}
-            userPlacemarkRef={userMarkerRef}
+            userPlacemark={userMarkerRef.current}
             onClick={onClick}
         />
     );
