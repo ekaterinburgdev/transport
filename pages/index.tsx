@@ -8,7 +8,6 @@ export default function Home(props) {
         <>
             <Head>
                 <title>Транспорт Екатеринбурга</title>
-                <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <MainPage {...props} />

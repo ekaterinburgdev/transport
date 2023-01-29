@@ -9,6 +9,7 @@
     "indent": "off",
     "no-console": ["error", { "allow": ["error"] }],
     "no-param-reassign": ["error", { "props": false }],
+    "consistent-return": "off",
 
     "@typescript-eslint/indent": ["error", 4],
 
