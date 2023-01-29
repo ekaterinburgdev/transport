@@ -36,7 +36,13 @@ function MapMainContainer() {
             });
         }());
         sidebarService.setSidebar = setSidebar;
-        sidebarService.open(<MapWelcomeMessage />);
+
+        const hasVisited = localStorage.getItem('hasVisited');
+
+        if (!hasVisited) {
+            sidebarService.open(<MapWelcomeMessage />);
+            localStorage.setItem('hasVisited', '1');
+        }
     }, []);
 
     return (
