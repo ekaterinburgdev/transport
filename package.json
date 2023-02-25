@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "pnpm -r dev",
-    "check-types": "tsc --noEmit",
+    "check-types": "pnpm -r check-types",
     "lint": "pnpm -r lint",
     "build": "pnpm -r build",
     "devPreinstall": "husky install"
