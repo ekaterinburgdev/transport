@@ -2,7 +2,7 @@
 
 Ekaterinburg transport ecosystem
 
-**[transport.ekaterinburg.io/map](https://transport.ekaterinburg.io/map)**
+**[transport.ekaterinburg.io](https://transport.ekaterinburg.io)**
 
 ## Tools
 
@@ -15,13 +15,13 @@ Ekaterinburg transport ecosystem
 
 1. Install [Node.js](https://nodejs.org/en/download/) (actual version is in `.nvmrc`, use `nvm use` to install or switch to actual version) and [pnpm](https://www.npmjs.com/package/pnpm#user-content-installation)
 
-2. Install dependencies
+2. Install dependencies in client and api
 
     ```
-    pnpm i
+    pnpm -r install
     ```
 
-1. Run local server
+3. Run local server
 
     ```
     pnpm run dev
