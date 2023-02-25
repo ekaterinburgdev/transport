@@ -1,14 +1,9 @@
 {
-  "name": "transpot-server",
+  "name": "transpot-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development nodemon index.ts localhost 3080"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "express": "^4.18.2"
   },

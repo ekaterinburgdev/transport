@@ -1,9 +1,6 @@
 {
   "name": "transport-client",
   "version": "1.0.0",
-  "homepage": "https://transport.ekaterinburg.io",
-  "license": "MIT",
-  "private": true,
   "scripts": {
     "dev": "node server.js",
     "build": "next build && next export",
