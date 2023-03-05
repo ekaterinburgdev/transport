@@ -1,4 +1,4 @@
 // This file is `/api` endpoint for Vercel Serverless Functions
-const { api } = require('transport-server');
+import { app } from 'transport-server/build/index.js';
 
-module.exports = api;
+export default app;

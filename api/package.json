@@ -1,6 +1,7 @@
 {
   "name": "transport-vercel-serverless",
   "version": "1.0.0",
+  "type": "module",
   "dependencies": {
     "transport-server": "workspace:../server"
   }
