@@ -4,7 +4,7 @@
     "outputDirectory": "client/.next",
     "framework": "nextjs",
     "functions": {
-        "api/index.js": {
+        "api/index.ts": {
             "maxDuration": 10
         }
     },
