@@ -2,7 +2,7 @@ import express from 'express';
 
 import { router } from './router';
 
-export const app = express();
+const app = express();
 const port = process.env.SERVER_PORT || 3080;
 
 app.use('/api', router);
@@ -13,3 +13,5 @@ if (!process.env.VERCEL) {
         console.log(`Server listening on the port::${port}`);
     });
 }
+
+export default app;
