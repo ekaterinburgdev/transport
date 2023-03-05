@@ -1,0 +1,12 @@
+{
+    "buildCommand": "pnpm run build",
+    "installCommand": "pnpm -r install",
+    "outputDirectory": "client/.next",
+    "framework": "nextjs",
+    "functions": {
+        "api/index.ts": {
+            "maxDuration": 10
+        }
+    },
+    "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }]
+}
