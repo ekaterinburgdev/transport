@@ -1,7 +1,8 @@
 import express from 'express';
 
-import { helloWorldRouter } from './hello-world';
+import { createMasstransRouter } from './masstrans.js';
 
 export const router = express.Router();
 
-router.use('/hello', helloWorldRouter);
+const masstransRouter = createMasstransRouter();
+router.use('/masstrans', masstransRouter);

@@ -1,8 +1,4 @@
 {
-  "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript"],
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  },
   "rules": {
     // @see https://typescript-eslint.io/rules/indent/
     // conflict with typescript-eslint
@@ -27,5 +23,5 @@
       }
     ]
   },
-  "ignorePatterns": ["next.config.js"]
+  "ignorePatterns": ["next.config.js", "build/"]
 }
