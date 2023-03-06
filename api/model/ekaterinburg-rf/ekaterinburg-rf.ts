@@ -1,4 +1,4 @@
-import got from 'got';
+import got, { OptionsOfJSONResponseBody } from 'got';
 import _ from 'lodash';
 
 import {
@@ -23,18 +23,16 @@ export class EkaterinburgRfModel {
     private transportTree: TransportTree | undefined = undefined;
 
     constructor() {
-        this.initSession().then(() => {
-            this.getTransTypeTree().then((tree) => {
-                const treeWithRoutesGroupedByNumber = tree.map((transportTypeTree) => ({
-                    ...transportTypeTree,
-                    routes: _.keyBy(transportTypeTree.routes, 'mr_num'),
-                }));
+        this.getTransTypeTree().then((tree) => {
+            const treeWithRoutesGroupedByNumber = tree.map((transportTypeTree) => ({
+                ...transportTypeTree,
+                routes: _.keyBy(transportTypeTree.routes, 'mr_num'),
+            }));
 
-                this.transportTree = _.keyBy(
-                    treeWithRoutesGroupedByNumber,
-                    'tt_title_en',
-                ) as unknown as TransportTree;
-            });
+            this.transportTree = _.keyBy(
+                treeWithRoutesGroupedByNumber,
+                'tt_title_en',
+            ) as unknown as TransportTree;
         });
     }
 
@@ -68,7 +66,6 @@ export class EkaterinburgRfModel {
         );
 
         return this.sendRequest<GetUnitsResponse>(JsonRpcMethods.GetUnits, {
-            sid: this.sid,
             marshList,
         });
     }
@@ -76,7 +73,6 @@ export class EkaterinburgRfModel {
     private getTransTypeTree(): Promise<GetTransTypeTreeResponse> {
         return this.sendRequest<GetTransTypeTreeResponse>(JsonRpcMethods.GetTransTypeTree, {
             ok_id: '',
-            sid: this.sid,
         });
     }
 
@@ -100,26 +96,46 @@ export class EkaterinburgRfModel {
     }
 
     private async sendRequest<R>(method: JsonRpcMethods, params: object) {
-        const gotRequest = got.extend({
+        if (!this.sid) {
+            await this.initSession();
+        }
+
+        this.incrementRequestId();
+
+        const gotOptions = {
             json: {
                 id: this.requestId,
                 jsonrpc,
                 method,
-                params,
+                params: {
+                    ...params,
+                    sid: this.sid,
+                },
             },
             responseType,
-        });
+        };
 
-        this.incrementRequestId();
-        let { body } = await gotRequest.post<JsonRpcResponse<R>>(marhsrutEkaterinburgRfJsonRpcLink);
+        let { body } = await got.post<JsonRpcResponse<R>>(
+            marhsrutEkaterinburgRfJsonRpcLink,
+            gotOptions as OptionsOfJSONResponseBody,
+        );
 
         const isSessionError = await this.processSessionError(body);
 
         if (isSessionError) {
             this.incrementRequestId();
-            ({ body } = await gotRequest.post<JsonRpcResponse<R>>(
+
+            gotOptions.json.params.sid = this.sid;
+            gotOptions.json.id = this.requestId;
+
+            ({ body } = await got.post<JsonRpcResponse<R>>(
                 marhsrutEkaterinburgRfJsonRpcLink,
+                gotOptions as OptionsOfJSONResponseBody,
             ));
+        }
+
+        if ((body as unknown as JsonRpcErrorResponse).error) {
+            throw new Error((body as unknown as JsonRpcErrorResponse).error.message_en);
         }
 
         return body.result;
