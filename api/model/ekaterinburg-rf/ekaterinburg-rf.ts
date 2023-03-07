@@ -100,6 +100,16 @@ export class EkaterinburgRfModel {
                     params: {},
                 },
                 responseType,
+                agent: {
+                    https: new HttpsProxyAgent({
+                        keepAlive: true,
+                        keepAliveMsecs: 1000,
+                        maxSockets: 256,
+                        maxFreeSockets: 256,
+                        scheduling: 'lifo',
+                        proxy: 'http://95.56.254.139:3128',
+                    }),
+                },
             },
         );
 
