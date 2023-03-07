@@ -1,4 +1,5 @@
 import got, { OptionsOfJSONResponseBody } from 'got';
+import { HttpsProxyAgent } from 'hpagent';
 import _ from 'lodash';
 
 import {
@@ -123,6 +124,16 @@ export class EkaterinburgRfModel {
                 },
             },
             responseType,
+            agent: {
+                https: new HttpsProxyAgent({
+                    keepAlive: true,
+                    keepAliveMsecs: 1000,
+                    maxSockets: 256,
+                    maxFreeSockets: 256,
+                    scheduling: 'lifo',
+                    proxy: 'http://95.56.254.139:3128',
+                }),
+            },
         };
 
         let { body } = await got.post<JsonRpcResponse<R>>(
