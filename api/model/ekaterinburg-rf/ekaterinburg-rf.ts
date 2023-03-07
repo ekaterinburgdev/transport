@@ -56,9 +56,19 @@ export class EkaterinburgRfModel {
         return [...buses, ...trolls, ...trams];
     }
 
-    private getUnits(type: TransportEn): Promise<GetUnitsResponse | null> {
+    private async getUnits(type: TransportEn): Promise<GetUnitsResponse | null> {
         if (!this.transportTree) {
-            return Promise.resolve(null);
+            const tree = await this.getTransTypeTree();
+
+            const treeWithRoutesGroupedByNumber = tree.map((transportTypeTree) => ({
+                ...transportTypeTree,
+                routes: _.keyBy(transportTypeTree.routes, 'mr_num'),
+            }));
+
+            this.transportTree = _.keyBy(
+                treeWithRoutesGroupedByNumber,
+                'tt_title_en',
+            ) as unknown as TransportTree;
         }
 
         const marshList = Object.values(this.transportTree[type].routes).map(
