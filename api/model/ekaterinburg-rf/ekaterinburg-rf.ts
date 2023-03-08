@@ -31,61 +31,67 @@ export class EkaterinburgRfModel {
     private transportTree: TransportTree | undefined = undefined;
 
     constructor() {
-        this.getTransTypeTree().then((tree) => {
-            const treeWithRoutesGroupedByNumber = tree.map((transportTypeTree) => ({
-                ...transportTypeTree,
-                routes: _.keyBy(transportTypeTree.routes, 'mr_num'),
-            }));
-
-            this.transportTree = _.keyBy(
-                treeWithRoutesGroupedByNumber,
-                'tt_title_en',
-            ) as unknown as TransportTree;
-        });
+        this.createTransportTree();
     }
 
     getBuses() {
-        return this.getUnits(TransportEn.Bus);
+        return this.getUnitByType(TransportEn.Bus);
     }
 
     getTrolls() {
-        return this.getUnits(TransportEn.Troll);
+        return this.getUnitByType(TransportEn.Troll);
     }
 
     getTrams() {
-        return this.getUnits(TransportEn.Tram);
+        return this.getUnitByType(TransportEn.Tram);
     }
 
-    async getAllUnits() {
-        const buses = (await this.getBuses()) || [];
-        const trolls = (await this.getTrolls()) || [];
-        const trams = (await this.getTrams()) || [];
-
-        return [...buses, ...trolls, ...trams];
-    }
-
-    private async getUnits(type: TransportEn): Promise<GetUnitsResponse | null> {
+    async getAllUnits(): Promise<GetUnitsResponse> {
         if (!this.transportTree) {
-            const tree = await this.getTransTypeTree();
-
-            const treeWithRoutesGroupedByNumber = tree.map((transportTypeTree) => ({
-                ...transportTypeTree,
-                routes: _.keyBy(transportTypeTree.routes, 'mr_num'),
-            }));
-
-            this.transportTree = _.keyBy(
-                treeWithRoutesGroupedByNumber,
-                'tt_title_en',
-            ) as unknown as TransportTree;
+            await this.createTransportTree();
         }
 
-        const marshList = Object.values(this.transportTree[type].routes).map(
+        const marshList: string[] = [];
+
+        for (const type in this.transportTree!) {
+            const marshListOfType = Object.values(
+                this.transportTree[type as TransportEn].routes,
+            ).map((route) => route.mr_id);
+
+            marshList.push(...marshListOfType);
+        }
+
+        return this.sendRequest<GetUnitsResponse>(JsonRpcMethods.GetUnits, {
+            marshList,
+        });
+    }
+
+    private async getUnitByType(type: TransportEn): Promise<GetUnitsResponse> {
+        if (!this.transportTree) {
+            await this.createTransportTree();
+        }
+
+        const marshList = Object.values(this.transportTree![type].routes).map(
             (route) => route.mr_id,
         );
 
         return this.sendRequest<GetUnitsResponse>(JsonRpcMethods.GetUnits, {
             marshList,
         });
+    }
+
+    private async createTransportTree() {
+        const tree = await this.getTransTypeTree();
+
+        const treeWithRoutesGroupedByNumber = tree.map((transportTypeTree) => ({
+            ...transportTypeTree,
+            routes: _.keyBy(transportTypeTree.routes, 'mr_num'),
+        }));
+
+        this.transportTree = _.keyBy(
+            treeWithRoutesGroupedByNumber,
+            'tt_title_en',
+        ) as unknown as TransportTree;
     }
 
     private getTransTypeTree(): Promise<GetTransTypeTreeResponse> {
