@@ -1,12 +1,11 @@
-import got, { OptionsOfJSONResponseBody } from 'got';
-import { HttpsProxyAgent } from 'hpagent';
+import fetch from 'node-fetch';
+import HttpsProxyAgent from 'https-proxy-agent';
 import _ from 'lodash';
 
 import {
     TransportEn,
     jsonrpc,
     JsonRpcMethods,
-    responseType,
     marhsrutEkaterinburgRfJsonRpcLink,
 } from './ekaterinburg-rf.constants.js';
 import {
@@ -17,6 +16,14 @@ import {
     InitSessionResponse,
     GetTransTypeTreeResponse,
 } from './ekaterinburg-rf.types.js';
+
+// @ts-ignore
+const proxyAgent = new HttpsProxyAgent('http://95.56.254.139:3128');
+const fetchCommonOptions = {
+    agent: proxyAgent,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+};
 
 export class EkaterinburgRfModel {
     private requestId = 1;
@@ -90,28 +97,17 @@ export class EkaterinburgRfModel {
     private async initSession() {
         this.requestId = 1;
 
-        const { body } = await got.post<JsonRpcResponse<InitSessionResponse>>(
-            marhsrutEkaterinburgRfJsonRpcLink,
-            {
-                json: {
-                    id: this.requestId,
-                    jsonrpc,
-                    method: JsonRpcMethods.StartSession,
-                    params: {},
-                },
-                responseType,
-                agent: {
-                    https: new HttpsProxyAgent({
-                        keepAlive: true,
-                        keepAliveMsecs: 1000,
-                        maxSockets: 256,
-                        maxFreeSockets: 256,
-                        scheduling: 'lifo',
-                        proxy: 'http://95.56.254.139:3128',
-                    }),
-                },
-            },
-        );
+        const response = await fetch(marhsrutEkaterinburgRfJsonRpcLink, {
+            ...fetchCommonOptions,
+            body: JSON.stringify({
+                id: this.requestId,
+                jsonrpc,
+                method: JsonRpcMethods.StartSession,
+                params: {},
+            }),
+        });
+
+        const body = (await response.json()) as JsonRpcResponse<InitSessionResponse>;
 
         this.sid = body.result.sid;
     }
@@ -123,46 +119,36 @@ export class EkaterinburgRfModel {
 
         this.incrementRequestId();
 
-        const gotOptions = {
-            json: {
-                id: this.requestId,
-                jsonrpc,
-                method,
-                params: {
-                    ...params,
-                    sid: this.sid,
-                },
-            },
-            responseType,
-            agent: {
-                https: new HttpsProxyAgent({
-                    keepAlive: true,
-                    keepAliveMsecs: 1000,
-                    maxSockets: 256,
-                    maxFreeSockets: 256,
-                    scheduling: 'lifo',
-                    proxy: 'http://95.56.254.139:3128',
-                }),
+        const requestBody = {
+            id: this.requestId,
+            jsonrpc,
+            method,
+            params: {
+                ...params,
+                sid: this.sid,
             },
         };
 
-        let { body } = await got.post<JsonRpcResponse<R>>(
-            marhsrutEkaterinburgRfJsonRpcLink,
-            gotOptions as OptionsOfJSONResponseBody,
-        );
+        const fetchOptions = {
+            ...fetchCommonOptions,
+            body: JSON.stringify(requestBody),
+        };
+
+        let response = await fetch(marhsrutEkaterinburgRfJsonRpcLink, fetchOptions);
+        let body = (await response.json()) as JsonRpcResponse<R>;
 
         const isSessionError = await this.processSessionError(body);
 
         if (isSessionError) {
             this.incrementRequestId();
 
-            gotOptions.json.params.sid = this.sid;
-            gotOptions.json.id = this.requestId;
+            requestBody.params.sid = this.sid;
+            requestBody.id = this.requestId;
 
-            ({ body } = await got.post<JsonRpcResponse<R>>(
-                marhsrutEkaterinburgRfJsonRpcLink,
-                gotOptions as OptionsOfJSONResponseBody,
-            ));
+            fetchOptions.body = JSON.stringify(requestBody);
+
+            response = await fetch(marhsrutEkaterinburgRfJsonRpcLink, fetchOptions);
+            body = (await response.json()) as JsonRpcResponse<R>;
         }
 
         if ((body as unknown as JsonRpcErrorResponse).error) {
