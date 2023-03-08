@@ -10,7 +10,7 @@ export function processUnitData(units: Unit[]) {
         routeDirection: unit.rl_racetype,
         type: unit.tt_title_en.toLowerCase().slice(0, 5),
         course: Number(unit.u_course),
-        disabled: Number(unit.u_inv),
+        accessibility: Number(unit.u_inv),
         coords: [Number(unit.u_lat), Number(unit.u_long)],
         model: unit.u_model,
         speed: Number(unit.u_speed),
