@@ -4,52 +4,50 @@ import { EkaterinburgRfModel } from '../../model/ekaterinburg-rf/ekaterinburg-rf
 
 import { processUnitData } from './masstrans.helpers.js';
 
-export function createMasstransController() {
-    const ekaterinburgRfModel = new EkaterinburgRfModel();
+const ekaterinburgRfModel = new EkaterinburgRfModel();
 
-    return {
-        async getBuses(_: Request, res: Response) {
-            const busesRaw = await ekaterinburgRfModel.getBuses();
+export const masstransController = {
+    async getBuses(_: Request, res: Response) {
+        const busesRaw = await ekaterinburgRfModel.getBuses();
 
-            if (!busesRaw) {
-                throw new Error('No response from ekaterinburg.rf');
-            }
+        if (!busesRaw) {
+            throw new Error('No response from ekaterinburg.rf');
+        }
 
-            const buses = processUnitData(busesRaw);
+        const buses = processUnitData(busesRaw);
 
-            res.json({ data: buses });
-        },
+        res.json({ data: buses });
+    },
 
-        async getTrolls(_: Request, res: Response) {
-            const trollsRaw = await ekaterinburgRfModel.getTrolls();
+    async getTrolls(_: Request, res: Response) {
+        const trollsRaw = await ekaterinburgRfModel.getTrolls();
 
-            if (!trollsRaw) {
-                throw new Error('No response from ekaterinburg.rf');
-            }
+        if (!trollsRaw) {
+            throw new Error('No response from ekaterinburg.rf');
+        }
 
-            const trolls = processUnitData(trollsRaw);
+        const trolls = processUnitData(trollsRaw);
 
-            res.json({ data: trolls });
-        },
+        res.json({ data: trolls });
+    },
 
-        async getTrams(_: Request, res: Response) {
-            const tramsRaw = await ekaterinburgRfModel.getTrams();
+    async getTrams(_: Request, res: Response) {
+        const tramsRaw = await ekaterinburgRfModel.getTrams();
 
-            if (!tramsRaw) {
-                throw new Error('No response from ekaterinburg.rf');
-            }
+        if (!tramsRaw) {
+            throw new Error('No response from ekaterinburg.rf');
+        }
 
-            const trams = processUnitData(tramsRaw);
+        const trams = processUnitData(tramsRaw);
 
-            res.json({ data: trams });
-        },
+        res.json({ data: trams });
+    },
 
-        async getAll(_: Request, res: Response) {
-            const unitsRaw = await ekaterinburgRfModel.getAllUnits();
+    async getAll(_: Request, res: Response) {
+        const unitsRaw = await ekaterinburgRfModel.getAllUnits();
 
-            const units = processUnitData(unitsRaw);
+        const units = processUnitData(unitsRaw);
 
-            res.json({ data: units });
-        },
-    };
-}
+        res.json({ data: units });
+    },
+};
