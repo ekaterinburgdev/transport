@@ -11,7 +11,7 @@ export function processUnitData(units: Unit[]) {
         type: unit.tt_title_en.toLowerCase().slice(0, 5),
         course: parseInt(unit.u_course, 10),
         accessibility: parseInt(unit.u_inv, 10),
-        coords: [parseInt(unit.u_lat, 10), parseInt(unit.u_long, 10)],
+        coords: [parseFloat(unit.u_lat), parseFloat(unit.u_long)],
         model: unit.u_model,
         speed: parseInt(unit.u_speed, 10),
         stateNumber: unit.u_statenum,
