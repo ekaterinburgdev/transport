@@ -1,11 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "rootDir": "./",
-    "outDir": "./build",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "lib": ["esnext"],
+    "target": "esnext",
+    "importHelpers": true,
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "outDir": "./build"
+  },
+  "ts-node": {
+    "esm": true
   },
   "include": ["next-env.d.ts", "**/*.ts"],
   "exclude": ["node_modules"]
