@@ -14,9 +14,9 @@ export const masstransController = {
             throw new Error('No response from ekaterinburg.rf');
         }
 
-        // const buses = processUnitData(busesRaw);
+        const buses = processUnitData(busesRaw);
 
-        res.json({ data: busesRaw });
+        res.json({ data: buses });
     },
 
     async getTrolls(_: Request, res: Response) {
@@ -26,9 +26,9 @@ export const masstransController = {
             throw new Error('No response from ekaterinburg.rf');
         }
 
-        // const trolls = processUnitData(trollsRaw);
+        const trolls = processUnitData(trollsRaw);
 
-        res.json({ data: trollsRaw });
+        res.json({ data: trolls });
     },
 
     async getTrams(_: Request, res: Response) {
@@ -38,16 +38,16 @@ export const masstransController = {
             throw new Error('No response from ekaterinburg.rf');
         }
 
-        // const trams = processUnitData(tramsRaw);
+        const trams = processUnitData(tramsRaw);
 
-        res.json({ data: tramsRaw });
+        res.json({ data: trams });
     },
 
     async getAll(_: Request, res: Response) {
         const unitsRaw = await ekaterinburgRfModel.getAllUnits();
 
-        // const units = processUnitData(unitsRaw);
+        const units = processUnitData(unitsRaw);
 
-        res.json({ data: unitsRaw });
+        res.json({ data: units });
     },
 };
