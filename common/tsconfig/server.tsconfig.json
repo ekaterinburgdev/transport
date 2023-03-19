@@ -9,7 +9,6 @@
         "strict": true,
         "skipLibCheck": true,
         "sourceMap": true,
-        "outDir": "./build",
         "resolveJsonModule": true
     },
     "ts-node": {

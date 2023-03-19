@@ -1,3 +1,5 @@
 {
-  "extends": "transport-common/tsconfig/server.tsconfig.json"
+  "extends": "transport-common/tsconfig/server.tsconfig.json",
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
 }
