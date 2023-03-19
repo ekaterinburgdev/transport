@@ -2,8 +2,8 @@
     "compilerOptions": {
         "module": "nodenext",
         "moduleResolution": "nodenext",
-        "lib": ["esnext"],
-        "target": "esnext",
+        "lib": ["es6"],
+        "target": "es6",
         "importHelpers": true,
         "esModuleInterop": true,
         "strict": true,
