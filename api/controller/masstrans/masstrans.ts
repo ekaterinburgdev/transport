@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 
-import { ClientUnit } from 'transport-common/types/masstrans.js';
+import { ClientUnit } from 'transport-common/types/masstrans';
 
-import { EkaterinburgRfModel } from '../../model/ekaterinburg-rf/ekaterinburg-rf.js';
-import { isValueInObject } from '../../utils/is-value-in-object.js';
+import { EkaterinburgRfModel } from '../../model/ekaterinburg-rf/ekaterinburg-rf';
+import { isValueInObject } from '../../utils/is-value-in-object';
 
-import { processUnitData } from './masstrans.helpers.js';
+import { processUnitData } from './masstrans.helpers';
 
 const ekaterinburgRfModel = new EkaterinburgRfModel();
 

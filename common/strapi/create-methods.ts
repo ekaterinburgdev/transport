@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
-import { StrapiContentTypes } from '../types/strapi.js';
-import { strapiUrl } from './constants.js';
+import { StrapiContentTypes } from '../types/strapi';
+import { strapiUrl } from './constants';
 
 export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: string) {
     const requestToStrapiOptions = {

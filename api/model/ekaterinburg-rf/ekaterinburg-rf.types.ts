@@ -1,6 +1,6 @@
-import { ServerUnit, TransTypeTree } from 'transport-common/types/ekaterinburg-rf.js';
+import { ServerUnit, TransTypeTree } from 'transport-common/types/ekaterinburg-rf';
 
-import { jsonrpc } from './ekaterinburg-rf.constants.js';
+import { jsonrpc } from './ekaterinburg-rf.constants';
 
 export type JsonRpcResponse<T> = {
     jsonrpc: typeof jsonrpc;

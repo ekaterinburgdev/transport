@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
-import { StrapiLoginResponse } from '../types/strapi.js';
-import { strapiUrl, email, password } from './constants.js';
+import { StrapiLoginResponse } from '../types/strapi';
+import { strapiUrl, email, password } from './constants';
 
 export async function loginStrapi() {
     const response = await fetch(`${strapiUrl}/api/auth/local`, {

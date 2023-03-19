@@ -2,23 +2,23 @@ import fetch from 'node-fetch';
 import HttpsProxyAgent from 'https-proxy-agent';
 import _ from 'lodash';
 
-import { ServerRoute } from 'transport-common/types/ekaterinburg-rf.js';
-import { ClientUnit, TransportTree } from 'transport-common/types/masstrans.js';
-import { createStrapiMethods } from 'transport-common/strapi/create-methods.js';
-import { StrapiContentTypes, StrapiTree } from 'transport-common/types/strapi.js';
+import { ServerRoute } from 'transport-common/types/ekaterinburg-rf';
+import { ClientUnit, TransportTree } from 'transport-common/types/masstrans';
+import { createStrapiMethods } from 'transport-common/strapi/create-methods';
+import { StrapiContentTypes, StrapiTree } from 'transport-common/types/strapi';
 
 import {
     jsonrpc,
     JsonRpcMethods,
     marhsrutEkaterinburgRfJsonRpcLink,
-} from './ekaterinburg-rf.constants.js';
+} from './ekaterinburg-rf.constants';
 import {
     JsonRpcResponse,
     GetUnitsResponse,
     JsonRpcErrorResponse,
     InitSessionResponse,
     GetTransTypeTreeResponse,
-} from './ekaterinburg-rf.types.js';
+} from './ekaterinburg-rf.types';
 
 // @ts-ignore
 const proxyAgent = new HttpsProxyAgent('http://95.56.254.139:3128');

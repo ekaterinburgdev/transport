@@ -1,4 +1,4 @@
-import { Stop, TransportTreeOfType } from './masstrans.js';
+import { Stop, TransportTreeOfType } from './masstrans';
 
 export enum StrapiContentTypes {
     Stop = 'stop',

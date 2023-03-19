@@ -1,4 +1,4 @@
-import { ServerUnit } from 'transport-common/types/ekaterinburg-rf.js';
+import { ServerUnit } from 'transport-common/types/ekaterinburg-rf';
 
 export function processUnitData(units: ServerUnit[]) {
     return units.map((unit) => ({

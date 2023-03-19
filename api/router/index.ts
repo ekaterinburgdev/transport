@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { masstransRouter } from './masstrans.js';
+import { masstransRouter } from './masstrans';
 
 export const router = express.Router();
 
