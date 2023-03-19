@@ -113,10 +113,12 @@ importers:
     specifiers:
       '@types/node': ^18.15.3
       node-fetch: ^3.3.1
+      tslib: ^2.5.0
     dependencies:
       node-fetch: 3.3.1
     devDependencies:
       '@types/node': 18.15.3
+      tslib: 2.5.0
 
   schedulers:
     specifiers:
