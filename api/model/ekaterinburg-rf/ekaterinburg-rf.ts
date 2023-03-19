@@ -2,14 +2,17 @@ import fetch from 'node-fetch';
 import HttpsProxyAgent from 'https-proxy-agent';
 import _ from 'lodash';
 
+import { ServerRoute } from 'transport-common/types/ekaterinburg-rf.js';
+import { ClientUnit, TransportTree } from 'transport-common/types/masstrans.js';
+import { createStrapiMethods } from 'transport-common/strapi/create-methods.js';
+import { StrapiContentTypes, StrapiTree } from 'transport-common/types/strapi.js';
+
 import {
-    TransportEn,
     jsonrpc,
     JsonRpcMethods,
     marhsrutEkaterinburgRfJsonRpcLink,
 } from './ekaterinburg-rf.constants.js';
 import {
-    TransportTree,
     JsonRpcResponse,
     GetUnitsResponse,
     JsonRpcErrorResponse,
@@ -20,7 +23,7 @@ import {
 // @ts-ignore
 const proxyAgent = new HttpsProxyAgent('http://95.56.254.139:3128');
 const fetchCommonOptions = {
-    agent: proxyAgent,
+    agent: process.env.VERCEL && proxyAgent,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
 };
@@ -28,73 +31,61 @@ const fetchCommonOptions = {
 export class EkaterinburgRfModel {
     private requestId = 1;
     private sid = '';
-    private transportTree: TransportTree | undefined = undefined;
+    private transportTree: null | TransportTree = null;
 
     constructor() {
-        this.createTransportTree();
+        this.updateTransportTree();
     }
 
-    getBuses() {
-        return this.getUnitByType(TransportEn.Bus);
-    }
-
-    getTrolls() {
-        return this.getUnitByType(TransportEn.Troll);
-    }
-
-    getTrams() {
-        return this.getUnitByType(TransportEn.Tram);
+    async getRoute(routeId: string): Promise<ServerRoute> {
+        return this.sendRequest(JsonRpcMethods.GetRoute, {
+            mr_id: routeId,
+        });
     }
 
     async getAllUnits(): Promise<GetUnitsResponse> {
         if (!this.transportTree) {
-            await this.createTransportTree();
+            await this.updateTransportTree();
         }
 
-        const marshList: string[] = [];
-
-        for (const type in this.transportTree!) {
-            const marshListOfType = Object.values(
-                this.transportTree[type as TransportEn].routes,
-            ).map((route) => route.mr_id);
-
-            marshList.push(...marshListOfType);
-        }
+        const marshList: string[] = [
+            ...this.transportTree!.bus.ids,
+            ...this.transportTree!.tram.ids,
+            ...this.transportTree!.troll.ids,
+        ];
 
         return this.sendRequest<GetUnitsResponse>(JsonRpcMethods.GetUnits, {
             marshList,
         });
     }
 
-    private async getUnitByType(type: TransportEn): Promise<GetUnitsResponse> {
+    async getUnitByType(clientUnit: ClientUnit): Promise<GetUnitsResponse> {
         if (!this.transportTree) {
-            await this.createTransportTree();
+            await this.updateTransportTree();
         }
 
-        const marshList = Object.values(this.transportTree![type].routes).map(
-            (route) => route.mr_id,
-        );
+        const marshList = this.transportTree![clientUnit].ids;
 
         return this.sendRequest<GetUnitsResponse>(JsonRpcMethods.GetUnits, {
             marshList,
         });
     }
 
-    private async createTransportTree() {
-        const tree = await this.getTransTypeTree();
+    private async updateTransportTree() {
+        const tree = await this.getTransportTreeFromStrapi();
+        const flatTree = tree.map((treeOfType) => treeOfType.attributes);
+        const groupedTree = _.keyBy(flatTree, 'type') as TransportTree;
 
-        const treeWithRoutesGroupedByNumber = tree.map((transportTypeTree) => ({
-            ...transportTypeTree,
-            routes: _.keyBy(transportTypeTree.routes, 'mr_num'),
-        }));
-
-        this.transportTree = _.keyBy(
-            treeWithRoutesGroupedByNumber,
-            'tt_title_en',
-        ) as unknown as TransportTree;
+        this.transportTree = groupedTree;
     }
 
-    private getTransTypeTree(): Promise<GetTransTypeTreeResponse> {
+    private getTransportTreeFromStrapi(): Promise<StrapiTree[]> {
+        const strapiTree = createStrapiMethods(StrapiContentTypes.TransportTree);
+
+        return strapiTree.getAll();
+    }
+
+    getTransTypeTree(): Promise<GetTransTypeTreeResponse> {
         return this.sendRequest<GetTransTypeTreeResponse>(JsonRpcMethods.GetTransTypeTree, {
             ok_id: '',
         });

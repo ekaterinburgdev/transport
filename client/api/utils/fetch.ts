@@ -31,8 +31,6 @@ export async function fetchApi(url: string, options: FetchOptions) {
         return resJson[dataField];
     } catch (e) {
         console.error(e);
-
-        throw e;
     }
 }
 

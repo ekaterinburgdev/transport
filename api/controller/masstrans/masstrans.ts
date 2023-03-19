@@ -1,49 +1,36 @@
 import { Request, Response } from 'express';
 
+import { ClientUnit } from 'transport-common/types/masstrans.js';
+
 import { EkaterinburgRfModel } from '../../model/ekaterinburg-rf/ekaterinburg-rf.js';
+import { isValueInObject } from '../../utils/is-value-in-object.js';
 
 import { processUnitData } from './masstrans.helpers.js';
 
 const ekaterinburgRfModel = new EkaterinburgRfModel();
 
 export const masstransController = {
-    async getBuses(_: Request, res: Response) {
-        const busesRaw = await ekaterinburgRfModel.getBuses();
+    async getUnit(req: Request, res: Response) {
+        const { unit } = req.params;
 
-        if (!busesRaw) {
+        if (!isValueInObject(ClientUnit, unit)) {
+            res.sendStatus(400);
+
+            return;
+        }
+
+        const unitsRaw = await ekaterinburgRfModel.getUnitByType(unit as ClientUnit);
+
+        if (!unitsRaw) {
             throw new Error('No response from ekaterinburg.rf');
         }
 
-        const buses = processUnitData(busesRaw);
+        const units = processUnitData(unitsRaw);
 
-        res.json({ data: buses });
+        res.json({ data: units });
     },
 
-    async getTrolls(_: Request, res: Response) {
-        const trollsRaw = await ekaterinburgRfModel.getTrolls();
-
-        if (!trollsRaw) {
-            throw new Error('No response from ekaterinburg.rf');
-        }
-
-        const trolls = processUnitData(trollsRaw);
-
-        res.json({ data: trolls });
-    },
-
-    async getTrams(_: Request, res: Response) {
-        const tramsRaw = await ekaterinburgRfModel.getTrams();
-
-        if (!tramsRaw) {
-            throw new Error('No response from ekaterinburg.rf');
-        }
-
-        const trams = processUnitData(tramsRaw);
-
-        res.json({ data: trams });
-    },
-
-    async getAll(_: Request, res: Response) {
+    async getAllUnits(_: Request, res: Response) {
         const unitsRaw = await ekaterinburgRfModel.getAllUnits();
 
         const units = processUnitData(unitsRaw);

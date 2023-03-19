@@ -7,16 +7,5 @@ export enum JsonRpcMethods {
     StartSession = 'startSession',
     GetTransTypeTree = 'getTransTypeTree',
     GetUnits = 'getUnits',
-}
-
-export enum TransportRu {
-    Bus = 'Автобус',
-    Tram = 'Трамвай',
-    Troll = 'Троллейбус',
-}
-
-export enum TransportEn {
-    Bus = 'Bus',
-    Tram = 'Tram',
-    Troll = 'Trolley',
+    GetRoute = 'getRoute',
 }
