@@ -10,7 +10,7 @@ import { STATION_ICON_BY_TYPE } from './MapStationsItem.constants';
 import { MapStationsItemProps } from './MapStationsItem.types';
 
 export function MapStationsItem(props: MapStationsItemProps) {
-    const { type, id, name, lat, lng } = props;
+    const { type, id, name, coords } = props;
 
     const map = useMap();
 
@@ -28,13 +28,13 @@ export function MapStationsItem(props: MapStationsItemProps) {
         sidebarService.close();
     });
 
-    if (!lng || !lat) {
+    if (!coords) {
         return null;
     }
 
-    return lng && lat ? (
+    return (
         <Marker
-            position={[Number(lat), Number(lng)]}
+            position={coords}
             icon={icon}
             key={id}
             eventHandlers={{
@@ -49,5 +49,5 @@ export function MapStationsItem(props: MapStationsItemProps) {
                 },
             }}
         />
-    ) : null;
+    );
 }

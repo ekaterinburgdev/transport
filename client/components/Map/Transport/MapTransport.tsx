@@ -18,8 +18,7 @@ export function MapTransport() {
     const [tramsRoutes, setTramsRoutes] = useState({});
     const [trollsRoutes, setTrollsRoutes] = useState({});
 
-    const [tramsStations, setTramsStations] = useState({});
-    const [trollsStations, setTrollsStations] = useState({});
+    const [stops, setStops] = useState([]);
 
     const [tramsPoints, setTramsPoints] = useState({});
     const [trollsPoints, setTrollsPoints] = useState({});
@@ -48,13 +47,9 @@ export function MapTransport() {
     };
 
     const updateStations = async () => {
-        const [tramsRes, trollsRes] = await Promise.all([
-            massTransApi.getStations(VehicleType.Tram),
-            massTransApi.getStations(VehicleType.Troll),
-        ]);
+        const stopsFromApi = (await massTransApi.getStops()) || [];
 
-        setTramsStations(groupBy(tramsRes, 'ID'));
-        setTrollsStations(groupBy(trollsRes, 'ID'));
+        setStops(stopsFromApi);
     };
 
     const updatePoints = async () => {
@@ -96,13 +91,12 @@ export function MapTransport() {
     const routesContextValue = useMemo(
         () => ({
             tramsRoutes,
-            tramsStations,
             tramsPoints,
             trollsRoutes,
-            trollsStations,
             trollsPoints,
+            stops,
         }),
-        [tramsRoutes, tramsStations, tramsPoints, trollsRoutes, trollsStations, trollsPoints],
+        [tramsRoutes, tramsPoints, trollsRoutes, trollsPoints, stops],
     );
 
     return (
