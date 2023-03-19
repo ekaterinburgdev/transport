@@ -1,10 +1,8 @@
-import { TStationType } from 'common/types/masstrans';
+import { StopType } from 'transport-common/types/masstrans';
 
 export type MapStationsItemProps = {
-    lat: number | null;
-    lng: number | null;
-    type: TStationType;
+    coords: [number, number];
+    type: StopType;
     id: string;
     name: string;
-    direction: string;
 };

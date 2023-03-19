@@ -1,5 +1,10 @@
+import { createStrapiMethods } from 'transport-common/strapi/create-methods';
+import { StrapiContentTypes, StrapiStop } from 'transport-common/types/strapi';
+
 import { VehicleType } from 'common/types/masstrans';
 import { fetchInternalApi } from 'api/utils/fetch';
+
+const strapiStops = createStrapiMethods(StrapiContentTypes.Stop);
 
 export const massTransApi = {
     getVehicles: (type: VehicleType) =>
@@ -10,10 +15,7 @@ export const massTransApi = {
         fetchInternalApi(`http://map.ettu.ru/api/v2/${type}/routes/?apiKey=111`, {
             dataField: 'routes',
         }),
-    getStations: (type: VehicleType) =>
-        fetchInternalApi(`http://map.ettu.ru/api/v2/${type}/stations/?apiKey=111`, {
-            dataField: 'points',
-        }),
+    getStops: () => strapiStops.getAll() as Promise<StrapiStop[]>,
     getPoints: (type: VehicleType) =>
         fetchInternalApi(`http://map.ettu.ru/api/v2/${type}/points/?apiKey=111`, {
             dataField: 'points',

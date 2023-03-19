@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useMapEvent } from 'react-leaflet';
 
-import { VehicleType } from 'common/types/masstrans';
 import { RoutesContext } from 'components/Map/Transport/MapTransport.context';
 
 import { MapStationsItem } from './Item/MapStationsItem';
@@ -9,7 +8,7 @@ import { MapStationsItem } from './Item/MapStationsItem';
 import { VISISBILITY_MINIMAL_ZOOM } from './MapStations.constants';
 
 export function MapStations() {
-    const routes = useContext(RoutesContext);
+    const { stops } = useContext(RoutesContext);
     const [hidden, setHidden] = useState(false);
     const map = useMapEvent('zoomend', () => {
         const zoom = map.getZoom();
@@ -23,36 +22,15 @@ export function MapStations() {
 
     return !hidden ? (
         <>
-            {Object.values(routes.tramsStations).map((stationArr: any) => {
-                const station = stationArr[0];
-
-                return (
-                    <MapStationsItem
-                        key={station.ID}
-                        lat={station?.LAT || station?.LATITUDE}
-                        lng={station?.LON || station?.LONGITUDE}
-                        type={VehicleType.Tram}
-                        id={station.ID}
-                        name={station.NAME}
-                        direction={station.DIRECTION}
-                    />
-                );
-            })}
-            {Object.values(routes.trollsStations).map((stationArr: any) => {
-                const station = stationArr[0];
-
-                return (
-                    <MapStationsItem
-                        key={station.ID}
-                        lat={station?.LAT || station?.LATITUDE}
-                        lng={station?.LON || station?.LONGITUDE}
-                        type={VehicleType.Troll}
-                        id={station.ID}
-                        name={station.NAME}
-                        direction={station.DIRECTION}
-                    />
-                );
-            })}
+            {stops.map((stop) => (
+                <MapStationsItem
+                    key={stop.id}
+                    coords={stop.attributes.coords}
+                    type={stop.attributes.type}
+                    id={stop.attributes.stopId}
+                    name={stop.attributes.title}
+                />
+            ))}
         </>
     ) : null;
 }
