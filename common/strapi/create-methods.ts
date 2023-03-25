@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 import { StrapiContentTypes } from '../types/strapi';
-import { strapiUrl } from './constants';
+import { STRAPI_URL, REQUEST_PAGINATION_SIZE } from './constants';
 
 export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: string) {
     const requestToStrapiOptions = {
@@ -13,7 +13,7 @@ export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: strin
 
     async function publish<T>(data: T) {
         try {
-            const resp = await fetch(`${strapiUrl}/api/${contentType}s`, {
+            const resp = await fetch(`${STRAPI_URL}/api/${contentType}s`, {
                 ...requestToStrapiOptions,
                 method: 'POST',
                 body: JSON.stringify({
@@ -34,7 +34,7 @@ export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: strin
     async function update<T extends { id: number }>(data: T) {
         try {
             const { id, ...attributes } = data;
-            const resp = await fetch(`${strapiUrl}/api/${contentType}s/${id}`, {
+            const resp = await fetch(`${STRAPI_URL}/api/${contentType}s/${id}`, {
                 method: 'PUT',
                 ...requestToStrapiOptions,
                 body: JSON.stringify({
@@ -54,7 +54,7 @@ export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: strin
 
     async function deleteById(id: number) {
         try {
-            const resp = await fetch(`${strapiUrl}/api/${contentType}s/${id}`, {
+            const resp = await fetch(`${STRAPI_URL}/api/${contentType}s/${id}`, {
                 method: 'DELETE',
                 ...requestToStrapiOptions,
             });
@@ -72,7 +72,7 @@ export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: strin
     async function getAll() {
         try {
             const resp = await fetch(
-                `${strapiUrl}/api/${contentType}s?pagination[pageSize]=2000`,
+                `${STRAPI_URL}/api/${contentType}s?pagination[pageSize]=${REQUEST_PAGINATION_SIZE}`,
                 requestToStrapiOptions,
             );
 
