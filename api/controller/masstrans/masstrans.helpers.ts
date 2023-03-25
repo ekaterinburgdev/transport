@@ -15,5 +15,6 @@ export function processUnitData(units: ServerUnit[]) {
         model: unit.u_model,
         speed: parseInt(unit.u_speed, 10),
         stateNumber: unit.u_statenum,
+        boardId: parseInt(unit.u_garagnum, 10),
     }));
 }

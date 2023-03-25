@@ -20,7 +20,7 @@ function getDeltaCoords(velocity: number, course: number) {
     const angleInRad = (course * Math.PI) / 180;
 
     // Calculating cathets (x and y) from hypotenuse (distance)
-    return [round(Math.cos(angleInRad) * distance, 4), round(Math.sin(angleInRad) * distance, 4)];
+    return [round(Math.sin(angleInRad) * distance, 4), -round(Math.cos(angleInRad) * distance, 4)];
 }
 
 function getVelocityInPixelsPerSecond(velocity: number, scale: number) {

@@ -393,7 +393,7 @@
     border-radius: 3px;
     display: flex;
     gap: 8px;
-    padding: 0 15px;
+    padding: 9px 15px;
 }
 
 .MapVehiclesSidebarRegionWrapper {
@@ -407,9 +407,11 @@
 
 .MapVehiclesSidebarRegionNumber {
     font: 400 30px/24px RoadNumbers, sans-serif;
+    padding-top: 9px;
 }
 
 .MapVehiclesSidebarRegion {
+    margin-top: -8px;
     font: 600 12px/14px Inter, sans-serif;
 }
 

@@ -1,7 +1,7 @@
 // FIXME: cure divatosis
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 // import dynamic from 'next/dynamic';
@@ -62,22 +62,29 @@ export function MapVehiclesSidebar({
     velocity,
     routeNumber,
     type,
+    stateNum,
     warning,
     map,
+    model,
 }: MapVehiclesItemProps) {
     // TODO: from и to будут лежать в пропсах MapVehicles, закинуть их
     const [from, to] = ['п. Мичуринский', 'Восточная'];
+    const stateNumber = useMemo(() => {
+        const splittedStateNum = stateNum.toLocaleLowerCase().split(' ');
+        if (splittedStateNum.length === 1) {
+            return null;
+        }
+
+        return {
+            number: splittedStateNum.slice(0, 2),
+            region: splittedStateNum[2],
+        };
+    }, [stateNum]);
 
     const {
         // imageUrl,
         features,
-        additionalInfo: {
-            vehicleModel,
-            vehicleOperator,
-            stateNumber,
-            factoryNumber,
-            manufactureYear,
-        },
+        additionalInfo: { vehicleModel, vehicleOperator, factoryNumber, manufactureYear },
     } = fixture;
 
     const manufactureYearDiff = new Date().getFullYear() - manufactureYear;
@@ -302,7 +309,7 @@ export function MapVehiclesSidebar({
                                         type={type}
                                         isCourseEast={false}
                                         additionalInfo={false}
-                                        course={90}
+                                        course={180}
                                     />
                                 </div>
                                 <PageText className={cn(styles.MapVehiclesSidebarStationName)}>
@@ -419,24 +426,28 @@ export function MapVehiclesSidebar({
                             <br />
                             <span className={cn(styles.MapVehiclesSidebarBoardId)}>{boardId}</span>
                         </div>
-                        <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
-                            <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
-                                Госномер
-                            </span>
-                            <div className={cn(styles.MapVehiclesSidebarRoadNumberWrapper)}>
-                                <div className={cn(styles.MapVehiclesSidebarRoadNumber)}>
-                                    {stateNumber.number.split(' ').map((part) => (
-                                        <span key={part}>{part}</span>
-                                    ))}
-                                </div>
-                                <div className={cn(styles.MapVehiclesSidebarRegionWrapper)}>
-                                    <span className={cn(styles.MapVehiclesSidebarRegionNumber)}>
-                                        {stateNumber.region}
-                                    </span>
-                                    <span className={cn(styles.MapVehiclesSidebarRegion)}>RUS</span>
+                        {stateNumber && (
+                            <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
+                                <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
+                                    Госномер
+                                </span>
+                                <div className={cn(styles.MapVehiclesSidebarRoadNumberWrapper)}>
+                                    <div className={cn(styles.MapVehiclesSidebarRoadNumber)}>
+                                        {stateNumber.number.map((part) => (
+                                            <span key={part}>{part}</span>
+                                        ))}
+                                    </div>
+                                    <div className={cn(styles.MapVehiclesSidebarRegionWrapper)}>
+                                        <span className={cn(styles.MapVehiclesSidebarRegionNumber)}>
+                                            {stateNumber.region}
+                                        </span>
+                                        <span className={cn(styles.MapVehiclesSidebarRegion)}>
+                                            RUS
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                     <Divider />
                     <div className={cn(styles.MapVehiclesSidebarAdditional)}>
@@ -447,7 +458,7 @@ export function MapVehiclesSidebar({
                             <Image src={modelPic} layout="intrinsic" alt="Модель" />
                             <div>
                                 <span className={cn(styles.MapVehiclesSidebarAdditionalTitle)}>
-                                    {vehicleModel.name}
+                                    {model}
                                 </span>
                                 <br />
                                 <span className={cn(styles.MapVehiclesSidebarAdditionalSubitle)}>

@@ -1,7 +1,7 @@
 import React, { useContext, useMemo, useState } from 'react';
 import { Polyline, useMapEvent } from 'react-leaflet';
 
-import { VehicleType } from 'common/types/masstrans';
+import { ClientUnit } from 'transport-common/types/masstrans';
 import { VEHICLE_TYPE_COLORS } from 'common/constants/colors';
 
 import { RoutesContext } from 'components/Map/Transport/MapTransport.context';
@@ -9,8 +9,8 @@ import { RoutesContext } from 'components/Map/Transport/MapTransport.context';
 import { VISISBILITY_MINIMAL_ZOOM } from './MapRoutes.constants';
 
 export type MapRoutesProps = {
-    routeNumber: number;
-    type: VehicleType;
+    routeNumber: string;
+    type: ClientUnit;
 };
 
 export function MapRoutes({ routeNumber, type }: MapRoutesProps) {

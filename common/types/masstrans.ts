@@ -35,3 +35,20 @@ export type Stop = {
     coords: [number, number];
     type: StopType;
 };
+
+export type Unit = {
+    id: number;
+    num: string;
+    depoTitle: string;
+    firstStation: string;
+    lastStation: string;
+    routeDirection: string;
+    type: ClientUnit;
+    course: number;
+    accessibility: number;
+    coords: [number, number];
+    model: string;
+    speed: number;
+    stateNumber: string;
+    boardId: number;
+};

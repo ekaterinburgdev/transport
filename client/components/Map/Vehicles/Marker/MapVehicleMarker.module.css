@@ -1,3 +1,17 @@
+.MapVehicleMarker {
+    animation: 150ms ease-out enlarge;
+    transform-origin: 20px 28px;
+}
+
+@keyframes enlarge {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
 .MapVehicleMarkerArrow {
     position: absolute;
     top: 0;
@@ -8,14 +22,14 @@
 
 .MapVehicleMarkerIcon {
     position: absolute;
-    top: 7px;
-    left: 8px;
+    top: 15px;
+    left: 7px;
 }
 
 .MapVehicleMarkerInfo {
     position: absolute;
     left: 41px;
-    top: 6px;
+    top: 14px;
     width: 66px;
 
     display: flex;
@@ -49,7 +63,7 @@
     line-height: 24px;
 }
 
-.MapVehicleMarkerDisabilityIcon {
+.MapVehicleMarkerAccessibilityIcon {
     display: block;
     margin: 3px auto;
 }
@@ -59,7 +73,7 @@
     margin: 2.5px auto;
 }
 
-.MapVehicleMarkerDisabilityWarning {
+.MapVehicleMarkerAccessibilityWarning {
     height: 24px;
     display: flex;
 }
