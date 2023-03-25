@@ -38,7 +38,7 @@ export function MapVehicles({ vehicles, type, onClick }: MapVehiclesProps) {
         setBounds(map.getBounds());
     }, []);
 
-    return !hidden && bounds ? (
+    return !hidden && bounds && vehicles ? (
         <>
             {vehicles.map((vehicle) =>
                 bounds.contains(vehicle.coords) ? (
