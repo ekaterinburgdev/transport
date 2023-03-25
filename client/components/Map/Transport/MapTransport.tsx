@@ -35,9 +35,9 @@ export function MapTransport() {
             massTransApi.getVehicles(ClientUnit.Bus),
         ]);
 
-        setTrolls(trollsRes);
-        setTrams(tramsRes);
-        setBuses(busesRes);
+        trollsRes && setTrolls(trollsRes);
+        tramsRes && setTrams(tramsRes);
+        busesRes && setBuses(busesRes);
     };
 
     const updateRoutes = async () => {
