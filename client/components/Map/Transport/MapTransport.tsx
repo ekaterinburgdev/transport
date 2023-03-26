@@ -88,7 +88,10 @@ export function MapTransport() {
     }, []);
 
     // Waits for task about new masstrans route API route
-    const onBusClick = useCallback((routeNumber: string) => {}, []);
+    const onBusClick = useCallback((routeNumber: string) => {
+        setShowTrollsRoute(null);
+        setShowTramsRoute(null);
+    }, []);
 
     useMapEvent('click', () => {
         setShowTramsRoute(null);

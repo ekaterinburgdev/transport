@@ -6,6 +6,8 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 // import dynamic from 'next/dynamic';
 
+import { ClientUnit } from 'transport-common/types/masstrans';
+
 import sidebarStyles from 'styles/leaflet-sidebar.module.css';
 
 import { POSITION_CLASSES } from 'common/constants/positions';
@@ -66,25 +68,51 @@ export function MapVehiclesSidebar({
     warning,
     map,
     model,
+    firstStation,
+    lastStation,
+    depoTitle,
 }: MapVehiclesItemProps) {
-    // TODO: from и to будут лежать в пропсах MapVehicles, закинуть их
-    const [from, to] = ['п. Мичуринский', 'Восточная'];
+    const [from, to] = [firstStation, lastStation];
     const stateNumber = useMemo(() => {
         const splittedStateNum = stateNum.toLocaleLowerCase().split(' ');
         if (splittedStateNum.length === 1) {
             return null;
         }
 
+        const roadNumber = splittedStateNum.slice(0, -1);
+        let region = splittedStateNum.at(-1);
+
+        if (!parseInt(region, 10)) {
+            roadNumber.push(region);
+            region = '196';
+        }
+
         return {
-            number: splittedStateNum.slice(0, 2),
-            region: splittedStateNum[2],
+            number: roadNumber,
+            region: region,
         };
     }, [stateNum]);
+
+    const vehicleOperator = useMemo(() => {
+        if (type !== ClientUnit.Bus) {
+            return {
+                title: 'Гортранс',
+                subTitle: depoTitle,
+            };
+        }
+
+        const depoTitleMatch = depoTitle.match(/(.+)\s+\((.+)\)/);
+
+        return {
+            title: depoTitleMatch ? depoTitleMatch?.[1] : depoTitle,
+            subTitle: depoTitleMatch?.[2] ? `Филиал ${depoTitleMatch?.[2]}` : undefined,
+        };
+    }, [depoTitle]);
 
     const {
         // imageUrl,
         features,
-        additionalInfo: { vehicleModel, vehicleOperator, factoryNumber, manufactureYear },
+        additionalInfo: { vehicleModel, factoryNumber, manufactureYear },
     } = fixture;
 
     const manufactureYearDiff = new Date().getFullYear() - manufactureYear;
@@ -408,15 +436,25 @@ export function MapVehiclesSidebar({
                             <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
                                 Перевозчик
                             </span>
-                            <Image src={operatorPic} layout="intrinsic" alt="Перевозчик" />
+                            {vehicleOperator.title === 'Гортранс' && (
+                                <Image src={operatorPic} layout="intrinsic" alt="Перевозчик" />
+                            )}
                             <div>
                                 <span className={cn(styles.MapVehiclesSidebarAdditionalTitle)}>
-                                    {vehicleOperator.name}
+                                    {vehicleOperator.title}
                                 </span>
-                                <br />
-                                <span className={cn(styles.MapVehiclesSidebarAdditionalSubitle)}>
-                                    {vehicleOperator.subsidiary}
-                                </span>
+                                {vehicleOperator.subTitle && (
+                                    <>
+                                        <br />
+                                        <span
+                                            className={cn(
+                                                styles.MapVehiclesSidebarAdditionalSubitle,
+                                            )}
+                                        >
+                                            {vehicleOperator.subTitle}
+                                        </span>
+                                    </>
+                                )}
                             </div>
                         </div>
                         <div>
@@ -432,12 +470,22 @@ export function MapVehiclesSidebar({
                                     Госномер
                                 </span>
                                 <div className={cn(styles.MapVehiclesSidebarRoadNumberWrapper)}>
-                                    <div className={cn(styles.MapVehiclesSidebarRoadNumber)}>
+                                    <div
+                                        className={cn(styles.MapVehiclesSidebarRoadNumber, {
+                                            [styles.MapVehiclesSidebarRoadNumberPassenger]:
+                                                stateNumber.number.length === 2,
+                                        })}
+                                    >
                                         {stateNumber.number.map((part) => (
                                             <span key={part}>{part}</span>
                                         ))}
                                     </div>
-                                    <div className={cn(styles.MapVehiclesSidebarRegionWrapper)}>
+                                    <div
+                                        className={cn(styles.MapVehiclesSidebarRegionWrapper, {
+                                            [styles.MapVehiclesSidebarRoadNumberPassenger]:
+                                                stateNumber.number.length === 2,
+                                        })}
+                                    >
                                         <span className={cn(styles.MapVehiclesSidebarRegionNumber)}>
                                             {stateNumber.region}
                                         </span>

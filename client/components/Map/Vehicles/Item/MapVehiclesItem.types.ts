@@ -11,6 +11,9 @@ export type MapVehiclesItemProps = {
     warning?: boolean;
     stateNum: string;
     model: string;
+    firstStation: string;
+    lastStation: string;
+    depoTitle: string;
     onClick: (routeNumber: string) => void;
     map: L.Map;
 };

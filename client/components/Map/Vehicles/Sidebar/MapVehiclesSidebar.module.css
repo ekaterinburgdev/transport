@@ -379,7 +379,6 @@
 
 .MapVehiclesSidebarRoadNumberWrapper {
     display: flex;
-    width: 180px;
     height: 48px;
     background-color: #1e2841;
     border-radius: 5px;
@@ -389,7 +388,7 @@
 
 .MapVehiclesSidebarRoadNumber {
     font: 400 36px/44px RoadNumbers, sans-serif;
-    background-color: #ffd400;
+    background-color: #fff;
     border-radius: 3px;
     display: flex;
     gap: 8px;
@@ -399,10 +398,15 @@
 .MapVehiclesSidebarRegionWrapper {
     display: flex;
     flex-direction: column;
-    background-color: #ffd400;
+    background-color: #fff;
     border-radius: 3px;
     flex: 1;
     justify-content: center;
+    width: 58px;
+}
+
+.MapVehiclesSidebarRoadNumberPassenger {
+    background-color: #ffd400;
 }
 
 .MapVehiclesSidebarRegionNumber {

@@ -52,6 +52,9 @@ export function MapVehicles({ vehicles, type, onClick }: MapVehiclesProps) {
                         stateNum={vehicle.stateNumber}
                         accessibility={Boolean(vehicle.accessibility)}
                         model={vehicle.model}
+                        firstStation={vehicle.firstStation}
+                        lastStation={vehicle.lastStation}
+                        depoTitle={vehicle.depoTitle}
                         key={`${type}-${vehicle.boardId}`}
                         onClick={onClick}
                     />
