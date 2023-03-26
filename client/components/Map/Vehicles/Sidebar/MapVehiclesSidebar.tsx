@@ -119,7 +119,7 @@ export function MapVehiclesSidebar({
                     <Close className={cn(styles.MapVehiclesSidebarCloseIcon)} />
                 </button>
                 <div className={cn(styles.MapVehiclesSidebarVehicleImage)}>
-                    <Image src={`/${type}.png`} width="448" height="225" />
+                    <Image src={`/${type}.png`} width="448" height="225" alt={type} />
                 </div>
                 <div className={cn(styles.MapVehiclesSidebarVehicleInfoWrapper)}>
                     <div className={cn(styles.MapVehiclesSidebarVehicleInfo)}>
@@ -134,7 +134,12 @@ export function MapVehiclesSidebar({
                         <div className={cn(styles.MapVehiclesSidebarVehicleFeatures)}>
                             {warning && (
                                 <abbr title={featuresTitle.warning} style={{ fontSize: 0 }}>
-                                    <Image src="/icons/warning.svg" width="26" height="24" />
+                                    <Image
+                                        src="/icons/warning.svg"
+                                        width="26"
+                                        height="24"
+                                        alt="warning"
+                                    />
                                 </abbr>
                             )}
                             {features.map((feature) => (
@@ -148,6 +153,7 @@ export function MapVehiclesSidebar({
                                         src={`/icons/${feature}-${type}.svg`}
                                         width={32}
                                         height={32}
+                                        alt={`${feature}-${type}`}
                                     />
                                     {/* <IconComponent
                                     feature={feature}
@@ -395,7 +401,7 @@ export function MapVehiclesSidebar({
                             <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
                                 Перевозчик
                             </span>
-                            <Image src={operatorPic} layout="intrinsic" />
+                            <Image src={operatorPic} layout="intrinsic" alt="Перевозчик" />
                             <div>
                                 <span className={cn(styles.MapVehiclesSidebarAdditionalTitle)}>
                                     {vehicleOperator.name}
@@ -438,7 +444,7 @@ export function MapVehiclesSidebar({
                             <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
                                 Модель машины
                             </span>
-                            <Image src={modelPic} layout="intrinsic" />
+                            <Image src={modelPic} layout="intrinsic" alt="Модель" />
                             <div>
                                 <span className={cn(styles.MapVehiclesSidebarAdditionalTitle)}>
                                     {vehicleModel.name}

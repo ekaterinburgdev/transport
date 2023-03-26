@@ -1,6 +1,6 @@
-import { Unit } from '../../model/ekaterinburg-rf/ekaterinburg-rf.types.js';
+import { ServerUnit } from 'transport-common/types/ekaterinburg-rf';
 
-export function processUnitData(units: Unit[]) {
+export function processUnitData(units: ServerUnit[]) {
     return units.map((unit) => ({
         id: parseInt(unit.mr_id, 10),
         num: unit.mr_num,

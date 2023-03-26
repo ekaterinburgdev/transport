@@ -1,12 +1,21 @@
 import { createContext } from 'react';
 
+import { StrapiStop } from 'transport-common/types/strapi';
+
 const routesDefault = {
     tramsRoutes: {},
-    tramsStations: {},
     tramsPoints: {},
     trollsRoutes: {},
-    trollsStations: {},
     trollsPoints: {},
+    stops: [],
 };
 
-export const RoutesContext = createContext(routesDefault);
+export type RoutesContextType = {
+    tramsRoutes: {};
+    tramsPoints: {};
+    trollsRoutes: {};
+    trollsPoints: {};
+    stops: StrapiStop[];
+};
+
+export const RoutesContext = createContext<RoutesContextType>(routesDefault);

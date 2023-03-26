@@ -18,9 +18,9 @@ export default function Home(props) {
 export async function getStaticProps() {
     return {
         props: {
-            cards: await MainPageApi.getCards(),
-            marqueeItems: await MainPageApi.getMarqueeItems(),
-            notifications: await MainPageApi.getNotifications(),
+            cards: (await MainPageApi.getCards()) || [],
+            marqueeItems: (await MainPageApi.getMarqueeItems()) || [],
+            notifications: (await MainPageApi.getNotifications()) || [],
         },
         revalidate: 15,
     };

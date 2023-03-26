@@ -61,6 +61,7 @@ export function MapWelcomeMessage() {
                             width="32"
                             height="32"
                             className={cn(styles.MapWelcomeMessageNotationIcon)}
+                            alt="Остановка троллейбуса"
                         />
                     </div>
                     <div className={cn(styles.MapWelcomeMessageNotation)}>
@@ -70,6 +71,7 @@ export function MapWelcomeMessage() {
                             width="32"
                             height="32"
                             className={cn(styles.MapWelcomeMessageNotationIcon)}
+                            alt="Остановка автобуса"
                         />
                     </div>
                     <div className={cn(styles.MapWelcomeMessageNotation)}>
@@ -79,6 +81,7 @@ export function MapWelcomeMessage() {
                             width="32"
                             height="32"
                             className={cn(styles.MapWelcomeMessageNotationIcon)}
+                            alt="Остановка трамвая"
                         />
                     </div>
                     <div className={cn(styles.MapWelcomeMessageNotation)}>
@@ -88,6 +91,7 @@ export function MapWelcomeMessage() {
                             width="32"
                             height="32"
                             className={cn(styles.MapWelcomeMessageNotationIcon)}
+                            alt="Остановка автобуса и троллейбуса"
                         />
                     </div>
                     <div className={cn(styles.MapWelcomeMessageNotation)}>
@@ -98,7 +102,12 @@ export function MapWelcomeMessage() {
                                 styles.MapWelcomeMessageFeatures,
                             )}
                         >
-                            <Image src="/icons/tram-disability.svg" width="20" height="20" />
+                            <Image
+                                src="/icons/tram-disability.svg"
+                                width="20"
+                                height="20"
+                                alt="Низкопольный транспорт"
+                            />
                         </div>
                     </div>
                     <div className={cn(styles.MapWelcomeMessageNotation)}>
@@ -109,7 +118,12 @@ export function MapWelcomeMessage() {
                                 styles.MapWelcomeMessageFeatures,
                             )}
                         >
-                            <Image src="/icons/warning.svg" width="20" height="20" />
+                            <Image
+                                src="/icons/warning.svg"
+                                width="20"
+                                height="20"
+                                alt="Едет не по маршруту"
+                            />
                         </div>
                     </div>
                 </div>

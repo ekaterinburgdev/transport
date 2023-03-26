@@ -3,7 +3,7 @@ const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
     eslint: {
-        dirs: ['pages', 'components', 'api', 'common'],
+        dirs: ['pages', 'components', 'api', 'common', 'hooks', 'services', 'utils'],
     },
     webpack(config) {
         config.module.rules.push({
@@ -14,6 +14,7 @@ const nextConfig = {
 
         return config;
     },
+    transpilePackages: ['transport-common'],
 };
 
 module.exports = nextConfig;

@@ -1,19 +1,5 @@
 {
-  "compilerOptions": {
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "lib": ["esnext"],
-    "target": "esnext",
-    "importHelpers": true,
-    "esModuleInterop": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "outDir": "./build"
-  },
-  "ts-node": {
-    "esm": true
-  },
-  "include": ["next-env.d.ts", "**/*.ts"],
+  "extends": "transport-common/tsconfig/server.tsconfig.json",
+  "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }

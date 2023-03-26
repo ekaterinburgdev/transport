@@ -30,7 +30,7 @@ function Article({ title, description }: any) {
     );
 }
 export async function getStaticPaths() {
-    const articles = await articlesApi.getArticles();
+    const articles = (await articlesApi.getArticles()) || [];
 
     return {
         paths: articles.map(({ attributes: { slug } }) => ({ params: { slug } })),

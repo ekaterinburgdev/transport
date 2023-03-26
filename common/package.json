@@ -1,0 +1,15 @@
+{
+  "name": "transport-common",
+  "version": "1.0.0",
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.9"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.3",
+    "@types/node-fetch": "^2.6.2",
+    "tslib": "^2.5.0"
+  }
+}

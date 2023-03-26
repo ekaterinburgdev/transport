@@ -5,7 +5,6 @@ import sidebarStyles from 'styles/leaflet-sidebar.module.css';
 
 import { IconFontCharsNames } from 'common/constants/iconFontChars';
 import { POSITION_CLASSES } from 'common/constants/positions';
-import { TStationType } from 'common/types/masstrans';
 import { VEHICLE_TYPE_COLORS } from 'common/constants/colors';
 
 import { Divider } from 'components/UI/Divider/Divider';
@@ -23,9 +22,10 @@ import Close from 'public/icons/close.svg';
 import { vehicleAwait } from './mocks/vehicle-await';
 
 import styles from './MapStationsSidebar.module.css';
+import { StopType } from 'transport-common/types/masstrans';
 
 export type MapStationsSidebarProps = {
-    type: TStationType;
+    type: StopType;
     name: string;
 };
 
