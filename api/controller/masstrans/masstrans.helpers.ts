@@ -10,7 +10,7 @@ export function processUnitData(units: ServerUnit[]) {
         routeDirection: unit.rl_racetype,
         type: unit.tt_title_en.toLowerCase().slice(0, 5),
         course: parseInt(unit.u_course, 10),
-        accessibility: parseInt(unit.u_inv, 10),
+        accessibility: Boolean(parseInt(unit.u_inv, 10)),
         coords: [parseFloat(unit.u_lat), parseFloat(unit.u_long)],
         model: unit.u_model,
         speed: parseInt(unit.u_speed, 10),

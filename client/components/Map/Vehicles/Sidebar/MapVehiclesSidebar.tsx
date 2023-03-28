@@ -38,7 +38,7 @@ import { featuresTitle, fixture } from './mocks/main';
 import Velocity from './Velocity/velocity.svg';
 import VelocityColor from './Velocity/velocity-color.svg';
 
-import { additionalHeader, vehiclesName } from './MapVehiclesSidebar.consts';
+import { additionalHeader, vehiclesName, SVERDLOVSK_REGION } from './MapVehiclesSidebar.constants';
 import { isNowLessArrival, getPointsRow } from './MapVehiclesSidebar.utils';
 
 import styles from './MapVehiclesSidebar.module.css';
@@ -84,7 +84,7 @@ export function MapVehiclesSidebar({
 
         if (!parseInt(region, 10)) {
             roadNumber.push(region);
-            region = '196';
+            region = SVERDLOVSK_REGION;
         }
 
         return {

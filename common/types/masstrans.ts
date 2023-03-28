@@ -45,7 +45,7 @@ export type Unit = {
     routeDirection: string;
     type: ClientUnit;
     course: number;
-    accessibility: number;
+    accessibility: boolean;
     coords: [number, number];
     model: string;
     speed: number;

@@ -50,7 +50,7 @@ export function MapVehicles({ vehicles, type, onClick }: MapVehiclesProps) {
                         type={type}
                         course={vehicle.course}
                         stateNum={vehicle.stateNumber}
-                        accessibility={Boolean(vehicle.accessibility)}
+                        accessibility={vehicle.accessibility}
                         model={vehicle.model}
                         firstStation={vehicle.firstStation}
                         lastStation={vehicle.lastStation}
