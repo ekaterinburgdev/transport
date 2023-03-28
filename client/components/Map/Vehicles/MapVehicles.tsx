@@ -1,44 +1,65 @@
-import React, { useState } from 'react';
-import { useMapEvent } from 'react-leaflet';
+import React, { useEffect, useState } from 'react';
+import { useMapEvents } from 'react-leaflet';
+import L from 'leaflet';
 
-import { VehicleType } from 'common/types/masstrans';
+import { Unit, ClientUnit } from 'transport-common/types/masstrans';
 
 import { MapVehiclesItem } from './Item/MapVehiclesItem';
 import { VISISBILITY_MINIMAL_ZOOM } from './MapVehicles.constants';
 
 export type MapVehiclesProps = {
-    vehicles: any[];
-    type: VehicleType;
-    onClick: (routeNumber: number) => void;
+    vehicles: Unit[];
+    type: ClientUnit;
+    onClick: (routeNumber: string) => void;
 };
 
 export function MapVehicles({ vehicles, type, onClick }: MapVehiclesProps) {
     const [hidden, setHidden] = useState(false);
+    const [bounds, setBounds] = useState<L.LatLngBounds>(null);
 
-    const map = useMapEvent('zoomend', () => {
-        const zoom = map.getZoom();
+    const map = useMapEvents({
+        zoomend: () => {
+            const zoom = map.getZoom();
 
-        if (zoom < VISISBILITY_MINIMAL_ZOOM) {
-            setHidden(true);
-        } else {
-            setHidden(false);
-        }
+            if (zoom < VISISBILITY_MINIMAL_ZOOM) {
+                setHidden(true);
+            } else {
+                setHidden(false);
+            }
+
+            setBounds(map.getBounds());
+        },
+        moveend: () => {
+            setBounds(map.getBounds());
+        },
     });
 
-    return !hidden ? (
+    useEffect(() => {
+        setBounds(map.getBounds());
+    }, []);
+
+    return !hidden && bounds && vehicles ? (
         <>
-            {vehicles.map((vehicle) => (
-                <MapVehiclesItem
-                    position={[Number(vehicle.LAT), Number(vehicle.LON)]}
-                    routeNumber={Number(vehicle.ROUTE)}
-                    velocity={Number(vehicle.VELOCITY)}
-                    boardId={Number(vehicle.BOARD_ID)}
-                    type={type}
-                    course={Number(vehicle.COURSE)}
-                    key={vehicle.BOARD_ID}
-                    onClick={onClick}
-                />
-            ))}
+            {vehicles.map((vehicle) =>
+                bounds.contains(vehicle.coords) ? (
+                    <MapVehiclesItem
+                        position={vehicle.coords}
+                        routeNumber={vehicle.num}
+                        velocity={vehicle.speed}
+                        boardId={vehicle.boardId}
+                        type={type}
+                        course={vehicle.course}
+                        stateNum={vehicle.stateNumber}
+                        accessibility={vehicle.accessibility}
+                        model={vehicle.model}
+                        firstStation={vehicle.firstStation}
+                        lastStation={vehicle.lastStation}
+                        depoTitle={vehicle.depoTitle}
+                        key={`${type}-${vehicle.boardId}`}
+                        onClick={onClick}
+                    />
+                ) : null,
+            )}
         </>
     ) : null;
 }

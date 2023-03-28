@@ -6,4 +6,5 @@ export enum HttpMethod {
 export type FetchOptions = {
     method?: HttpMethod;
     dataField: string;
+    cache?: RequestCache;
 };

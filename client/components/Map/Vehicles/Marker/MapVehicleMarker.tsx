@@ -14,14 +14,14 @@ export function MapVehicleMarker({
     routeNumber,
     type,
     isCourseEast,
-    disability,
+    accessibility,
     warning,
     course,
     additionalInfo = true,
 }: MapVehicleMarkerProps) {
     const arrowImage = `/icons/${type}-arrow.svg`;
     const transportImage = `/icons/${type}-light.svg`;
-    const disabilityIcon = `/icons/${type}-disability.svg`;
+    const accessibilityIcon = `/icons/${type}-accessibility.svg`;
     const warningIcon = '/icons/warning.svg';
     const color = VEHICLE_TYPE_COLORS[type];
 
@@ -29,13 +29,15 @@ export function MapVehicleMarker({
         <div
             id={`vehicle-${boardId}-${routeNumber}`}
             style={{ transform: 'translate3d(0px, 0px, 0px)' }}
+            className={cn(styles.MapVehicleMarker)}
         >
             <picture>
                 <source srcSet={arrowImage} type="image/svg+xml" />
                 <img
-                    style={{ transform: `rotate(${course}deg)`, transformOrigin: '20px 20px' }}
+                    style={{ transform: `rotate(${course}deg)`, transformOrigin: '20px 28px' }}
                     className={cn(styles.MapVehicleMarkerArrow)}
                     src={arrowImage}
+                    id="arrow"
                     alt="Vehicle arrow icon"
                 />
             </picture>
@@ -62,19 +64,19 @@ export function MapVehicleMarker({
                         >
                             {routeNumber}
                         </div>
-                        {disability && !warning && (
+                        {accessibility && !warning && (
                             <div className={cn(styles.MapVehicleMarkerInfoItem)}>
                                 <picture>
-                                    <source srcSet={disabilityIcon} type="image/svg+xml" />
+                                    <source srcSet={accessibilityIcon} type="image/svg+xml" />
                                     <img
-                                        className={cn(styles.MapVehicleMarkerDisabilityIcon)}
-                                        src={disabilityIcon}
+                                        className={cn(styles.MapVehicleMarkerAccessibilityIcon)}
+                                        src={accessibilityIcon}
                                         alt="Vehicle low-floor icon"
                                     />
                                 </picture>
                             </div>
                         )}
-                        {warning && !disability && (
+                        {warning && !accessibility && (
                             <div className={cn(styles.MapVehicleMarkerInfoItem)}>
                                 <picture>
                                     <source srcSet={warningIcon} type="image/svg+xml" />
@@ -86,14 +88,14 @@ export function MapVehicleMarker({
                                 </picture>
                             </div>
                         )}
-                        {warning && disability && (
-                            <div className={`${cn(styles.MapVehicleMarkerDisabilityWarning)}`}>
+                        {warning && accessibility && (
+                            <div className={`${cn(styles.MapVehicleMarkerAccessibilityWarning)}`}>
                                 <div className={cn(styles.MapVehicleMarkerInfoItem)}>
                                     <picture>
-                                        <source srcSet={disabilityIcon} type="image/svg+xml" />
+                                        <source srcSet={accessibilityIcon} type="image/svg+xml" />
                                         <img
-                                            className={cn(styles.MapVehicleMarkerDisabilityIcon)}
-                                            src={disabilityIcon}
+                                            className={cn(styles.MapVehicleMarkerAccessibilityIcon)}
+                                            src={accessibilityIcon}
                                             alt="Vehicle low-floor icon"
                                         />
                                     </picture>

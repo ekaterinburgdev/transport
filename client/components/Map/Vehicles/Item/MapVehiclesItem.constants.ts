@@ -1,6 +1,6 @@
 export const EAST_COURSE_RANGE = {
-    left: 315,
-    right: 45,
+    left: 45,
+    right: 135,
 };
 
 export const ANIMATION_INTERVAL = 50;

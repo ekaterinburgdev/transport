@@ -1,15 +1,20 @@
-import { VehicleType } from 'common/types/masstrans';
+import { ClientUnit } from 'transport-common/types/masstrans';
 
 export type MapVehiclesItemProps = {
     boardId: number;
     velocity: number;
     position: [number, number];
-    routeNumber: number | null;
+    routeNumber: string | null;
     course: number;
-    type: VehicleType;
-    disability?: boolean;
+    type: ClientUnit;
+    accessibility?: boolean;
     warning?: boolean;
-    onClick: (routeNumber: number) => void;
+    stateNum: string;
+    model: string;
+    firstStation: string;
+    lastStation: string;
+    depoTitle: string;
+    onClick: (routeNumber: string) => void;
     map: L.Map;
 };
 

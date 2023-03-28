@@ -62,8 +62,8 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
     }
 
     getIcon() {
-        const { boardId, routeNumber, course, type, disability, warning } = this.props;
-        const isCourseEast = course > EAST_COURSE_RANGE.left || course < EAST_COURSE_RANGE.right;
+        const { boardId, routeNumber, course, type, accessibility, warning } = this.props;
+        const isCourseEast = course > EAST_COURSE_RANGE.left && course < EAST_COURSE_RANGE.right;
 
         return new L.DivIcon({
             iconSize: [33, 28],
@@ -75,7 +75,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
                     boardId={boardId}
                     routeNumber={routeNumber}
                     type={type}
-                    disability={disability}
+                    accessibility={accessibility}
                     warning={warning}
                     isCourseEast={isCourseEast}
                     course={course}
@@ -101,6 +101,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
 
     onClickEventHandler = () => {
         const { routeNumber, onClick } = this.props;
+
         if (!this.isActive) {
             this.isActive = true;
             sidebarService.open(<MapVehiclesSidebar {...this.props} />, () => {

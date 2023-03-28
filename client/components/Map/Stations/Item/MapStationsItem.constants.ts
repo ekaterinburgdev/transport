@@ -1,11 +1,20 @@
 import L from 'leaflet';
+import classNames from 'classnames/bind';
 
 import { StationType } from 'common/types/masstrans';
 
-const commonIconOptions: Pick<L.IconOptions, 'iconSize' | 'iconAnchor' | 'popupAnchor'> = {
+import styles from './MapStationsItem.module.css';
+
+const cn = classNames.bind(styles);
+
+const commonIconOptions: Pick<
+    L.IconOptions,
+    'iconSize' | 'iconAnchor' | 'popupAnchor' | 'className'
+> = {
     iconSize: [24, 24],
-    iconAnchor: [12, 24],
+    iconAnchor: [12, 12],
     popupAnchor: [0, -24],
+    className: cn(styles.MapStationsItemIcon),
 };
 
 const iconTramOptions = new L.Icon({

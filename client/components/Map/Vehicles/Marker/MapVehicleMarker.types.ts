@@ -1,11 +1,11 @@
-import { VehicleType } from 'common/types/masstrans';
+import { ClientUnit } from 'transport-common/types/masstrans';
 
 export type MapVehicleMarkerProps = {
     boardId: number;
-    routeNumber: number;
-    type: VehicleType;
+    routeNumber: string;
+    type: ClientUnit;
     isCourseEast: boolean;
-    disability?: boolean;
+    accessibility?: boolean;
     warning?: boolean;
     course: number;
     additionalInfo?: boolean;

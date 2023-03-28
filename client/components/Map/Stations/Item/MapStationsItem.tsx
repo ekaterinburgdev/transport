@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import L from 'leaflet';
 import { Marker, useMap, useMapEvent } from 'react-leaflet';
+import classNames from 'classnames/bind';
 
 import { sidebarService } from 'services/sidebar/sidebar';
 
@@ -8,6 +9,10 @@ import { MapStationsSidebar } from '../Sidebar/MapStationsSidebar';
 
 import { STATION_ICON_BY_TYPE } from './MapStationsItem.constants';
 import { MapStationsItemProps } from './MapStationsItem.types';
+
+import styles from './MapStationsItem.module.css';
+
+const cn = classNames.bind(styles);
 
 export function MapStationsItem(props: MapStationsItemProps) {
     const { type, id, name, coords } = props;
@@ -18,8 +23,8 @@ export function MapStationsItem(props: MapStationsItemProps) {
     const icon = isActive
         ? new L.Icon({
               ...STATION_ICON_BY_TYPE[type].options,
-              iconAnchor: [24, 48],
               iconSize: [48, 48],
+              className: cn(styles.MapStationsItemIcon, styles.MapStationsItemIconActive),
           })
         : STATION_ICON_BY_TYPE[type];
 

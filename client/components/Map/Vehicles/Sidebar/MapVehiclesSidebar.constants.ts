@@ -11,3 +11,5 @@ export const additionalHeader = {
     [VehicleType.Troll]: 'о троллейбусе',
     [VehicleType.Tram]: 'о трамвае',
 };
+
+export const SVERDLOVSK_REGION = '196';
