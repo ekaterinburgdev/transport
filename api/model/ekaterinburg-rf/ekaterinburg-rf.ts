@@ -48,6 +48,10 @@ export class EkaterinburgRfModel {
             await this.updateTransportTree();
         }
 
+        if (!this.transportTree) {
+            return [];
+        }
+
         const marshList: string[] = [
             ...this.transportTree!.bus.ids,
             ...this.transportTree!.tram.ids,
@@ -64,6 +68,10 @@ export class EkaterinburgRfModel {
             await this.updateTransportTree();
         }
 
+        if (!this.transportTree) {
+            return [];
+        }
+
         const marshList = this.transportTree![clientUnit].ids;
 
         return this.sendRequest<GetUnitsResponse>(JsonRpcMethods.GetUnits, {
@@ -73,6 +81,11 @@ export class EkaterinburgRfModel {
 
     private async updateTransportTree() {
         const tree = await this.getTransportTreeFromStrapi();
+
+        if (!tree) {
+            return;
+        }
+
         const flatTree = tree.map((treeOfType) => treeOfType.attributes);
         const groupedTree = _.keyBy(flatTree, 'type') as TransportTree;
 

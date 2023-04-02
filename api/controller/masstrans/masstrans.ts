@@ -5,7 +5,7 @@ import { ClientUnit } from 'transport-common/types/masstrans';
 import { EkaterinburgRfModel } from '../../model/ekaterinburg-rf/ekaterinburg-rf';
 import { isValueInObject } from '../../utils/is-value-in-object';
 
-import { processUnitData } from './masstrans.helpers';
+import { processUnitData, processRouteData } from './masstrans.helpers';
 
 const ekaterinburgRfModel = new EkaterinburgRfModel();
 
@@ -36,5 +36,21 @@ export const masstransController = {
         const units = processUnitData(unitsRaw);
 
         res.json({ data: units });
+    },
+
+    async getRoute(req: Request, res: Response) {
+        const { id } = req.params;
+
+        if (!Number(id)) {
+            res.sendStatus(400);
+
+            return;
+        }
+
+        const routeRaw = await ekaterinburgRfModel.getRoute(id);
+
+        const route = processRouteData(routeRaw);
+
+        res.json({ data: route });
     },
 };

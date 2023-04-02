@@ -52,3 +52,25 @@ export type Unit = {
     stateNumber: string;
     boardId: number;
 };
+
+export type Depo = {
+    id: number;
+    title: string;
+};
+
+export type Race = {
+    coordsList: [number, number][];
+    id: string;
+    firstStation: string;
+    lastStation: string;
+    raceType: string;
+    stops: Omit<Stop, 'type'>[];
+};
+
+export type Route = {
+    id: number;
+    num: string;
+    title: string;
+    depos: Depo[];
+    races: Race[];
+};
