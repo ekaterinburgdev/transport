@@ -21,4 +21,9 @@ export const massTransApi = {
         fetchInternalApi(`http://map.ettu.ru/api/v2/${type}/points/?apiKey=111`, {
             dataField: 'points',
         }),
+    getStopInfo: (stopId: string) =>
+        fetchApi(`/api/masstrans/stop/${stopId}`, {
+            dataField: 'data',
+            cache: 'no-store',
+        }),
 };

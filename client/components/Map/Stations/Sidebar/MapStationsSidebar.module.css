@@ -1,5 +1,5 @@
 .MapStationsSidebar {
-    bottom: 124px;
+    max-height: calc(100vh - 150px);
 
     display: flex;
     flex-direction: column;
@@ -14,6 +14,8 @@
 }
 
 .MapStationsSidebarWrapper {
+    position: relative;
+
     border-radius: 16px;
     background-color: var(--background-primary);
 
@@ -30,9 +32,17 @@
     padding: 16px 24px;
 }
 
+.MapStationsSidebarHeaderWrapper {
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+
 .MapStationsSidebarHeader {
     display: flex;
     gap: 16px;
+
+    background-color: #fff;
 }
 
 .MapStationsSidebarHeaderInfo {

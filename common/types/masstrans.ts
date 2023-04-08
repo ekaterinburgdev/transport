@@ -36,6 +36,14 @@ export type Stop = {
     type: StopType;
 };
 
+export type StopInfoItem = {
+    arriveTime: string;
+    route: string;
+    type: ClientUnit;
+    to: string;
+    through: string[];
+};
+
 export type Unit = {
     id: number;
     num: string;

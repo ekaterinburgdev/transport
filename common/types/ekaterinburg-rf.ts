@@ -48,6 +48,18 @@ export type ServerRoute = RoutesTree & {
     races: ServerRaceList[];
 };
 
+export type ServerStopArriveUnit = Pick<RoutesTree, 'mr_id' | 'mr_num'> &
+    Pick<ServerRaceList, 'rl_racetype'> &
+    Pick<TransTypeTree, 'tt_id'> &
+    Pick<ServerUnit, 'u_inv'> & {
+        firststation_title: string;
+        firststation_title_en: string;
+        laststation_title: string;
+        laststation_title_en: string;
+        tc_arrivetime: string;
+        tc_systime: string;
+    };
+
 export type TransTypeTree<RoutesType = RoutesTree[]> = {
     routes: RoutesType;
     tt_id: string;
@@ -62,26 +74,22 @@ export type RoutesTree = {
     mr_title_en: string;
 };
 
-export type ServerUnit = Pick<RoutesTree, 'mr_id' | 'mr_num'> & {
-    u_id: string;
-    tt_id: string;
-    tt_title: TransportRu;
-    tt_title_en: TransportEn;
-    pk_id: string;
-    u_statenum: string;
-    u_garagnum: string;
-    u_model: string;
-    u_timenav: string;
-    u_lat: string;
-    u_long: string;
-    u_speed: string;
-    u_course: string;
-    u_inv: string;
-    rl_racetype: string;
-    pk_title: string;
-    pk_title_en: string;
-    rl_firststation_title: string;
-    rl_firststation_title_en: string;
-    rl_laststation_title: string;
-    rl_laststation_title_en: string;
-};
+export type ServerUnit = Pick<RoutesTree, 'mr_id' | 'mr_num'> &
+    Pick<ServerRaceList, 'rl_racetype'> &
+    ServerPark &
+    Omit<TransTypeTree, 'routes'> & {
+        u_id: string;
+        u_statenum: string;
+        u_garagnum: string;
+        u_model: string;
+        u_timenav: string;
+        u_lat: string;
+        u_long: string;
+        u_speed: string;
+        u_course: string;
+        u_inv: string;
+        rl_firststation_title: string;
+        rl_firststation_title_en: string;
+        rl_laststation_title: string;
+        rl_laststation_title_en: string;
+    };
