@@ -29,5 +29,5 @@ jobs:
           pnpm -r --filter transport-server --filter transport-common i
           pnpm build:common
           pnpm build:server
-          pm2 list
-          pm2 restart transport-server
+          pm2 delete all
+          pm2 start node api/build/index.js --name transport-server
