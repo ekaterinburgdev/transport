@@ -21,6 +21,10 @@ export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: strin
                 }),
             });
 
+            if (resp.status !== 200) {
+                throw new Error(resp.statusText);
+            }
+
             const body = (await resp.json()) as any;
 
             if (body.error) {
@@ -42,6 +46,10 @@ export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: strin
                 }),
             });
 
+            if (resp.status !== 200) {
+                throw new Error(resp.statusText);
+            }
+
             const body = (await resp.json()) as any;
 
             if (body.error) {
@@ -59,6 +67,10 @@ export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: strin
                 ...requestToStrapiOptions,
             });
 
+            if (resp.status !== 200) {
+                throw new Error(resp.statusText);
+            }
+
             const body = (await resp.json()) as any;
 
             if (body.error) {
@@ -75,6 +87,10 @@ export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: strin
                 `${STRAPI_URL}/api/${contentType}s?pagination[pageSize]=${REQUEST_PAGINATION_SIZE}`,
                 requestToStrapiOptions,
             );
+
+            if (resp.status !== 200) {
+                throw new Error(resp.statusText);
+            }
 
             const body = (await resp.json()) as any;
 
