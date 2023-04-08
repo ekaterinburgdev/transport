@@ -20,9 +20,12 @@ jobs:
         username: ${{ secrets.API_SERVER_USERNAME }}
         password: ${{ secrets.API_SERVER_PASSWORD }}
         script: |
+          printenv
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
+          printenv
           cd transport-api-test.na4u.ru/transport
+          printenv
           git reset --hard
           git pull
           nvm use
