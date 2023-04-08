@@ -29,4 +29,4 @@ jobs:
           pnpm -r --filter transport-server --filter transport-common i
           pnpm build:common
           pnpm build:server
-          pnpm start:server
+          pm2 restart "API Transport"
