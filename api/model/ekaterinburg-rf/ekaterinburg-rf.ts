@@ -1,5 +1,4 @@
 import fetch from 'node-fetch';
-import HttpsProxyAgent from 'https-proxy-agent';
 import _ from 'lodash';
 
 import { ServerRoute } from 'transport-common/types/ekaterinburg-rf';
@@ -20,10 +19,7 @@ import {
     GetTransTypeTreeResponse,
 } from './ekaterinburg-rf.types';
 
-// @ts-ignore
-const proxyAgent = new HttpsProxyAgent('http://95.56.254.139:3128');
 const fetchCommonOptions = {
-    agent: process.env.VERCEL && proxyAgent,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
 };

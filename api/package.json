@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "express": "^4.18.2",
-    "https-proxy-agent": "^5.0.1",
     "lodash": "^4.17.21",
     "node-fetch": "^2.6.9",
     "transport-common": "workspace:*"

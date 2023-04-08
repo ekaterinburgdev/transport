@@ -1,5 +1,8 @@
 {
   "extends": "transport-common/tsconfig/server.tsconfig.json",
+  "compilerOptions": {
+    "outDir": "build",
+  },
   "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }
