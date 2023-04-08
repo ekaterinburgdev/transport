@@ -2,7 +2,7 @@ name: API prod deploy
 on:
   push:
     branches:
-      - main
+      - test-deploy
     paths-ignore:
       - README.md
       - .gitignore
