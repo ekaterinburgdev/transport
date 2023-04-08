@@ -26,10 +26,7 @@ jobs:
           cd transport-api-test.na4u.ru/transport
           git reset --hard
           git pull
-          source ~/.profile
           nvm use
           pnpm -r --filter transport-server --filter transport-common i
-          pnpm build:common
-          pnpm build:server
-          pm2 delete all
-          pm2 start node api/build/index.js --name transport-server
+          pnpm build:common  build:server
+          pm2 restart transport-server
