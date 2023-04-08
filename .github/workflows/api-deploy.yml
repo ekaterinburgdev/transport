@@ -29,4 +29,5 @@ jobs:
           pnpm -r --filter transport-server --filter transport-common i
           pnpm build:common
           pnpm build:server
+          pm2 list
           pm2 restart transport-server
