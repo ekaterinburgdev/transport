@@ -29,4 +29,5 @@ jobs:
           nvm use
           pnpm -r --filter transport-server --filter transport-common i
           pnpm build:common build:server
-          pm2 restart transport-server
+          pm2 delete transport-server
+          pm2 start node api/build/index.js --name transport-server
