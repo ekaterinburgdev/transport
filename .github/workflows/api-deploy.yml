@@ -20,10 +20,11 @@ jobs:
         username: ${{ secrets.API_SERVER_USERNAME }}
         password: ${{ secrets.API_SERVER_PASSWORD }}
         script: |
-          export APP_PORT=${{ secrets.API_SERVER_PORT }}
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
           cd transport-api-test.na4u.ru/transport
+          export APP_PORT=${{ secrets.API_SERVER_PORT }}
+          git fetch
           git reset --hard
           git pull
           nvm use
