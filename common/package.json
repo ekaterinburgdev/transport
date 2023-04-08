@@ -2,7 +2,8 @@
   "name": "transport-common",
   "version": "1.0.0",
   "scripts": {
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "build": "tsc"
   },
   "dependencies": {
     "node-fetch": "^2.6.9"
