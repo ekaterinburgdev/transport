@@ -20,6 +20,7 @@ jobs:
         username: ${{ secrets.API_SERVER_USERNAME }}
         password: ${{ secrets.API_SERVER_PASSWORD }}
         script: |
+          source ~/.bashrc
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
           cd transport-api-test.na4u.ru/transport
