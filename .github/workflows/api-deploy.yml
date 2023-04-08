@@ -24,11 +24,11 @@ jobs:
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
 
-          export APP_PORT=${{ secrets.API_SERVER_PORT }}
           cd transport-api-test.na4u.ru/transport
           git fetch
           git checkout origin/main
 
+          export APP_PORT=${{ secrets.API_SERVER_PORT }}
           nvm use
           pnpm -r --filter transport-server --filter transport-common i
           pnpm build:common
