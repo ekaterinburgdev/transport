@@ -21,6 +21,7 @@ jobs:
         password: ${{ secrets.API_SERVER_PASSWORD }}
         script: |
           whoami
+          echo $SHELL
           ls -la
           cd transport-api-test.na4u.ru/transport
           git reset --hard
