@@ -1,20 +1,17 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Polyline, useMapEvent } from 'react-leaflet';
 
-import { ClientUnit } from 'transport-common/types/masstrans';
+import { ClientUnit, Route } from 'transport-common/types/masstrans';
 import { VEHICLE_TYPE_COLORS } from 'common/constants/colors';
-
-import { RoutesContext } from 'components/Map/Transport/MapTransport.context';
 
 import { VISISBILITY_MINIMAL_ZOOM } from './MapRoutes.constants';
 
-export type MapRoutesProps = {
-    routeNumber: string;
+export type MapRoutesProps = Route & {
     type: ClientUnit;
+    routeDirection: string;
 };
 
-export function MapRoutes({ routeNumber, type }: MapRoutesProps) {
-    const routes = useContext(RoutesContext);
+export function MapRoutes({ races, type, routeDirection }: MapRoutesProps) {
     const [hidden, setHidden] = useState(false);
 
     const map = useMapEvent('zoomend', () => {
@@ -28,32 +25,12 @@ export function MapRoutes({ routeNumber, type }: MapRoutesProps) {
     });
 
     const routePositions = useMemo(() => {
-        const route = routes[`${type}sRoutes`]?.[routeNumber];
+        const route = races.find((race) => race.raceType === routeDirection);
 
-        if (!route) {
-            return null;
-        }
+        return route?.coordsList;
+    }, [races, routeDirection, type]);
 
-        return route[0].elements.map((element) => {
-            const stations = element.full_path;
-
-            return stations
-                .map((station) => {
-                    const stationData = routes[`${type}sPoints`][station];
-
-                    if (!stationData) {
-                        return null;
-                    }
-
-                    const { LAT: lat, LON: lng } = stationData[0];
-
-                    return [lat, lng];
-                })
-                .filter(Boolean);
-        });
-    }, [routeNumber, routes, type]);
-
-    return !hidden ? (
+    return !hidden && routePositions ? (
         <Polyline
             positions={routePositions}
             pathOptions={{

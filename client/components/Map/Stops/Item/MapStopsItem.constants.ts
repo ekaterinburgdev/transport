@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 
 import { StationType } from 'common/types/masstrans';
 
-import styles from './MapStationsItem.module.css';
+import styles from './MapStopsItem.module.css';
 
 const cn = classNames.bind(styles);
 
@@ -14,7 +14,7 @@ const commonIconOptions: Pick<
     iconSize: [24, 24],
     iconAnchor: [12, 12],
     popupAnchor: [0, -24],
-    className: cn(styles.MapStationsItemIcon),
+    className: cn(styles.MapStopsItemIcon),
 };
 
 const iconTramOptions = new L.Icon({

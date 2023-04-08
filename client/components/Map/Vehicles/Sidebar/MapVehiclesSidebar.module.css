@@ -201,18 +201,18 @@
     padding-left: 18px;
 }
 
-.MapVehiclesSidebarStationsWrapper {
+.MapVehiclesSidebarStopsWrapper {
     padding: 0 24px;
 }
 
-.MapVehiclesSidebarStations {
+.MapVehiclesSidebarStops {
     margin: 0;
     padding: 0;
     list-style: none;
     position: relative;
 }
 
-.MapVehiclesSidebarStations::before {
+.MapVehiclesSidebarStops::before {
     content: '';
     width: 6px;
     position: absolute;
@@ -221,15 +221,15 @@
     bottom: 28px;
 }
 
-.MapVehiclesSidebarStations_bus::before {
+.MapVehiclesSidebarStops_bus::before {
     background-color: var(--bus-translucent);
 }
 
-.MapVehiclesSidebarStations_troll::before {
+.MapVehiclesSidebarStops_troll::before {
     background-color: var(--troll-translucent);
 }
 
-.MapVehiclesSidebarStations_tram::before {
+.MapVehiclesSidebarStops_tram::before {
     background-color: var(--tram-translucent);
 }
 
@@ -274,7 +274,7 @@
     border-width: 4px;
 }
 
-.MapVehiclesSidebarActiveStations {
+.MapVehiclesSidebarActiveStops {
     position: relative;
 }
 

@@ -1,20 +1,9 @@
-import { ClientUnit } from 'transport-common/types/masstrans';
+import { ClientUnit, Unit } from 'transport-common/types/masstrans';
 
-export type MapVehiclesItemProps = {
-    boardId: number;
-    velocity: number;
-    position: [number, number];
-    routeNumber: string | null;
-    course: number;
+export type MapVehiclesItemProps = Unit & {
     type: ClientUnit;
-    accessibility?: boolean;
     warning?: boolean;
-    stateNum: string;
-    model: string;
-    firstStation: string;
-    lastStation: string;
-    depoTitle: string;
-    onClick: (routeNumber: string) => void;
+    onClick: (routeId: number, routeDirection: string) => void;
     map: L.Map;
 };
 

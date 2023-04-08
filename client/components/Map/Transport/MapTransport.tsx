@@ -1,32 +1,25 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { Pane, useMapEvent } from 'react-leaflet';
-import groupBy from 'lodash/groupBy';
 
-import { ClientUnit } from 'transport-common/types/masstrans';
+import { ClientUnit, Route, Unit } from 'transport-common/types/masstrans';
 
 import { massTransApi } from 'api/masstrans/masstrans';
 
 import { MapRoutes } from 'components/Map/Routes/MapRoutes';
-import { MapStations } from 'components/Map/Stations/MapStations';
+import { MapStops } from 'components/Map/Stops/MapStops';
 import { MapVehicles } from 'components/Map/Vehicles/MapVehicles';
 
 import { RoutesContext } from './MapTransport.context';
 
 export function MapTransport() {
-    const [trolls, setTrolls] = useState([]);
-    const [trams, setTrams] = useState([]);
-    const [buses, setBuses] = useState([]);
-
-    const [tramsRoutes, setTramsRoutes] = useState({});
-    const [trollsRoutes, setTrollsRoutes] = useState({});
+    const [trolls, setTrolls] = useState<Unit[]>([]);
+    const [trams, setTrams] = useState<Unit[]>([]);
+    const [buses, setBuses] = useState<Unit[]>([]);
+    const [activeRoute, setActiveRoute] = useState<
+        Route & { type: ClientUnit; routeDirection: string }
+    >(null);
 
     const [stops, setStops] = useState([]);
-
-    const [tramsPoints, setTramsPoints] = useState({});
-    const [trollsPoints, setTrollsPoints] = useState({});
-
-    const [showTramsRoute, setShowTramsRoute] = useState<string | null>(null);
-    const [showTrollsRoute, setShowTrollsRoute] = useState<string | null>(null);
 
     const updateTransport = async () => {
         const [tramsRes, trollsRes, busesRes] = await Promise.all([
@@ -40,91 +33,74 @@ export function MapTransport() {
         busesRes && setBuses(busesRes);
     };
 
-    const updateRoutes = async () => {
-        const [tramsRes, trollsRes] = await Promise.all([
-            massTransApi.getRoutes(ClientUnit.Tram),
-            massTransApi.getRoutes(ClientUnit.Troll),
-        ]);
-
-        setTramsRoutes(groupBy(tramsRes, 'num'));
-        setTrollsRoutes(groupBy(trollsRes, 'num'));
-    };
-
-    const updateStations = async () => {
+    const updateStops = async () => {
         const stopsFromApi = (await massTransApi.getStops()) || [];
 
         setStops(stopsFromApi);
     };
 
-    const updatePoints = async () => {
-        const [tramsRes, trollsRes] = await Promise.all([
-            massTransApi.getPoints(ClientUnit.Tram),
-            massTransApi.getPoints(ClientUnit.Troll),
-        ]);
-
-        setTramsPoints(groupBy(tramsRes, 'ID'));
-        setTrollsPoints(groupBy(trollsRes, 'ID'));
-    };
-
     useEffect(() => {
-        updateRoutes();
         updateTransport();
-        updateStations();
-        updatePoints();
+        updateStops();
 
         setInterval(async () => {
             updateTransport();
         }, 30000);
     }, []);
 
-    const onTrollClick = useCallback((routeNumber: string) => {
-        setShowTrollsRoute(routeNumber);
-        setShowTramsRoute(null);
-    }, []);
+    const onTransportClick = useCallback(
+        (type: ClientUnit) => async (routeId: number, routeDirection: string) => {
+            const route = await massTransApi.getRoute(routeId);
 
-    const onTramClick = useCallback((routeNumber: string) => {
-        setShowTramsRoute(routeNumber);
-        setShowTrollsRoute(null);
-    }, []);
-
-    // Waits for task about new masstrans route API route
-    const onBusClick = useCallback((routeNumber: string) => {
-        setShowTrollsRoute(null);
-        setShowTramsRoute(null);
-    }, []);
+            if (route) {
+                setActiveRoute({
+                    ...route,
+                    type,
+                    routeDirection,
+                });
+            }
+        },
+        [],
+    );
 
     useMapEvent('click', () => {
-        setShowTramsRoute(null);
-        setShowTrollsRoute(null);
+        setActiveRoute(null);
     });
 
     const routesContextValue = useMemo(
         () => ({
-            tramsRoutes,
-            tramsPoints,
-            trollsRoutes,
-            trollsPoints,
             stops,
         }),
-        [tramsRoutes, tramsPoints, trollsRoutes, trollsPoints, stops],
+        [stops],
     );
 
     return (
         <RoutesContext.Provider value={routesContextValue}>
             {/* Render vehicles */}
             <Pane name="vehicles" style={{ zIndex: 550 }}>
-                <MapVehicles vehicles={trolls} type={ClientUnit.Troll} onClick={onTrollClick} />
-                <MapVehicles vehicles={trams} type={ClientUnit.Tram} onClick={onTramClick} />
-                <MapVehicles vehicles={buses} type={ClientUnit.Bus} onClick={onBusClick} />
+                <MapVehicles
+                    vehicles={trolls}
+                    type={ClientUnit.Troll}
+                    onClick={onTransportClick(ClientUnit.Troll)}
+                />
+                <MapVehicles
+                    vehicles={trams}
+                    type={ClientUnit.Tram}
+                    onClick={onTransportClick(ClientUnit.Tram)}
+                />
+                <MapVehicles
+                    vehicles={buses}
+                    type={ClientUnit.Bus}
+                    onClick={onTransportClick(ClientUnit.Bus)}
+                />
             </Pane>
 
             {/* Render selected route */}
-            {showTramsRoute && <MapRoutes routeNumber={showTramsRoute} type={ClientUnit.Tram} />}
-            {showTrollsRoute && <MapRoutes routeNumber={showTrollsRoute} type={ClientUnit.Troll} />}
+            {activeRoute && <MapRoutes {...activeRoute} />}
 
-            {/* Render stations */}
-            <Pane name="stations" style={{ zIndex: 500 }}>
-                <MapStations />
+            {/* Render stops */}
+            <Pane name="stops" style={{ zIndex: 500 }}>
+                <MapStops />
             </Pane>
         </RoutesContext.Provider>
     );

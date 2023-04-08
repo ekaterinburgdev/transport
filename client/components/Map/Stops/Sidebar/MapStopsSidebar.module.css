@@ -1,4 +1,4 @@
-.MapStationsSidebar {
+.MapStopsSidebar {
     max-height: calc(100vh - 150px);
 
     display: flex;
@@ -13,9 +13,8 @@
     font-family: 'Iset Sans', sans-serif;
 }
 
-.MapStationsSidebarWrapper {
+.MapStopsSidebarWrapper {
     position: relative;
-
     border-radius: 16px;
     background-color: var(--background-primary);
 
@@ -24,34 +23,34 @@
     scrollbar-width: none;
 }
 
-.MapStationsSidebarWrapper::-webkit-scrollbar {
+.MapStopsSidebarWrapper::-webkit-scrollbar {
     display: none;
 }
 
-.MapStationsSidebarRow {
+.MapStopsSidebarRow {
     padding: 16px 24px;
 }
 
-.MapStationsSidebarHeaderWrapper {
+.MapStopsSidebarHeaderWrapper {
     position: sticky;
     top: 0;
     left: 0;
 }
 
-.MapStationsSidebarHeader {
+.MapStopsSidebarHeader {
     display: flex;
     gap: 16px;
 
     background-color: #fff;
 }
 
-.MapStationsSidebarHeaderInfo {
+.MapStopsSidebarHeaderInfo {
     display: flex;
     gap: 10px;
     flex: 1;
 }
 
-.MapStationsSidebarCloseButton {
+.MapStopsSidebarCloseButton {
     border: 0;
     padding: 0;
 
@@ -59,11 +58,11 @@
     cursor: pointer;
 }
 
-.MapStationsSidebarCloseIcon > path {
+.MapStopsSidebarCloseIcon > path {
     stroke: var(--text-primary);
 }
 
-.MapStationsSidebarVehicles {
+.MapStopsSidebarVehicles {
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -73,22 +72,22 @@
     scrollbar-width: none;
 }
 
-.MapStationsSidebarVehicles::-webkit-scrollbar {
+.MapStopsSidebarVehicles::-webkit-scrollbar {
     display: none;
 }
 
-.MapStationsSidebarVehicle {
+.MapStopsSidebarVehicle {
     display: flex;
     gap: 32px;
 }
 
-.MapStationsSidebarVehicleInfo {
+.MapStopsSidebarVehicleInfo {
     display: flex;
     gap: 16px;
     flex: 1;
 }
 
-.MapStationsSidebarVehicleRoute {
+.MapStopsSidebarVehicleRoute {
     flex-shrink: 0;
 
     width: 58px;
@@ -103,29 +102,29 @@
     color: white;
 }
 
-.MapStationsSidebarVehicleRouteBus {
+.MapStopsSidebarVehicleRouteBus {
     background-color: var(--bus);
 }
 
-.MapStationsSidebarVehicleRouteTram {
+.MapStopsSidebarVehicleRouteTram {
     background-color: var(--tram);
 }
 
-.MapStationsSidebarVehicleRouteTroll {
+.MapStopsSidebarVehicleRouteTroll {
     background-color: var(--troll);
 }
 
-.MapStationsSidebarVehicleEndpoint {
+.MapStopsSidebarVehicleEndpoint {
     font-size: 20px;
     line-height: 22px;
 }
 
-.MapStationsSidebarVehicleKeypoints,
-.MapStationsSidebarVehicleArriveTime {
+.MapStopsSidebarVehicleKeypoints,
+.MapStopsSidebarVehicleArriveTime {
     font-size: 16px;
     line-height: 18px;
 }
 
-.MapStationsSidebarVehicleKeypoints {
+.MapStopsSidebarVehicleKeypoints {
     font-weight: 300;
 }

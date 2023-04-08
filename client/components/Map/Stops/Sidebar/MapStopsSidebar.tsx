@@ -17,11 +17,12 @@ import { useDisablePropagation } from 'hooks/useDisablePropagation';
 
 import Close from 'public/icons/close.svg';
 
-import styles from './MapStationsSidebar.module.css';
 import { StopInfoItem, StopType } from 'transport-common/types/masstrans';
 import { massTransApi } from 'api/masstrans/masstrans';
 
-export type MapStationsSidebarProps = {
+import styles from './MapStopsSidebar.module.css';
+
+export type MapStopsSidebarProps = {
     type: StopType;
     name: string;
     id: string;
@@ -29,7 +30,7 @@ export type MapStationsSidebarProps = {
 
 const cn = classNames.bind(styles);
 
-export function MapStationsSidebar({ type, name, id }: MapStationsSidebarProps) {
+export function MapStopsSidebar({ type, name, id }: MapStopsSidebarProps) {
     const [vehicleAwait, setVehicleAwait] = useState<StopInfoItem[]>(null);
     const [loading, setLoading] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
@@ -74,19 +75,14 @@ export function MapStationsSidebar({ type, name, id }: MapStationsSidebarProps) 
             ref={ref}
             className={cn(
                 POSITION_CLASSES.topleft,
-                styles.MapStationsSidebar,
+                styles.MapStopsSidebar,
                 sidebarStyles.leafletSidebar,
             )}
         >
-            <div className={cn(styles.MapStationsSidebarWrapper)}>
-                <div className={cn(styles.MapStationsSidebarHeaderWrapper)}>
-                    <div
-                        className={cn(
-                            styles.MapStationsSidebarRow,
-                            styles.MapStationsSidebarHeader,
-                        )}
-                    >
-                        <div className={cn(styles.MapStationsSidebarHeaderInfo)}>
+            <div className={cn(styles.MapStopsSidebarWrapper)}>
+                <div className={cn(styles.MapStopsSidebarHeaderWrapper)}>
+                    <div className={cn(styles.MapStopsSidebarRow, styles.MapStopsSidebarHeader)}>
+                        <div className={cn(styles.MapStopsSidebarHeaderInfo)}>
                             <Typography variant="h3">
                                 {type
                                     .split('-')
@@ -102,26 +98,24 @@ export function MapStationsSidebar({ type, name, id }: MapStationsSidebarProps) 
                             onClick={() => {
                                 sidebarService.close();
                             }}
-                            className={cn(styles.MapStationsSidebarCloseButton)}
+                            className={cn(styles.MapStopsSidebarCloseButton)}
                         >
-                            <Close className={cn(styles.MapStationsSidebarCloseIcon)} />
+                            <Close className={cn(styles.MapStopsSidebarCloseIcon)} />
                         </button>
                     </div>
                     <Divider />
                 </div>
-                <div
-                    className={cn(styles.MapStationsSidebarRow, styles.MapStationsSidebarVehicles)}
-                >
-                    {!loading && Boolean(vehicleAwait) ? (
+                <div className={cn(styles.MapStopsSidebarRow, styles.MapStopsSidebarVehicles)}>
+                {!loading && Boolean(vehicleAwait) ? (
                         <>
                             {vehicleAwait.map((vehicle) => (
                                 <div
                                     key={`${vehicle.route}-${vehicle.type}-${vehicle.arriveTime}`}
-                                    className={cn(styles.MapStationsSidebarVehicle)}
+                                    className={cn(styles.MapStopsSidebarVehicle)}
                                 >
-                                    <div className={cn(styles.MapStationsSidebarVehicleInfo)}>
+                                    <div className={cn(styles.MapStopsSidebarVehicleInfo)}>
                                         <div
-                                            className={cn(styles.MapStationsSidebarVehicleRoute)}
+                                            className={cn(styles.MapStopsSidebarVehicleRoute)}
                                             style={{
                                                 backgroundColor: VEHICLE_TYPE_COLORS[vehicle.type],
                                             }}
@@ -131,7 +125,7 @@ export function MapStationsSidebar({ type, name, id }: MapStationsSidebarProps) 
                                         <div>
                                             <span
                                                 className={cn(
-                                                    styles.MapStationsSidebarVehicleEndpoint,
+                                                    styles.MapStopsSidebarVehicleEndpoint,
                                                 )}
                                             >
                                                 {vehicle.to}
@@ -141,7 +135,7 @@ export function MapStationsSidebar({ type, name, id }: MapStationsSidebarProps) 
                                                     <br />
                                                     <span
                                                         className={cn(
-                                                            styles.MapStationsSidebarVehicleKeypoints,
+                                                            styles.MapStopsSidebarVehicleKeypoints,
                                                         )}
                                                     >
                                                         {`через ${vehicle.through.join(', ')}`}
@@ -150,7 +144,7 @@ export function MapStationsSidebar({ type, name, id }: MapStationsSidebarProps) 
                                             )}
                                         </div>
                                     </div>
-                                    <div className={cn(styles.MapStationsSidebarVehicleArriveTime)}>
+                                    <div className={cn(styles.MapStopsSidebarVehicleArriveTime)}>
                                         {getTimeToArrive(vehicle.arriveTime) > 15
                                             ? vehicle.arriveTime
                                             : `${getTimeToArrive(vehicle.arriveTime)} мин`}
