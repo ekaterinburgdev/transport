@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "attributes": {
+            "title": "С 1 января маршрут меняет схему движения",
+            "text": "Вместо Верх-Исетского бульвара автобусы поедут по улице Татищева",
+            "createdAt": "2023-01-14T19:09:51.695Z",
+            "updatedAt": "2023-01-26T21:18:37.710Z",
+            "publishedAt": "2023-01-20T00:44:06.566Z",
+            "routeNumber": "014",
+            "fromDate": "2023-01-01",
+            "untilDate": null,
+            "hasOwnCard": true,
+            "transportType": "bus"
+        }
+    }
+]

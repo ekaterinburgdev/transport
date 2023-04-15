@@ -1,0 +1,656 @@
+[
+    {
+        "id": 14,
+        "attributes": {
+            "title": "Где транспорт",
+            "titleColor": "#ffffff",
+            "titleBackground": "#00B400",
+            "url": "/map",
+            "invert": null,
+            "backgroundColor": null,
+            "button": "Посмотреть на карте",
+            "buttonColor": "#000000",
+            "buttonBackground": "#ffffff",
+            "createdAt": "2023-01-24T17:35:27.662Z",
+            "updatedAt": "2023-01-29T13:36:32.795Z",
+            "publishedAt": "2023-01-27T07:23:05.084Z",
+            "type": "all",
+            "priority": 0,
+            "cardId": null,
+            "subtitle": null,
+            "subtitleColor": null,
+            "sizeDesktop": "L",
+            "sizeMobile": "S",
+            "backgroundImage": {
+                "data": {
+                    "id": 23,
+                    "attributes": {
+                        "name": "Frame 522map (2).png",
+                        "alternativeText": "Frame 522map (2).png",
+                        "caption": "Frame 522map (2).png",
+                        "width": 3008,
+                        "height": 1472,
+                        "formats": {
+                            "large": {
+                                "ext": ".png",
+                                "url": "/uploads/large_Frame_522map_2_692052d22d.png",
+                                "hash": "large_Frame_522map_2_692052d22d",
+                                "mime": "image/png",
+                                "name": "large_Frame 522map (2).png",
+                                "path": null,
+                                "size": 487.8,
+                                "width": 1000,
+                                "height": 489
+                            },
+                            "small": {
+                                "ext": ".png",
+                                "url": "/uploads/small_Frame_522map_2_692052d22d.png",
+                                "hash": "small_Frame_522map_2_692052d22d",
+                                "mime": "image/png",
+                                "name": "small_Frame 522map (2).png",
+                                "path": null,
+                                "size": 153.86,
+                                "width": 500,
+                                "height": 245
+                            },
+                            "medium": {
+                                "ext": ".png",
+                                "url": "/uploads/medium_Frame_522map_2_692052d22d.png",
+                                "hash": "medium_Frame_522map_2_692052d22d",
+                                "mime": "image/png",
+                                "name": "medium_Frame 522map (2).png",
+                                "path": null,
+                                "size": 303.47,
+                                "width": 750,
+                                "height": 367
+                            },
+                            "thumbnail": {
+                                "ext": ".png",
+                                "url": "/uploads/thumbnail_Frame_522map_2_692052d22d.png",
+                                "hash": "thumbnail_Frame_522map_2_692052d22d",
+                                "mime": "image/png",
+                                "name": "thumbnail_Frame 522map (2).png",
+                                "path": null,
+                                "size": 44.93,
+                                "width": 245,
+                                "height": 120
+                            }
+                        },
+                        "hash": "Frame_522map_2_692052d22d",
+                        "ext": ".png",
+                        "mime": "image/png",
+                        "size": 718.18,
+                        "url": "/uploads/Frame_522map_2_692052d22d.png",
+                        "previewUrl": null,
+                        "provider": "local",
+                        "provider_metadata": null,
+                        "createdAt": "2023-01-26T17:57:55.174Z",
+                        "updatedAt": "2023-01-26T17:57:55.174Z"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": 1,
+        "attributes": {
+            "title": "Стоимость проезда",
+            "titleColor": "#2A2B3C",
+            "titleBackground": null,
+            "url": "/articles/payments",
+            "invert": false,
+            "backgroundColor": null,
+            "button": null,
+            "buttonColor": null,
+            "buttonBackground": null,
+            "createdAt": "2023-01-14T13:33:36.698Z",
+            "updatedAt": "2023-01-27T09:38:57.623Z",
+            "publishedAt": "2023-01-20T00:42:35.084Z",
+            "type": "all",
+            "priority": 10,
+            "cardId": null,
+            "subtitle": null,
+            "subtitleColor": null,
+            "sizeDesktop": "M",
+            "sizeMobile": "XS",
+            "backgroundImage": {
+                "data": {
+                    "id": 47,
+                    "attributes": {
+                        "name": "✅ Стоимость проезда (1).svg",
+                        "alternativeText": "✅ Стоимость проезда (1).svg",
+                        "caption": "✅ Стоимость проезда (1).svg",
+                        "width": 368,
+                        "height": 368,
+                        "formats": null,
+                        "hash": "Stoimost_proezda_1_67df1c6b09",
+                        "ext": ".svg",
+                        "mime": "image/svg+xml",
+                        "size": 6.62,
+                        "url": "/uploads/Stoimost_proezda_1_67df1c6b09.svg",
+                        "previewUrl": null,
+                        "provider": "local",
+                        "provider_metadata": null,
+                        "createdAt": "2023-01-27T09:38:06.938Z",
+                        "updatedAt": "2023-01-27T09:38:06.938Z"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": 2,
+        "attributes": {
+            "title": "Пробки сейчас",
+            "titleColor": "#2A2B3C",
+            "titleBackground": null,
+            "url": null,
+            "invert": false,
+            "backgroundColor": "#ffffff",
+            "button": null,
+            "buttonColor": null,
+            "buttonBackground": null,
+            "createdAt": "2023-01-14T13:40:15.011Z",
+            "updatedAt": "2023-01-27T07:18:59.586Z",
+            "publishedAt": "2023-01-20T00:43:06.654Z",
+            "type": "all",
+            "priority": 20,
+            "cardId": null,
+            "subtitle": null,
+            "subtitleColor": null,
+            "sizeDesktop": "S",
+            "sizeMobile": "S",
+            "backgroundImage": {
+                "data": {
+                    "id": 43,
+                    "attributes": {
+                        "name": "✅ Пробки сейчас.svg",
+                        "alternativeText": "✅ Пробки сейчас.svg",
+                        "caption": "✅ Пробки сейчас.svg",
+                        "width": 176,
+                        "height": 176,
+                        "formats": null,
+                        "hash": "Probki_sejchas_0b6c2f3363",
+                        "ext": ".svg",
+                        "mime": "image/svg+xml",
+                        "size": 1.08,
+                        "url": "/uploads/Probki_sejchas_0b6c2f3363.svg",
+                        "previewUrl": null,
+                        "provider": "local",
+                        "provider_metadata": null,
+                        "createdAt": "2023-01-27T07:18:55.831Z",
+                        "updatedAt": "2023-01-27T07:18:55.831Z"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": 4,
+        "attributes": {
+            "title": "Как сэкономить на оплате проезда",
+            "titleColor": "#ffffff",
+            "titleBackground": null,
+            "url": "/articles/tariffs",
+            "invert": true,
+            "backgroundColor": "#00B4FF",
+            "button": "Узнать",
+            "buttonColor": "#2A2B3C",
+            "buttonBackground": "#ffffff",
+            "createdAt": "2023-01-14T13:48:24.509Z",
+            "updatedAt": "2023-01-27T07:19:37.828Z",
+            "publishedAt": "2023-01-20T00:42:45.991Z",
+            "type": "citizen",
+            "priority": 40,
+            "cardId": null,
+            "subtitle": null,
+            "subtitleColor": null,
+            "sizeDesktop": "M",
+            "sizeMobile": "XS",
+            "backgroundImage": {
+                "data": {
+                    "id": 41,
+                    "attributes": {
+                        "name": "✅ Про Екарту и Уралочку.svg",
+                        "alternativeText": "✅ Про Екарту и Уралочку.svg",
+                        "caption": "✅ Про Екарту и Уралочку.svg",
+                        "width": 368,
+                        "height": 368,
+                        "formats": null,
+                        "hash": "Pro_Ekartu_i_Uralochku_10e5f3ffb0",
+                        "ext": ".svg",
+                        "mime": "image/svg+xml",
+                        "size": 2139.07,
+                        "url": "/uploads/Pro_Ekartu_i_Uralochku_10e5f3ffb0.svg",
+                        "previewUrl": null,
+                        "provider": "local",
+                        "provider_metadata": null,
+                        "createdAt": "2023-01-27T07:15:11.263Z",
+                        "updatedAt": "2023-01-27T07:15:11.263Z"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": 6,
+        "attributes": {
+            "title": "Расписание маршрутов",
+            "titleColor": "#ffffff",
+            "titleBackground": null,
+            "url": "/articles/traffic-timetable",
+            "invert": null,
+            "backgroundColor": "#ffffff",
+            "button": null,
+            "buttonColor": null,
+            "buttonBackground": null,
+            "createdAt": "2023-01-14T13:54:32.789Z",
+            "updatedAt": "2023-01-26T18:02:30.557Z",
+            "publishedAt": "2023-01-22T01:07:25.956Z",
+            "type": "all",
+            "priority": 60,
+            "cardId": null,
+            "subtitle": null,
+            "subtitleColor": null,
+            "sizeDesktop": "S",
+            "sizeMobile": "XS",
+            "backgroundImage": {
+                "data": {
+                    "id": 26,
+                    "attributes": {
+                        "name": "✅ Расписание маршрутов (1).png",
+                        "alternativeText": "✅ Расписание маршрутов (1).png",
+                        "caption": "✅ Расписание маршрутов (1).png",
+                        "width": 1472,
+                        "height": 1472,
+                        "formats": {
+                            "large": {
+                                "ext": ".png",
+                                "url": "/uploads/large_Raspisanie_marshrutov_1_207435a5db.png",
+                                "hash": "large_Raspisanie_marshrutov_1_207435a5db",
+                                "mime": "image/png",
+                                "name": "large_✅ Расписание маршрутов (1).png",
+                                "path": null,
+                                "size": 142.23,
+                                "width": 1000,
+                                "height": 1000
+                            },
+                            "small": {
+                                "ext": ".png",
+                                "url": "/uploads/small_Raspisanie_marshrutov_1_207435a5db.png",
+                                "hash": "small_Raspisanie_marshrutov_1_207435a5db",
+                                "mime": "image/png",
+                                "name": "small_✅ Расписание маршрутов (1).png",
+                                "path": null,
+                                "size": 45.92,
+                                "width": 500,
+                                "height": 500
+                            },
+                            "medium": {
+                                "ext": ".png",
+                                "url": "/uploads/medium_Raspisanie_marshrutov_1_207435a5db.png",
+                                "hash": "medium_Raspisanie_marshrutov_1_207435a5db",
+                                "mime": "image/png",
+                                "name": "medium_✅ Расписание маршрутов (1).png",
+                                "path": null,
+                                "size": 88.74,
+                                "width": 750,
+                                "height": 750
+                            },
+                            "thumbnail": {
+                                "ext": ".png",
+                                "url": "/uploads/thumbnail_Raspisanie_marshrutov_1_207435a5db.png",
+                                "hash": "thumbnail_Raspisanie_marshrutov_1_207435a5db",
+                                "mime": "image/png",
+                                "name": "thumbnail_✅ Расписание маршрутов (1).png",
+                                "path": null,
+                                "size": 8.97,
+                                "width": 156,
+                                "height": 156
+                            }
+                        },
+                        "hash": "Raspisanie_marshrutov_1_207435a5db",
+                        "ext": ".png",
+                        "mime": "image/png",
+                        "size": 53.02,
+                        "url": "/uploads/Raspisanie_marshrutov_1_207435a5db.png",
+                        "previewUrl": null,
+                        "provider": "local",
+                        "provider_metadata": null,
+                        "createdAt": "2023-01-26T18:01:55.641Z",
+                        "updatedAt": "2023-01-26T18:01:55.641Z"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": 7,
+        "attributes": {
+            "title": "Правила оплаты парковки",
+            "titleColor": "#ffffff",
+            "titleBackground": null,
+            "url": "/articles/parking",
+            "invert": null,
+            "backgroundColor": "#2A2B3C",
+            "button": null,
+            "buttonColor": null,
+            "buttonBackground": null,
+            "createdAt": "2023-01-14T13:55:46.022Z",
+            "updatedAt": "2023-01-27T07:20:13.891Z",
+            "publishedAt": "2023-01-20T00:43:01.676Z",
+            "type": "all",
+            "priority": 70,
+            "cardId": null,
+            "subtitle": null,
+            "subtitleColor": null,
+            "sizeDesktop": null,
+            "sizeMobile": null,
+            "backgroundImage": {
+                "data": {
+                    "id": 44,
+                    "attributes": {
+                        "name": "✅ Парковки.svg",
+                        "alternativeText": "✅ Парковки.svg",
+                        "caption": "✅ Парковки.svg",
+                        "width": 368,
+                        "height": 176,
+                        "formats": null,
+                        "hash": "Parkovki_bbb29e882c",
+                        "ext": ".svg",
+                        "mime": "image/svg+xml",
+                        "size": 0.81,
+                        "url": "/uploads/Parkovki_bbb29e882c.svg",
+                        "previewUrl": null,
+                        "provider": "local",
+                        "provider_metadata": null,
+                        "createdAt": "2023-01-27T07:20:10.610Z",
+                        "updatedAt": "2023-01-27T07:20:10.610Z"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": 15,
+        "attributes": {
+            "title": "Карта перекрытий",
+            "titleColor": "#2A2B3C",
+            "titleBackground": null,
+            "url": "https://екатеринбург.рф/жителям/инфокарта?rubric_id=3",
+            "invert": null,
+            "backgroundColor": null,
+            "button": null,
+            "buttonColor": null,
+            "buttonBackground": null,
+            "createdAt": "2023-01-25T16:13:37.845Z",
+            "updatedAt": "2023-01-27T09:44:39.706Z",
+            "publishedAt": "2023-01-27T07:20:41.314Z",
+            "type": "all",
+            "priority": 75,
+            "cardId": null,
+            "subtitle": null,
+            "subtitleColor": null,
+            "sizeDesktop": "S",
+            "sizeMobile": "S",
+            "backgroundImage": {
+                "data": {
+                    "id": 45,
+                    "attributes": {
+                        "name": "✅ Карта перекрытий.svg",
+                        "alternativeText": "✅ Карта перекрытий.svg",
+                        "caption": "✅ Карта перекрытий.svg",
+                        "width": 176,
+                        "height": 176,
+                        "formats": null,
+                        "hash": "Karta_perekrytij_76e74786c9",
+                        "ext": ".svg",
+                        "mime": "image/svg+xml",
+                        "size": 2.93,
+                        "url": "/uploads/Karta_perekrytij_76e74786c9.svg",
+                        "previewUrl": null,
+                        "provider": "local",
+                        "provider_metadata": null,
+                        "createdAt": "2023-01-27T07:20:35.452Z",
+                        "updatedAt": "2023-01-27T07:20:35.452Z"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": 8,
+        "attributes": {
+            "title": "Бюро находок",
+            "titleColor": "#ffffff",
+            "titleBackground": null,
+            "url": "/articles/lost-and-found",
+            "invert": null,
+            "backgroundColor": "#E63223",
+            "button": "Найти потеряшку",
+            "buttonColor": "#E63223",
+            "buttonBackground": "#ffffff",
+            "createdAt": "2023-01-14T13:57:06.238Z",
+            "updatedAt": "2023-01-27T07:20:58.418Z",
+            "publishedAt": "2023-01-20T00:42:37.700Z",
+            "type": "all",
+            "priority": 80,
+            "cardId": null,
+            "subtitle": "Если что-то потеряли в транспорте, \u2028мы поможем найти",
+            "subtitleColor": "#ffffff",
+            "sizeDesktop": "S",
+            "sizeMobile": "S",
+            "backgroundImage": {
+                "data": {
+                    "id": 46,
+                    "attributes": {
+                        "name": "✅ Бюро находок.svg",
+                        "alternativeText": "✅ Бюро находок.svg",
+                        "caption": "✅ Бюро находок.svg",
+                        "width": 368,
+                        "height": 176,
+                        "formats": null,
+                        "hash": "Byuro_nahodok_490358a888",
+                        "ext": ".svg",
+                        "mime": "image/svg+xml",
+                        "size": 1.1,
+                        "url": "/uploads/Byuro_nahodok_490358a888.svg",
+                        "previewUrl": null,
+                        "provider": "local",
+                        "provider_metadata": null,
+                        "createdAt": "2023-01-27T07:20:55.156Z",
+                        "updatedAt": "2023-01-27T07:20:55.156Z"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": 9,
+        "attributes": {
+            "title": "Похвалить или поругать",
+            "titleColor": "#2A2B3C",
+            "titleBackground": null,
+            "url": "/articles/complaints-suggestions",
+            "invert": null,
+            "backgroundColor": "#ffffff",
+            "button": null,
+            "buttonColor": null,
+            "buttonBackground": null,
+            "createdAt": "2023-01-14T17:42:42.105Z",
+            "updatedAt": "2023-01-27T07:21:17.174Z",
+            "publishedAt": "2023-01-20T00:43:04.301Z",
+            "type": "citizen",
+            "priority": 90,
+            "cardId": null,
+            "subtitle": null,
+            "subtitleColor": null,
+            "sizeDesktop": "S",
+            "sizeMobile": "S",
+            "backgroundImage": {
+                "data": {
+                    "id": 39,
+                    "attributes": {
+                        "name": "✅ Отзыв или жалоба.svg",
+                        "alternativeText": "✅ Отзыв или жалоба.svg",
+                        "caption": "✅ Отзыв или жалоба.svg",
+                        "width": 368,
+                        "height": 176,
+                        "formats": null,
+                        "hash": "Otzyv_ili_zhaloba_e6da6af909",
+                        "ext": ".svg",
+                        "mime": "image/svg+xml",
+                        "size": 177.26,
+                        "url": "/uploads/Otzyv_ili_zhaloba_e6da6af909.svg",
+                        "previewUrl": null,
+                        "provider": "local",
+                        "provider_metadata": null,
+                        "createdAt": "2023-01-27T07:15:10.194Z",
+                        "updatedAt": "2023-01-27T07:15:10.194Z"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": 10,
+        "attributes": {
+            "title": "Всё про велосипеды и самокаты",
+            "titleColor": "#ffffff",
+            "titleBackground": null,
+            "url": "/articles/bikes-scooters",
+            "invert": null,
+            "backgroundColor": "#AA9B46",
+            "button": null,
+            "buttonColor": null,
+            "buttonBackground": null,
+            "createdAt": "2023-01-14T17:46:46.087Z",
+            "updatedAt": "2023-01-27T07:21:50.758Z",
+            "publishedAt": "2023-01-20T00:42:42.140Z",
+            "type": "all",
+            "priority": 100,
+            "cardId": null,
+            "subtitle": null,
+            "subtitleColor": "#ffffff",
+            "sizeDesktop": "M",
+            "sizeMobile": "S",
+            "backgroundImage": {
+                "data": {
+                    "id": 36,
+                    "attributes": {
+                        "name": "✅ Прокат.svg",
+                        "alternativeText": "✅ Прокат.svg",
+                        "caption": "✅ Прокат.svg",
+                        "width": 368,
+                        "height": 368,
+                        "formats": null,
+                        "hash": "Prokat_90d3301e85",
+                        "ext": ".svg",
+                        "mime": "image/svg+xml",
+                        "size": 5.47,
+                        "url": "/uploads/Prokat_90d3301e85.svg",
+                        "previewUrl": null,
+                        "provider": "local",
+                        "provider_metadata": null,
+                        "createdAt": "2023-01-27T07:15:10.039Z",
+                        "updatedAt": "2023-01-27T07:15:10.039Z"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": 12,
+        "attributes": {
+            "title": "Как провезти в транспорте",
+            "titleColor": "#000000",
+            "titleBackground": null,
+            "url": "/articles/baggage-rules",
+            "invert": null,
+            "backgroundColor": "#ffffff",
+            "button": null,
+            "buttonColor": null,
+            "buttonBackground": null,
+            "createdAt": "2023-01-14T17:53:00.667Z",
+            "updatedAt": "2023-01-28T19:03:46.207Z",
+            "publishedAt": "2023-01-20T00:42:53.345Z",
+            "type": "all",
+            "priority": 120,
+            "cardId": null,
+            "subtitle": "коляску, велосипед, багаж или кошку",
+            "subtitleColor": "#000000",
+            "sizeDesktop": "L",
+            "sizeMobile": "S",
+            "backgroundImage": {
+                "data": {
+                    "id": 37,
+                    "attributes": {
+                        "name": "✅ Провоз ненормативного багажа.svg",
+                        "alternativeText": "✅ Провоз ненормативного багажа.svg",
+                        "caption": "✅ Провоз ненормативного багажа.svg",
+                        "width": 752,
+                        "height": 368,
+                        "formats": null,
+                        "hash": "Provoz_nenormativnogo_bagazha_4e85c5287b",
+                        "ext": ".svg",
+                        "mime": "image/svg+xml",
+                        "size": 10.89,
+                        "url": "/uploads/Provoz_nenormativnogo_bagazha_4e85c5287b.svg",
+                        "previewUrl": null,
+                        "provider": "local",
+                        "provider_metadata": null,
+                        "createdAt": "2023-01-27T07:15:10.065Z",
+                        "updatedAt": "2023-01-27T07:15:10.065Z"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "id": 13,
+        "attributes": {
+            "title": "Маломобильным пассажирам",
+            "titleColor": "#ffffff",
+            "titleBackground": null,
+            "url": "/articles/limited-mobility",
+            "invert": null,
+            "backgroundColor": null,
+            "button": null,
+            "buttonColor": null,
+            "buttonBackground": null,
+            "createdAt": "2023-01-14T18:45:25.427Z",
+            "updatedAt": "2023-01-27T07:22:51.474Z",
+            "publishedAt": "2023-01-20T00:42:58.351Z",
+            "type": "all",
+            "priority": 130,
+            "cardId": null,
+            "subtitle": "помощь в метро",
+            "subtitleColor": "#ffffff",
+            "sizeDesktop": "M",
+            "sizeMobile": "S",
+            "backgroundImage": {
+                "data": {
+                    "id": 35,
+                    "attributes": {
+                        "name": "✅ Маломобильным пассажирам.svg",
+                        "alternativeText": "✅ Маломобильным пассажирам.svg",
+                        "caption": "✅ Маломобильным пассажирам.svg",
+                        "width": 368,
+                        "height": 360,
+                        "formats": null,
+                        "hash": "Malomobilnym_passazhiram_931be2e799",
+                        "ext": ".svg",
+                        "mime": "image/svg+xml",
+                        "size": 4.67,
+                        "url": "/uploads/Malomobilnym_passazhiram_931be2e799.svg",
+                        "previewUrl": null,
+                        "provider": "local",
+                        "provider_metadata": null,
+                        "createdAt": "2023-01-27T07:15:10.012Z",
+                        "updatedAt": "2023-01-27T07:15:10.012Z"
+                    }
+                }
+            }
+        }
+    }
+]
