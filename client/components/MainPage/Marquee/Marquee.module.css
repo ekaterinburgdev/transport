@@ -1,5 +1,4 @@
 .Marquee {
-    display: none;
     font-family: 'Press Start 2P';
     padding: 8px;
     background: #000000;
@@ -19,7 +18,14 @@
     display: flex;
     gap: 72px;
     padding: 0 8px;
-    animation: 100s infinite linear marquee;
+    animation: 60s infinite linear marquee;
+}
+
+
+@media screen and (min-width: 768px) {
+    .MarqueeInner {
+        animation-duration: 100s;
+    }
 }
 
 .Marquee:hover .MarqueeInner {
