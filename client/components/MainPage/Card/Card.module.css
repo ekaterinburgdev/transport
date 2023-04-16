@@ -1,24 +1,28 @@
 .Card {
+    --CardTitleColor: #123;
+    --CardTitleBgrColor: transparent;
+
+    --CardTitleUnderlineColor: var(--CardTitleColor);
+
+    --CardBgrColor: transparent;
+    --CardBgrImage: none;
+
+    --CardSubtitleColor: #111;
+
+    --CardButtonColor: #fff;
+    --CardButtonBgrColor: #000;
+
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 16px;
     border-radius: 8px;
     text-decoration: none;
-    background-size: cover;
-    background-position: 100% 50%;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
     background-color: var(--CardBgrColor);
-    --CardTitleColor: #111;
-    --CardTitleBgrColor: transparent;
-
-    --CardTitleUnderlineColor: var(--CardTitleUnderlineColor);
-
-    --CardBgrColor: #fff;
-    --CardBgrImage: transparent;
-    --CardSubtitleColor: #111;
-
-    --CardButtonColor: #fff;
-    --CardButtonBgrColor: transparent;
+    background-image: var(--CardBgrImage);
 }
 
 @media screen and (min-width: 768px) {
@@ -77,7 +81,6 @@
     font-weight: 400;
     padding: 8px;
     margin-top: auto;
-    transition: .15s ease opacity;
     color: var(--CardButtonColor);
     background-color: var(--CardButtonBgrColor);
 }
