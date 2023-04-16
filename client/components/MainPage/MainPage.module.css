@@ -52,7 +52,7 @@
 .MainPageCardGrid {
     display: grid;
     grid-auto-flow: row dense;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: .9vw;
 }
 
@@ -60,13 +60,14 @@
     aspect-ratio: 1 / 1;
 }
 
-@media screen and (min-width: 768px) {
-    .MainPageCardGrid {
-        grid-template-columns: repeat(2,1fr);
-        gap: .9vw;
-    }
+/* TODO: control grid size via CMS */
+.MainPageCardGrid > *:nth-child(1),
+.MainPageCardGrid > *:nth-child(8) {
+    aspect-ratio: 2 / 1;
+    grid-area: span 1 / span 2;
+}
 
-    /* TODO Control sizing in CMS */
+@media screen and (min-width: 768px) {
     .MainPageCardGrid > *:nth-child(1),
     .MainPageCardGrid > *:nth-child(6),
     .MainPageCardGrid > *:nth-child(8),
@@ -74,9 +75,7 @@
         grid-area: span 1 / span 2;
         aspect-ratio: 2 / 1;
     }
-}
-
-@media screen and (min-width: 768px) {
+    
     .MainPageCardGrid > *:nth-child(2) {
         background-color: transparent !important;
     }
@@ -90,5 +89,9 @@
 @media screen and (min-width: 1200px) {
     .MainPageCardGrid {
         grid-template-columns: repeat(4,1fr);
+    }
+    
+    .MainPageCardGrid > * {
+        aspect-ratio: auto;
     }
 }

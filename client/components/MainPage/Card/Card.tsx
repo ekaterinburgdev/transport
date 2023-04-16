@@ -34,23 +34,23 @@ export function Card({
                 "--CardTitleBgrColor": titleBackground,
                 "--CardTitleUnderlineColor": hexToRgb(titleColor),
                 "--CardBgrColor": backgroundColor,
-                "--CardBgrImage": `url(https://transport-cms.ekaterinburg.io${backgroundImage})`,
+                "--CardBgrImage": backgroundImage && `url(https://transport-cms.ekaterinburg.io${backgroundImage})`,
                 "--CardSubtitleColor": subtitleColor,
                 "--CardButtonColor": buttonColor,
                 "--CardButtonBgrColor": buttonBackground,
             } as React.CSSProperties}
         >
-            <div className={cn(styles.CardTitle, { [styles.CardTitle_Bg]: Boolean(titleBackground) })}>
+            {title && <div className={cn(styles.CardTitle, { [styles.CardTitle_Bg]: Boolean(titleBackground) })}>
                 {title}
-            </div>
+            </div>}
 
-            <div className={cn(styles.CardSubtitle)}>
+            {subtitle && <div className={cn(styles.CardSubtitle)}>
                 {subtitle}
-            </div>
+            </div>}
 
-            <div className={cn(styles.CardButton)}>
+            {button && <div className={cn(styles.CardButton)}>
                 {button}
-            </div>
+            </div>}
         </a>
     );
 }
