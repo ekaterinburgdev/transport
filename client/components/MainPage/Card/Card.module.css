@@ -7,7 +7,18 @@
     text-decoration: none;
     background-size: cover;
     background-position: 100% 50%;
-    background-color: #fff;
+    background-color: var(--CardBgrColor);
+    --CardTitleColor: #111;
+    --CardTitleBgrColor: transparent;
+
+    --CardTitleUnderlineColor: var(--CardTitleUnderlineColor);
+
+    --CardBgrColor: #fff;
+    --CardBgrImage: transparent;
+    --CardSubtitleColor: #111;
+
+    --CardButtonColor: #fff;
+    --CardButtonBgrColor: transparent;
 }
 
 @media screen and (min-width: 768px) {
@@ -17,23 +28,22 @@
     }
 }
 
-
 .CardTitle {
     font-size: 18px;
     font-weight: 500;
     line-height: 1.05;
     margin-bottom: 8px;
+    color: var(--CardTitleColor);
+    background-color: var(--CardTitleBgrColor);
     text-decoration: underline;
-    text-decoration-color: rgba(255, 255, 255, 0.2);
-    text-decoration-style: solid;
+    text-decoration-color: rgba(var(--CardTitleUnderlineColor), 0.2);
     text-underline-offset: 3px;
     transition: .15s ease text-decoration;
 }
 
-.CardTitle[style*="background"] {
+.CardTitle_Bg {
     padding: .5em .75em;
 }
-
 
 @media screen and (min-width: 768px) {
     .CardTitle {
@@ -43,13 +53,14 @@
 }
 
 .Card:hover .CardTitle {
-    text-decoration-color: rgba(255, 255, 255, 0.4);
+    text-decoration-color: rgba(var(--CardTitleUnderlineColor), 0.6);
 }
 
 .CardSubtitle {
     font-size: 14px;
     line-height: 1.35;
     margin-top: .5em;
+    color: var(--CardSubtitleColor);
 }
 
 @media screen and (min-width: 768px) {
@@ -67,6 +78,8 @@
     padding: 8px;
     margin-top: auto;
     transition: .15s ease opacity;
+    color: var(--CardButtonColor);
+    background-color: var(--CardButtonBgrColor);
 }
 
 @media screen and (min-width: 768px) {
