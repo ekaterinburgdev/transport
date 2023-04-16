@@ -1,16 +1,16 @@
 .Card {
-    --CardTitleColor: #123;
+    --CardTitleColor: inherit;
     --CardTitleBgrColor: transparent;
 
-    --CardTitleUnderlineColor: var(--CardTitleColor);
+    --CardTitleUnderlineColor: inherit;
 
     --CardBgrColor: transparent;
     --CardBgrImage: none;
 
-    --CardSubtitleColor: #111;
+    --CardSubtitleColor: inherit;
 
-    --CardButtonColor: #fff;
-    --CardButtonBgrColor: #000;
+    --CardButtonColor: inherit;
+    --CardButtonBgrColor: transparent;
 
     display: flex;
     flex-direction: column;
