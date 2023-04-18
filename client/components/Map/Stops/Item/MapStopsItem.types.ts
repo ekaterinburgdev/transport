@@ -1,6 +1,6 @@
 import { StopType } from 'transport-common/types/masstrans';
 
-export type MapStationsItemProps = {
+export type MapStopsItemProps = {
     coords: [number, number];
     type: StopType;
     id: string;

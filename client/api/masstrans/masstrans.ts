@@ -12,14 +12,11 @@ export const massTransApi = {
             dataField: 'data',
             cache: 'no-store',
         }),
-    getRoutes: (type: ClientUnit) =>
-        fetchInternalApi(`http://map.ettu.ru/api/v2/${type}/routes/?apiKey=111`, {
-            dataField: 'routes',
-        }),
     getStops: () => strapiStops.getAll() as Promise<StrapiStop[]>,
-    getPoints: (type: ClientUnit) =>
-        fetchInternalApi(`http://map.ettu.ru/api/v2/${type}/points/?apiKey=111`, {
-            dataField: 'points',
+    getRoute: (routeId: number) =>
+        fetchApi(`/api/masstrans/route/${routeId}`, {
+            dataField: 'data',
+            cache: 'no-store',
         }),
     getStopInfo: (stopId: string) =>
         fetchApi(`/api/masstrans/stop/${stopId}`, {

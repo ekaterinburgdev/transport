@@ -44,7 +44,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
     }
 
     componentDidUpdate(prevProps: Readonly<MapVehiclesItemProps>): void {
-        const { course, position } = this.props;
+        const { course, coords } = this.props;
 
         if (prevProps.course !== course) {
             const icon = this.getIcon();
@@ -52,7 +52,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
             this.markerRef?.current?.setIcon(icon);
         }
 
-        if (!isEqual(prevProps.position, position)) {
+        if (!isEqual(prevProps.coords, coords)) {
             this.updateTranslate();
         }
     }
@@ -62,7 +62,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
     }
 
     getIcon() {
-        const { boardId, routeNumber, course, type, accessibility, warning } = this.props;
+        const { boardId, num, course, type, accessibility, warning } = this.props;
         const isCourseEast = course > EAST_COURSE_RANGE.left && course < EAST_COURSE_RANGE.right;
 
         return new L.DivIcon({
@@ -73,7 +73,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
             html: ReactDOMServer.renderToStaticMarkup(
                 <MapVehicleMarker
                     boardId={boardId}
-                    routeNumber={routeNumber}
+                    routeNumber={num}
                     type={type}
                     accessibility={accessibility}
                     warning={warning}
@@ -100,7 +100,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
     };
 
     onClickEventHandler = () => {
-        const { routeNumber, onClick } = this.props;
+        const { id, onClick, routeDirection } = this.props;
 
         if (!this.isActive) {
             this.isActive = true;
@@ -109,19 +109,13 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
             });
         }
 
-        if (!routeNumber) {
-            return;
-        }
-
-        onClick(routeNumber);
+        onClick(id, routeDirection);
     };
 
     private updateTranslate = () => {
-        const { boardId, routeNumber, velocity, course } = this.props;
+        const { boardId, num, speed, course } = this.props;
 
-        const marker = document.querySelector(
-            `#vehicle-${boardId}-${routeNumber}`,
-        ) as HTMLDivElement;
+        const marker = document.querySelector(`#vehicle-${boardId}-${num}`) as HTMLDivElement;
 
         if (!marker) {
             return;
@@ -130,18 +124,18 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
         startMoveInDirection({
             direction: course,
             vehicle: marker,
-            velocity,
+            velocity: speed,
             scale: this.getScale(),
         });
     };
 
     render() {
-        const { position } = this.props;
+        const { coords } = this.props;
 
         return (
             <Marker
                 icon={this.icon}
-                position={position}
+                position={coords}
                 eventHandlers={{ click: this.onClickEventHandler }}
                 ref={this.markerRef}
             />

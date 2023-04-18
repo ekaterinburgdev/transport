@@ -3,11 +3,10 @@ import { useMapEvent } from 'react-leaflet';
 
 import { RoutesContext } from 'components/Map/Transport/MapTransport.context';
 
-import { MapStationsItem } from './Item/MapStationsItem';
+import { MapStopsItem } from './Item/MapStopsItem';
+import { VISISBILITY_MINIMAL_ZOOM } from './MapStops.constants';
 
-import { VISISBILITY_MINIMAL_ZOOM } from './MapStations.constants';
-
-export function MapStations() {
+export function MapStops() {
     const { stops } = useContext(RoutesContext);
     const [hidden, setHidden] = useState(false);
     const map = useMapEvent('zoomend', () => {
@@ -23,7 +22,7 @@ export function MapStations() {
     return !hidden ? (
         <>
             {stops.map((stop) => (
-                <MapStationsItem
+                <MapStopsItem
                     key={stop.id}
                     coords={stop.attributes.coords}
                     type={stop.attributes.type}

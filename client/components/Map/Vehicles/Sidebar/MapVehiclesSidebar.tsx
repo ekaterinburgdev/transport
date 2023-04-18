@@ -61,10 +61,10 @@ const cn = classNames.bind(styles);
 
 export function MapVehiclesSidebar({
     boardId,
-    velocity,
-    routeNumber,
+    speed,
+    num,
     type,
-    stateNum,
+    stateNumber,
     warning,
     map,
     model,
@@ -73,8 +73,8 @@ export function MapVehiclesSidebar({
     depoTitle,
 }: MapVehiclesItemProps) {
     const [from, to] = [firstStation, lastStation];
-    const stateNumber = useMemo(() => {
-        const splittedStateNum = stateNum.toLocaleLowerCase().split(' ');
+    const stateNumberObject = useMemo(() => {
+        const splittedStateNum = stateNumber.toLocaleLowerCase().split(' ');
         if (splittedStateNum.length === 1) {
             return null;
         }
@@ -91,7 +91,7 @@ export function MapVehiclesSidebar({
             number: roadNumber,
             region: region,
         };
-    }, [stateNum]);
+    }, [stateNumber]);
 
     const vehicleOperator = useMemo(() => {
         if (type !== ClientUnit.Bus) {
@@ -164,7 +164,7 @@ export function MapVehiclesSidebar({
                                 backgroundColor: VEHICLE_TYPE_COLORS[type],
                             }}
                         >
-                            {routeNumber}
+                            {num}
                         </div>
                         <div className={cn(styles.MapVehiclesSidebarVehicleFeatures)}>
                             {warning && (
@@ -212,7 +212,7 @@ export function MapVehiclesSidebar({
                             className={cn(styles.MapVehiclesSidebarVelocityValue)}
                             style={{ color: VEHICLE_TYPE_COLORS[type] }}
                         >
-                            {velocity}
+                            {speed}
                         </span>
                         <span className={cn(styles.MapVehiclesSidebarVelocityMeasure)}>км/ч</span>
                     </div>
@@ -247,12 +247,12 @@ export function MapVehiclesSidebar({
                         </span>
                     )}
                 </div>
-                <div className={cn(styles.MapVehiclesSidebarStationsWrapper)}>
+                <div className={cn(styles.MapVehiclesSidebarStopsWrapper)}>
                     <Divider />
                     <ul
                         className={cn(
-                            styles.MapVehiclesSidebarStations,
-                            styles[`MapVehiclesSidebarStations_${type}`],
+                            styles.MapVehiclesSidebarStops,
+                            styles[`MapVehiclesSidebarStops_${type}`],
                         )}
                     >
                         {/* TODO: вытащить li в компонент */}
@@ -324,7 +324,7 @@ export function MapVehiclesSidebar({
                                     ))}
                             </div>
                         )}
-                        <div className={cn(styles.MapVehiclesSidebarActiveStations)}>
+                        <div className={cn(styles.MapVehiclesSidebarActiveStops)}>
                             <div
                                 className={cn(styles.MapVehiclesSidebarActiveBorder)}
                                 style={{ backgroundColor: VEHICLE_TYPE_COLORS[type] }}
@@ -333,7 +333,7 @@ export function MapVehiclesSidebar({
                                 <div className={cn(styles.MapVehiclesSidebarVehicleMarker)}>
                                     <MapVehicleMarker
                                         boardId={boardId}
-                                        routeNumber={routeNumber}
+                                        routeNumber={num}
                                         type={type}
                                         isCourseEast={false}
                                         additionalInfo={false}
@@ -464,7 +464,7 @@ export function MapVehiclesSidebar({
                             <br />
                             <span className={cn(styles.MapVehiclesSidebarBoardId)}>{boardId}</span>
                         </div>
-                        {stateNumber && (
+                        {stateNumberObject && (
                             <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
                                 <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
                                     Госномер
@@ -473,21 +473,21 @@ export function MapVehiclesSidebar({
                                     <div
                                         className={cn(styles.MapVehiclesSidebarRoadNumber, {
                                             [styles.MapVehiclesSidebarRoadNumberPassenger]:
-                                                stateNumber.number.length === 2,
+                                                stateNumberObject.number.length === 2,
                                         })}
                                     >
-                                        {stateNumber.number.map((part) => (
+                                        {stateNumberObject.number.map((part) => (
                                             <span key={part}>{part}</span>
                                         ))}
                                     </div>
                                     <div
                                         className={cn(styles.MapVehiclesSidebarRegionWrapper, {
                                             [styles.MapVehiclesSidebarRoadNumberPassenger]:
-                                                stateNumber.number.length === 2,
+                                                stateNumberObject.number.length === 2,
                                         })}
                                     >
                                         <span className={cn(styles.MapVehiclesSidebarRegionNumber)}>
-                                            {stateNumber.region}
+                                            {stateNumberObject.region}
                                         </span>
                                         <span className={cn(styles.MapVehiclesSidebarRegion)}>
                                             RUS

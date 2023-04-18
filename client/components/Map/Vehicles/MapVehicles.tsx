@@ -10,7 +10,7 @@ import { VISISBILITY_MINIMAL_ZOOM } from './MapVehicles.constants';
 export type MapVehiclesProps = {
     vehicles: Unit[];
     type: ClientUnit;
-    onClick: (routeNumber: string) => void;
+    onClick: (routeNumber: number, routeDirection: string) => void;
 };
 
 export function MapVehicles({ vehicles, type, onClick }: MapVehiclesProps) {
@@ -43,18 +43,8 @@ export function MapVehicles({ vehicles, type, onClick }: MapVehiclesProps) {
             {vehicles.map((vehicle) =>
                 bounds.contains(vehicle.coords) ? (
                     <MapVehiclesItem
-                        position={vehicle.coords}
-                        routeNumber={vehicle.num}
-                        velocity={vehicle.speed}
-                        boardId={vehicle.boardId}
+                        {...vehicle}
                         type={type}
-                        course={vehicle.course}
-                        stateNum={vehicle.stateNumber}
-                        accessibility={vehicle.accessibility}
-                        model={vehicle.model}
-                        firstStation={vehicle.firstStation}
-                        lastStation={vehicle.lastStation}
-                        depoTitle={vehicle.depoTitle}
                         key={`${type}-${vehicle.boardId}`}
                         onClick={onClick}
                     />

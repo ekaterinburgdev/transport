@@ -1,9 +1,9 @@
 import _ from 'lodash';
 
-import { GetTransTypeTreeResponse } from 'transport-server/model/ekaterinburg-rf/ekaterinburg-rf.types.js';
-import { JsonRpcMethods } from 'transport-server/model/ekaterinburg-rf/ekaterinburg-rf.constants.js';
-import { ServerRoute } from 'transport-common/types/ekaterinburg-rf.js';
-import { Stop, TransportTree } from 'transport-common/types/masstrans.js';
+import { GetTransTypeTreeResponse } from 'transport-server/model/ekaterinburg-rf/ekaterinburg-rf.types';
+import { JsonRpcMethods } from 'transport-server/model/ekaterinburg-rf/ekaterinburg-rf.constants';
+import { ServerRoute } from 'transport-common/types/ekaterinburg-rf';
+import { Stop, TransportTree } from 'transport-common/types/masstrans';
 
 export const serverToClientMappers = {
     [JsonRpcMethods.GetTransTypeTree]: (transportTree: GetTransTypeTreeResponse) => {

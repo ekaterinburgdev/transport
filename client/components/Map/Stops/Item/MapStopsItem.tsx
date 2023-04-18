@@ -5,16 +5,16 @@ import classNames from 'classnames/bind';
 
 import { sidebarService } from 'services/sidebar/sidebar';
 
-import { MapStationsSidebar } from '../Sidebar/MapStationsSidebar';
+import { MapStopsSidebar } from '../Sidebar/MapStopsSidebar';
 
-import { STATION_ICON_BY_TYPE } from './MapStationsItem.constants';
-import { MapStationsItemProps } from './MapStationsItem.types';
+import { STATION_ICON_BY_TYPE } from './MapStopsItem.constants';
+import { MapStopsItemProps } from './MapStopsItem.types';
 
-import styles from './MapStationsItem.module.css';
+import styles from './MapStopsItem.module.css';
 
 const cn = classNames.bind(styles);
 
-export function MapStationsItem(props: MapStationsItemProps) {
+export function MapStopsItem(props: MapStopsItemProps) {
     const { type, id, name, coords } = props;
 
     const map = useMap();
@@ -24,7 +24,7 @@ export function MapStationsItem(props: MapStationsItemProps) {
         ? new L.Icon({
               ...STATION_ICON_BY_TYPE[type].options,
               iconSize: [48, 48],
-              className: cn(styles.MapStationsItemIcon, styles.MapStationsItemIconActive),
+              className: cn(styles.MapStopsItemIcon, styles.MapStopsItemIconActive),
           })
         : STATION_ICON_BY_TYPE[type];
 
@@ -47,7 +47,7 @@ export function MapStationsItem(props: MapStationsItemProps) {
                     map?.fireEvent?.('click');
                     if (!isActive) {
                         sidebarService.open(
-                            <MapStationsSidebar type={type} name={name} id={id} />,
+                            <MapStopsSidebar type={type} name={name} id={id} />,
                             () => {
                                 setIsActive(false);
                             },
