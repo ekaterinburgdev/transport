@@ -23,6 +23,7 @@
     "@types/lodash": "^4.14.188",
     "@types/node": "18.11.6",
     "@types/react": "^18.0.25",
+    "@types/react-leaflet": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
     "eslint": "^8.27.0",
