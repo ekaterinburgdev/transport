@@ -106,7 +106,7 @@ export function MapStopsSidebar({ type, name, id }: MapStopsSidebarProps) {
                     <Divider />
                 </div>
                 <div className={cn(styles.MapStopsSidebarRow, styles.MapStopsSidebarVehicles)}>
-                {!loading && Boolean(vehicleAwait) ? (
+                    {!loading && Boolean(vehicleAwait) ? (
                         <>
                             {vehicleAwait.map((vehicle) => (
                                 <div

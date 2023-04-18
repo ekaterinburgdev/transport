@@ -1,13 +1,13 @@
 import _ from 'lodash';
 
-import { JsonRpcMethods } from 'transport-server/model/ekaterinburg-rf/ekaterinburg-rf.constants.js';
-import { EkaterinburgRfModel } from 'transport-server/model/ekaterinburg-rf/ekaterinburg-rf.js';
-import { createStrapiMethods } from 'transport-common/strapi/create-methods.js';
-import { StopType, Stop, TransportTree } from 'transport-common/types/masstrans.js';
-import { loginStrapi } from 'transport-common/strapi/login.js';
-import { StrapiContentTypes, StrapiStop, StrapiTree } from 'transport-common/types/strapi.js';
+import { JsonRpcMethods } from 'transport-server/model/ekaterinburg-rf/ekaterinburg-rf.constants';
+import { EkaterinburgRfModel } from 'transport-server/model/ekaterinburg-rf/ekaterinburg-rf';
+import { createStrapiMethods } from 'transport-common/strapi/create-methods';
+import { StopType, Stop, TransportTree } from 'transport-common/types/masstrans';
+import { loginStrapi } from 'transport-common/strapi/login';
+import { StrapiContentTypes, StrapiStop, StrapiTree } from 'transport-common/types/strapi';
 
-import { serverToClientMappers } from './mappers.js';
+import { serverToClientMappers } from './mappers';
 
 const model = new EkaterinburgRfModel();
 
