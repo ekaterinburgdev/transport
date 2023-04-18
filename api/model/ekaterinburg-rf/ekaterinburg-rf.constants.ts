@@ -8,4 +8,5 @@ export enum JsonRpcMethods {
     GetTransTypeTree = 'getTransTypeTree',
     GetUnits = 'getUnits',
     GetRoute = 'getRoute',
+    GetStopArrive = 'getStopArrive',
 }

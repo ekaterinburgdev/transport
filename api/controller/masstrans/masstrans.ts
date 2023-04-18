@@ -5,7 +5,7 @@ import { ClientUnit } from 'transport-common/types/masstrans';
 import { EkaterinburgRfModel } from '../../model/ekaterinburg-rf/ekaterinburg-rf';
 import { isValueInObject } from '../../utils/is-value-in-object';
 
-import { processUnitData, processRouteData } from './masstrans.helpers';
+import { processUnitData, processRouteData, processStopInfoData } from './masstrans.helpers';
 
 const ekaterinburgRfModel = new EkaterinburgRfModel();
 
@@ -52,5 +52,25 @@ export const masstransController = {
         const route = processRouteData(routeRaw);
 
         res.json({ data: route });
+    },
+
+    async getStopInfo(req: Request, res: Response) {
+        const { stopId } = req.params;
+
+        if (!parseInt(stopId, 10)) {
+            res.sendStatus(400);
+
+            return;
+        }
+
+        const stopInfoRaw = await ekaterinburgRfModel.getStopInfo(stopId);
+
+        if (!stopInfoRaw) {
+            throw new Error('No response from ekaterinburg.rf');
+        }
+
+        const stopInfo = processStopInfoData(stopInfoRaw);
+
+        res.json({ data: stopInfo });
     },
 };

@@ -1,10 +1,19 @@
 import {
+    ServerStopArriveUnit,
     ServerPark,
     ServerRoute,
     ServerStop,
     ServerUnit,
 } from 'transport-common/types/ekaterinburg-rf';
-import { ClientUnit, Depo, Route, Stop, Unit } from 'transport-common/types/masstrans';
+
+import {
+    ClientUnit,
+    StopInfoItem,
+    Depo,
+    Route,
+    Stop,
+    Unit,
+} from 'transport-common/types/masstrans';
 
 export function processUnitData(units: ServerUnit[]): Unit[] {
     return units.map((unit) => ({
@@ -58,4 +67,17 @@ export function processRouteData(route: ServerRoute): Route {
             stops: race.stopList.map(processStop),
         })),
     };
+}
+
+export function processStopInfoData(
+    stopInfo: (ServerStopArriveUnit & { type: ClientUnit })[],
+): StopInfoItem[] {
+    return stopInfo.map((item) => ({
+        arriveTime: item.tc_arrivetime,
+        route: item.mr_num,
+        type: item.type,
+        to: item.laststation_title,
+        // TODO: get through stations from GetRoute
+        through: [],
+    }));
 }

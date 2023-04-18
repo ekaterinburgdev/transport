@@ -46,9 +46,12 @@ export function MapStationsItem(props: MapStationsItemProps) {
                 click() {
                     map?.fireEvent?.('click');
                     if (!isActive) {
-                        sidebarService.open(<MapStationsSidebar type={type} name={name} />, () => {
-                            setIsActive(false);
-                        });
+                        sidebarService.open(
+                            <MapStationsSidebar type={type} name={name} id={id} />,
+                            () => {
+                                setIsActive(false);
+                            },
+                        );
                         setIsActive(true);
                     }
                 },

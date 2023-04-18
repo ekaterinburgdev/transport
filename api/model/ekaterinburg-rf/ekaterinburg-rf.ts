@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import _ from 'lodash';
 
-import { ServerRoute } from 'transport-common/types/ekaterinburg-rf';
+import { ServerRoute, ServerStopArriveUnit } from 'transport-common/types/ekaterinburg-rf';
 import { ClientUnit, TransportTree } from 'transport-common/types/masstrans';
 import { createStrapiMethods } from 'transport-common/strapi/create-methods';
 import { StrapiContentTypes, StrapiTree } from 'transport-common/types/strapi';
@@ -17,6 +17,7 @@ import {
     JsonRpcErrorResponse,
     InitSessionResponse,
     GetTransTypeTreeResponse,
+    GetStopArriveResponse,
 } from './ekaterinburg-rf.types';
 
 const fetchCommonOptions = {
@@ -33,9 +34,39 @@ export class EkaterinburgRfModel {
         this.updateTransportTree();
     }
 
-    async getRoute(routeId: string): Promise<ServerRoute> {
+    getRoute(routeId: string): Promise<ServerRoute> {
         return this.sendRequest(JsonRpcMethods.GetRoute, {
             mr_id: routeId,
+        });
+    }
+
+    async getStopInfo(stopId: string): Promise<(ServerStopArriveUnit & { type: ClientUnit })[]> {
+        if (!this.transportTree) {
+            await this.updateTransportTree();
+        }
+
+        const stopArrives = await this.sendRequest<GetStopArriveResponse>(
+            JsonRpcMethods.GetStopArrive,
+            {
+                st_id: stopId,
+            },
+        );
+
+        return stopArrives.map((stopArrive) => {
+            let type = ClientUnit.Bus;
+
+            if (this.transportTree!.tram.ids.includes(stopArrive.mr_id)) {
+                type = ClientUnit.Tram;
+            }
+
+            if (this.transportTree!.troll.ids.includes(stopArrive.mr_id)) {
+                type = ClientUnit.Troll;
+            }
+
+            return {
+                ...stopArrive,
+                type,
+            };
         });
     }
 
