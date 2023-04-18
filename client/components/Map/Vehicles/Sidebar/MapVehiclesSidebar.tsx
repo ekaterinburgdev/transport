@@ -73,7 +73,7 @@ export function MapVehiclesSidebar({
     depoTitle,
 }: MapVehiclesItemProps) {
     const [from, to] = [firstStation, lastStation];
-    const stateNum = useMemo(() => {
+    const stateNumberObject = useMemo(() => {
         const splittedStateNum = stateNumber.toLocaleLowerCase().split(' ');
         if (splittedStateNum.length === 1) {
             return null;
@@ -464,7 +464,7 @@ export function MapVehiclesSidebar({
                             <br />
                             <span className={cn(styles.MapVehiclesSidebarBoardId)}>{boardId}</span>
                         </div>
-                        {stateNum && (
+                        {stateNumberObject && (
                             <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
                                 <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
                                     Госномер
@@ -473,21 +473,21 @@ export function MapVehiclesSidebar({
                                     <div
                                         className={cn(styles.MapVehiclesSidebarRoadNumber, {
                                             [styles.MapVehiclesSidebarRoadNumberPassenger]:
-                                                stateNum.number.length === 2,
+                                                stateNumberObject.number.length === 2,
                                         })}
                                     >
-                                        {stateNum.number.map((part) => (
+                                        {stateNumberObject.number.map((part) => (
                                             <span key={part}>{part}</span>
                                         ))}
                                     </div>
                                     <div
                                         className={cn(styles.MapVehiclesSidebarRegionWrapper, {
                                             [styles.MapVehiclesSidebarRoadNumberPassenger]:
-                                                stateNum.number.length === 2,
+                                                stateNumberObject.number.length === 2,
                                         })}
                                     >
                                         <span className={cn(styles.MapVehiclesSidebarRegionNumber)}>
-                                            {stateNum.region}
+                                            {stateNumberObject.region}
                                         </span>
                                         <span className={cn(styles.MapVehiclesSidebarRegion)}>
                                             RUS
