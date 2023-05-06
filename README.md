@@ -1,8 +1,8 @@
 # Ekaterinburg Transport
 
-Ekaterinburg transport ecosystem
+Ekaterinburg transport website
 
-**[transport.ekaterinburg.io](https://transport.ekaterinburg.io)**
+**[transport.ekaterinburg.city](https://transport.ekaterinburg.city)**
 
 ## Tools
 
