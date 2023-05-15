@@ -124,7 +124,7 @@ export class EkaterinburgRfModel {
         }
 
         const flatTree = tree.map((treeOfType) => treeOfType.attributes);
-        const groupedTree = _.keyBy(flatTree, 'type') as TransportTree;
+        const groupedTree = _.keyBy(flatTree, 'type') as unknown as TransportTree;
 
         this.transportTree = groupedTree;
     }
