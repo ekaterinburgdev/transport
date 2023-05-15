@@ -11,7 +11,7 @@ export enum StopType {
     TrollBus = 'troll-bus',
 }
 
-export type TransportTreeOfType = {
+export interface TransportTreeOfType {
     type: ClientUnit;
     numbers: string[];
     ids: string[];
@@ -21,31 +21,32 @@ export type TransportTreeOfType = {
             id: string;
         };
     };
-};
+}
 
-export type TransportTree = {
+export interface TransportTree {
     [ClientUnit.Bus]: TransportTreeOfType;
     [ClientUnit.Tram]: TransportTreeOfType;
     [ClientUnit.Troll]: TransportTreeOfType;
-};
+}
 
-export type Stop = {
+export interface Stop {
     title: string;
     stopId: string;
     coords: [number, number];
     type: StopType;
-};
+}
 
-export type StopInfoItem = {
+export interface StopInfoItem {
     arriveTime: string;
     route: string;
     type: ClientUnit;
     to: string;
     through: string[];
-};
+}
 
-export type Unit = {
-    id: number;
+export interface Unit {
+    id: string;
+    routeId: number;
     num: string;
     depoTitle: string;
     firstStation: string;
@@ -59,26 +60,36 @@ export type Unit = {
     speed: number;
     stateNumber: string;
     boardId: number;
-};
+}
 
-export type Depo = {
+export interface Depo {
     id: number;
     title: string;
-};
+}
 
-export type Race = {
+export interface Race {
     coordsList: [number, number][];
     id: string;
     firstStation: string;
     lastStation: string;
     raceType: string;
     stops: Omit<Stop, 'type'>[];
-};
+}
 
-export type Route = {
+export interface Route {
     id: number;
     num: string;
     title: string;
     depos: Depo[];
     races: Race[];
-};
+}
+
+interface UnitArriveInfoOwnFields {
+    arriveTime: string;
+    routeId: string;
+    routeDirection: string;
+}
+
+export interface UnitArriveInfo extends Omit<Stop, 'type' | 'coords'>, UnitArriveInfoOwnFields {}
+
+export interface UnitArriveStop extends Omit<Stop, 'type'>, Partial<UnitArriveInfoOwnFields> {}

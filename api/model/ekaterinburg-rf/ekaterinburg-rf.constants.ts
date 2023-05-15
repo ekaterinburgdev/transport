@@ -9,4 +9,5 @@ export enum JsonRpcMethods {
     GetUnits = 'getUnits',
     GetRoute = 'getRoute',
     GetStopArrive = 'getStopArrive',
+    GetUnitArrive = 'getUnitArrive',
 }

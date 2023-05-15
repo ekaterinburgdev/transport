@@ -1,12 +1,13 @@
 // FIXME: cure divatosis
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import L from 'leaflet';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 // import dynamic from 'next/dynamic';
 
-import { ClientUnit } from 'transport-common/types/masstrans';
+import { ClientUnit, UnitArriveStop } from 'transport-common/types/masstrans';
 
 import sidebarStyles from 'styles/leaflet-sidebar.module.css';
 
@@ -32,16 +33,16 @@ import { MapVehicleMarker } from '../Marker/MapVehicleMarker';
 
 import modelPic from './mocks/model.png';
 import operatorPic from './mocks/operator.png';
-import { stations } from './mocks/stations';
 import { featuresTitle, fixture } from './mocks/main';
 
 import Velocity from './Velocity/velocity.svg';
 import VelocityColor from './Velocity/velocity-color.svg';
 
 import { additionalHeader, vehiclesName, SVERDLOVSK_REGION } from './MapVehiclesSidebar.constants';
-import { isNowLessArrival, getPointsRow } from './MapVehiclesSidebar.utils';
+import { getPointsRow } from './MapVehiclesSidebar.utils';
 
 import styles from './MapVehiclesSidebar.module.css';
+import { massTransApi } from 'api/masstrans/masstrans';
 
 export type MapVehiclesSidebarProps = {
     type: TStationType;
@@ -71,8 +72,19 @@ export function MapVehiclesSidebar({
     firstStation,
     lastStation,
     depoTitle,
+    id,
+    coords,
 }: MapVehiclesItemProps) {
     const [from, to] = [firstStation, lastStation];
+    const [stops, setStops] = useState<UnitArriveStop[]>([]);
+    const latLngCoords = useMemo(() => new L.LatLng(...coords), [coords]);
+
+    useEffect(() => {
+        massTransApi.getVehicleInfo(id).then((stopsRes) => {
+            setStops(stopsRes || []);
+        });
+    }, [id]);
+
     const stateNumberObject = useMemo(() => {
         const splittedStateNum = stateNumber.toLocaleLowerCase().split(' ');
         if (splittedStateNum.length === 1) {
@@ -123,15 +135,40 @@ export function MapVehiclesSidebar({
 
     useDisablePropagation(ref);
 
-    // FIXME: findIndex return -1
-    const nearestStationIndex = Math.max(
-        stations.findIndex((station) => isNowLessArrival(station)) - 1,
-        0,
+    const nearestStopIndex = useMemo(
+        () =>
+            Math.max(
+                stops.reduce(
+                    (acc, stop, idx) => {
+                        const distance = latLngCoords.distanceTo(stop.coords);
+
+                        if (distance < acc.distance) {
+                            acc.idx = idx;
+                            acc.distance = distance;
+                        }
+
+                        return acc;
+                    },
+                    { idx: 0, distance: Infinity },
+                ).idx,
+                0,
+            ),
+        [stops],
     );
-    const afterStart = stations.slice(1, nearestStationIndex);
-    const lastNearestIndex = Math.min(nearestStationIndex + 4, stations.length - 1);
-    const afterNearest = stations.slice(nearestStationIndex + 1, lastNearestIndex);
-    const beforeEnd = stations.slice(lastNearestIndex, stations.length - 1);
+    const afterStart = useMemo(() => stops.slice(1, nearestStopIndex), [stops, nearestStopIndex]);
+    const lastNearestIndex = useMemo(
+        () => Math.min(nearestStopIndex + 4, stops.length - 1),
+        [stops, nearestStopIndex],
+    );
+    const afterNearest = useMemo(
+        () => stops.slice(nearestStopIndex + 1, lastNearestIndex),
+        [stops, nearestStopIndex, lastNearestIndex],
+    );
+    const beforeEnd = useMemo(
+        () => stops.slice(lastNearestIndex, stops.length - 1),
+        [stops, lastNearestIndex],
+    );
+    const endStop = useMemo(() => stops[stops.length - 1], [stops]);
 
     return (
         <div
@@ -247,126 +284,47 @@ export function MapVehiclesSidebar({
                         </span>
                     )}
                 </div>
-                <div className={cn(styles.MapVehiclesSidebarStopsWrapper)}>
-                    <Divider />
-                    <ul
-                        className={cn(
-                            styles.MapVehiclesSidebarStops,
-                            styles[`MapVehiclesSidebarStops_${type}`],
-                        )}
-                    >
-                        {/* TODO: вытащить li в компонент */}
-                        {nearestStationIndex !== 0 && (
-                            <li className={cn(styles.MapVehiclesSidebarStation)}>
-                                <div
-                                    className={cn(
-                                        styles.MapVehiclesSidebarBullet,
-                                        styles.MapVehiclesSidebarBullet_big,
-                                    )}
-                                    style={{ borderColor: VEHICLE_TYPE_TRANSLUCENT_COLORS[type] }}
-                                />
-                                <PageText
-                                    className={cn(
-                                        styles.MapVehiclesSidebarStationName,
-                                        styles.MapVehiclesSidebarStartStation,
-                                    )}
-                                >
-                                    {stations[0].name}
-                                </PageText>
-                            </li>
-                        )}
-                        {afterStart.length > 0 && (
-                            <div
-                                className={cn(styles.MapVehiclesSidebarHiddenStationWrapper)}
-                                onClick={() => {
-                                    setAfterOpened(!afterOpened);
-                                }}
-                            >
-                                {!afterOpened && (
-                                    <div className={cn(styles.MapVehiclesSidebarHiddenCount)}>
-                                        {getPointsRow(afterStart.length)}
-                                    </div>
-                                )}
-                                <div
-                                    className={cn(styles.MapVehiclesSidebarHiddenCountTextWrapper)}
-                                >
-                                    <PageText>
-                                        {`${afterStart.length} ${getNoun(
-                                            afterStart.length,
-                                            'остановка',
-                                            'остановки',
-                                            'остановок',
-                                        )}`}
-                                    </PageText>
-                                    <Arrow
-                                        className={cn(styles.MapVehiclesSidebarHiddenArrow, {
-                                            [styles.MapVehiclesSidebarHiddenArrow_opened]:
-                                                afterOpened,
-                                        })}
-                                    />
-                                </div>
-                                {afterOpened &&
-                                    afterStart.map((station) => (
-                                        <li className={cn(styles.MapVehiclesSidebarStation)}>
-                                            <div
-                                                className={cn(styles.MapVehiclesSidebarBullet)}
-                                                style={{
-                                                    borderColor:
-                                                        VEHICLE_TYPE_TRANSLUCENT_COLORS[type],
-                                                }}
-                                            />
-                                            <PageText
-                                                className={cn(styles.MapVehiclesSidebarStationName)}
-                                            >
-                                                {station.name}
-                                            </PageText>
-                                        </li>
-                                    ))}
-                            </div>
-                        )}
-                        <div className={cn(styles.MapVehiclesSidebarActiveStops)}>
-                            <div
-                                className={cn(styles.MapVehiclesSidebarActiveBorder)}
-                                style={{ backgroundColor: VEHICLE_TYPE_COLORS[type] }}
-                            />
-                            <li className={cn(styles.MapVehiclesSidebarStation)}>
-                                <div className={cn(styles.MapVehiclesSidebarVehicleMarker)}>
-                                    <MapVehicleMarker
-                                        boardId={boardId}
-                                        routeNumber={num}
-                                        type={type}
-                                        isCourseEast={false}
-                                        additionalInfo={false}
-                                        course={180}
-                                    />
-                                </div>
-                                <PageText className={cn(styles.MapVehiclesSidebarStationName)}>
-                                    {stations[nearestStationIndex].name}
-                                </PageText>
-                            </li>
-                            {afterNearest.map((station) => (
+                {stops.length > 0 && (
+                    <div className={cn(styles.MapVehiclesSidebarStopsWrapper)}>
+                        <Divider />
+                        <ul
+                            className={cn(
+                                styles.MapVehiclesSidebarStops,
+                                styles[`MapVehiclesSidebarStops_${type}`],
+                            )}
+                        >
+                            {/* TODO: вытащить li в компонент */}
+                            {nearestStopIndex !== 0 && (
                                 <li className={cn(styles.MapVehiclesSidebarStation)}>
                                     <div
-                                        className={cn(styles.MapVehiclesSidebarBullet)}
-                                        style={{ borderColor: VEHICLE_TYPE_COLORS[type] }}
+                                        className={cn(
+                                            styles.MapVehiclesSidebarBullet,
+                                            styles.MapVehiclesSidebarBullet_big,
+                                        )}
+                                        style={{
+                                            borderColor: VEHICLE_TYPE_TRANSLUCENT_COLORS[type],
+                                        }}
                                     />
-                                    <PageText className={cn(styles.MapVehiclesSidebarStationName)}>
-                                        {station.name}
+                                    <PageText
+                                        className={cn(
+                                            styles.MapVehiclesSidebarStationName,
+                                            styles.MapVehiclesSidebarStartStation,
+                                        )}
+                                    >
+                                        {stops[0].title}
                                     </PageText>
-
-                                    <PageText>{station.arrivalTime}</PageText>
                                 </li>
-                            ))}
-                            {beforeEnd.length > 0 && (
+                            )}
+                            {afterStart.length > 0 && (
                                 <div
                                     className={cn(styles.MapVehiclesSidebarHiddenStationWrapper)}
                                     onClick={() => {
-                                        setBeforeOpened(!beforeOpened);
+                                        setAfterOpened(!afterOpened);
                                     }}
                                 >
-                                    {!beforeOpened && (
+                                    {!afterOpened && (
                                         <div className={cn(styles.MapVehiclesSidebarHiddenCount)}>
-                                            {getPointsRow(beforeEnd.length)}
+                                            {getPointsRow(afterStart.length)}
                                         </div>
                                     )}
                                     <div
@@ -375,8 +333,8 @@ export function MapVehiclesSidebar({
                                         )}
                                     >
                                         <PageText>
-                                            {`${beforeEnd.length} ${getNoun(
-                                                beforeEnd.length,
+                                            {`${afterStart.length} ${getNoun(
+                                                afterStart.length,
                                                 'остановка',
                                                 'остановки',
                                                 'остановок',
@@ -385,17 +343,18 @@ export function MapVehiclesSidebar({
                                         <Arrow
                                             className={cn(styles.MapVehiclesSidebarHiddenArrow, {
                                                 [styles.MapVehiclesSidebarHiddenArrow_opened]:
-                                                    beforeOpened,
+                                                    afterOpened,
                                             })}
                                         />
                                     </div>
-                                    {beforeOpened &&
-                                        beforeEnd.map((station) => (
+                                    {afterOpened &&
+                                        afterStart.map((stop) => (
                                             <li className={cn(styles.MapVehiclesSidebarStation)}>
                                                 <div
                                                     className={cn(styles.MapVehiclesSidebarBullet)}
                                                     style={{
-                                                        borderColor: VEHICLE_TYPE_COLORS[type],
+                                                        borderColor:
+                                                            VEHICLE_TYPE_TRANSLUCENT_COLORS[type],
                                                     }}
                                                 />
                                                 <PageText
@@ -403,34 +362,146 @@ export function MapVehiclesSidebar({
                                                         styles.MapVehiclesSidebarStationName,
                                                     )}
                                                 >
-                                                    {station.name}
+                                                    {stop.title}
                                                 </PageText>
-                                                <PageText>{station.arrivalTime}</PageText>
                                             </li>
                                         ))}
                                 </div>
                             )}
-                            {nearestStationIndex !== stations.length - 1 && (
+                            <div className={cn(styles.MapVehiclesSidebarActiveStops)}>
+                                <div
+                                    className={cn(styles.MapVehiclesSidebarActiveBorder)}
+                                    style={{ backgroundColor: VEHICLE_TYPE_COLORS[type] }}
+                                />
                                 <li className={cn(styles.MapVehiclesSidebarStation)}>
+                                    <div className={cn(styles.MapVehiclesSidebarVehicleMarker)}>
+                                        <MapVehicleMarker
+                                            boardId={boardId}
+                                            routeNumber={num}
+                                            type={type}
+                                            isCourseEast={false}
+                                            additionalInfo={false}
+                                            course={180}
+                                        />
+                                    </div>
+                                    <PageText className={cn(styles.MapVehiclesSidebarStationName)}>
+                                        {stops[nearestStopIndex]?.title}
+                                    </PageText>
+                                </li>
+                                {afterNearest.map((stop) => (
+                                    <li className={cn(styles.MapVehiclesSidebarStation)}>
+                                        <div
+                                            className={cn(styles.MapVehiclesSidebarBullet)}
+                                            style={{ borderColor: VEHICLE_TYPE_COLORS[type] }}
+                                        />
+                                        <PageText
+                                            className={cn(styles.MapVehiclesSidebarStationName)}
+                                        >
+                                            {stop.title}
+                                        </PageText>
+                                        {'arriveTime' in stop && (
+                                            <PageText>{stop.arriveTime}</PageText>
+                                        )}
+                                    </li>
+                                ))}
+                                {beforeEnd.length > 0 && (
                                     <div
                                         className={cn(
-                                            styles.MapVehiclesSidebarBullet,
-                                            styles.MapVehiclesSidebarBullet_big,
+                                            styles.MapVehiclesSidebarHiddenStationWrapper,
                                         )}
-                                        style={{ borderColor: VEHICLE_TYPE_COLORS[type] }}
-                                    />
-                                    <PageText className={cn(styles.MapVehiclesSidebarStationName)}>
-                                        {stations[stations.length - 1].name}
-                                    </PageText>
-                                    <PageText>{stations[stations.length - 1].arrivalTime}</PageText>
-                                </li>
-                            )}
-                        </div>
-                    </ul>
-                </div>
+                                        onClick={() => {
+                                            setBeforeOpened(!beforeOpened);
+                                        }}
+                                    >
+                                        {!beforeOpened && (
+                                            <div
+                                                className={cn(styles.MapVehiclesSidebarHiddenCount)}
+                                            >
+                                                {getPointsRow(beforeEnd.length)}
+                                            </div>
+                                        )}
+                                        <div
+                                            className={cn(
+                                                styles.MapVehiclesSidebarHiddenCountTextWrapper,
+                                            )}
+                                        >
+                                            <PageText>
+                                                {`${beforeEnd.length} ${getNoun(
+                                                    beforeEnd.length,
+                                                    'остановка',
+                                                    'остановки',
+                                                    'остановок',
+                                                )}`}
+                                            </PageText>
+                                            <Arrow
+                                                className={cn(
+                                                    styles.MapVehiclesSidebarHiddenArrow,
+                                                    {
+                                                        [styles.MapVehiclesSidebarHiddenArrow_opened]:
+                                                            beforeOpened,
+                                                    },
+                                                )}
+                                            />
+                                        </div>
+                                        {beforeOpened &&
+                                            beforeEnd.map((stop) => (
+                                                <li
+                                                    className={cn(styles.MapVehiclesSidebarStation)}
+                                                >
+                                                    <div
+                                                        className={cn(
+                                                            styles.MapVehiclesSidebarBullet,
+                                                        )}
+                                                        style={{
+                                                            borderColor: VEHICLE_TYPE_COLORS[type],
+                                                        }}
+                                                    />
+                                                    <PageText
+                                                        className={cn(
+                                                            styles.MapVehiclesSidebarStationName,
+                                                        )}
+                                                    >
+                                                        {stop.title}
+                                                    </PageText>
+                                                    {'arriveTime' in stop && (
+                                                        <PageText>{stop.arriveTime}</PageText>
+                                                    )}
+                                                </li>
+                                            ))}
+                                    </div>
+                                )}
+                                {stops.length > 0 && nearestStopIndex !== stops.length - 1 && (
+                                    <li className={cn(styles.MapVehiclesSidebarStation)}>
+                                        <div
+                                            className={cn(
+                                                styles.MapVehiclesSidebarBullet,
+                                                styles.MapVehiclesSidebarBullet_big,
+                                            )}
+                                            style={{ borderColor: VEHICLE_TYPE_COLORS[type] }}
+                                        />
+                                        <PageText
+                                            className={cn(styles.MapVehiclesSidebarStationName)}
+                                        >
+                                            {endStop.title}
+                                        </PageText>
+
+                                        {'arriveTime' in endStop && (
+                                            <PageText>{endStop.arriveTime}</PageText>
+                                        )}
+                                    </li>
+                                )}
+                            </div>
+                        </ul>
+                    </div>
+                )}
                 <Divider />
                 <div className={cn(styles.MapVehiclesSidebarAdditionalWrapper)}>
-                    <Typography variant="h3">{`Подробнее ${additionalHeader[type]}`}</Typography>
+                    <Typography
+                        className={cn(styles.MapVehiclesSidebarAdditionalTitle)}
+                        variant="h3"
+                    >
+                        {`Подробнее ${additionalHeader[type]}`}
+                    </Typography>
                     <div className={cn(styles.MapVehiclesSidebarAdditional)}>
                         <div className={cn(styles.MapVehiclesSidebarOperatorWrapper)}>
                             <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>

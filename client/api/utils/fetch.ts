@@ -34,7 +34,3 @@ export async function fetchApi(url: string, options: FetchOptions) {
         console.error(e);
     }
 }
-
-export async function fetchInternalApi(url: string, options: FetchOptions) {
-    return fetchApi(getCorsWrapper(url), options);
-}

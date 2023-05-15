@@ -100,7 +100,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
     };
 
     onClickEventHandler = () => {
-        const { id, onClick, routeDirection } = this.props;
+        const { onClick, routeDirection, routeId } = this.props;
 
         if (!this.isActive) {
             this.isActive = true;
@@ -109,7 +109,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
             });
         }
 
-        onClick(id, routeDirection);
+        onClick(routeId, routeDirection);
     };
 
     private updateTranslate = () => {
