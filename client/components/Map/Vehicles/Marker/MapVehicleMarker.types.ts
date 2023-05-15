@@ -1,7 +1,7 @@
 import { ClientUnit } from 'transport-common/types/masstrans';
 
 export type MapVehicleMarkerProps = {
-    boardId: number;
+    id: string;
     routeNumber: string;
     type: ClientUnit;
     isCourseEast: boolean;

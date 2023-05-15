@@ -61,6 +61,7 @@ const cn = classNames.bind(styles);
 // }
 
 export function MapVehiclesSidebar({
+    id,
     boardId,
     speed,
     num,
@@ -72,7 +73,6 @@ export function MapVehiclesSidebar({
     firstStation,
     lastStation,
     depoTitle,
-    id,
     coords,
 }: MapVehiclesItemProps) {
     const [from, to] = [firstStation, lastStation];
@@ -376,7 +376,7 @@ export function MapVehiclesSidebar({
                                 <li className={cn(styles.MapVehiclesSidebarStation)}>
                                     <div className={cn(styles.MapVehiclesSidebarVehicleMarker)}>
                                         <MapVehicleMarker
-                                            boardId={boardId}
+                                            id={id}
                                             routeNumber={num}
                                             type={type}
                                             isCourseEast={false}
