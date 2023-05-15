@@ -45,7 +45,7 @@ export function MapVehicles({ vehicles, type, onClick }: MapVehiclesProps) {
                     <MapVehiclesItem
                         {...vehicle}
                         type={type}
-                        key={`${type}-${vehicle.id}`}
+                        key={`${type}-${vehicle.boardId}`}
                         onClick={onClick}
                     />
                 ) : null,
