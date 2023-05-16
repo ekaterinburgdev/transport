@@ -338,6 +338,10 @@
     text-align: center;
 }
 
+.MapVehiclesSidebarAdditionalTitle {
+    text-align: center;
+}
+
 .MapVehiclesSidebarOperatorWrapper {
     display: flex;
     flex-direction: column;

@@ -62,7 +62,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
     }
 
     getIcon() {
-        const { boardId, num, course, type, accessibility, warning } = this.props;
+        const { id, num, course, type, accessibility, warning } = this.props;
         const isCourseEast = course > EAST_COURSE_RANGE.left && course < EAST_COURSE_RANGE.right;
 
         return new L.DivIcon({
@@ -72,7 +72,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
             className: `${cn(styles.MapVehicle)}`,
             html: ReactDOMServer.renderToStaticMarkup(
                 <MapVehicleMarker
-                    boardId={boardId}
+                    id={id}
                     routeNumber={num}
                     type={type}
                     accessibility={accessibility}
@@ -100,7 +100,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
     };
 
     onClickEventHandler = () => {
-        const { id, onClick, routeDirection } = this.props;
+        const { onClick, routeDirection, routeId } = this.props;
 
         if (!this.isActive) {
             this.isActive = true;
@@ -109,13 +109,13 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
             });
         }
 
-        onClick(id, routeDirection);
+        onClick(routeId, routeDirection);
     };
 
     private updateTranslate = () => {
-        const { boardId, num, speed, course } = this.props;
+        const { id, num, speed, course } = this.props;
 
-        const marker = document.querySelector(`#vehicle-${boardId}-${num}`) as HTMLDivElement;
+        const marker = document.querySelector(`#vehicle-${id}-${num}`) as HTMLDivElement;
 
         if (!marker) {
             return;

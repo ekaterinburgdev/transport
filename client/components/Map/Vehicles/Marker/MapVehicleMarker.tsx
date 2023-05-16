@@ -10,7 +10,7 @@ import styles from './MapVehicleMarker.module.css';
 const cn = classNames.bind(styles);
 
 export function MapVehicleMarker({
-    boardId,
+    id,
     routeNumber,
     type,
     isCourseEast,
@@ -27,7 +27,7 @@ export function MapVehicleMarker({
 
     return (
         <div
-            id={`vehicle-${boardId}-${routeNumber}`}
+            id={`vehicle-${id}-${routeNumber}`}
             style={{ transform: 'translate3d(0px, 0px, 0px)' }}
             className={cn(styles.MapVehicleMarker)}
         >

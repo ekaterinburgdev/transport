@@ -20,7 +20,7 @@ export const serverToClientMappers = {
             ),
         }));
 
-        return _.keyBy(flatTree, 'type') as TransportTree;
+        return _.keyBy(flatTree, 'type') as unknown as TransportTree;
     },
     [JsonRpcMethods.GetRoute]: (routes: ServerRoute[]) => {
         const flatStops = routes

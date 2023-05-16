@@ -1,7 +1,11 @@
 import fetch from 'node-fetch';
 import _ from 'lodash';
 
-import { ServerRoute, ServerStopArriveUnit } from 'transport-common/types/ekaterinburg-rf';
+import {
+    ServerRoute,
+    ServerStopArriveUnit,
+    ServerUnitArrive,
+} from 'transport-common/types/ekaterinburg-rf';
 import { ClientUnit, TransportTree } from 'transport-common/types/masstrans';
 import { createStrapiMethods } from 'transport-common/strapi/create-methods';
 import { StrapiContentTypes, StrapiTree } from 'transport-common/types/strapi';
@@ -32,6 +36,12 @@ export class EkaterinburgRfModel {
 
     constructor() {
         this.updateTransportTree();
+    }
+
+    getUnitArrive(unitId: string): Promise<ServerUnitArrive[]> {
+        return this.sendRequest(JsonRpcMethods.GetUnitArrive, {
+            u_id: unitId,
+        });
     }
 
     getRoute(routeId: string): Promise<ServerRoute> {
@@ -114,7 +124,7 @@ export class EkaterinburgRfModel {
         }
 
         const flatTree = tree.map((treeOfType) => treeOfType.attributes);
-        const groupedTree = _.keyBy(flatTree, 'type') as TransportTree;
+        const groupedTree = _.keyBy(flatTree, 'type') as unknown as TransportTree;
 
         this.transportTree = groupedTree;
     }
