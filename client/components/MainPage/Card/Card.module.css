@@ -16,7 +16,7 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 16px;
-    border-radius: 8px;
+    border-radius: 16px;
     text-decoration: none;
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -33,7 +33,7 @@
 }
 
 .CardTitle {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 1.05;
     margin-bottom: 8px;
@@ -51,7 +51,7 @@
 
 @media screen and (min-width: 768px) {
     .CardTitle {
-        font-size: 28px;
+        font-size: 32px;
         border-radius: 8px;
     }
 }
@@ -75,11 +75,11 @@
 
 .CardButton {
     display: inline-block;
-    border-radius: 4px;
-    font-size: 12px;
+    border-radius: 8px;
+    font-size: 14px;
     line-height: 1.35;
     font-weight: 400;
-    padding: 8px;
+    padding: .55em 1.2em;
     margin-top: auto;
     color: var(--CardButtonColor);
     background-color: var(--CardButtonBgrColor);

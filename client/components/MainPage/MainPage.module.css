@@ -1,59 +1,65 @@
 .MainPage {
     display: flex;
     justify-content: center;
-    background: #f2f2f2;
     overflow: hidden;
+    background: #f2f2f2;
 }
 
 .MainPageInner {
-    max-width: 1800px;
     width: 100%;
     margin: auto;
-    padding: 0 5vw;
+    padding: 0 20px;
 }
 
-.MainPageTitle {
-    font-size: 10vw;
-}
-
-@media screen and (min-width: 1200px) {
-    .MainPageTitle {
-        font-size: min(10vw, 160px);
+@media screen and (min-width: 768px) {
+    .MainPageInner {
+        max-width: 1800px;
+        padding: 0 2vmax;
     }
 }
 
 .MainPageLogo {
     display: flex;
     align-items: center;
-    font-size: 3.75vw;
-    line-height: 1;
-    margin-top: 0.15em;
+    margin-top: 0.5em;
+    margin-bottom: 1.1em;
     color: #123;
     font-weight: 500;
-    margin-bottom: 0.8em;
+    font-size: min(9.8vw, 176px);
+    line-height: 1;
+}
+
+
+@media screen and (min-width: 768px) {
+    .MainPageLogo {
+        margin-bottom: .8em;
+    }
 }
 
 .MainPageLogo svg {
     flex-shrink: 0;
-    width: 19.5vw;
-    height: 19.5vw;
-    margin-right: 5vw;
+    width: 2.3em;
+    height: 2.3em;
+    margin-right: .26em;
 }
 
-@media screen and (min-width: 768px) {
-    .MainPageLogo svg {
-        flex-shrink: 0;
-        width: 16vw;
-        height: 16vw;
-        margin-right: 3vw;
-    }
+.MainPageTitle {
+    font-size: 1em;
+    font-weight: 500;
+    margin: 0;
 }
 
 .MainPageCardGrid {
     display: grid;
-    grid-auto-flow: row dense;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .9vw;
+    grid-auto-flow: row dense;
+    gap: 24px;
+}
+
+@media screen and (min-width: 768px) {
+    .MainPageCardGrid {
+        gap: 32px;
+    }
 }
 
 .MainPageCardGrid > * {
@@ -63,8 +69,8 @@
 /* TODO: control grid size via CMS */
 .MainPageCardGrid > *:nth-child(1),
 .MainPageCardGrid > *:nth-child(8) {
-    aspect-ratio: 2 / 1;
     grid-area: span 1 / span 2;
+    aspect-ratio: 2 / 1;
 }
 
 @media screen and (min-width: 768px) {

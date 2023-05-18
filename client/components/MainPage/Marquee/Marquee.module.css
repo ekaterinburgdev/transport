@@ -1,11 +1,22 @@
 .Marquee {
+    padding: 16px;
+    margin-top: 48px;
+    margin-bottom: 64px;
     font-family: 'Press Start 2P';
-    padding: 8px;
     background: #000000;
-    border-radius: 8px;
+    border-radius: 24px;
     overflow: hidden;
     color: rgb(230, 50, 35);
     text-shadow: 0px 0px 16px #E63223;
+}
+
+@media screen and (min-width: 768px) {
+    .Marquee {
+        margin-top: 94px;
+        margin-bottom: 94px;
+        padding: 24px;
+        border-radius: 77px;
+    }
 }
 
 @media screen and (min-width: 1440px) {
