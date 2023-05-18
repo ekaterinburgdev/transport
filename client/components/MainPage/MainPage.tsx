@@ -10,6 +10,7 @@ import Logo from './Logo.svg';
 import styles from './MainPage.module.css';
 import { Marquee } from './Marquee/Marquee';
 import { Notification } from './Notification/Notification';
+import { PROJECT_TRANSPORT, ProjectsPanel, Theme } from 'ekb';
 
 const cn = classNames.bind(styles);
 
@@ -54,6 +55,8 @@ export function MainPage({ cards, marqueeItems, notifications }: MainPageTypes) 
 
                 <Marquee items={marqueeItems.map(({ attributes: { message } }) => message)} />
             </div>
+
+            <ProjectsPanel activeProjectId={PROJECT_TRANSPORT.id} theme={Theme.LIGHT} />
         </div>
     );
 }
