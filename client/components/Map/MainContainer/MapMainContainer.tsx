@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import L from 'leaflet';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import classNames from 'classnames/bind';
-import { ProjectsPanel, PROJECT_TRANSPORT, Theme } from 'ekb';
 
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
@@ -67,7 +66,6 @@ function MapMainContainer() {
 
                 {sidebar}
             </MapContainer>
-            <ProjectsPanel activeProjectId={PROJECT_TRANSPORT.id} theme={Theme.LIGHT} />
         </>
     );
 }

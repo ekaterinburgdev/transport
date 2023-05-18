@@ -10,6 +10,7 @@ import Logo from './Logo.svg';
 import styles from './MainPage.module.css';
 import { Marquee } from './Marquee/Marquee';
 import { Notification } from './Notification/Notification';
+import { ALL_PROJECTS, PRODUCTION_PROJECTS, PROJECT_TRANSPORT, ProjectsPanel, Theme } from 'ekb';
 
 const cn = classNames.bind(styles);
 

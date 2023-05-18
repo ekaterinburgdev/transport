@@ -4,6 +4,7 @@ import Head from 'next/head';
 
 import 'styles/globals.css';
 import 'ekb/style.css';
+import { ALL_PROJECTS, PROJECT_TRANSPORT, ProjectsPanel, Theme } from 'ekb';
 
 type AppProps<PropsType extends object> = {
     Component: React.ComponentType<PropsType>;
@@ -21,6 +22,8 @@ function App({ Component, pageProps }: AppProps<any>) {
             </Head>
 
             <Component {...pageProps} />
+
+            <ProjectsPanel projects={ALL_PROJECTS} activeProjectId={PROJECT_TRANSPORT.id} theme={Theme.LIGHT} />
         </>
     );
 }
