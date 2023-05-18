@@ -13,6 +13,7 @@
     --CardButtonBgrColor: transparent;
 
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: flex-start;
     padding: 16px;
@@ -23,6 +24,34 @@
     background-position: 100% 100%;
     background-color: var(--CardBgrColor);
     background-image: var(--CardBgrImage);
+    box-shadow: 0 2px 4px rgba(0,0,0,.04);
+    border: 1px solid rgba(0,0,0,.08);
+}
+
+.Card:before {
+    content: '';
+    position: absolute;
+    border-radius: inherit;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: .15s ease opacity;
+}
+
+@media (hover: hover) {
+    .Card:hover:before {
+        opacity: .1;
+        box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    }
+}
+
+.Card:active:before {
+    opacity: .15;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
 }
 
 @media screen and (min-width: 768px) {
