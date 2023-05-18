@@ -2,51 +2,39 @@
     display: flex;
     justify-content: center;
     overflow: hidden;
-    background: #f2f2f2;
+    background: white;
 }
 
 .MainPageInner {
     width: 100%;
+    max-width: 1980px;
     margin: auto;
-    padding: 0 20px;
-}
-
-@media screen and (min-width: 768px) {
-    .MainPageInner {
-        max-width: 1800px;
-        padding: 0 2vmax;
-    }
+    padding: 2vmax;
 }
 
 .MainPageLogo {
     display: flex;
     align-items: center;
-    margin-top: 0.5em;
-    margin-bottom: 1.1em;
+    margin-top: 0.15em;
+    margin-bottom: .5em;
     color: #123;
     font-weight: 500;
-    font-size: min(9.8vw, 176px);
+    font-size: min(8vw, 176px);
     line-height: 1;
-}
-
-
-@media screen and (min-width: 768px) {
-    .MainPageLogo {
-        margin-bottom: .8em;
-    }
 }
 
 .MainPageLogo svg {
     flex-shrink: 0;
-    width: 2.3em;
-    height: 2.3em;
-    margin-right: .26em;
+    width: 2.25em;
+    height: 2.25em;
+    margin-right: .25em;
 }
 
 .MainPageTitle {
     font-size: 1em;
     font-weight: 500;
     margin: 0;
+    margin-bottom: 0.4vw;
 }
 
 .MainPageCardGrid {
