@@ -118,9 +118,10 @@ export const masstransController = {
 
         const result: UnitArriveStop[] = [...stops];
         const nextStopIndex = result.findIndex((stop) => stop.stopId === arriveInfo[0].stopId);
-        const arriveInfoWithCoords = arriveInfo.map((info, idx) => ({
+
+        const arriveInfoWithCoords = arriveInfo.slice(0, result.length).map((info, idx) => ({
             ...info,
-            coords: result[nextStopIndex + idx].coords,
+            coords: result[nextStopIndex + idx]?.coords,
         }));
 
         result.splice(nextStopIndex, arriveInfoWithCoords.length, ...arriveInfoWithCoords);

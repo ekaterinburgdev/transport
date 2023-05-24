@@ -6,6 +6,8 @@
     "build": "tsc"
   },
   "dependencies": {
+    "form-data": "^4.0.0",
+    "formdata-node": "4",
     "node-fetch": "^2.6.9"
   },
   "devDependencies": {

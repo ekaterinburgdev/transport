@@ -15,6 +15,9 @@ const nextConfig = {
         return config;
     },
     transpilePackages: ['transport-common'],
+    images: {
+        unoptimized: true,
+    },
 };
 
 module.exports = nextConfig;

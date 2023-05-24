@@ -48,8 +48,13 @@
     stroke: white;
 }
 
-.MapVehiclesSidebarVehicleImage {
+.MapVehiclesSidebarVehicleImageWrapper {
     font-size: 0;
+}
+
+.MapVehiclesSidebarVehicleImage {
+    object-fit: cover;
+    object-position: center;
 }
 
 .MapVehiclesSidebarVehicleInfoWrapper {

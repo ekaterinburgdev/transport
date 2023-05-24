@@ -1,6 +1,6 @@
 export const featuresTitle = {
     stroller: 'можно с коляской',
-    'low-mobility': 'можно с инвалидным креслом',
+    accessibility: 'можно с инвалидным креслом',
     bike: 'можно с велосипедом',
     wifi: 'есть бесплатный вайфай',
     elderly: 'есть места для пенсионеров',

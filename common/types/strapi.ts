@@ -1,21 +1,27 @@
-import { Stop, TransportTreeOfType } from './masstrans';
+import { Stop, TransportTreeOfType, UnitInfo } from './masstrans';
 
 export enum StrapiContentTypes {
     Stop = 'stop',
     TransportTree = 'transport-tree',
+    UnitInfo = 'unit-info',
 }
 
-export type StrapiStop = {
+export interface StrapiStop {
     id: number;
     attributes: Stop;
-};
+}
 
-export type StrapiTree = {
+export interface StrapiUnitInfo {
+    id: number;
+    attributes: UnitInfo;
+}
+
+export interface StrapiTree {
     id: number;
     attributes: TransportTreeOfType;
-};
+}
 
-export type StrapiLoginResponse = {
+export interface StrapiLoginResponse {
     user: string;
     jwt: string;
-};
+}
