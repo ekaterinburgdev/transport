@@ -1,5 +1,5 @@
 {
-    "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript", "../eslintrc.json"],
+    "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript", "../.eslintrc.json"],
     "parserOptions": {
       "project": "./tsconfig.json"
     }
