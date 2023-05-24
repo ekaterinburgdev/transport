@@ -163,9 +163,6 @@ importers:
       form-data:
         specifier: ^4.0.0
         version: 4.0.0
-      formdata-node:
-        specifier: '4'
-        version: 4.4.1
       node-fetch:
         specifier: ^2.6.9
         version: 2.6.9
@@ -188,9 +185,6 @@ importers:
       form-data:
         specifier: ^4.0.0
         version: 4.0.0
-      formdata-node:
-        specifier: '4'
-        version: 4.4.1
       jsdom:
         specifier: ^22.0.0
         version: 22.0.0
@@ -3744,14 +3738,6 @@ packages:
       mime-types: 2.1.35
     dev: false
 
-  /formdata-node@4.4.1:
-    resolution: {integrity: sha512-0iirZp3uVDjVGt9p49aTaqjk84TrglENEDuqfdlZQ1roC9CWlPk6Avf8EEnZNcAqPonwkG35x4n3ww/1THYAeQ==}
-    engines: {node: '>= 12.20'}
-    dependencies:
-      node-domexception: 1.0.0
-      web-streams-polyfill: 4.0.0-beta.3
-    dev: false
-
   /forwarded@0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
     engines: {node: '>= 0.6'}
@@ -4866,11 +4852,6 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
-    dev: false
-
-  /node-domexception@1.0.0:
-    resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
-    engines: {node: '>=10.5.0'}
     dev: false
 
   /node-fetch@2.6.9:
@@ -6210,11 +6191,6 @@ packages:
     engines: {node: '>=14'}
     dependencies:
       xml-name-validator: 4.0.0
-    dev: false
-
-  /web-streams-polyfill@4.0.0-beta.3:
-    resolution: {integrity: sha512-QW95TCTaHmsYfHDybGMwO5IJIM93I/6vTRk+daHTWFPhwh+C8Cg7j7XyKrwrj8Ib6vYXe0ocYNrmzY4xAAN6ug==}
-    engines: {node: '>= 14'}
     dev: false
 
   /webidl-conversions@3.0.1:

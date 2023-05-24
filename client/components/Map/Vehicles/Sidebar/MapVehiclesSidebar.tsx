@@ -8,9 +8,11 @@ import Image from 'next/image';
 // import dynamic from 'next/dynamic';
 
 import { ClientUnit, ImageSizes, UnitArriveStop, UnitInfo } from 'transport-common/types/masstrans';
+import { STRAPI_URL } from 'transport-common/strapi/constants';
 
 import sidebarStyles from 'styles/leaflet-sidebar.module.css';
 
+import { massTransApi } from 'api/masstrans/masstrans';
 import { POSITION_CLASSES } from 'common/constants/positions';
 import { TStationType } from 'common/types/masstrans';
 import { VEHICLE_TYPE_COLORS, VEHICLE_TYPE_TRANSLUCENT_COLORS } from 'common/constants/colors';
@@ -31,19 +33,20 @@ import { Typography } from 'components/UI/Typography/Typography';
 import { MapVehiclesItemProps } from '../Item/MapVehiclesItem.types';
 import { MapVehicleMarker } from '../Marker/MapVehicleMarker';
 
-import modelPic from './mocks/model.png';
 import operatorPic from './mocks/operator.png';
-import { featuresTitle, fixture } from './mocks/main';
 
 import Velocity from './Velocity/velocity.svg';
 import VelocityColor from './Velocity/velocity-color.svg';
 
-import { additionalHeader, vehiclesName, SVERDLOVSK_REGION } from './MapVehiclesSidebar.constants';
+import {
+    additionalHeader,
+    vehiclesName,
+    SVERDLOVSK_REGION,
+    featuresTitle,
+} from './MapVehiclesSidebar.constants';
 import { getPointsRow } from './MapVehiclesSidebar.utils';
 
 import styles from './MapVehiclesSidebar.module.css';
-import { massTransApi } from 'api/masstrans/masstrans';
-import { STRAPI_URL } from 'transport-common/strapi/constants';
 
 export type MapVehiclesSidebarProps = {
     type: TStationType;
@@ -134,11 +137,6 @@ export function MapVehiclesSidebar({
             subTitle: depoTitleMatch?.[2] ? `Филиал ${depoTitleMatch?.[2]}` : undefined,
         };
     }, [depoTitle]);
-
-    const {
-        // imageUrl,
-        features,
-    } = fixture;
 
     const manufactureYearDiff = useMemo(() => {
         if (!unitInfo?.year) {
