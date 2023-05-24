@@ -33,8 +33,6 @@ import { Typography } from 'components/UI/Typography/Typography';
 import { MapVehiclesItemProps } from '../Item/MapVehiclesItem.types';
 import { MapVehicleMarker } from '../Marker/MapVehicleMarker';
 
-import operatorPic from './mocks/operator.png';
-
 import Velocity from './Velocity/velocity.svg';
 import VelocityColor from './Velocity/velocity-color.svg';
 
@@ -530,9 +528,10 @@ export function MapVehiclesSidebar({
                             <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
                                 Перевозчик
                             </span>
-                            {vehicleOperator.title === 'Гортранс' && (
+                            {/* // TODO: add operators' pics */}
+                            {/* {vehicleOperator.title === 'Гортранс' && (
                                 <Image src={operatorPic} layout="intrinsic" alt="Перевозчик" />
-                            )}
+                            )} */}
                             <div>
                                 <span className={cn(styles.MapVehiclesSidebarAdditionalTitle)}>
                                     {vehicleOperator.title}
