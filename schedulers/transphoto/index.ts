@@ -96,7 +96,7 @@ async function updateUnitInfoInStrapi(
                 });
                 console.log('deleting old image from strapi');
 
-                if (!infoFromStrapi.image?.data.id) {
+                if (!infoFromStrapi.image?.data?.id) {
                     continue;
                 }
 
