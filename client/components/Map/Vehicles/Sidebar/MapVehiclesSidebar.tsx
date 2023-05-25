@@ -92,11 +92,7 @@ export function MapVehiclesSidebar({
         massTransApi.getUnitInfo(type, boardId, stateNumber).then((unitInfoRes) => {
             const unitInfoItem = unitInfoRes[0];
 
-            if (!unitInfoItem) {
-                return;
-            }
-
-            setUnitInfo(unitInfoItem.attributes);
+            setUnitInfo(unitInfoItem?.attributes);
         });
     }, [type, boardId, stateNumber]);
 
