@@ -109,7 +109,7 @@ export enum ImageSizes {
 
 export interface UnitInfo {
     image?: {
-        data: {
+        data?: {
             id: number;
             attributes: {
                 formats: Record<ImageSizes, ImageFormat>;

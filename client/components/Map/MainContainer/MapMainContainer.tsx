@@ -45,28 +45,26 @@ function MapMainContainer() {
     }, []);
 
     return (
-        <>
-            <MapContainer
-                center={position}
-                attributionControl={null}
-                zoomControl={false}
-                zoom={16}
-                zoomDelta={0.6}
-                zoomSnap={0.4}
-                scrollWheelZoom
-                doubleClickZoom={false}
-                className={cn(styles.Map)}
-            >
-                <TileLayer url="https://tiles.ekaterinburg.io/styles/basic-white/{z}/{x}/{y}@2x.png" />
+        <MapContainer
+            center={position}
+            attributionControl={null}
+            zoomControl={false}
+            zoom={16}
+            zoomDelta={0.6}
+            zoomSnap={0.4}
+            scrollWheelZoom
+            doubleClickZoom={false}
+            className={cn(styles.Map)}
+        >
+            <TileLayer url="https://tiles.ekaterinburg.io/styles/basic-white/{z}/{x}/{y}@2x.png" />
 
-                <MapLocation />
-                <MapZoomControl position="bottomright" />
+            <MapLocation />
+            <MapZoomControl position="bottomright" />
 
-                <MapTransport />
+            <MapTransport />
 
-                {sidebar}
-            </MapContainer>
-        </>
+            {sidebar}
+        </MapContainer>
     );
 }
 

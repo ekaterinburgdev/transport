@@ -211,12 +211,11 @@ export function MapVehiclesSidebar({
                     <div className={cn(styles.MapVehiclesSidebarVehicleImageWrapper)}>
                         <Image
                             src={`${STRAPI_URL}${
-                                unitInfo?.image.data.attributes.formats[ImageSizes.Medium].url
+                                unitInfo?.image.data.attributes.formats[ImageSizes.Small].url
                             }`}
                             className={cn(styles.MapVehiclesSidebarVehicleImage)}
                             width={448}
                             height={250}
-                            unoptimized
                             alt={`Маршрут №${num}`}
                         />
                     </div>
@@ -586,65 +585,85 @@ export function MapVehiclesSidebar({
                             </div>
                         )}
                     </div>
-                    <Divider />
-                    <div className={cn(styles.MapVehiclesSidebarAdditional)}>
-                        {Boolean(unitInfo?.model || unitInfo?.factory) && (
-                            <div className={cn(styles.MapVehiclesSidebarModelWrapper)}>
-                                <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
-                                    Модель машины
-                                </span>
-                                {/* TODO: add models' pics */}
-                                {/* <Image src={modelPic} layout="intrinsic" alt="Модель" /> */}
-                                <div>
-                                    {unitInfo.model && (
+                    {unitInfo && (
+                        <>
+                            <Divider />
+                            <div className={cn(styles.MapVehiclesSidebarAdditional)}>
+                                {Boolean(unitInfo?.model || unitInfo?.factory) && (
+                                    <div className={cn(styles.MapVehiclesSidebarModelWrapper)}>
                                         <span
-                                            className={cn(styles.MapVehiclesSidebarAdditionalTitle)}
+                                            className={cn(styles.MapVehiclesSidebarAdditionalLabel)}
                                         >
-                                            {unitInfo.model}
+                                            Модель машины
                                         </span>
-                                    )}
-                                    {Boolean(unitInfo.model && unitInfo.factory) && <br />}
-                                    {unitInfo.factory && (
+                                        {/* TODO: add models' pics */}
+                                        {/* <Image src={modelPic} layout="intrinsic" alt="Модель" /> */}
+                                        <div>
+                                            {unitInfo.model && (
+                                                <span
+                                                    className={cn(
+                                                        styles.MapVehiclesSidebarAdditionalTitle,
+                                                    )}
+                                                >
+                                                    {unitInfo.model}
+                                                </span>
+                                            )}
+                                            {Boolean(unitInfo.model && unitInfo.factory) && <br />}
+                                            {unitInfo.factory && (
+                                                <span
+                                                    className={cn(
+                                                        styles.MapVehiclesSidebarAdditionalSubitle,
+                                                    )}
+                                                >
+                                                    {unitInfo.factory}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+                                {unitInfo?.factoryNumber && (
+                                    <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
+                                        <span
+                                            className={cn(styles.MapVehiclesSidebarAdditionalLabel)}
+                                        >
+                                            Заводской номер
+                                        </span>
+                                        <span
+                                            className={cn(styles.MapVehiclesSidebarFactoryNumber)}
+                                        >
+                                            {unitInfo.factoryNumber}
+                                        </span>
+                                    </div>
+                                )}
+                                {unitInfo?.year && (
+                                    <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
+                                        <span
+                                            className={cn(styles.MapVehiclesSidebarAdditionalLabel)}
+                                        >
+                                            Год выпуска
+                                        </span>
+                                        <span
+                                            className={cn(styles.MapVehiclesSidebarManufactureYear)}
+                                        >
+                                            {unitInfo.year}
+                                        </span>
                                         <span
                                             className={cn(
-                                                styles.MapVehiclesSidebarAdditionalSubitle,
+                                                styles.MapVehiclesSidebarManufactureYearDiff,
                                             )}
                                         >
-                                            {unitInfo.factory}
+                                            {`${manufactureYearDiff} ${getNoun(
+                                                manufactureYearDiff,
+                                                'год',
+                                                'года',
+                                                'лет',
+                                            )} назад`}
                                         </span>
-                                    )}
-                                </div>
+                                    </div>
+                                )}
                             </div>
-                        )}
-                        {unitInfo?.factoryNumber && (
-                            <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
-                                <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
-                                    Заводской номер
-                                </span>
-                                <span className={cn(styles.MapVehiclesSidebarFactoryNumber)}>
-                                    {unitInfo.factoryNumber}
-                                </span>
-                            </div>
-                        )}
-                        {unitInfo?.year && (
-                            <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
-                                <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
-                                    Год выпуска
-                                </span>
-                                <span className={cn(styles.MapVehiclesSidebarManufactureYear)}>
-                                    {unitInfo.year}
-                                </span>
-                                <span className={cn(styles.MapVehiclesSidebarManufactureYearDiff)}>
-                                    {`${manufactureYearDiff} ${getNoun(
-                                        manufactureYearDiff,
-                                        'год',
-                                        'года',
-                                        'лет',
-                                    )} назад`}
-                                </span>
-                            </div>
-                        )}
-                    </div>
+                        </>
+                    )}
                 </div>
             </div>
         </div>
