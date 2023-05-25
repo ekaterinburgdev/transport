@@ -81,10 +81,12 @@ export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: strin
         }
     }
 
-    async function getAll() {
+    async function getAll(filter?: string, withImage: boolean = false) {
         try {
             const resp = await fetch(
-                `${STRAPI_URL}/api/${contentType}s?pagination[pageSize]=${REQUEST_PAGINATION_SIZE}`,
+                `${STRAPI_URL}/api/${contentType}s?pagination[pageSize]=${REQUEST_PAGINATION_SIZE}${
+                    withImage ? '&populate=image' : ''
+                }${filter ? '&' + filter : ''}`,
                 requestToStrapiOptions,
             );
 

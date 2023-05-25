@@ -7,10 +7,12 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 // import dynamic from 'next/dynamic';
 
-import { ClientUnit, UnitArriveStop } from 'transport-common/types/masstrans';
+import { ClientUnit, ImageSizes, UnitArriveStop, UnitInfo } from 'transport-common/types/masstrans';
+import { STRAPI_URL } from 'transport-common/strapi/constants';
 
 import sidebarStyles from 'styles/leaflet-sidebar.module.css';
 
+import { massTransApi } from 'api/masstrans/masstrans';
 import { POSITION_CLASSES } from 'common/constants/positions';
 import { TStationType } from 'common/types/masstrans';
 import { VEHICLE_TYPE_COLORS, VEHICLE_TYPE_TRANSLUCENT_COLORS } from 'common/constants/colors';
@@ -31,18 +33,18 @@ import { Typography } from 'components/UI/Typography/Typography';
 import { MapVehiclesItemProps } from '../Item/MapVehiclesItem.types';
 import { MapVehicleMarker } from '../Marker/MapVehicleMarker';
 
-import modelPic from './mocks/model.png';
-import operatorPic from './mocks/operator.png';
-import { featuresTitle, fixture } from './mocks/main';
-
 import Velocity from './Velocity/velocity.svg';
 import VelocityColor from './Velocity/velocity-color.svg';
 
-import { additionalHeader, vehiclesName, SVERDLOVSK_REGION } from './MapVehiclesSidebar.constants';
+import {
+    additionalHeader,
+    vehiclesName,
+    SVERDLOVSK_REGION,
+    featuresTitle,
+} from './MapVehiclesSidebar.constants';
 import { getPointsRow } from './MapVehiclesSidebar.utils';
 
 import styles from './MapVehiclesSidebar.module.css';
-import { massTransApi } from 'api/masstrans/masstrans';
 
 export type MapVehiclesSidebarProps = {
     type: TStationType;
@@ -69,7 +71,7 @@ export function MapVehiclesSidebar({
     stateNumber,
     warning,
     map,
-    model,
+    accessibility,
     firstStation,
     lastStation,
     depoTitle,
@@ -77,6 +79,7 @@ export function MapVehiclesSidebar({
 }: MapVehiclesItemProps) {
     const [from, to] = [firstStation, lastStation];
     const [stops, setStops] = useState<UnitArriveStop[]>([]);
+    const [unitInfo, setUnitInfo] = useState<UnitInfo>(null);
     const latLngCoords = useMemo(() => new L.LatLng(...coords), [coords]);
 
     useEffect(() => {
@@ -84,6 +87,14 @@ export function MapVehiclesSidebar({
             setStops(stopsRes || []);
         });
     }, [id]);
+
+    useEffect(() => {
+        massTransApi.getUnitInfo(type, boardId, stateNumber).then((unitInfoRes) => {
+            const unitInfoItem = unitInfoRes[0];
+
+            setUnitInfo(unitInfoItem?.attributes);
+        });
+    }, [type, boardId, stateNumber]);
 
     const stateNumberObject = useMemo(() => {
         const splittedStateNum = stateNumber.toLocaleLowerCase().split(' ');
@@ -121,13 +132,15 @@ export function MapVehiclesSidebar({
         };
     }, [depoTitle]);
 
-    const {
-        // imageUrl,
-        features,
-        additionalInfo: { vehicleModel, factoryNumber, manufactureYear },
-    } = fixture;
+    const manufactureYearDiff = useMemo(() => {
+        if (!unitInfo?.year) {
+            return 0;
+        }
 
-    const manufactureYearDiff = new Date().getFullYear() - manufactureYear;
+        const numberYear = parseInt(unitInfo.year.match(/((\d+)\.)?(\d{4})/)[3], 10);
+
+        return new Date().getFullYear() - numberYear;
+    }, [unitInfo?.year]);
 
     const ref = useRef<HTMLDivElement>(null);
     const [afterOpened, setAfterOpened] = useState(false);
@@ -140,6 +153,10 @@ export function MapVehiclesSidebar({
             Math.max(
                 stops.reduce(
                     (acc, stop, idx) => {
+                        if (!stop.coords || !latLngCoords) {
+                            return acc;
+                        }
+
                         const distance = latLngCoords.distanceTo(stop.coords);
 
                         if (distance < acc.distance) {
@@ -190,9 +207,19 @@ export function MapVehiclesSidebar({
                 >
                     <Close className={cn(styles.MapVehiclesSidebarCloseIcon)} />
                 </button>
-                <div className={cn(styles.MapVehiclesSidebarVehicleImage)}>
-                    <Image src={`/${type}.png`} width="448" height="225" alt={type} />
-                </div>
+                {unitInfo?.image.data && (
+                    <div className={cn(styles.MapVehiclesSidebarVehicleImageWrapper)}>
+                        <Image
+                            src={`${STRAPI_URL}${
+                                unitInfo?.image.data.attributes.formats[ImageSizes.Small].url
+                            }`}
+                            className={cn(styles.MapVehiclesSidebarVehicleImage)}
+                            width={448}
+                            height={250}
+                            alt={`Маршрут №${num}`}
+                        />
+                    </div>
+                )}
                 <div className={cn(styles.MapVehiclesSidebarVehicleInfoWrapper)}>
                     <div className={cn(styles.MapVehiclesSidebarVehicleInfo)}>
                         <div
@@ -214,27 +241,16 @@ export function MapVehiclesSidebar({
                                     />
                                 </abbr>
                             )}
-                            {features.map((feature) => (
-                                <abbr
-                                    key={feature}
-                                    title={featuresTitle[feature]}
-                                    style={{ fontSize: 0 }}
-                                >
-                                    {/* TODO: temp solve instead of dinamic import */}
+                            {accessibility && (
+                                <abbr title={featuresTitle.accessibility} style={{ fontSize: 0 }}>
                                     <Image
-                                        src={`/icons/${feature}-${type}.svg`}
+                                        src={`/icons/${type}-accessibility.svg`}
                                         width={32}
                                         height={32}
-                                        alt={`${feature}-${type}`}
+                                        alt={featuresTitle.accessibility}
                                     />
-                                    {/* <IconComponent
-                                    feature={feature}
-                                    className={cn(
-                                        styles[`MapVehiclesSidebarVehicleFeatureIcon_${type}`],
-                                    )}
-                                /> */}
                                 </abbr>
-                            ))}
+                            )}
                         </div>
                     </div>
                     <div className={cn(styles.MapVehiclesSidebarVelocity)}>
@@ -507,9 +523,10 @@ export function MapVehiclesSidebar({
                             <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
                                 Перевозчик
                             </span>
-                            {vehicleOperator.title === 'Гортранс' && (
+                            {/* // TODO: add operators' pics */}
+                            {/* {vehicleOperator.title === 'Гортранс' && (
                                 <Image src={operatorPic} layout="intrinsic" alt="Перевозчик" />
-                            )}
+                            )} */}
                             <div>
                                 <span className={cn(styles.MapVehiclesSidebarAdditionalTitle)}>
                                     {vehicleOperator.title}
@@ -568,48 +585,85 @@ export function MapVehiclesSidebar({
                             </div>
                         )}
                     </div>
-                    <Divider />
-                    <div className={cn(styles.MapVehiclesSidebarAdditional)}>
-                        <div className={cn(styles.MapVehiclesSidebarModelWrapper)}>
-                            <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
-                                Модель машины
-                            </span>
-                            <Image src={modelPic} layout="intrinsic" alt="Модель" />
-                            <div>
-                                <span className={cn(styles.MapVehiclesSidebarAdditionalTitle)}>
-                                    {model}
-                                </span>
-                                <br />
-                                <span className={cn(styles.MapVehiclesSidebarAdditionalSubitle)}>
-                                    {vehicleModel.factory}
-                                </span>
+                    {unitInfo && (
+                        <>
+                            <Divider />
+                            <div className={cn(styles.MapVehiclesSidebarAdditional)}>
+                                {Boolean(unitInfo?.model || unitInfo?.factory) && (
+                                    <div className={cn(styles.MapVehiclesSidebarModelWrapper)}>
+                                        <span
+                                            className={cn(styles.MapVehiclesSidebarAdditionalLabel)}
+                                        >
+                                            Модель машины
+                                        </span>
+                                        {/* TODO: add models' pics */}
+                                        {/* <Image src={modelPic} layout="intrinsic" alt="Модель" /> */}
+                                        <div>
+                                            {unitInfo.model && (
+                                                <span
+                                                    className={cn(
+                                                        styles.MapVehiclesSidebarAdditionalTitle,
+                                                    )}
+                                                >
+                                                    {unitInfo.model}
+                                                </span>
+                                            )}
+                                            {Boolean(unitInfo.model && unitInfo.factory) && <br />}
+                                            {unitInfo.factory && (
+                                                <span
+                                                    className={cn(
+                                                        styles.MapVehiclesSidebarAdditionalSubitle,
+                                                    )}
+                                                >
+                                                    {unitInfo.factory}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+                                {unitInfo?.factoryNumber && (
+                                    <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
+                                        <span
+                                            className={cn(styles.MapVehiclesSidebarAdditionalLabel)}
+                                        >
+                                            Заводской номер
+                                        </span>
+                                        <span
+                                            className={cn(styles.MapVehiclesSidebarFactoryNumber)}
+                                        >
+                                            {unitInfo.factoryNumber}
+                                        </span>
+                                    </div>
+                                )}
+                                {unitInfo?.year && (
+                                    <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
+                                        <span
+                                            className={cn(styles.MapVehiclesSidebarAdditionalLabel)}
+                                        >
+                                            Год выпуска
+                                        </span>
+                                        <span
+                                            className={cn(styles.MapVehiclesSidebarManufactureYear)}
+                                        >
+                                            {unitInfo.year}
+                                        </span>
+                                        <span
+                                            className={cn(
+                                                styles.MapVehiclesSidebarManufactureYearDiff,
+                                            )}
+                                        >
+                                            {`${manufactureYearDiff} ${getNoun(
+                                                manufactureYearDiff,
+                                                'год',
+                                                'года',
+                                                'лет',
+                                            )} назад`}
+                                        </span>
+                                    </div>
+                                )}
                             </div>
-                        </div>
-                        <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
-                            <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
-                                Заводской номер
-                            </span>
-                            <span className={cn(styles.MapVehiclesSidebarFactoryNumber)}>
-                                {factoryNumber}
-                            </span>
-                        </div>
-                        <div className={cn(styles.MapVehiclesSidebarLabelWrapper)}>
-                            <span className={cn(styles.MapVehiclesSidebarAdditionalLabel)}>
-                                Год выпуска
-                            </span>
-                            <span className={cn(styles.MapVehiclesSidebarManufactureYear)}>
-                                {manufactureYear}
-                            </span>
-                            <span className={cn(styles.MapVehiclesSidebarManufactureYearDiff)}>
-                                {`${manufactureYearDiff} ${getNoun(
-                                    manufactureYearDiff,
-                                    'год',
-                                    'года',
-                                    'лет',
-                                )} назад`}
-                            </span>
-                        </div>
-                    </div>
+                        </>
+                    )}
                 </div>
             </div>
         </div>

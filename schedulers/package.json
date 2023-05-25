@@ -3,17 +3,22 @@
   "version": "1.0.0",
   "scripts": {
     "check-types": "tsc --noEmit",
-    "update:masstrans": "ts-node masstrans/index.ts"
+    "update:masstrans": "ts-node masstrans/index.ts",
+    "update:transphoto": "ts-node transphoto/index.ts"
   },
   "dependencies": {
+    "form-data": "^4.0.0",
+    "jsdom": "^22.0.0",
     "lodash": "^4.17.21",
-    "node-fetch": "^3.3.1",
+    "node-fetch": "^2.6.9",
     "transport-common": "workspace:*",
     "transport-server": "workspace:*"
   },
   "devDependencies": {
+    "@types/jsdom": "^21.1.1",
     "@types/lodash": "^4.14.188",
     "@types/node": "^18.15.3",
+    "@types/node-fetch": "2.6.2",
     "ts-node": "^10.9.1",
     "tslib": "^2.5.0",
     "typescript": "^4.8.4"

@@ -13,3 +13,12 @@ export const additionalHeader = {
 };
 
 export const SVERDLOVSK_REGION = '196';
+
+export const featuresTitle = {
+    stroller: 'можно с коляской',
+    accessibility: 'можно с инвалидным креслом',
+    bike: 'можно с велосипедом',
+    wifi: 'есть бесплатный вайфай',
+    elderly: 'есть места для пенсионеров',
+    warning: 'измененный маршрут',
+};

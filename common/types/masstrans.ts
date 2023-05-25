@@ -93,3 +93,34 @@ interface UnitArriveInfoOwnFields {
 export interface UnitArriveInfo extends Omit<Stop, 'type' | 'coords'>, UnitArriveInfoOwnFields {}
 
 export interface UnitArriveStop extends Omit<Stop, 'type'>, Partial<UnitArriveInfoOwnFields> {}
+
+export interface ImageFormat {
+    url: string;
+    width: number;
+    height: number;
+}
+
+export enum ImageSizes {
+    Thumbnail = 'thumbnail',
+    Small = 'small',
+    Medium = 'medium',
+    Large = 'large',
+}
+
+export interface UnitInfo {
+    image?: {
+        data?: {
+            id: number;
+            attributes: {
+                formats: Record<ImageSizes, ImageFormat>;
+            };
+        };
+    };
+    imageUrl?: string;
+    boardNumber: string;
+    model: string;
+    factoryNumber: string;
+    year: string;
+    type?: ClientUnit;
+    factory?: string;
+}

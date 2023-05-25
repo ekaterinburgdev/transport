@@ -48,8 +48,13 @@
     stroke: white;
 }
 
-.MapVehiclesSidebarVehicleImage {
+.MapVehiclesSidebarVehicleImageWrapper {
     font-size: 0;
+}
+
+.MapVehiclesSidebarVehicleImage {
+    object-fit: cover;
+    object-position: center;
 }
 
 .MapVehiclesSidebarVehicleInfoWrapper {
@@ -148,7 +153,6 @@
 .MapVehiclesSidebarDirection {
     display: flex;
     flex-direction: column;
-    gap: 8px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -156,18 +160,31 @@
     padding-left: 16px;
 }
 
-.MapVehiclesSidebarDirection::before {
+.MapVehiclesSidebarHeaderStation {
+    position: relative;
+}
+
+.MapVehiclesSidebarHeaderStation:first-of-type {
+    padding-bottom: 8px;
+}
+
+.MapVehiclesSidebarHeaderStation::before {
     content: '';
     width: 3px;
     position: absolute;
-    left: 2px;
-    top: 18px;
-    bottom: 18px;
+    left: -14px;
     background-color: #d2d9e8;
 }
 
-.MapVehiclesSidebarHeaderStation {
-    position: relative;
+.MapVehiclesSidebarHeaderStation:first-of-type::before {
+    top: 50%;
+    bottom: 0;
+}
+
+
+.MapVehiclesSidebarHeaderStation:last-of-type::before {
+    top: 0;
+    bottom: 50%;
 }
 
 .MapVehiclesSidebarHeaderBullet {
