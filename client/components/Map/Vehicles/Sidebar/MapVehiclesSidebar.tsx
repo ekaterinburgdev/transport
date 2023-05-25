@@ -211,7 +211,7 @@ export function MapVehiclesSidebar({
                 >
                     <Close className={cn(styles.MapVehiclesSidebarCloseIcon)} />
                 </button>
-                {unitInfo?.image && (
+                {unitInfo?.image.data && (
                     <div className={cn(styles.MapVehiclesSidebarVehicleImageWrapper)}>
                         <Image
                             src={`${STRAPI_URL}${
