@@ -1,8 +1,9 @@
 import express from 'express';
 
-import { masstransController } from '../controller/masstrans/masstrans';
+import { MasstransController } from '../controller/masstrans/masstrans';
 
 export const masstransRouter = express.Router();
+const masstransController = new MasstransController();
 
 masstransRouter.get('/all-units', masstransController.getAllUnits);
 masstransRouter.get('/:unit', masstransController.getUnit);

@@ -54,7 +54,7 @@ export function MapStopsSidebar({ type, name, id }: MapStopsSidebarProps) {
 
     useDisablePropagation(ref);
 
-    const getTimeToArrive = (arriveTime: string) => {
+    const getTimeToArrive = useCallback((arriveTime: string) => {
         const [hours, minutes] = arriveTime.split(':');
 
         const arriveDate = new Date();
@@ -68,7 +68,7 @@ export function MapStopsSidebar({ type, name, id }: MapStopsSidebarProps) {
         }
 
         return Math.max(Math.round((arriveDate.getTime() - now.getTime()) / 1000 / 60), 0);
-    };
+    }, []);
 
     return (
         <div
