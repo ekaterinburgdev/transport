@@ -27,13 +27,6 @@ function MapMainContainer() {
     const [sidebar, setSidebar] = useState<React.ReactElement>(null);
 
     useEffect(() => {
-        (async function init() {
-            L.Icon.Default.mergeOptions({
-                iconRetinaUrl: iconRetinaUrl.src,
-                iconUrl: iconUrl.src,
-                shadowUrl: shadowUrl.src,
-            });
-        })();
         sidebarService.setSidebar = setSidebar;
 
         const hasVisited = localStorage.getItem('hasVisited');
