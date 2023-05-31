@@ -1,27 +1,12 @@
 .MapVehiclesSidebar {
-    bottom: 124px;
-
-    margin-top: 16px;
-    margin-left: 16px;
-    width: 448px;
-
-    border-radius: 16px;
     color: var(--text-secondary);
+    background-color: var(--background-primary);
+    height: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 
     font-family: 'Iset Sans', sans-serif;
-
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.MapVehiclesSidebar::-webkit-scrollbar {
-    display: none;
-}
-
-.MapVehiclesSidebarWrapper {
-    border-radius: 16px;
-    background-color: var(--background-primary);
 }
 
 .MapVehiclesSidebarCloseButton {
@@ -32,7 +17,7 @@
     justify-content: flex-end;
     margin-right: 16px;
     top: 16px;
-    z-index: 1;
+    z-index: 100;
 
     border: 0;
     background: none;
@@ -460,4 +445,10 @@
 .MapVehiclesSidebarManufactureYearDiff {
     font-size: 18px;
     line-height: 24px;
+}
+
+@media screen and (max-width: 756px) {
+    .MapVehiclesSidebarVehicleImage {
+        width: 100%;
+    }
 }

@@ -104,8 +104,11 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
 
         if (!this.isActive) {
             this.isActive = true;
-            sidebarService.open(<MapVehiclesSidebar {...this.props} />, () => {
-                this.isActive = false;
+            sidebarService.open({
+                component: <MapVehiclesSidebar {...this.props} />,
+                onClose: () => {
+                    this.isActive = false;
+                },
             });
         }
 

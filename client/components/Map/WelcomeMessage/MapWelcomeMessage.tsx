@@ -1,37 +1,21 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
-import sidebarStyles from 'styles/leaflet-sidebar.module.css';
-
 import { IconFontCharsNames } from 'common/constants/iconFontChars';
-import { POSITION_CLASSES } from 'common/constants/positions';
 
 import { Divider } from 'components/UI/Divider/Divider';
 import { IconFont } from 'components/UI/Typography/IconFont/IconFont';
 import { Typography } from 'components/UI/Typography/Typography';
 import { PageText } from 'components/UI/Typography/PageText/PageText';
 
-import { useDisablePropagation } from 'hooks/useDisablePropagation';
-
 import styles from './MapWelcomeMessage.module.css';
 
 const cn = classNames.bind(styles);
 
 export function MapWelcomeMessage() {
-    const ref = useRef<HTMLDivElement>(null);
-
-    useDisablePropagation(ref);
-
     return (
-        <div
-            ref={ref}
-            className={cn(
-                POSITION_CLASSES.topleft,
-                styles.MapWelcomeMessage,
-                sidebarStyles.leafletSidebar,
-            )}
-        >
+        <div className={cn(styles.MapWelcomeMessage)}>
             <div className={cn(styles.MapWelcomeMessageRow)}>
                 <Typography variant="h3">
                     Привет!
@@ -103,7 +87,7 @@ export function MapWelcomeMessage() {
                             )}
                         >
                             <Image
-                                src="/icons/tram-disability.svg"
+                                src="/icons/tram-accessibility.svg"
                                 width="20"
                                 height="20"
                                 alt="Низкопольный транспорт"

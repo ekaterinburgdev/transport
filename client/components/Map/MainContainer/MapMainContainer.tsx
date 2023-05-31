@@ -29,12 +29,14 @@ function MapMainContainer() {
     useEffect(() => {
         sidebarService.setSidebar = setSidebar;
 
-        const hasVisited = localStorage.getItem('hasVisited');
+        try {
+            const hasVisited = false; //localStorage.getItem('hasVisited');
 
-        if (!hasVisited) {
-            sidebarService.open(<MapWelcomeMessage />);
-            localStorage.setItem('hasVisited', '1');
-        }
+            if (!hasVisited) {
+                sidebarService.open({ component: <MapWelcomeMessage /> });
+                localStorage.setItem('hasVisited', '1');
+            }
+        } catch (e) {}
     }, []);
 
     return (

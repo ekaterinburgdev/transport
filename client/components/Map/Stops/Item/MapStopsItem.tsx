@@ -46,12 +46,12 @@ export function MapStopsItem(props: MapStopsItemProps) {
                 click() {
                     map?.fireEvent?.('click');
                     if (!isActive) {
-                        sidebarService.open(
-                            <MapStopsSidebar type={type} name={name} id={id} />,
-                            () => {
+                        sidebarService.open({
+                            component: <MapStopsSidebar type={type} name={name} id={id} />,
+                            onClose: () => {
                                 setIsActive(false);
                             },
-                        );
+                        });
                         setIsActive(true);
                     }
                 },

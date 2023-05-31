@@ -1,4 +1,6 @@
-import { Dispatch, SetStateAction, ReactElement } from 'react';
+import React, { Dispatch, SetStateAction, ReactElement } from 'react';
+
+import { Modal } from 'components/UI/Modal/Modal';
 
 class SidebarService {
     setSidebar: Dispatch<SetStateAction<ReactElement>>;
@@ -7,11 +9,17 @@ class SidebarService {
 
     private onClose: VoidFunction;
 
-    readonly open = (component: ReactElement, onClose?: VoidFunction) => {
+    readonly open = ({
+        component,
+        onClose,
+    }: {
+        component: ReactElement;
+        onClose?: VoidFunction;
+    }) => {
         this.close();
         this.onClose = onClose;
-        this.component = component;
-        this.setSidebar?.(component);
+        this.component = <Modal>{component}</Modal>;
+        this.setSidebar?.(this.component);
     };
 
     readonly close = () => {
