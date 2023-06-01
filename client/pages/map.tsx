@@ -8,6 +8,12 @@ export default function Map() {
         <>
             <Head>
                 <title>Карта транспорта</title>
+                <style>{`
+                    html,
+                    body {
+                        overflow: hidden;
+                    }
+                `}</style>
             </Head>
 
             <MapComponent />

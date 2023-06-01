@@ -29,12 +29,14 @@ function MapMainContainer() {
     useEffect(() => {
         sidebarService.setSidebar = setSidebar;
 
-        const hasVisited = localStorage.getItem('hasVisited');
+        try {
+            const hasVisited = localStorage.getItem('hasVisited');
 
-        if (!hasVisited) {
-            sidebarService.open(<MapWelcomeMessage />);
-            localStorage.setItem('hasVisited', '1');
-        }
+            if (!hasVisited) {
+                sidebarService.open({ component: <MapWelcomeMessage /> });
+                localStorage.setItem('hasVisited', '1');
+            }
+        } catch (e) {}
     }, []);
 
     return (
@@ -44,7 +46,6 @@ function MapMainContainer() {
             zoomControl={false}
             zoom={16}
             zoomDelta={0.6}
-            zoomSnap={0.4}
             scrollWheelZoom
             doubleClickZoom={false}
             className={cn(styles.Map)}

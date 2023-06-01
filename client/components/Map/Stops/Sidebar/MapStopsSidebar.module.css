@@ -1,30 +1,12 @@
 .MapStopsSidebar {
-    max-height: calc(100vh - 150px);
-
     display: flex;
     flex-direction: column;
-    margin-top: 16px;
-    margin-left: 16px;
-    width: 448px;
-
-    border-radius: 16px;
+    background-color: var(--background-primary);
     color: var(--text-secondary);
+    position: relative;
+    height: 100%;
 
     font-family: 'Iset Sans', sans-serif;
-}
-
-.MapStopsSidebarWrapper {
-    position: relative;
-    border-radius: 16px;
-    background-color: var(--background-primary);
-
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.MapStopsSidebarWrapper::-webkit-scrollbar {
-    display: none;
 }
 
 .MapStopsSidebarRow {
@@ -34,12 +16,14 @@
 .MapStopsSidebarHeaderWrapper {
     position: sticky;
     top: 0;
-    left: 0;
 }
 
 .MapStopsSidebarHeader {
     display: flex;
     gap: 16px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    padding-right: 80px;
 
     background-color: #fff;
 }
@@ -56,6 +40,7 @@
 
     background: none;
     cursor: pointer;
+    z-index: 100;
 }
 
 .MapStopsSidebarCloseIcon > path {
@@ -67,7 +52,6 @@
     flex-direction: column;
     gap: 30px;
 
-    overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }

@@ -2,13 +2,10 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-top: 24px;
-    margin-left: 16px;
     padding: 24px 0;
-    width: 369px;
 
-    border-radius: 16px;
-    background-color: var(--background-primary);
+    background: var(--background-primary);
+    height: 100%;
     color: var(--text-secondary);
 }
 

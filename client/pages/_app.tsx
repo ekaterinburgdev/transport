@@ -1,10 +1,10 @@
 import React from 'react';
-
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { ALL_PROJECTS, PROJECT_TRANSPORT, ProjectsPanel, Theme } from 'ekb';
 
 import 'styles/globals.css';
 import 'ekb/style.css';
-import { ALL_PROJECTS, PROJECT_TRANSPORT, ProjectsPanel, Theme } from 'ekb';
 
 type AppProps<PropsType extends object> = {
     Component: React.ComponentType<PropsType>;
@@ -12,6 +12,8 @@ type AppProps<PropsType extends object> = {
 };
 
 function App({ Component, pageProps }: AppProps<any>) {
+    const { pathname } = useRouter();
+
     return (
         <>
             <Head>
@@ -23,7 +25,13 @@ function App({ Component, pageProps }: AppProps<any>) {
 
             <Component {...pageProps} />
 
-            <ProjectsPanel projects={ALL_PROJECTS} activeProjectId={PROJECT_TRANSPORT.id} theme={Theme.LIGHT} />
+            <div data-pathname={pathname}>
+                <ProjectsPanel
+                    projects={ALL_PROJECTS}
+                    activeProjectId={PROJECT_TRANSPORT.id}
+                    theme={Theme.LIGHT}
+                />
+            </div>
         </>
     );
 }

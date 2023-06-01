@@ -1,19 +1,14 @@
 // FIXME: cure divatosis
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import L from 'leaflet';
 import classNames from 'classnames/bind';
-import Image from 'next/image';
-// import dynamic from 'next/dynamic';
 
 import { ClientUnit, ImageSizes, UnitArriveStop, UnitInfo } from 'transport-common/types/masstrans';
 import { STRAPI_URL } from 'transport-common/strapi/constants';
 
-import sidebarStyles from 'styles/leaflet-sidebar.module.css';
-
 import { massTransApi } from 'api/masstrans/masstrans';
-import { POSITION_CLASSES } from 'common/constants/positions';
 import { TStationType } from 'common/types/masstrans';
 import { VEHICLE_TYPE_COLORS, VEHICLE_TYPE_TRANSLUCENT_COLORS } from 'common/constants/colors';
 
@@ -24,8 +19,6 @@ import Close from 'public/icons/close.svg';
 import Arrow from 'public/icons/arrow.svg';
 
 import { getNoun } from 'utils/plural';
-
-import { useDisablePropagation } from 'hooks/useDisablePropagation';
 
 import { PageText } from 'components/UI/Typography/PageText/PageText';
 import { Typography } from 'components/UI/Typography/Typography';
@@ -142,11 +135,8 @@ export function MapVehiclesSidebar({
         return new Date().getFullYear() - numberYear;
     }, [unitInfo?.year]);
 
-    const ref = useRef<HTMLDivElement>(null);
     const [afterOpened, setAfterOpened] = useState(false);
     const [beforeOpened, setBeforeOpened] = useState(false);
-
-    useDisablePropagation(ref);
 
     const nearestStopIndex = useMemo(
         () =>
@@ -188,28 +178,11 @@ export function MapVehiclesSidebar({
     const endStop = useMemo(() => stops[stops.length - 1], [stops]);
 
     return (
-        <div
-            ref={ref}
-            className={cn(
-                POSITION_CLASSES.topleft,
-                styles.MapVehiclesSidebar,
-                sidebarStyles.leafletSidebar,
-            )}
-        >
+        <div className={cn(styles.MapVehiclesSidebar)}>
             <div className={cn(styles.MapVehiclesSidebarWrapper)}>
-                <button
-                    type="button"
-                    onClick={() => {
-                        map?.fireEvent?.('click');
-                        sidebarService.close();
-                    }}
-                    className={cn(styles.MapVehiclesSidebarCloseButton)}
-                >
-                    <Close className={cn(styles.MapVehiclesSidebarCloseIcon)} />
-                </button>
                 {unitInfo?.image.data && (
                     <div className={cn(styles.MapVehiclesSidebarVehicleImageWrapper)}>
-                        <Image
+                        <img
                             src={`${STRAPI_URL}${
                                 unitInfo?.image.data.attributes.formats[ImageSizes.Small].url
                             }`}
@@ -233,7 +206,7 @@ export function MapVehiclesSidebar({
                         <div className={cn(styles.MapVehiclesSidebarVehicleFeatures)}>
                             {warning && (
                                 <abbr title={featuresTitle.warning} style={{ fontSize: 0 }}>
-                                    <Image
+                                    <img
                                         src="/icons/warning.svg"
                                         width="26"
                                         height="24"
@@ -243,7 +216,7 @@ export function MapVehiclesSidebar({
                             )}
                             {accessibility && (
                                 <abbr title={featuresTitle.accessibility} style={{ fontSize: 0 }}>
-                                    <Image
+                                    <img
                                         src={`/icons/${type}-accessibility.svg`}
                                         width={32}
                                         height={32}

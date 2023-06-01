@@ -23,11 +23,6 @@ a {
     box-sizing: border-box;
 }
 
-body {
-    padding: 0;
-    margin: 0;
-}
-
 .leaflet-control-container .leaflet-bottom.leaflet-right {
     display: flex;
     flex-direction: column;
@@ -51,3 +46,17 @@ body {
         color-scheme: dark;
     }
 } */
+
+@media screen and (max-width: 768px) {
+    div[data-pathname="/map"] div[class^="_modal"]:first-of-type {
+        top: 16px;
+        bottom: initial;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    div[data-pathname="/map"] div[class^="_modal"]:first-of-type {
+        top: 0;
+        bottom: initial;
+    }
+}
