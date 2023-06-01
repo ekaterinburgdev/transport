@@ -78,6 +78,10 @@ async function getTransportInfoFromPage(
             } else if (realImagePath.startsWith('/')) {
                 item.imageUrl = origin + realImagePath;
             } else {
+                if (!/http(s)?:\/\/(\w|\.|-|_)+((\w|\d|\.|-|_|\/)+)?/.test(realImagePath)) {
+                    throw new Error(`Invalid image src format: ${realImagePath}`);
+                }
+
                 item.imageUrl = realImagePath;
             }
         }
@@ -85,6 +89,10 @@ async function getTransportInfoFromPage(
         const boardNumber = cells[boardNumberCol]?.querySelector('a')?.textContent;
 
         if (boardNumber) {
+            if (!/\d+/.test(boardNumber)) {
+                throw new Error(`Invalid board number format: ${boardNumber}`);
+            }
+
             item.boardNumber = boardNumber;
         }
 
@@ -97,12 +105,20 @@ async function getTransportInfoFromPage(
         const factoryNumber = cells[factoryNumberCol]?.textContent;
 
         if (factoryNumber) {
+            if (!/\d+/.test(factoryNumber)) {
+                throw new Error(`Invalid board number format: ${factoryNumber}`);
+            }
+
             item.factoryNumber = factoryNumber;
         }
 
         const year = cells[yearCol]?.textContent;
 
         if (year) {
+            if (!/(\d{2}\.)?\d{4}/.test(year)) {
+                throw new Error(`Invalid year format: ${year}`);
+            }
+
             item.year = year;
         }
 
