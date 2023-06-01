@@ -1,0 +1,27 @@
+name: Update public transport transphoto static data
+on:
+  schedule:
+    - cron: "0 22 * * 0"
+jobs:
+  deploy:
+    name: Build
+    runs-on: ubuntu-20.04
+    steps:
+    - name: deploy
+      uses: appleboy/ssh-action@v0.1.9
+      with:
+        host: ${{ secrets.API_SERVER_HOST }}
+        username: ${{ secrets.API_SERVER_USERNAME }}
+        password: ${{ secrets.API_SERVER_PASSWORD }}
+        script: |
+          # Fix NVM appleboy/ssh-action
+          export NVM_DIR=~/.nvm
+          source ~/.nvm/nvm.sh
+
+          cd transport-api-test.na4u.ru/transport
+          export STRAPI_EMAIL="${{ secrets.STRAPI_EMAIL }}"
+          export STRAPI_PASSWORD="${{ secrets.STRAPI_PASSWORD }}"
+
+          nvm use
+          pnpm -r --filter transport-schedulers --filter transport-common i
+          pnpm -r --filter transport-schedulers update:transphoto
