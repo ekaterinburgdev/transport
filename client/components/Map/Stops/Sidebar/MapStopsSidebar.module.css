@@ -16,7 +16,6 @@
 .MapStopsSidebarHeaderWrapper {
     position: sticky;
     top: 0;
-    left: 0;
 }
 
 .MapStopsSidebarHeader {
@@ -24,6 +23,7 @@
     gap: 16px;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
+    padding-right: 80px;
 
     background-color: #fff;
 }
@@ -52,7 +52,6 @@
     flex-direction: column;
     gap: 30px;
 
-    overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }

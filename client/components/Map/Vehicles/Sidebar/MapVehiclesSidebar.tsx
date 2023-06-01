@@ -180,16 +180,6 @@ export function MapVehiclesSidebar({
     return (
         <div className={cn(styles.MapVehiclesSidebar)}>
             <div className={cn(styles.MapVehiclesSidebarWrapper)}>
-                <button
-                    type="button"
-                    onClick={() => {
-                        map?.fireEvent?.('click');
-                        sidebarService.close();
-                    }}
-                    className={cn(styles.MapVehiclesSidebarCloseButton)}
-                >
-                    <Close className={cn(styles.MapVehiclesSidebarCloseIcon)} />
-                </button>
                 {unitInfo?.image.data && (
                     <div className={cn(styles.MapVehiclesSidebarVehicleImageWrapper)}>
                         <img

@@ -23,10 +23,16 @@ export function useModalSheet(
     let dragStartPosition: null | number = null;
     let isDragFinished = false;
 
-    function nextPosition() {
+    function nextPosition(scrollElement?: HTMLElement) {
         const newPositionIndex = Math.min(currentPositionIndex + 1, MODAL_POSITIONS.length - 1);
         setCurrentPositionIndex(newPositionIndex);
         setCurrentPosition(MODAL_POSITIONS[newPositionIndex]);
+
+        if (scrollElement && newPositionIndex === MODAL_POSITIONS.length - 1) {
+            scrollElement.scrollTo({
+                top: 0,
+            });
+        }
     }
 
     function prevPosition() {
@@ -46,7 +52,6 @@ export function useModalSheet(
     function onDrag(event: React.TouchEvent) {
         event.preventDefault();
 
-        console.log('drag');
         if (isDragFinished) {
             return;
         }
@@ -58,19 +63,10 @@ export function useModalSheet(
         const currentDragPosition = event.touches.item(0).clientY;
 
         if (currentDragPosition - dragStartPosition > CHANGE_POSITION_DELTA) {
-            console.log('next');
             isDragFinished = true;
-            nextPosition();
 
-            const modalElement = (event.target as HTMLElement).parentElement.querySelector(
-                '#modal-scroll-wrapper',
-            );
-
-            if (modalElement) {
-                modalElement.scrollTo({
-                    top: 0,
-                });
-            }
+            const modalElement = (event.target as HTMLElement).parentElement;
+            nextPosition(modalElement);
         }
 
         if (currentDragPosition - dragStartPosition < -CHANGE_POSITION_DELTA) {

@@ -30,7 +30,7 @@ function MapMainContainer() {
         sidebarService.setSidebar = setSidebar;
 
         try {
-            const hasVisited = false; //localStorage.getItem('hasVisited');
+            const hasVisited = localStorage.getItem('hasVisited');
 
             if (!hasVisited) {
                 sidebarService.open({ component: <MapWelcomeMessage /> });
@@ -46,7 +46,6 @@ function MapMainContainer() {
             zoomControl={false}
             zoom={16}
             zoomDelta={0.6}
-            zoomSnap={0.4}
             scrollWheelZoom
             doubleClickZoom={false}
             className={cn(styles.Map)}

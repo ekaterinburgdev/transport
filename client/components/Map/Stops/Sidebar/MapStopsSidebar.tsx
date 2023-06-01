@@ -8,10 +8,6 @@ import { Divider } from 'components/UI/Divider/Divider';
 import { Typography } from 'components/UI/Typography/Typography';
 import { IconFont } from 'components/UI/Typography/IconFont/IconFont';
 
-import { sidebarService } from 'services/sidebar/sidebar';
-
-import Close from 'public/icons/close.svg';
-
 import { StopInfoItem, StopType } from 'transport-common/types/masstrans';
 import { massTransApi } from 'api/masstrans/masstrans';
 
@@ -78,15 +74,6 @@ export function MapStopsSidebar({ type, name, id }: MapStopsSidebarProps) {
                         </Typography>
                         <Typography variant="h3">{name}</Typography>
                     </div>
-                    <button
-                        type="button"
-                        onClick={() => {
-                            sidebarService.close();
-                        }}
-                        className={cn(styles.MapStopsSidebarCloseButton)}
-                    >
-                        <Close className={cn(styles.MapStopsSidebarCloseIcon)} />
-                    </button>
                 </div>
                 <Divider />
             </div>
