@@ -447,8 +447,19 @@
     line-height: 24px;
 }
 
-@media screen and (max-width: 756px) {
+@media screen and (max-width: 768px) {
     .MapVehiclesSidebarVehicleImage {
         width: 100%;
+        height: 300px;
+
+        object-position: bottom;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .MapVehiclesSidebarVehicleImage {
+        height: auto;
+
+        object-position: center;
     }
 }
