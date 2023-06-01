@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import { sidebarService } from 'services/sidebar/sidebar';
 import sidebarStyles from 'styles/leaflet-sidebar.module.css';
 import { POSITION_CLASSES } from 'common/constants/positions';
-import { useModalSheet } from 'hooks/useModalSheet/useModalSheet';
+import { ModalPosition, useModalSheet } from 'hooks/useModalSheet/useModalSheet';
 import { useDisablePropagation } from 'hooks/useDisablePropagation';
 
 import Close from 'public/icons/close.svg';
@@ -18,7 +18,7 @@ export function Modal({ children }: React.PropsWithChildren) {
 
     useDisablePropagation(ref);
 
-    const [currentPosition, onDragEnd, onDrag] = useModalSheet();
+    const [currentPosition, onDragEnd, onDrag] = useModalSheet(ModalPosition.HalfOpen);
 
     return (
         <div

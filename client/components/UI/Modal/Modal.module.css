@@ -73,15 +73,15 @@
 
 @media screen and (max-width: 768px) {
     .Modal {
-        width: 94%;
+        width: calc(100% - 16px);
         margin: 0;
         max-height: calc(100% - 90px);
-        height: calc(100% - 90px);
         left: 50% !important;
         bottom: 0;
         top: initial !important;
         transform: translate(-50%, 0);
-        transition: transform 150ms ease-out;
+        transition: height 150ms ease-out;
+        will-change: height;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
     }
@@ -100,16 +100,16 @@
     }
 
     .Modal_fullOpen {
-        transform: translate(-50%, 0);
+        height: calc(100% - 90px);
     }
 
     .Modal_halfOpen {
-        transform: translate(-50%, 40%);
+        height: 50%;
     }
 
     .Modal_hidden {
         overflow: hidden;
-        transform: translate(-50%, 85%);
+        height: 15%;
     }
 
     .ModalDragArea {
