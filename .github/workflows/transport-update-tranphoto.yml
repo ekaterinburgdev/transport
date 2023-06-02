@@ -3,11 +3,11 @@ on:
   schedule:
     - cron: "0 22 * * 0"
 jobs:
-  deploy:
-    name: Build
+  update-public-transport-transphoto-static-data:
+    name: Update
     runs-on: ubuntu-20.04
     steps:
-    - name: deploy
+    - name: "run update:transphoto script"
       uses: appleboy/ssh-action@v0.1.9
       with:
         host: ${{ secrets.API_SERVER_HOST }}
