@@ -46,17 +46,3 @@ a {
         color-scheme: dark;
     }
 } */
-
-@media screen and (max-width: 768px) {
-    div[data-pathname="/map"] div[class^="_modal"]:first-of-type {
-        top: 16px;
-        bottom: initial;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    div[data-pathname="/map"] div[class^="_modal"]:first-of-type {
-        top: 0;
-        bottom: initial;
-    }
-}
