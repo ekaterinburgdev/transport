@@ -5,17 +5,20 @@ import React, { useEffect, useMemo, useState } from 'react';
 import L from 'leaflet';
 import classNames from 'classnames/bind';
 
-import { ClientUnit, ImageSizes, UnitArriveStop, UnitInfo } from 'transport-common/types/masstrans';
+import {
+    ClientUnit,
+    ImageSizes,
+    StopType,
+    UnitArriveStop,
+    UnitInfo,
+} from 'transport-common/types/masstrans';
 import { STRAPI_URL } from 'transport-common/strapi/constants';
 
 import { massTransApi } from 'api/masstrans/masstrans';
-import { TStationType } from 'common/types/masstrans';
 import { VEHICLE_TYPE_COLORS, VEHICLE_TYPE_TRANSLUCENT_COLORS } from 'common/constants/colors';
 
 import { Divider } from 'components/UI/Divider/Divider';
-import { sidebarService } from 'services/sidebar/sidebar';
 
-import Close from 'public/icons/close.svg';
 import Arrow from 'public/icons/arrow.svg';
 
 import { getNoun } from 'utils/plural';
@@ -40,7 +43,7 @@ import { getPointsRow } from './MapVehiclesSidebar.utils';
 import styles from './MapVehiclesSidebar.module.css';
 
 export type MapVehiclesSidebarProps = {
-    type: TStationType;
+    type: StopType;
     name: string;
 };
 

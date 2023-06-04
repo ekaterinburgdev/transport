@@ -1,35 +1,61 @@
-import React, { useContext, useState } from 'react';
-import { useMapEvent } from 'react-leaflet';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useMapEvents } from 'react-leaflet';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { RoutesContext } from 'components/Map/Transport/MapTransport.context';
+import { State } from 'common/types/state';
+import { setStops } from 'state/features/public-transport';
+import { massTransApi } from 'api/masstrans/masstrans';
 
 import { MapStopsItem } from './Item/MapStopsItem';
 import { VISISBILITY_MINIMAL_ZOOM } from './MapStops.constants';
 
 export function MapStops() {
-    const { stops } = useContext(RoutesContext);
+    const dispatch = useDispatch();
+    const stops = useSelector((state: State) => state.publicTransport.stops);
     const [hidden, setHidden] = useState(false);
-    const map = useMapEvent('zoomend', () => {
-        const zoom = map.getZoom();
+    const [bounds, setBounds] = useState<L.LatLngBounds>(null);
 
-        if (zoom < VISISBILITY_MINIMAL_ZOOM) {
-            setHidden(true);
-        } else {
-            setHidden(false);
-        }
+    const map = useMapEvents({
+        zoomend: () => {
+            const zoom = map.getZoom();
+
+            if (zoom < VISISBILITY_MINIMAL_ZOOM) {
+                setHidden(true);
+            } else {
+                setHidden(false);
+            }
+
+            setBounds(map.getBounds());
+        },
+        moveend: () => {
+            setBounds(map.getBounds());
+        },
     });
 
-    return !hidden ? (
+    const updateStops = useCallback(async () => {
+        const stopsFromApi = (await massTransApi.getStops()) || [];
+
+        dispatch(setStops(stopsFromApi));
+    }, []);
+
+    useEffect(() => {
+        updateStops();
+        setBounds(map.getBounds());
+    }, []);
+
+    return !hidden && bounds && stops ? (
         <>
-            {stops.map((stop) => (
-                <MapStopsItem
-                    key={stop.id}
-                    coords={stop.attributes.coords}
-                    type={stop.attributes.type}
-                    id={stop.attributes.stopId}
-                    name={stop.attributes.title}
-                />
-            ))}
+            {stops.map((stop) =>
+                bounds.contains(stop.attributes.coords) ? (
+                    <MapStopsItem
+                        key={stop.id}
+                        coords={stop.attributes.coords}
+                        type={stop.attributes.type}
+                        id={stop.attributes.stopId}
+                        name={stop.attributes.title}
+                    />
+                ) : null,
+            )}
         </>
     ) : null;
 }

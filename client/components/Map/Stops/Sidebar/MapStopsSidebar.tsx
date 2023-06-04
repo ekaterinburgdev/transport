@@ -1,6 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback } from 'react';
 import classNames from 'classnames/bind';
+import { useSelector } from 'react-redux';
 
+import { State } from 'common/types/state';
 import { IconFontCharsNames } from 'common/constants/iconFontChars';
 import { VEHICLE_TYPE_COLORS } from 'common/constants/colors';
 
@@ -8,8 +10,7 @@ import { Divider } from 'components/UI/Divider/Divider';
 import { Typography } from 'components/UI/Typography/Typography';
 import { IconFont } from 'components/UI/Typography/IconFont/IconFont';
 
-import { StopInfoItem, StopType } from 'transport-common/types/masstrans';
-import { massTransApi } from 'api/masstrans/masstrans';
+import { StopType } from 'transport-common/types/masstrans';
 
 import styles from './MapStopsSidebar.module.css';
 
@@ -22,26 +23,7 @@ export type MapStopsSidebarProps = {
 const cn = classNames.bind(styles);
 
 export function MapStopsSidebar({ type, name, id }: MapStopsSidebarProps) {
-    const [vehicleAwait, setVehicleAwait] = useState<StopInfoItem[]>(null);
-    const [loading, setLoading] = useState(false);
-    const ref = useRef<HTMLDivElement>(null);
-
-    const updateVehicleArriveInfo = useCallback(async () => {
-        try {
-            const stopInfo = await massTransApi.getStopInfo(id);
-
-            setVehicleAwait(stopInfo);
-        } catch (e) {
-            console.error('Ошибка при получении остановок');
-        }
-
-        setLoading(false);
-    }, [id]);
-
-    useEffect(() => {
-        setLoading(true);
-        updateVehicleArriveInfo();
-    }, [id]);
+    const stopInfo = useSelector((state: State) => state.publicTransport.stopInfo);
 
     const getTimeToArrive = useCallback((arriveTime: string) => {
         const [hours, minutes] = arriveTime.split(':');
@@ -78,9 +60,9 @@ export function MapStopsSidebar({ type, name, id }: MapStopsSidebarProps) {
                 <Divider />
             </div>
             <div className={cn(styles.MapStopsSidebarRow, styles.MapStopsSidebarVehicles)}>
-                {!loading && Boolean(vehicleAwait) ? (
+                {Boolean(stopInfo) ? (
                     <>
-                        {vehicleAwait.map((vehicle) => (
+                        {stopInfo.map((vehicle) => (
                             <div
                                 key={`${vehicle.route}-${vehicle.type}-${vehicle.arriveTime}`}
                                 className={cn(styles.MapStopsSidebarVehicle)}
@@ -119,7 +101,7 @@ export function MapStopsSidebar({ type, name, id }: MapStopsSidebarProps) {
                                 </div>
                             </div>
                         ))}
-                        {vehicleAwait.length === 0 && (
+                        {stopInfo.length === 0 && (
                             <Typography variant="h4">
                                 О нет! В ближайшее время транспорта тут не будет
                             </Typography>

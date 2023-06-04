@@ -1,4 +1,4 @@
-import { VehicleType } from 'common/types/masstrans';
+import { ClientUnit } from 'transport-common/types/masstrans';
 
 const getColorFromCss = (name: string) =>
     getComputedStyle(document.documentElement).getPropertyValue(`--${name}`);
@@ -11,13 +11,13 @@ export const BUS_COLOR = getColorFromCss('bus') || '#00B400';
 export const BUS_TRANSLUCENT_COLOR = getColorFromCss('bus-translucent') || '#80D9FF';
 
 export const VEHICLE_TYPE_COLORS = {
-    [VehicleType.Tram]: TRAM_COLOR,
-    [VehicleType.Troll]: TROLL_COLOR,
-    [VehicleType.Bus]: BUS_COLOR,
+    [ClientUnit.Tram]: TRAM_COLOR,
+    [ClientUnit.Troll]: TROLL_COLOR,
+    [ClientUnit.Bus]: BUS_COLOR,
 };
 
 export const VEHICLE_TYPE_TRANSLUCENT_COLORS = {
-    [VehicleType.Tram]: TRAM_TRANSLUCENT_COLOR,
-    [VehicleType.Troll]: TROLL_TRANSLUCENT_COLOR,
-    [VehicleType.Bus]: BUS_TRANSLUCENT_COLOR,
+    [ClientUnit.Tram]: TRAM_TRANSLUCENT_COLOR,
+    [ClientUnit.Troll]: TROLL_TRANSLUCENT_COLOR,
+    [ClientUnit.Bus]: BUS_TRANSLUCENT_COLOR,
 };

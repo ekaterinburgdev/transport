@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import L from 'leaflet';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import classNames from 'classnames/bind';
-
-import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
-import iconUrl from 'leaflet/dist/images/marker-icon.png';
-import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
 import { sidebarService } from 'services/sidebar/sidebar';
 
