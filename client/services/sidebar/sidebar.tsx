@@ -3,11 +3,20 @@ import React, { Dispatch, SetStateAction, ReactElement } from 'react';
 import { Modal } from 'components/UI/Modal/Modal';
 
 class SidebarService {
+    static instance = null;
+
     setSidebar: Dispatch<SetStateAction<ReactElement>>;
 
     private component: ReactElement = null;
-
     private onClose: VoidFunction;
+
+    constructor() {
+        if (SidebarService.instance) {
+            return SidebarService.instance;
+        }
+
+        SidebarService.instance = this;
+    }
 
     readonly open = ({
         component,
@@ -16,7 +25,6 @@ class SidebarService {
         component: ReactElement;
         onClose?: VoidFunction;
     }) => {
-        this.close();
         this.onClose = onClose;
         this.component = <Modal>{component}</Modal>;
         this.setSidebar?.(this.component);

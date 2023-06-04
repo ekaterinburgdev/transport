@@ -1,7 +1,10 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ALL_PROJECTS, PROJECT_TRANSPORT, ProjectsPanel, Theme } from 'ekb';
+
+import { store } from 'state';
 
 import 'styles/globals.css';
 import 'ekb/style.css';
@@ -23,7 +26,9 @@ function App({ Component, pageProps }: AppProps<any>) {
                 <link rel="manifest" href="/site.webmanifest" />
             </Head>
 
-            <Component {...pageProps} />
+            <Provider store={store}>
+                <Component {...pageProps} />
+            </Provider>
 
             <div data-pathname={pathname}>
                 <ProjectsPanel

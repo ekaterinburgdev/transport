@@ -1,12 +1,14 @@
 import React, { Component, createRef } from 'react';
 import ReactDOMServer from 'react-dom/server';
+import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
 import { Marker } from 'react-leaflet';
 import L from 'leaflet';
 import classNames from 'classnames/bind';
 
 import { withMap } from 'components/Map/hocs/withMap';
-
+import { setCurrentVehicle } from 'state/features/public-transport';
+import { State } from 'common/types/state';
 import { sidebarService } from 'services/sidebar/sidebar';
 
 import { MapVehicleMarker } from '../Marker/MapVehicleMarker';
@@ -24,8 +26,6 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
     private icon: L.DivIcon;
 
     private markerRef = createRef<L.Marker>();
-
-    private isActive = false;
 
     constructor(props: MapVehiclesItemProps) {
         super(props);
@@ -100,19 +100,19 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
     };
 
     onClickEventHandler = () => {
-        const { onClick, routeDirection, routeId } = this.props;
+        const { routeDirection, routeId, num, setCurrentVehicle, type } = this.props;
 
-        if (!this.isActive) {
-            this.isActive = true;
-            sidebarService.open({
-                component: <MapVehiclesSidebar {...this.props} />,
-                onClose: () => {
-                    this.isActive = false;
-                },
-            });
-        }
+        sidebarService.open({
+            component: <MapVehiclesSidebar {...this.props} />,
+            onClose: () => setCurrentVehicle(null),
+        });
 
-        onClick(routeId, routeDirection);
+        setCurrentVehicle({
+            num,
+            routeId,
+            routeDirection,
+            type,
+        });
     };
 
     private updateTranslate = () => {
@@ -146,4 +146,19 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
     }
 }
 
-export const MapVehiclesItem = withMap(MapVehiclesItemComponent);
+const mapStateToProps = (state: State) => {
+    const { currentVehicle } = state.publicTransport;
+
+    return {
+        currentVehicle,
+    };
+};
+const mapDispatchToProps = {
+    setCurrentVehicle,
+};
+
+// TODO: rewrite to functional component
+export const MapVehiclesItem = withMap(
+    // @ts-ignore somehow "typeof setCurrentVehicle" type is invalid for setCurrentVehicle prop
+    connect(mapStateToProps, mapDispatchToProps)(MapVehiclesItemComponent),
+);

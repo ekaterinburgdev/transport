@@ -1,10 +1,13 @@
+import { State } from 'common/types/state';
+import { setCurrentVehicle } from 'state/features/public-transport';
 import { ClientUnit, Unit } from 'transport-common/types/masstrans';
 
 export type MapVehiclesItemProps = Unit & {
     type: ClientUnit;
     warning?: boolean;
-    onClick: (routeId: number, routeDirection: string) => void;
     map: L.Map;
+    currentVehicle: State['publicTransport']['currentVehicle'];
+    setCurrentVehicle: typeof setCurrentVehicle;
 };
 
 export type MoveInDirectionParams = {

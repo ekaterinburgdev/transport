@@ -1,1 +1,1 @@
-export const VISISBILITY_MINIMAL_ZOOM = 13;
+export const VISISBILITY_MINIMAL_ZOOM = 11;
