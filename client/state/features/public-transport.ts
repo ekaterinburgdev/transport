@@ -94,10 +94,10 @@ const publicTransportSlice = createSlice({
                     return;
                 }
 
-                const vehicleStops = uniqBy(
-                    currentRoute.races.map((race) => race.stops).flat(2),
-                    'stopId',
-                ).map((stop) => stop.stopId);
+                const racesInDirection = currentRoute.races.find(
+                    (race) => race.raceType === currentVehicle.routeDirection,
+                );
+                const vehicleStops = racesInDirection?.stops.map((stop) => stop.stopId) || [];
 
                 state.vehicleStops = vehicleStops;
             },
@@ -112,6 +112,7 @@ const publicTransportSlice = createSlice({
                     stopInfo.map((info) => ({
                         route: info.route,
                         type: info.type,
+                        routeDirection: info.routeDirection,
                     })),
                 );
 

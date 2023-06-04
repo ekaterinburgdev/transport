@@ -41,6 +41,7 @@ export interface StopInfoItem {
     route: string;
     type: ClientUnit;
     to: string;
+    routeDirection: string;
     through: string[];
 }
 

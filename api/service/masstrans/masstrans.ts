@@ -88,6 +88,7 @@ export class MasstransService {
         return stopInfo.map((item) => ({
             arriveTime: item.tc_arrivetime,
             route: item.mr_num,
+            routeDirection: item.rl_racetype,
             type: item.type,
             to: item.laststation_title,
             // TODO: get through stations from GetRoute

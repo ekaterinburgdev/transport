@@ -53,7 +53,9 @@ export function MapVehicles({ vehicles, type }: MapVehiclesProps) {
             if (isStopActive) {
                 return currentStopVehicles.some(
                     (stopVehicle) =>
-                        stopVehicle.route === vehicle.num && stopVehicle.type === vehicle.type,
+                        stopVehicle.route === vehicle.num &&
+                        stopVehicle.type === vehicle.type &&
+                        stopVehicle.routeDirection === vehicle.routeDirection,
                 );
             }
 

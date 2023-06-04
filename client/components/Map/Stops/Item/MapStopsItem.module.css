@@ -5,4 +5,9 @@
 
 .MapStopsItemIconActive {
     margin: -24px 0 0 -24px !important;
+    z-index: 10000 !important;
+}
+
+.MapStopsItemIconSelected {
+    z-index: 10000 !important;
 }

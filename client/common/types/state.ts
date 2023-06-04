@@ -8,7 +8,7 @@ export interface State {
         currentRoute: Route & Pick<Unit, 'type' | 'routeDirection'>;
         stops: StrapiStop[];
         vehicleStops: StrapiStop['attributes']['stopId'][];
-        stopVehicles: Pick<StopInfoItem, 'route' | 'type'>[];
+        stopVehicles: Pick<StopInfoItem, 'route' | 'type' | 'routeDirection'>[];
         stopInfo: StopInfoItem[];
     };
 }

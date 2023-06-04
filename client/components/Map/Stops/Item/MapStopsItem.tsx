@@ -50,7 +50,10 @@ export function MapStopsItem({ type, id, name, coords }: MapStopsItemProps) {
             const isStopActive = currentVehicleStops.includes(id);
 
             if (isStopActive) {
-                return iconObject.selected;
+                return new L.Icon({
+                    ...iconObject.selected.options,
+                    className: cn(styles.MapStopsItemIcon, styles.MapStopsItemIconSelected),
+                });
             }
 
             return iconObject.inactive;
