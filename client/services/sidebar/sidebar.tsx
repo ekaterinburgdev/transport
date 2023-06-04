@@ -25,7 +25,6 @@ class SidebarService {
         component: ReactElement;
         onClose?: VoidFunction;
     }) => {
-        this.onClose?.();
         this.onClose = onClose;
         this.component = <Modal>{component}</Modal>;
         this.setSidebar?.(this.component);

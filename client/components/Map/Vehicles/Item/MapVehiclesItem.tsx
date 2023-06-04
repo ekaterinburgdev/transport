@@ -104,6 +104,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
 
         sidebarService.open({
             component: <MapVehiclesSidebar {...this.props} />,
+            onClose: () => setCurrentVehicle(null),
         });
 
         setCurrentVehicle({
