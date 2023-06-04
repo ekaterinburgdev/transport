@@ -157,7 +157,7 @@ const mapDispatchToProps = {
 };
 
 // TODO: rewrite to functional component
-// @ts-ignore somehow "typeof setCurrentVehicle" type is invalid for setCurrentVehicle prop
 export const MapVehiclesItem = withMap(
+    // @ts-ignore somehow "typeof setCurrentVehicle" type is invalid for setCurrentVehicle prop
     connect(mapStateToProps, mapDispatchToProps)(MapVehiclesItemComponent),
 );
