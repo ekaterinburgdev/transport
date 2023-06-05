@@ -20,6 +20,7 @@ export const FIRST_URL_BY_TYPE = {
     [ClientUnit.Bus]: [
         'https://fotobus.msk.ru/list.php?loid=4348&serv=0',
         'https://fotobus.msk.ru/list.php?loid=226&serv=0',
+        'https://fotobus.msk.ru/list.php?loid=228&serv=0',
     ],
 };
 
@@ -67,7 +68,6 @@ async function getTransportInfoFromPage(
         }
 
         const item = {} as UnitInfo;
-
         const image = cells[imageCol]?.querySelector('img')?.src;
 
         if (image && image !== '/img/spt.gif') {
@@ -79,7 +79,9 @@ async function getTransportInfoFromPage(
                 item.imageUrl = origin + realImagePath;
             } else {
                 if (!/http(s)?:\/\/(\w|\.|-|_)+((\w|\d|\.|-|_|\/)+)?/.test(realImagePath)) {
-                    throw new Error(`Invalid image src format: ${realImagePath}`);
+                    console.error(`Invalid image src format: ${realImagePath}`);
+
+                    return;
                 }
 
                 item.imageUrl = realImagePath;
@@ -89,8 +91,10 @@ async function getTransportInfoFromPage(
         const boardNumber = cells[boardNumberCol]?.querySelector('a')?.textContent;
 
         if (boardNumber) {
-            if (!/\d+/.test(boardNumber)) {
-                throw new Error(`Invalid board number format: ${boardNumber}`);
+            if (!/(\d+|б\/н)/i.test(boardNumber)) {
+                console.error(`Invalid board number format: ${boardNumber}`);
+
+                return;
             }
 
             item.boardNumber = boardNumber;
@@ -106,7 +110,9 @@ async function getTransportInfoFromPage(
 
         if (factoryNumber) {
             if (!/\d+/.test(factoryNumber)) {
-                throw new Error(`Invalid board number format: ${factoryNumber}`);
+                console.error(`Invalid board number format: ${factoryNumber}`);
+
+                return;
             }
 
             item.factoryNumber = factoryNumber;
@@ -116,7 +122,9 @@ async function getTransportInfoFromPage(
 
         if (year) {
             if (!/(\d{2}\.)?\d{4}/.test(year)) {
-                throw new Error(`Invalid year format: ${year}`);
+                console.error(`Invalid year format: ${year}`);
+
+                return;
             }
 
             item.year = year;
@@ -199,6 +207,22 @@ export async function getTransportInfo() {
     }
 
     nextBusPageUrl = FIRST_URL_BY_TYPE[ClientUnit.Bus][1];
+
+    while (nextBusPageUrl) {
+        // @ts-ignore
+        const { data, nextPageUrl } = await getTransportInfoFromPage(nextBusPageUrl, {
+            imageCol: 0,
+            boardNumberCol: 1,
+            modelCol: 2,
+            factoryNumberCol: 3,
+            yearCol: 4,
+        });
+
+        busesInfo.push(...data);
+        nextBusPageUrl = nextPageUrl;
+    }
+
+    nextBusPageUrl = FIRST_URL_BY_TYPE[ClientUnit.Bus][2];
 
     while (nextBusPageUrl) {
         // @ts-ignore
