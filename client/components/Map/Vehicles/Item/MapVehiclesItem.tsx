@@ -62,7 +62,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
     }
 
     getIcon() {
-        const { id, num, course, type, accessibility, warning, map } = this.props;
+        const { id, num, course, type, accessibility, warning } = this.props;
         const isCourseEast = course > EAST_COURSE_RANGE.left && course < EAST_COURSE_RANGE.right;
 
         return new L.DivIcon({
