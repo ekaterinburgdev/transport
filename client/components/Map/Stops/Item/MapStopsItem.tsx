@@ -4,8 +4,6 @@ import { Marker } from 'react-leaflet';
 import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ClientUnit, StopType } from 'transport-common/types/masstrans';
-
 import { store } from 'state';
 import { sidebarService } from 'services/sidebar/sidebar';
 import { State } from 'common/types/state';
@@ -13,28 +11,12 @@ import { setCurrentStop } from 'state/features/public-transport';
 
 import { MapStopsSidebar } from '../Sidebar/MapStopsSidebar';
 
-import { STOP_ICON_BY_TYPE, TROLL_BUS_ICON_BY_TYPE } from './MapStopsItem.constants';
 import { MapStopsItemProps } from './MapStopsItem.types';
+import { getIconObjectByTypes } from './MapStopsItem.utils';
 
 import styles from './MapStopsItem.module.css';
 
 const cn = classNames.bind(styles);
-
-export function getIconObjectByTypes(stopType: StopType, vehicleType?: ClientUnit) {
-    if (!vehicleType) {
-        if (stopType !== StopType.TrollBus) {
-            return STOP_ICON_BY_TYPE[stopType];
-        }
-
-        return TROLL_BUS_ICON_BY_TYPE[ClientUnit.Bus];
-    }
-
-    if (stopType !== StopType.TrollBus) {
-        return STOP_ICON_BY_TYPE[vehicleType];
-    }
-
-    return TROLL_BUS_ICON_BY_TYPE[vehicleType];
-}
 
 export function MapStopsItem({ type, id, name, coords }: MapStopsItemProps) {
     const dispatch = useDispatch<typeof store.dispatch>();
@@ -43,21 +25,26 @@ export function MapStopsItem({ type, id, name, coords }: MapStopsItemProps) {
     const currentVehicle = useSelector((state: State) => state.publicTransport.currentVehicle);
 
     const icon = useMemo(() => {
-        const iconObject = getIconObjectByTypes(type, currentVehicle?.type);
         const isVehicleActive = Boolean(currentVehicleStops.length);
 
         if (isVehicleActive) {
             const isStopActive = currentVehicleStops.includes(id);
 
             if (isStopActive) {
+                const iconObject = getIconObjectByTypes(type, currentVehicle?.type);
+
                 return new L.Icon({
                     ...iconObject.selected.options,
                     className: cn(styles.MapStopsItemIcon, styles.MapStopsItemIconSelected),
                 });
             }
 
+            const iconObject = getIconObjectByTypes(type);
+
             return iconObject.inactive;
         }
+
+        const iconObject = getIconObjectByTypes(type);
 
         const isActive = currentStop === id;
         const hasActiveStop = currentStop !== null;
