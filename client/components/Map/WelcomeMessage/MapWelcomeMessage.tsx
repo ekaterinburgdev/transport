@@ -41,7 +41,7 @@ export function MapWelcomeMessage() {
                     <div className={cn(styles.MapWelcomeMessageNotation)}>
                         <PageText>Остановка троллейбуса</PageText>
                         <Image
-                            src="/icons/troll-station.svg"
+                            src="/icons/troll-stop.svg"
                             width="32"
                             height="32"
                             className={cn(styles.MapWelcomeMessageNotationIcon)}
@@ -51,7 +51,7 @@ export function MapWelcomeMessage() {
                     <div className={cn(styles.MapWelcomeMessageNotation)}>
                         <PageText>Остановка автобуса</PageText>
                         <Image
-                            src="/icons/bus-station.svg"
+                            src="/icons/bus-stop.svg"
                             width="32"
                             height="32"
                             className={cn(styles.MapWelcomeMessageNotationIcon)}
@@ -61,7 +61,7 @@ export function MapWelcomeMessage() {
                     <div className={cn(styles.MapWelcomeMessageNotation)}>
                         <PageText>Остановка трамвая</PageText>
                         <Image
-                            src="/icons/tram-station.svg"
+                            src="/icons/tram-stop.svg"
                             width="32"
                             height="32"
                             className={cn(styles.MapWelcomeMessageNotationIcon)}
@@ -71,7 +71,7 @@ export function MapWelcomeMessage() {
                     <div className={cn(styles.MapWelcomeMessageNotation)}>
                         <PageText>Остановка автобуса и троллейбуса</PageText>
                         <Image
-                            src="/icons/troll-bus-station.svg"
+                            src="/icons/bus-troll-stop.svg"
                             width="32"
                             height="32"
                             className={cn(styles.MapWelcomeMessageNotationIcon)}
