@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import { isUndefined } from 'lodash';
 import fetch from 'node-fetch';
 
 import { ClientUnit, UnitInfo } from 'transport-common/types/masstrans';
@@ -14,20 +15,24 @@ export interface GetTransportInfoOptions {
 export const FIRST_URL_BY_TYPE = {
     [ClientUnit.Troll]: 'https://transphoto.org/list.php?t=2&serv=0&cid=55',
     [ClientUnit.Tram]: [
+        // Gortrans
         'https://transphoto.org/list.php?t=1&cid=55&serv=0',
+        // Upper Pyshma
         'https://transphoto.org/list.php?did=6488&serv=0',
     ],
     [ClientUnit.Bus]: [
+        // Gortrans
         'https://fotobus.msk.ru/list.php?loid=4348&serv=0',
+        // private carriers
         'https://fotobus.msk.ru/list.php?loid=226&serv=0',
+        // intercity
         'https://fotobus.msk.ru/list.php?loid=228&serv=0',
+        // Upper Pyshma and Sredneuralsk
+        'http://fotobus.msk.ru/list.php?loid=246&serv=0',
     ],
 };
 
-async function getTransportInfoFromPage(
-    url: string,
-    { imageCol, boardNumberCol, modelCol, factoryNumberCol, yearCol }: GetTransportInfoOptions,
-) {
+async function getTransportInfoFromPage(url: string) {
     const { origin, pathname } = new URL(url);
     const transportPageRes = await fetch(url, {
         headers: {
@@ -60,11 +65,59 @@ async function getTransportInfoFromPage(
 
     const result: UnitInfo[] = [];
 
+    let imageCol: number;
+    let boardNumberCol: number;
+    let modelCol: number;
+    let factoryNumberCol: number;
+    let yearCol: number;
+
     rows?.forEach((row) => {
+        const headerCells = row.querySelectorAll('th');
+
+        if (headerCells.length) {
+            headerCells.forEach((cell, idx) => {
+                switch (cell.textContent?.trim()) {
+                    case 'Фото':
+                        imageCol = idx;
+                        break;
+                    case '№':
+                        if (boardNumberCol === undefined) {
+                            boardNumberCol = idx;
+                        }
+
+                        break;
+                    case 'Гос.№':
+                        boardNumberCol = idx;
+                        break;
+                    case 'Модель':
+                        modelCol = idx;
+                        break;
+                    case 'Зав.№':
+                        factoryNumberCol = idx;
+                        break;
+                    case 'Постр.':
+                        yearCol = idx;
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
+
         const cells = row.querySelectorAll('td');
 
         if (!cells.length) {
             return;
+        }
+
+        if (
+            isUndefined(imageCol) ||
+            isUndefined(boardNumberCol) ||
+            isUndefined(factoryNumberCol) ||
+            isUndefined(modelCol) ||
+            isUndefined(yearCol)
+        ) {
+            throw Error('One of the columns number was not found');
         }
 
         const item = {} as UnitInfo;
@@ -156,13 +209,7 @@ export async function getTransportInfo() {
     const trollsInfo: UnitInfo[] = [];
     while (nextTrollPageUrl) {
         // @ts-ignore
-        const { data, nextPageUrl } = await getTransportInfoFromPage(nextTrollPageUrl, {
-            imageCol: 0,
-            boardNumberCol: 1,
-            modelCol: 2,
-            factoryNumberCol: 3,
-            yearCol: 4,
-        });
+        const { data, nextPageUrl } = await getTransportInfoFromPage(nextTrollPageUrl);
 
         trollsInfo.push(...data);
         nextTrollPageUrl = nextPageUrl;
@@ -170,18 +217,12 @@ export async function getTransportInfo() {
 
     const tramsInfo: UnitInfo[] = [];
 
-    for (const url of FIRST_URL_BY_TYPE[ClientUnit.Tram]) {
-        let nextTramPageUrl: string | null = url;
+    for (const firstUrl of FIRST_URL_BY_TYPE[ClientUnit.Tram]) {
+        let nextTramPageUrl: string | null = firstUrl;
 
         while (nextTramPageUrl) {
             // @ts-ignore
-            const { data, nextPageUrl } = await getTransportInfoFromPage(nextTramPageUrl, {
-                imageCol: 0,
-                boardNumberCol: 1,
-                modelCol: 2,
-                factoryNumberCol: 3,
-                yearCol: 4,
-            });
+            const { data, nextPageUrl } = await getTransportInfoFromPage(nextTramPageUrl);
 
             tramsInfo.push(...data);
             nextTramPageUrl = nextPageUrl;
@@ -190,52 +231,16 @@ export async function getTransportInfo() {
 
     const busesInfo: UnitInfo[] = [];
 
-    let nextBusPageUrl: string | null = FIRST_URL_BY_TYPE[ClientUnit.Bus][0];
+    for (const firstUrl of FIRST_URL_BY_TYPE[ClientUnit.Bus]) {
+        let nextBusPageUrl: string | null = firstUrl;
 
-    while (nextBusPageUrl) {
-        // @ts-ignore
-        const { data, nextPageUrl } = await getTransportInfoFromPage(nextBusPageUrl, {
-            imageCol: 0,
-            boardNumberCol: 1,
-            modelCol: 3,
-            factoryNumberCol: 4,
-            yearCol: 5,
-        });
+        while (nextBusPageUrl) {
+            // @ts-ignore
+            const { data, nextPageUrl } = await getTransportInfoFromPage(nextBusPageUrl);
 
-        busesInfo.push(...data);
-        nextBusPageUrl = nextPageUrl;
-    }
-
-    nextBusPageUrl = FIRST_URL_BY_TYPE[ClientUnit.Bus][1];
-
-    while (nextBusPageUrl) {
-        // @ts-ignore
-        const { data, nextPageUrl } = await getTransportInfoFromPage(nextBusPageUrl, {
-            imageCol: 0,
-            boardNumberCol: 1,
-            modelCol: 2,
-            factoryNumberCol: 3,
-            yearCol: 4,
-        });
-
-        busesInfo.push(...data);
-        nextBusPageUrl = nextPageUrl;
-    }
-
-    nextBusPageUrl = FIRST_URL_BY_TYPE[ClientUnit.Bus][2];
-
-    while (nextBusPageUrl) {
-        // @ts-ignore
-        const { data, nextPageUrl } = await getTransportInfoFromPage(nextBusPageUrl, {
-            imageCol: 0,
-            boardNumberCol: 1,
-            modelCol: 2,
-            factoryNumberCol: 3,
-            yearCol: 4,
-        });
-
-        busesInfo.push(...data);
-        nextBusPageUrl = nextPageUrl;
+            busesInfo.push(...data);
+            nextBusPageUrl = nextPageUrl;
+        }
     }
 
     return {

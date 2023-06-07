@@ -15,7 +15,7 @@ export const massTransApi = {
         }),
     getStops: () => strapiStops.getAll() as Promise<StrapiStop[]>,
     getUnitInfo: (type: ClientUnit, boardId: number, stateNumber: string) => {
-        const filterNumber = stateNumber.includes(boardId.toString()) ? stateNumber : boardId;
+        const filterNumber = type === ClientUnit.Bus ? stateNumber : boardId;
 
         return strapiUnitInfo.getAll(
             `filters[type][$eq]=${type}&filters[boardNumber][$eq]=${filterNumber}`,

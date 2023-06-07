@@ -10,6 +10,7 @@ import { ClientUnit, UnitInfo } from 'transport-common/types/masstrans';
 import { StrapiContentTypes, StrapiUnitInfo } from 'transport-common/types/strapi';
 
 import { getTransportInfo, getFactoryNamesByModelsAndType } from './crawler';
+import { writeFileSync } from 'fs';
 
 async function updateUnitInfoInStrapi(
     infos: UnitInfo[],
@@ -110,32 +111,34 @@ async function updateUnitInfoInStrapi(
 async function main() {
     const transportInfo = await getTransportInfo();
 
-    const busesModels = transportInfo.buses.map((bus) => bus.model).filter(Boolean) as string[];
-    const trollsModels = transportInfo.trolls
-        .map((troll) => troll.model)
-        .filter(Boolean) as string[];
-    const tramsModels = transportInfo.trams.map((tram) => tram.model).filter(Boolean) as string[];
+    writeFileSync('./test.json', JSON.stringify(transportInfo));
 
-    const busesFactories = await getFactoryNamesByModelsAndType(busesModels, ClientUnit.Bus);
-    const trollsFactories = await getFactoryNamesByModelsAndType(trollsModels, ClientUnit.Troll);
-    const tramsFactories = await getFactoryNamesByModelsAndType(tramsModels, ClientUnit.Tram);
+    // const busesModels = transportInfo.buses.map((bus) => bus.model).filter(Boolean) as string[];
+    // const trollsModels = transportInfo.trolls
+    //     .map((troll) => troll.model)
+    //     .filter(Boolean) as string[];
+    // const tramsModels = transportInfo.trams.map((tram) => tram.model).filter(Boolean) as string[];
 
-    const jwt = await loginStrapi();
+    // const busesFactories = await getFactoryNamesByModelsAndType(busesModels, ClientUnit.Bus);
+    // const trollsFactories = await getFactoryNamesByModelsAndType(trollsModels, ClientUnit.Troll);
+    // const tramsFactories = await getFactoryNamesByModelsAndType(tramsModels, ClientUnit.Tram);
 
-    const trollsInfoWithType = transportInfo.trolls.map((troll) => ({
-        ...troll,
-        type: ClientUnit.Troll,
-    }));
-    await updateUnitInfoInStrapi(trollsInfoWithType, trollsFactories, jwt, ClientUnit.Troll);
+    // const jwt = await loginStrapi();
 
-    const busesInfoWithType = transportInfo.buses.map((bus) => ({ ...bus, type: ClientUnit.Bus }));
-    await updateUnitInfoInStrapi(busesInfoWithType, busesFactories, jwt, ClientUnit.Bus);
+    // const trollsInfoWithType = transportInfo.trolls.map((troll) => ({
+    //     ...troll,
+    //     type: ClientUnit.Troll,
+    // }));
+    // await updateUnitInfoInStrapi(trollsInfoWithType, trollsFactories, jwt, ClientUnit.Troll);
 
-    const tramsInfoWithType = transportInfo.trams.map((tram) => ({
-        ...tram,
-        type: ClientUnit.Tram,
-    }));
-    await updateUnitInfoInStrapi(tramsInfoWithType, tramsFactories, jwt, ClientUnit.Tram);
+    // const busesInfoWithType = transportInfo.buses.map((bus) => ({ ...bus, type: ClientUnit.Bus }));
+    // await updateUnitInfoInStrapi(busesInfoWithType, busesFactories, jwt, ClientUnit.Bus);
+
+    // const tramsInfoWithType = transportInfo.trams.map((tram) => ({
+    //     ...tram,
+    //     type: ClientUnit.Tram,
+    // }));
+    // await updateUnitInfoInStrapi(tramsInfoWithType, tramsFactories, jwt, ClientUnit.Tram);
 }
 
 main();
