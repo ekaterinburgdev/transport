@@ -111,34 +111,32 @@ async function updateUnitInfoInStrapi(
 async function main() {
     const transportInfo = await getTransportInfo();
 
-    writeFileSync('./test.json', JSON.stringify(transportInfo));
+    const busesModels = transportInfo.buses.map((bus) => bus.model).filter(Boolean) as string[];
+    const trollsModels = transportInfo.trolls
+        .map((troll) => troll.model)
+        .filter(Boolean) as string[];
+    const tramsModels = transportInfo.trams.map((tram) => tram.model).filter(Boolean) as string[];
 
-    // const busesModels = transportInfo.buses.map((bus) => bus.model).filter(Boolean) as string[];
-    // const trollsModels = transportInfo.trolls
-    //     .map((troll) => troll.model)
-    //     .filter(Boolean) as string[];
-    // const tramsModels = transportInfo.trams.map((tram) => tram.model).filter(Boolean) as string[];
+    const busesFactories = await getFactoryNamesByModelsAndType(busesModels, ClientUnit.Bus);
+    const trollsFactories = await getFactoryNamesByModelsAndType(trollsModels, ClientUnit.Troll);
+    const tramsFactories = await getFactoryNamesByModelsAndType(tramsModels, ClientUnit.Tram);
 
-    // const busesFactories = await getFactoryNamesByModelsAndType(busesModels, ClientUnit.Bus);
-    // const trollsFactories = await getFactoryNamesByModelsAndType(trollsModels, ClientUnit.Troll);
-    // const tramsFactories = await getFactoryNamesByModelsAndType(tramsModels, ClientUnit.Tram);
+    const jwt = await loginStrapi();
 
-    // const jwt = await loginStrapi();
+    const trollsInfoWithType = transportInfo.trolls.map((troll) => ({
+        ...troll,
+        type: ClientUnit.Troll,
+    }));
+    await updateUnitInfoInStrapi(trollsInfoWithType, trollsFactories, jwt, ClientUnit.Troll);
 
-    // const trollsInfoWithType = transportInfo.trolls.map((troll) => ({
-    //     ...troll,
-    //     type: ClientUnit.Troll,
-    // }));
-    // await updateUnitInfoInStrapi(trollsInfoWithType, trollsFactories, jwt, ClientUnit.Troll);
+    const busesInfoWithType = transportInfo.buses.map((bus) => ({ ...bus, type: ClientUnit.Bus }));
+    await updateUnitInfoInStrapi(busesInfoWithType, busesFactories, jwt, ClientUnit.Bus);
 
-    // const busesInfoWithType = transportInfo.buses.map((bus) => ({ ...bus, type: ClientUnit.Bus }));
-    // await updateUnitInfoInStrapi(busesInfoWithType, busesFactories, jwt, ClientUnit.Bus);
-
-    // const tramsInfoWithType = transportInfo.trams.map((tram) => ({
-    //     ...tram,
-    //     type: ClientUnit.Tram,
-    // }));
-    // await updateUnitInfoInStrapi(tramsInfoWithType, tramsFactories, jwt, ClientUnit.Tram);
+    const tramsInfoWithType = transportInfo.trams.map((tram) => ({
+        ...tram,
+        type: ClientUnit.Tram,
+    }));
+    await updateUnitInfoInStrapi(tramsInfoWithType, tramsFactories, jwt, ClientUnit.Tram);
 }
 
 main();
