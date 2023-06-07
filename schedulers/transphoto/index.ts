@@ -10,7 +10,6 @@ import { ClientUnit, UnitInfo } from 'transport-common/types/masstrans';
 import { StrapiContentTypes, StrapiUnitInfo } from 'transport-common/types/strapi';
 
 import { getTransportInfo, getFactoryNamesByModelsAndType } from './crawler';
-import { writeFileSync } from 'fs';
 
 async function updateUnitInfoInStrapi(
     infos: UnitInfo[],
