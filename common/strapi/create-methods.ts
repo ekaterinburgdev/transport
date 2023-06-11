@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import fetch, { Response } from 'node-fetch';
 
 import { StrapiContentTypes } from '../types/strapi';
 import { parallelRequests } from '../utils/parallelRequests';
@@ -82,7 +82,7 @@ export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: strin
         }
     }
 
-    async function getAll(filter?: string, withImage: boolean = false) {
+    async function getAll<R>(filter?: string, withImage: boolean = false): Promise<R[]> {
         try {
             const sizeRequest = await fetch(
                 `${STRAPI_URL}/api/${contentType}s?pagination[pageSize]=1${
@@ -118,7 +118,7 @@ export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: strin
                 );
             }
 
-            const response = await parallelRequests(requests, async (rawResult) => {
+            const response = await parallelRequests<Response, R>(requests, async (rawResult) => {
                 if (rawResult.status !== 200) {
                     throw new Error(rawResult.statusText);
                 }
@@ -135,6 +135,8 @@ export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: strin
             return response;
         } catch (e) {
             console.log(e);
+
+            return [];
         }
     }
 
