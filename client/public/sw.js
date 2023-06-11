@@ -12,7 +12,7 @@ self.addEventListener('fetch', (event) => {
     console.log(`Request of ${event.request.url}`, event.request.cache);
 
     if (event.request.cache === 'no-cache' || event.request.cache === 'no-store') {
-        event.respondWith(fetch(event.request));
+        event.respondWith(fetch(event.request).catch((e) => console.error(e)));
 
         return;
     }
@@ -21,7 +21,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches
             .match(event.request)
-            .then((cached) => cached || fetch(event.request))
+            .then((cached) => cached || fetch(event.request).catch((e) => console.error(e)))
             .then((response) => cache(event.request, response).then(() => response)),
     );
     event.waitUntil(update(event.request));
