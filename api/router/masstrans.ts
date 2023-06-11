@@ -1,12 +1,11 @@
 import express from 'express';
 
-import { MasstransController } from '../controller/masstrans/masstrans';
+import { controllerLayer } from '../controller/index';
 
 export const masstransRouter = express.Router();
-const masstransController = new MasstransController();
 
-masstransRouter.get('/all-units', masstransController.getAllUnits);
-masstransRouter.get('/:unit', masstransController.getUnit);
-masstransRouter.get('/route/:id', masstransController.getRoute);
-masstransRouter.get('/stop/:stopId', masstransController.getStopInfo);
-masstransRouter.get('/unit/:unitId', masstransController.getUnitInfo);
+masstransRouter.get('/all-units', controllerLayer.masstrans.getAllUnits);
+masstransRouter.get('/:unit', controllerLayer.masstrans.getUnit);
+masstransRouter.get('/route/:id', controllerLayer.masstrans.getRoute);
+masstransRouter.get('/stop/:stopId', controllerLayer.masstrans.getStopInfo);
+masstransRouter.get('/unit/:unitId', controllerLayer.masstrans.getUnitInfo);

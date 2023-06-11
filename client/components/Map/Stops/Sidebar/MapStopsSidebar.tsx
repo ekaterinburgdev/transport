@@ -17,12 +17,11 @@ import styles from './MapStopsSidebar.module.css';
 export type MapStopsSidebarProps = {
     type: StopType;
     name: string;
-    id: string;
 };
 
 const cn = classNames.bind(styles);
 
-export function MapStopsSidebar({ type, name, id }: MapStopsSidebarProps) {
+export function MapStopsSidebar({ type, name }: MapStopsSidebarProps) {
     const stopInfo = useSelector((state: State) => state.publicTransport.stopInfo);
 
     const getTimeToArrive = useCallback((arriveTime: string) => {

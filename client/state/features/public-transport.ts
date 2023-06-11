@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { massTransApi } from 'api/masstrans/masstrans';
+import { uniq } from 'lodash';
 
+import { massTransApi } from 'api/masstrans/masstrans';
 import {
     SetCurrentStopPayload,
     SetCurrentVehiclePayload,
@@ -9,7 +10,6 @@ import {
     State,
     CurrentStopPayload,
 } from 'common/types/state';
-import { uniq, uniqBy } from 'lodash';
 
 import { initialState } from '../constants/public-transport';
 
@@ -22,6 +22,7 @@ export const setCurrentVehicle = createAsyncThunk(
                 currentRoute: null,
             };
         }
+
         const { routeId } = currentVehicle;
 
         const currentRoute = await massTransApi.getRoute(routeId);
