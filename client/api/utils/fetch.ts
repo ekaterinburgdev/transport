@@ -1,7 +1,5 @@
 import { HttpMethod, FetchOptions } from 'common/types/requests';
 
-import { getCorsWrapper } from './get-cors-wrapper';
-
 export async function fetchApi(url: string, options: FetchOptions) {
     const { method = HttpMethod.GET, dataField, cache } = options;
 

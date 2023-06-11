@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 
 import { StrapiContentTypes } from '../types/strapi';
+import { parallelRequests } from '../utils/parallelRequests';
 import { STRAPI_URL, REQUEST_PAGINATION_SIZE } from './constants';
 
 export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: string) {
@@ -83,24 +84,55 @@ export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: strin
 
     async function getAll(filter?: string, withImage: boolean = false) {
         try {
-            const resp = await fetch(
-                `${STRAPI_URL}/api/${contentType}s?pagination[pageSize]=${REQUEST_PAGINATION_SIZE}${
-                    withImage ? '&populate=image' : ''
-                }${filter ? '&' + filter : ''}`,
+            const sizeRequest = await fetch(
+                `${STRAPI_URL}/api/${contentType}s?pagination[pageSize]=1${
+                    filter ? '&' + filter : ''
+                }`,
                 requestToStrapiOptions,
             );
 
-            if (resp.status !== 200) {
-                throw new Error(resp.statusText);
+            if (sizeRequest.status !== 200) {
+                throw new Error(sizeRequest.statusText);
             }
 
-            const body = (await resp.json()) as any;
+            const sizeRequestBody = (await sizeRequest.json()) as any;
 
-            if (body.error) {
-                throw new Error(JSON.stringify(body.error));
+            if (sizeRequestBody.error) {
+                throw new Error(JSON.stringify(sizeRequestBody.error));
             }
 
-            return body.data;
+            const pageCount = Math.ceil(
+                sizeRequestBody?.meta?.pagination?.total / REQUEST_PAGINATION_SIZE,
+            );
+
+            const requests = [];
+
+            for (let i = 1; i <= pageCount; i++) {
+                requests.push(
+                    fetch(
+                        `${STRAPI_URL}/api/${contentType}s?pagination[page]=${i}&pagination[pageSize]=${REQUEST_PAGINATION_SIZE}${
+                            withImage ? '&populate=image' : ''
+                        }${filter ? '&' + filter : ''}`,
+                        requestToStrapiOptions,
+                    ),
+                );
+            }
+
+            const response = await parallelRequests(requests, async (rawResult) => {
+                if (rawResult.status !== 200) {
+                    throw new Error(rawResult.statusText);
+                }
+
+                const result = await rawResult.json();
+
+                if (result.error) {
+                    throw new Error(JSON.stringify(result.error));
+                }
+
+                return result.data;
+            });
+
+            return response;
         } catch (e) {
             console.log(e);
         }

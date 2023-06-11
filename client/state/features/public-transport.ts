@@ -110,11 +110,11 @@ const publicTransportSlice = createSlice({
                 const { currentStop, stopInfo } = action.payload;
 
                 const stopVehicles = uniq(
-                    stopInfo.map((info) => ({
+                    stopInfo?.map((info) => ({
                         route: info.route,
                         type: info.type,
                         routeDirection: info.routeDirection,
-                    })),
+                    })) || [],
                 );
 
                 state.currentStop = currentStop;

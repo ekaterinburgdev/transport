@@ -4,4 +4,4 @@ export const EMAIL = process.env.STRAPI_EMAIL;
 // password of Authenticated User
 export const PASSWORD = process.env.STRAPI_PASSWORD;
 // pagination size to request all of the data from table
-export const REQUEST_PAGINATION_SIZE = 2000;
+export const REQUEST_PAGINATION_SIZE = 400;
