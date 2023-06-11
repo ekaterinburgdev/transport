@@ -14,8 +14,26 @@ export const massTransApi = {
             cache: 'no-store',
         }),
     getStops: () => strapiStops.getAll() as Promise<StrapiStop[]>,
-    getUnitInfo: (type: ClientUnit, boardId: number, stateNumber: string) => {
-        const filterNumber = type === ClientUnit.Bus ? stateNumber : boardId;
+    getUnitInfo: ({
+        type,
+        boardId,
+        stateNumber,
+        num,
+    }: {
+        type: ClientUnit;
+        boardId: number;
+        stateNumber: string;
+        num: string;
+    }) => {
+        let filterNumber = type === ClientUnit.Bus ? stateNumber : boardId;
+
+        if (type === ClientUnit.Tram) {
+            if (num === '333') {
+                filterNumber = filterNumber.toString().padStart(5, '0');
+            } else {
+                filterNumber = filterNumber.toString().padStart(3, '0');
+            }
+        }
 
         return strapiUnitInfo.getAll(
             `filters[type][$eq]=${type}&filters[boardNumber][$eq]=${filterNumber}`,

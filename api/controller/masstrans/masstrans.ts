@@ -2,13 +2,9 @@ import { Request, Response } from 'express';
 
 import { ClientUnit } from 'transport-common/types/masstrans';
 
-import { EkaterinburgRfModel } from '../../model/ekaterinburg-rf/ekaterinburg-rf';
 import { isValueInObject } from '../../utils/is-value-in-object';
-
-import { MasstransService } from '../../service/masstrans/masstrans';
-
-const ekaterinburgRfModel = new EkaterinburgRfModel();
-const masstransService = new MasstransService();
+import { modelLayer } from '../../model/index';
+import { serviceLayer } from '../../service/index';
 
 export class MasstransController {
     async getUnit(req: Request, res: Response) {
@@ -20,21 +16,21 @@ export class MasstransController {
             return;
         }
 
-        const unitsRaw = await ekaterinburgRfModel.getUnitByType(unit as ClientUnit);
+        const unitsRaw = await modelLayer.ekaterinburgRf.getUnitByType(unit as ClientUnit);
 
         if (!unitsRaw) {
             throw new Error('No response from ekaterinburg.rf');
         }
 
-        const units = masstransService.processUnitData(unitsRaw);
+        const units = serviceLayer.masstrans.processUnitData(unitsRaw);
 
         res.json({ data: units });
     }
 
     async getAllUnits(_: Request, res: Response) {
-        const unitsRaw = await ekaterinburgRfModel.getAllUnits();
+        const unitsRaw = await modelLayer.ekaterinburgRf.getAllUnits();
 
-        const units = masstransService.processUnitData(unitsRaw);
+        const units = serviceLayer.masstrans.processUnitData(unitsRaw);
 
         res.json({ data: units });
     }
@@ -48,9 +44,9 @@ export class MasstransController {
             return;
         }
 
-        const routeRaw = await ekaterinburgRfModel.getRoute(id);
+        const routeRaw = await modelLayer.ekaterinburgRf.getRoute(id);
 
-        const route = masstransService.processRouteData(routeRaw);
+        const route = serviceLayer.masstrans.processRouteData(routeRaw);
 
         res.json({ data: route });
     }
@@ -64,13 +60,13 @@ export class MasstransController {
             return;
         }
 
-        const stopInfoRaw = await ekaterinburgRfModel.getStopInfo(stopId);
+        const stopInfoRaw = await modelLayer.ekaterinburgRf.getStopInfo(stopId);
 
         if (!stopInfoRaw) {
             throw new Error('No response from ekaterinburg.rf');
         }
 
-        const stopInfo = masstransService.processStopInfoData(stopInfoRaw);
+        const stopInfo = serviceLayer.masstrans.processStopInfoData(stopInfoRaw);
 
         res.json({ data: stopInfo });
     }
@@ -78,13 +74,13 @@ export class MasstransController {
     async getUnitInfo(req: Request, res: Response) {
         const { unitId } = req.params;
 
-        const arriveInfoRaw = await ekaterinburgRfModel.getUnitArrive(unitId);
+        const arriveInfoRaw = await modelLayer.ekaterinburgRf.getUnitArrive(unitId);
 
         if (!arriveInfoRaw) {
             throw new Error('No response from ekaterinburg.rf about arrive info');
         }
 
-        const arriveInfo = masstransService.processUnitArrive(arriveInfoRaw);
+        const arriveInfo = serviceLayer.masstrans.processUnitArrive(arriveInfoRaw);
 
         if (!arriveInfo.length) {
             res.json({
@@ -94,15 +90,15 @@ export class MasstransController {
             return;
         }
 
-        const routeRaw = await ekaterinburgRfModel.getRoute(arriveInfo[0].routeId);
+        const routeRaw = await modelLayer.ekaterinburgRf.getRoute(arriveInfo[0].routeId);
 
         if (!routeRaw) {
             throw new Error('No response from ekaterinburg.rf about route');
         }
 
-        const route = masstransService.processRouteData(routeRaw);
+        const route = serviceLayer.masstrans.processRouteData(routeRaw);
 
-        const unitInfo = masstransService.processUnitInfo(route, arriveInfo);
+        const unitInfo = serviceLayer.masstrans.processUnitInfo(route, arriveInfo);
 
         res.json({
             data: unitInfo,

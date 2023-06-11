@@ -66,7 +66,6 @@ export function MapVehiclesSidebar({
     type,
     stateNumber,
     warning,
-    map,
     accessibility,
     firstStation,
     lastStation,
@@ -85,12 +84,19 @@ export function MapVehiclesSidebar({
     }, [id]);
 
     useEffect(() => {
-        massTransApi.getUnitInfo(type, boardId, stateNumber).then((unitInfoRes) => {
-            const unitInfoItem = unitInfoRes[0];
+        massTransApi
+            .getUnitInfo({
+                type,
+                boardId,
+                stateNumber,
+                num,
+            })
+            .then((unitInfoRes) => {
+                const unitInfoItem = unitInfoRes[0];
 
-            setUnitInfo(unitInfoItem?.attributes);
-        });
-    }, [type, boardId, stateNumber]);
+                setUnitInfo(unitInfoItem?.attributes);
+            });
+    }, [type, boardId, stateNumber, num]);
 
     const stateNumberObject = useMemo(() => {
         const splittedStateNum = stateNumber.toLocaleLowerCase().split(' ');
@@ -368,7 +374,7 @@ export function MapVehiclesSidebar({
                                 <li className={cn(styles.MapVehiclesSidebarStation)}>
                                     <div className={cn(styles.MapVehiclesSidebarVehicleMarker)}>
                                         <MapVehicleMarker
-                                            id={id}
+                                            id="sidebar"
                                             routeNumber={num}
                                             type={type}
                                             isCourseEast={false}
