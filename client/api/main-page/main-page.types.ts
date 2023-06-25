@@ -44,6 +44,12 @@ export interface Card {
     };
 }
 
+export interface AccessibilityTransportCounters {
+    buses: number,
+    trolls: number,
+    trams: number
+}
+
 interface Thumbnail {
     ext: string;
     url: string;

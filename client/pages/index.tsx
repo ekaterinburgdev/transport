@@ -18,10 +18,11 @@ export default function Home(props) {
 export async function getStaticProps() {
     return {
         props: {
-            cards: (await MainPageApi.getCards()) || [],
-            marqueeItems: (await MainPageApi.getMarqueeItems()) || [],
-            notifications: (await MainPageApi.getNotifications()) || [],
+            cards: await MainPageApi.getCards() || [],
+            trafficJams: await MainPageApi.getTrafficJamsCounter() || null,
+            a11yTransportCounters: await MainPageApi.getA11yTransportCounters() || {},
+            marqueeItems: await MainPageApi.getMarqueeItems() || [],
         },
-        revalidate: 15,
+        revalidate: 60,
     };
 }
