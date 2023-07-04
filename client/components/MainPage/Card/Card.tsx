@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import { CardProps } from './Card.types';
 
 import styles from './Card.module.css';
+import t from 'utils/typograph';
 
 const cn = classNames.bind(styles);
 
@@ -41,11 +42,11 @@ export function Card({
             } as React.CSSProperties}
         >
             {title && <div className={cn(styles.CardTitle, { [styles.CardTitle_Bg]: Boolean(titleBackground) })}>
-                {title}
+                {t(title)}
             </div>}
 
             {subtitle && <div className={cn(styles.CardSubtitle)}>
-                {subtitle}
+                {t(subtitle)}
             </div>}
 
             {button && <div className={cn(styles.CardButton)}>

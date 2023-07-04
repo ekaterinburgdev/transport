@@ -1,10 +1,11 @@
 import React from 'react';
 import classNames from 'classnames/bind';
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+import md from 'markdown-it';
 import { ArticleProps } from './Article.types';
 import Link from 'next/link';
 
 import styles from './Article.module.css';
+import t from 'utils/typograph';
 
 const cn = classNames.bind(styles);
 
@@ -20,9 +21,10 @@ export function Article({ title, description }: ArticleProps) {
                 {title}
             </h1>
 
-            <ReactMarkdown className={cn(styles.ArticleContent)}>
-                {description}
-            </ReactMarkdown>
+            <div
+                className={cn(styles.ArticleContent)}
+                dangerouslySetInnerHTML={{ __html: t(md().render(description)) }}
+            />
         </article>
     )
 }
