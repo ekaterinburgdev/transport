@@ -72,6 +72,7 @@
     margin-bottom: .25em;
 }
 
+.ArticleContent ol,
 .ArticleContent ul,
 .ArticleContent p {
     font-size: 20px;
@@ -79,16 +80,16 @@
     margin-bottom: 1.1em;
 }
 
-.ArticleContent ul {
-    list-style-type: none;
-}
-
 .ArticleContent li {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
 
-.ArticleContent li:before {
+.ArticleContent ul {
+    list-style-type: none;
+}
+
+.ArticleContent ul li:before {
     content: "—";
     display: inline-block;
     padding-right: .5em;
@@ -118,6 +119,7 @@
         font-size: 32px;
     }
     
+    .ArticleContent ol,
     .ArticleContent ul,
     .ArticleContent p {
         font-size: 22px;
