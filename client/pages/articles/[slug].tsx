@@ -1,34 +1,23 @@
 import React from 'react';
 import Head from 'next/head';
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
-import Link from 'next/link';
-import { articlesApi } from 'api/articles/articles';
 
-function Article({ title, description }: any) {
+import { articlesApi } from 'api/articles/articles';
+import { ArticleProps } from 'components/Articles/Article/Article.types';
+import { Article } from 'components/Articles/Article/Article';
+
+function ArticlePage({ title, description }: ArticleProps) {
     return (
         <>
+        
             <Head>
                 <title>Транспорт Екатеринбурга — {title}</title>
             </Head>
 
-            <div
-                style={{
-                    maxWidth: 900,
-                    margin: '24px auto 80px',
-                    fontSize: 20,
-                    lineHeight: 1.3,
-                }}
-            >
-                <div style={{ marginBottom: 40 }}>
-                    <Link href="/">← Назад</Link>
-                </div>
-                <h1>{title}</h1>
-
-                <ReactMarkdown>{description}</ReactMarkdown>
-            </div>
+            <Article title={title} description={description} />
         </>
     );
 }
+
 export async function getStaticPaths() {
     const articles = (await articlesApi.getArticles()) || [];
 
@@ -46,4 +35,4 @@ export async function getStaticProps({ params }) {
     };
 }
 
-export default Article;
+export default ArticlePage;
