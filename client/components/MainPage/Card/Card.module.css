@@ -22,13 +22,6 @@
     background-image: var(--CardBgrImage);
 }
 
-@media screen and (min-width: 768px) {
-    .Card {
-        padding: 32px;
-        border-radius: 24px;
-    }
-}
-
 .CardTitle {
     font-size: 20px;
     font-weight: 500;
@@ -46,20 +39,6 @@
     padding: .5em .75em;
 }
 
-@media screen and (min-width: 768px) {
-    .CardTitle {
-        font-size: 24px;
-        border-radius: 8px;
-    }
-}
-
-@media screen and (min-width: 1440px) {
-    .CardTitle {
-        font-size: 32px;
-        border-radius: 8px;
-    }
-}
-
 .Card:hover .CardTitle {
     text-decoration-color: rgba(var(--CardTitleUnderlineColor), 0.6);
 }
@@ -72,7 +51,31 @@
 }
 
 @media screen and (min-width: 768px) {
+    .Card {
+        padding: 32px;
+        border-radius: 24px;
+    }
+
+    .CardTitle {
+        font-size: 32px;
+        border-radius: 8px;
+    }
+
     .CardSubtitle {
-        font-size: 18px;
+        font-size: 24px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .Card {
+        padding: 2vw;
+    }
+
+    .CardTitle {
+        font-size: 1.8vw;
+    }
+
+    .CardSubtitle {
+        font-size: 1.2vw;
     }
 }
