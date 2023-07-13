@@ -21,6 +21,11 @@
     background-position: 100% 100%;
     background-color: var(--CardBgrColor);
     background-image: var(--CardBgrImage);
+    transition: .15s ease;
+}
+
+.Card:hover {
+    filter: brightness(0.97);
 }
 
 .CardTitle {
