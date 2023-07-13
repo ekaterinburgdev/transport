@@ -13,7 +13,10 @@ import { Marquee } from './Marquee/Marquee';
 
 const cn = classNames.bind(styles);
 
-export function MainPage({ cards, marqueeItems, notifications }: MainPageTypes) {
+export function MainPage({ cards, trafficJams, a11yTransportCounters, marqueeItems }: MainPageTypes) {
+    // TODO Output data to dynamic cards
+    console.log({ trafficJams, a11yTransportCounters });
+
     return (
         <div className={cn(styles.MainPage)}>
             <div className={cn(styles.MainPageInner)}>
@@ -21,14 +24,6 @@ export function MainPage({ cards, marqueeItems, notifications }: MainPageTypes) 
                     <Logo />
                     <h1 className={cn(styles.MainPageTitle)}>Транспорт Екатеринбурга</h1>
                 </div>
-                {/* {notifications.map(({ id, attributes }) => (
-                    <Notification
-                        text={attributes.text}
-                        title={attributes.title}
-                        image={attributes.image}
-                        key={id}
-                    />
-                ))} */}
 
                 <div className={styles.MainPageCardGrid}>
                     {cards
