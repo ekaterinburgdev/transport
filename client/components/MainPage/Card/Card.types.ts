@@ -1,3 +1,5 @@
+import { ReactElement } from "react";
+
 export type CardProps = {
     title: string;
     titleColor: string;
@@ -11,5 +13,6 @@ export type CardProps = {
     subtitle: string;
     subtitleColor: string;
     invert: boolean;
+    dynamicContent: ReactElement;
     key: number;
 };

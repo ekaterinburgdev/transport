@@ -1,4 +1,3 @@
-import React from 'react';
 import classNames from 'classnames/bind';
 import { CardProps } from './Card.types';
 
@@ -24,6 +23,7 @@ export function Card({
     buttonBackground,
     subtitle,
     subtitleColor,
+    dynamicContent
 }: CardProps) {
 
     return (
@@ -43,9 +43,15 @@ export function Card({
                 {t(title)}
             </div>}
 
-            {subtitle && <div className={cn(styles.CardSubtitle)}>
-                {t(subtitle)}
-            </div>}
+            {
+                dynamicContent
+                    ? dynamicContent
+                    : <>
+                        {subtitle && <div className={cn(styles.CardSubtitle)}>
+                            {subtitle}
+                        </div>}
+                    </>
+            }
         </a>
     );
 }

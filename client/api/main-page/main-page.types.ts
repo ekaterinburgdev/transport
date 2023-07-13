@@ -38,6 +38,7 @@ export interface Card {
         cardId: null;
         subtitle: null | string;
         subtitleColor: string;
+        dynamicId: string;
         createdAt: Date;
         updatedAt: Date;
         publishedAt: Date;
