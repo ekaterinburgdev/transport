@@ -18,11 +18,8 @@ export function Card({
     url,
     backgroundColor,
     backgroundImage,
-    button,
-    buttonColor,
-    buttonBackground,
-    subtitle,
-    subtitleColor,
+    headerCaption,
+    bottomCaption,
     dynamicContent
 }: CardProps) {
 
@@ -36,7 +33,7 @@ export function Card({
                 "--CardTitleUnderlineColor": hexToRgb(titleColor),
                 "--CardBgrColor": backgroundColor,
                 "--CardBgrImage": backgroundImage && `url(https://transport-cms.ekaterinburg.io${backgroundImage})`,
-                "--CardSubtitleColor": subtitleColor
+                "--CardSubtitleColor": titleColor
             } as React.CSSProperties}
         >
             {title && <div className={cn(styles.CardTitle, { [styles.CardTitle_Bg]: Boolean(titleBackground) })}>
@@ -47,8 +44,9 @@ export function Card({
                 dynamicContent
                     ? dynamicContent
                     : <>
-                        {subtitle && <div className={cn(styles.CardSubtitle)}>
-                            {subtitle}
+                        {headerCaption && <div className={cn(styles.CardSubtitle)}>
+                            {headerCaption}
+                            {bottomCaption}
                         </div>}
                     </>
             }

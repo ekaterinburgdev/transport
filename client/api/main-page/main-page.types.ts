@@ -29,15 +29,12 @@ export interface Card {
                 };
             };
         };
-        button: null;
-        buttonColor: null;
-        buttonBackground: null;
         type: CardType;
         priority: number;
         size: CardSize;
         cardId: null;
-        subtitle: null | string;
-        subtitleColor: string;
+        headerCaption: null | string;
+        bottomCaption: null | string;
         dynamicId: string;
         createdAt: Date;
         updatedAt: Date;

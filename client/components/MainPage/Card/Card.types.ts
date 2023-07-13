@@ -7,11 +7,8 @@ export type CardProps = {
     url: string;
     backgroundColor: string;
     backgroundImage: string;
-    button: string;
-    buttonColor: string;
-    buttonBackground: string;
-    subtitle: string;
-    subtitleColor: string;
+    headerCaption: string;
+    bottomCaption: string;
     invert: boolean;
     dynamicContent: ReactElement;
     key: number;
