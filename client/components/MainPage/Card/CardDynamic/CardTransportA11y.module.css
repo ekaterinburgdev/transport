@@ -1,0 +1,17 @@
+.CardTransportA11y {
+    font-size: 1.25em;
+}
+
+.CardTransportA11yList {
+    display: flex;
+    gap: 1.25em;
+}
+
+.CardTransportA11yItem {
+    font-weight: 600;
+    text-align: left;
+}
+
+.CardTransportA11yItem dd {
+    margin: 12px 0 0;
+}

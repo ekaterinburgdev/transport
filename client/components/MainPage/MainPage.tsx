@@ -4,18 +4,25 @@ import React from 'react';
 import classNames from 'classnames/bind';
 import { MainPageTypes } from './MainPage.types';
 import { Card } from './Card/Card';
+import { CardTrafficJams } from './Card/CardDynamic/CardTrafficJams';
+import { CardTransportA11y } from './Card/CardDynamic/CardTransportA11y';
 
 import Logo from './Logo.svg';
-import Footer from './Footer.svg';
 
 import styles from './MainPage.module.css';
 import { Marquee } from './Marquee/Marquee';
 
 const cn = classNames.bind(styles);
 
-export function MainPage({ cards, trafficJams, a11yTransportCounters, marqueeItems }: MainPageTypes) {
-    // TODO Output data to dynamic cards
-    console.log({ trafficJams, a11yTransportCounters });
+export function MainPage({ cards, cardsDynamicData, marqueeItems }: MainPageTypes) {
+    const getDynamicContent = (dynamicId) => {
+        switch (dynamicId) {
+            case 'a11y-transport':
+                return <CardTransportA11y {...cardsDynamicData.a11yTransportCounters} />
+            case 'traffic-jams':
+                return <CardTrafficJams score={cardsDynamicData.trafficJams} />
+        }
+    }
 
     return (
         <div className={cn(styles.MainPage)}>
@@ -28,8 +35,8 @@ export function MainPage({ cards, trafficJams, a11yTransportCounters, marqueeIte
                 <div className={styles.MainPageCardGrid}>
                     {cards
                         .sort((a, b) => a.attributes.priority - b.attributes.priority)
-                        .map(({ id, attributes }) => (
-                            <Card
+                        .map(({ id, attributes }) => {
+                            return <Card
                                 title={attributes.title}
                                 titleColor={attributes.titleColor}
                                 titleBackground={attributes.titleBackground}
@@ -42,9 +49,10 @@ export function MainPage({ cards, trafficJams, a11yTransportCounters, marqueeIte
                                 subtitle={attributes.subtitle}
                                 subtitleColor={attributes.subtitleColor}
                                 invert={attributes.invert}
+                                dynamicContent={getDynamicContent(attributes.dynamicId)}
                                 key={id}
                             />
-                        ))}
+                        })}
                 </div>
 
                 <Marquee items={marqueeItems.map(({ attributes: { message } }) => message)} />
