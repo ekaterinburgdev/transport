@@ -6,6 +6,7 @@ import { MainPageTypes } from './MainPage.types';
 import { Card } from './Card/Card';
 
 import Logo from './Logo.svg';
+import Footer from './Footer.svg';
 
 import styles from './MainPage.module.css';
 import { Marquee } from './Marquee/Marquee';
@@ -53,6 +54,8 @@ export function MainPage({ cards, marqueeItems, notifications }: MainPageTypes) 
 
                 <Marquee items={marqueeItems.map(({ attributes: { message } }) => message)} />
             </div>
+
+            <div className={styles.MainPageFooter}></div>
         </div>
     );
 }

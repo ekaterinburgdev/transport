@@ -9,9 +9,6 @@
 
     --CardSubtitleColor: inherit;
 
-    --CardButtonColor: inherit;
-    --CardButtonBgrColor: transparent;
-
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -27,7 +24,7 @@
 
 @media screen and (min-width: 768px) {
     .Card {
-        padding: 36px;
+        padding: 32px;
         border-radius: 24px;
     }
 }
@@ -51,6 +48,13 @@
 
 @media screen and (min-width: 768px) {
     .CardTitle {
+        font-size: 24px;
+        border-radius: 8px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .CardTitle {
         font-size: 32px;
         border-radius: 8px;
     }
@@ -70,24 +74,5 @@
 @media screen and (min-width: 768px) {
     .CardSubtitle {
         font-size: 18px;
-    }
-}
-
-.CardButton {
-    display: inline-block;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.35;
-    font-weight: 400;
-    padding: .55em 1.2em;
-    margin-top: auto;
-    color: var(--CardButtonColor);
-    background-color: var(--CardButtonBgrColor);
-}
-
-@media screen and (min-width: 768px) {
-    .CardButton {
-        font-size: 18px;
-        padding: 16px 40px;
     }
 }

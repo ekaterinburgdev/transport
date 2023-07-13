@@ -2,21 +2,23 @@
     display: flex;
     justify-content: center;
     overflow: hidden;
-    background: #f2f2f2;
+    background: url(./Footer.svg) repeat-x center bottom;
+    background-size: 150% auto;
+    padding-bottom: 22vw;
 }
 
 .MainPageInner {
     width: 100%;
     max-width: 1980px;
     margin: auto;
-    padding: 2vmax;
+    padding: 2vmax 2vmax 4vmax;
 }
 
 .MainPageLogo {
     display: flex;
     align-items: center;
     margin-top: 0.15em;
-    margin-bottom: .5em;
+    margin-bottom: .8em;
     color: #123;
     font-weight: 500;
     font-size: min(8vw, 176px);
@@ -42,11 +44,13 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-auto-flow: row dense;
     gap: 24px;
+    margin-bottom: 24px;
 }
 
 @media screen and (min-width: 768px) {
     .MainPageCardGrid {
-        gap: 32px;
+        gap: 40px;
+        margin-bottom: 40px;
     }
 }
 
@@ -62,20 +66,17 @@
 }
 
 @media screen and (min-width: 768px) {
+    .MainPage {
+        background-size: 100% auto;
+        padding-bottom: 16vw;
+    }
+
     .MainPageCardGrid > *:nth-child(1),
     .MainPageCardGrid > *:nth-child(6),
     .MainPageCardGrid > *:nth-child(8),
     .MainPageCardGrid > *:nth-child(11) {
         grid-area: span 1 / span 2;
         aspect-ratio: 2 / 1;
-    }
-    
-    .MainPageCardGrid > *:nth-child(2) {
-        background-color: transparent !important;
-    }
-
-    .MainPageCardGrid > *:nth-child(2) [class*="CardTitle"] {
-        font-size: 40px;
     }
 }
 
@@ -89,3 +90,4 @@
         aspect-ratio: auto;
     }
 }
+
