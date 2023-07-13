@@ -43,6 +43,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-auto-flow: row dense;
+    align-items: stretch;
     gap: 24px;
     margin-bottom: 24px;
 }
@@ -56,11 +57,14 @@
 
 .MainPageCardGrid > * {
     aspect-ratio: 1 / 1;
+    max-width: 100%;
 }
 
-.MainPageCardGrid > *:nth-child(1) {
+.MainPageCardGrid > *:first-child,
+.MainPageCardGrid > *:last-child {
     grid-area: span 1 / span 2;
     aspect-ratio: 2 / 1;
+    align-self: stretch;
 }
 
 @media screen and (min-width: 768px) {
@@ -68,16 +72,26 @@
         background-size: 100% auto;
         padding-bottom: 16vw;
     }
-
-    .MainPageCardGrid > *:nth-child(1),
-    .MainPageCardGrid > *:nth-child(6) {
-        grid-area: span 1 / span 2;
-        aspect-ratio: 2 / 1;
-    }
 }
 
 
 @media screen and (min-width: 1200px) {
+    .MainPageCardGrid > *:first-child {
+        aspect-ratio: auto;
+    }
+    
+    .MainPageCardGrid > *:last-child {
+        grid-area: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    .MainPageCardGrid {
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+
+@media screen and (min-width: 1440px) {
     .MainPageCardGrid {
         grid-template-columns: repeat(4,1fr);
     }
