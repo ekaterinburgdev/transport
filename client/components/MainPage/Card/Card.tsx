@@ -3,6 +3,7 @@ import { CardProps } from './Card.types';
 
 import styles from './Card.module.css';
 import t from 'utils/typograph';
+import React from "react";
 
 const cn = classNames.bind(styles);
 
@@ -22,7 +23,6 @@ export function Card({
     bottomCaption,
     dynamicContent
 }: CardProps) {
-
     return (
         <a
             className={cn(styles.Card)}
@@ -36,19 +36,26 @@ export function Card({
                 "--CardSubtitleColor": titleColor
             } as React.CSSProperties}
         >
-            {title && <div className={cn(styles.CardTitle, { [styles.CardTitle_Bg]: Boolean(titleBackground) })}>
-                {t(title)}
-            </div>}
+           <div style={{height: "auto"}}>
+               {title && <div className={cn(styles.CardTitle, { [styles.CardTitle_Bg]: Boolean(titleBackground) })}>
+                   {t(title)}
+               </div>}
+               {headerCaption && <div className={cn(styles.CardSubtitle)}>
+                   {headerCaption}
+               </div>}
+           </div>
 
             {
                 dynamicContent
                     ? dynamicContent
-                    : <>
-                        {headerCaption && <div className={cn(styles.CardSubtitle)}>
-                            {headerCaption}
+                    : <div>
+                        {bottomCaption &&
+                            <div className={headerCaption ?
+                                cn(styles.CardBottomCapture)
+                                : cn(styles.CardBottomCapture_NoSubtitle)}>
                             {bottomCaption}
                         </div>}
-                    </>
+                    </div>
             }
         </a>
     );

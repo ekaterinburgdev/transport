@@ -12,7 +12,11 @@
     position: relative;
     display: flex;
     flex-direction: column;
+
     align-items: flex-start;
+    justify-content: space-between;
+    height: 100%;
+
     padding: 16px;
     border-radius: 16px;
     text-decoration: none;
@@ -41,6 +45,19 @@
     transition: .15s ease text-decoration;
 }
 
+.CardBottomCapture, .CardBottomCapture_NoSubtitle {
+    color: var(--CardTitleColor);
+    font-weight: 500;
+}
+
+.CardBottomCapture {
+    font-size: 24px;
+}
+
+.CardBottomCapture_NoSubtitle {
+    font-size: 50px;
+}
+
 .CardTitle_Bg {
     padding: .5em .75em;
 }
@@ -52,7 +69,7 @@
 .CardSubtitle {
     font-size: 14px;
     line-height: 1.35;
-    margin-top: .5em;
+    margin-top: 15px;
     color: var(--CardSubtitleColor);
 }
 
