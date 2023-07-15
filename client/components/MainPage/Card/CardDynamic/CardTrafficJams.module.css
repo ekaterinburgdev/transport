@@ -1,6 +1,80 @@
 .CardTrafficJams {
+    /*position: absolute;*/
+    /*bottom: .35em;*/
+    /*right: .45em;*/
+    /*font-size: 100px;*/
+    /*color: white;*/
+}
+
+.CardTrafficLight {
+    width: 84px;
+    height: 84px;
+    border: 7.5px solid #141D34;
+    border-radius: 14.77px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 59px;
+    color: white;
+    margin-left: 12px;
+    background-color: #00b400;
+}
+
+.CardTrafficLight_Container {
+    display: block;
+    align-content: flex-end;
+    align-items: flex-end;
+    justify-content: right;
+    justify-items: right;
+}
+
+.CardTrafficLight_Border {
+    position: relative;
+    background-color: #141D34;
+    /* Takes up the entire space */
+    /*height: 9.23px;*/
+    width: 96px;
+    height: 9px;
+    border-radius: 44px;
+    top: 7.38px;
+    left: 0px;
+    z-index: 0;
+}
+
+.CardTrafficLight_Border::before {
+    width: 19px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0px 19px 19px 0px;
+    border-color: transparent #141D34 transparent transparent;
+    transform: rotate(4deg);
     position: absolute;
-    bottom: .35em;
-    right: .45em;
-    font-size: 100px;
+    border-radius: 100px;
+    content: '';
+    /*background-color: #141D34;*/
+    top: 7px;
+    left: -19px;
+    /*background-color: #141D34;*/
+    /*position: absolute;*/
+
+    /*height: 20px;*/
+    /*width: 10px;*/
+    /*border-radius: 24px;*/
+}
+
+.CardTrafficLight_Border::after {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0px 25px 24px 0px;
+    border-color: transparent #141D34 transparent transparent;
+    transform: rotate(0deg);
+    position: absolute;
+    content: '';
+    /*background-color: #141D34;*/
+    top: 5px;
+    left: 71px;
+    /*height: 20px;*/
+    /*width: 10px;*/
+    /*border-radius: 24px;*/
 }
