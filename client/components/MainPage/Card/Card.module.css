@@ -48,6 +48,7 @@
 .CardBottomCapture, .CardBottomCapture_NoSubtitle {
     color: var(--CardTitleColor);
     font-weight: 500;
+    margin: 0;
 }
 
 .CardBottomCapture {

@@ -36,13 +36,13 @@ export function Card({
                 "--CardSubtitleColor": titleColor
             } as React.CSSProperties}
         >
-           <div style={{height: "auto"}}>
+           <div style={{ height: "auto" }}>
                {title && <div className={cn(styles.CardTitle, { [styles.CardTitle_Bg]: Boolean(titleBackground) })}>
                    {t(title)}
                </div>}
-               {headerCaption && <div className={cn(styles.CardSubtitle)}>
+               {headerCaption && <p className={cn(styles.CardSubtitle)}>
                    {headerCaption}
-               </div>}
+               </p>}
            </div>
 
             {
@@ -50,11 +50,11 @@ export function Card({
                     ? dynamicContent
                     : <div>
                         {bottomCaption &&
-                            <div className={headerCaption ?
+                            <p className={headerCaption ?
                                 cn(styles.CardBottomCapture)
                                 : cn(styles.CardBottomCapture_NoSubtitle)}>
                             {bottomCaption}
-                        </div>}
+                        </p>}
                     </div>
             }
         </a>

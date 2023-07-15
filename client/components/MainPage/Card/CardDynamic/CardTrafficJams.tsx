@@ -15,9 +15,8 @@ const getTrafficLightByScore = (score: any) => {
     }
 }
 export function CardTrafficJams({ score }) {
-
     return (
-        <div style={{display: "flex",alignSelf: "end"}}>
+        <div className={cn(styles.CardTrafficLight__Container)}>
             <div className={cn(styles.CardTrafficLight, getTrafficLightByScore(score))}>
                 {score}
             </div>
