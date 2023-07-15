@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 
 import styles from './CardTrafficJams.module.css';
+import React from "react";
 
 const cn = classNames.bind(styles);
 const getTrafficLightByScore = (score: any) => {
@@ -16,9 +17,7 @@ const getTrafficLightByScore = (score: any) => {
 export function CardTrafficJams({ score }) {
 
     return (
-        <div className={styles.CardTrafficLight_Container}>
-            <div className={cn(styles.CardTrafficLight_Border)}>
-            </div>
+        <div style={{display: "flex",alignSelf: "end"}}>
             <div className={cn(styles.CardTrafficLight, getTrafficLightByScore(score))}>
                 {score}
             </div>
