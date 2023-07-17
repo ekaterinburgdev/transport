@@ -9,8 +9,6 @@
     align-items: center;
     width: 110px;
     width: 1.9em;
-    height: 100px;
-
     height: 1.7em;
     padding-top: 0.1em;
     padding-left: 0.25em;
@@ -18,7 +16,6 @@
     background-size: contain;
     background-repeat: no-repeat;
     font-weight: 500;
-
     font-size: clamp(48px, 5vw, 100px);
 }
 
