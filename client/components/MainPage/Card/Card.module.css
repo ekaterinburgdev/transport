@@ -26,6 +26,7 @@
     background-color: var(--CardBgrColor);
     background-image: var(--CardBgrImage);
     transition: .15s ease;
+    overflow: hidden;
 }
 
 .Card:hover {
@@ -33,6 +34,7 @@
 }
 
 .CardTitle {
+    position: relative;
     font-size: 20px;
     font-weight: 500;
     line-height: 1.05;
@@ -92,14 +94,14 @@
 
 @media screen and (min-width: 1200px) {
     .Card {
-        padding: 2vw;
+        padding: clamp(30px, 2vw, 40px);
     }
 
     .CardTitle {
-        font-size: 1.5vw;
+        font-size: clamp(24px, 1.5vw, 32px);
     }
 
     .CardSubtitle {
-        font-size: 1.2vw;
+        font-size: clamp(20px, 1.2vw, 24px);
     }
 }

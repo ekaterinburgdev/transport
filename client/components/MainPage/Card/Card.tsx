@@ -30,13 +30,13 @@ export function Card({
             style={{
                 "--CardTitleColor": titleColor,
                 "--CardTitleBgrColor": titleBackground,
-                "--CardTitleUnderlineColor": hexToRgb(titleColor),
+                "--CardTitleUnderlineColor": titleColor && hexToRgb(titleColor),
                 "--CardBgrColor": backgroundColor,
                 "--CardBgrImage": backgroundImage && `url(https://transport-cms.ekaterinburg.io${backgroundImage})`,
                 "--CardSubtitleColor": titleColor
             } as React.CSSProperties}
         >
-           <div style={{ height: "auto" }}>
+           <div>
                {title && <div className={cn(styles.CardTitle, { [styles.CardTitle_Bg]: Boolean(titleBackground) })}>
                    {t(title)}
                </div>}

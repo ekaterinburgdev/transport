@@ -4,27 +4,38 @@
 }
 
 .CardTrafficLight {
-    width: 110px;
-    height: 100px;
     display: flex;
-    align-items: center;
     justify-content: center;
-
-    font-size: 59px;
+    align-items: center;
+    width: 110px;
+    width: 1.9em;
+    height: 1.7em;
+    padding-top: 0.1em;
+    padding-left: 0.25em;
+    background-position: right bottom;
     background-size: contain;
     background-repeat: no-repeat;
-    padding-left: 10px;
+    font-weight: 500;
+    font-size: clamp(48px, 5vw, 100px);
 }
 
 .CardTrafficLight_Green {
     color: white;
     background-image: url("/icons/traffic-light_green.svg");
+    background-color: #F5FBF5;
+    box-shadow: 0 0 0 500px #F5FBF5;
 }
+
 .CardTrafficLight_Yellow {
     color: #141D34;
+    background-color: #fcf9e5;
+    box-shadow: 0 0 0 500px #fcf9e5;
     background-image: url("/icons/traffic-light_yellow.svg");
 }
+
 .CardTrafficLight_Red {
     color: white;
     background-image: url("/icons/traffic-light_red.svg");
+    background-color: #FEF6F6;
+    box-shadow: 0 0 0 500px #FEF6F6;
 }
