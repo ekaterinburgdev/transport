@@ -19,7 +19,7 @@
     background-repeat: no-repeat;
     font-weight: 500;
 
-    font-size: clamp(40px, 6vw, 100px);
+    font-size: clamp(48px, 5vw, 100px);
 }
 
 .CardTrafficLight_Green {

@@ -94,14 +94,14 @@
 
 @media screen and (min-width: 1200px) {
     .Card {
-        padding: min(2vw, 40px);
+        padding: clamp(30px, 2vw, 40px);
     }
 
     .CardTitle {
-        font-size: min(1.5vw, 32px);
+        font-size: clamp(24px, 1.5vw, 32px);
     }
 
     .CardSubtitle {
-        font-size: min(1.2vw, 24px);
+        font-size: clamp(20px, 1.2vw, 24px);
     }
 }
