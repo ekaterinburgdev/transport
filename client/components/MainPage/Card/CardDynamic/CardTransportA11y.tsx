@@ -9,16 +9,19 @@ export function CardTransportA11y({ buses, trolls, trams }) {
         <div className={cn(styles.CardTransportA11y)}>
             <dl className={cn(styles.CardTransportA11yList)}>
                 <div className={cn(styles.CardTransportA11yItem)}>
+                    <img src="/icons/bus-dark.svg" alt="" />
                     <dt>Автобусы</dt>
                     <dd>{buses}</dd>
                 </div>
 
                 <div className={cn(styles.CardTransportA11yItem)}>
+                    <img src="/icons/trol-dark.svg" alt="" /> 
                     <dt>Троллейбусы</dt>
                     <dd>{trolls}</dd>
                 </div>
 
                 <div className={cn(styles.CardTransportA11yItem)}>
+                    <img src="/icons/tram-dark.svg" alt="" />
                     <dt>Трамваи</dt>
                     <dd>{trams}</dd>
                 </div>

@@ -1,17 +1,40 @@
 .CardTransportA11y {
-    font-size: 1.25em;
+    color: #4C3F00;
+    font-size: 1.5em;
 }
 
 .CardTransportA11yList {
     display: flex;
-    gap: 1.25em;
+    gap: 1em;
+    margin: 0;
 }
 
 .CardTransportA11yItem {
     font-weight: 600;
-    text-align: left;
+}
+
+.CardTransportA11yItem {
+    display: flex;
+    align-items: center;
+    gap: .15em;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.CardTransportA11yItem img {
+    width: .9em;
+}
+
+.CardTransportA11yItem dt {
+    font-size: 0;
 }
 
 .CardTransportA11yItem dd {
-    margin: 12px 0 0;
+    margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+    .CardTransportA11y {
+        font-size: 3em;
+    }
 }
