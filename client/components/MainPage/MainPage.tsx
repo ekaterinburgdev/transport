@@ -6,6 +6,7 @@ import { MainPageTypes } from './MainPage.types';
 import { Card } from './Card/Card';
 import { CardTrafficJams } from './Card/CardDynamic/CardTrafficJams';
 import { CardTransportA11y } from './Card/CardDynamic/CardTransportA11y';
+import { CardMap } from './Card/CardDynamic/CardMap';
 
 import Logo from './Logo.svg';
 
@@ -21,6 +22,8 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems }: MainPageType
                 return <CardTransportA11y {...cardsDynamicData.a11yTransportCounters} />
             case 'traffic-jams':
                 return <CardTrafficJams score={cardsDynamicData.trafficJams} />
+            case 'map':
+                return <CardMap  />
         }
     }
 
