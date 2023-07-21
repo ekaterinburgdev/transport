@@ -16,7 +16,7 @@ import 'leaflet/dist/leaflet.css';
 
 const cn = classNames.bind(styles);
 
-function MapMainContainer() {
+function MapMainContainer({ zoom = 16, showControls = true }) {
     const position: [number, number] = COORDS_EKATERINBURG;
 
     const [sidebar, setSidebar] = useState<React.ReactElement>(null);
@@ -39,7 +39,7 @@ function MapMainContainer() {
             center={position}
             attributionControl={null}
             zoomControl={false}
-            zoom={16}
+            zoom={zoom}
             zoomDelta={0.6}
             scrollWheelZoom
             doubleClickZoom={false}
@@ -47,8 +47,10 @@ function MapMainContainer() {
         >
             <TileLayer url="https://tiles.ekaterinburg.io/styles/basic-white/{z}/{x}/{y}@2x.png" />
 
-            <MapLocation />
-            <MapZoomControl position="bottomright" />
+            {showControls && <>
+                <MapLocation />
+                <MapZoomControl position="bottomright" />
+            </>}
 
             <MapTransport />
 
