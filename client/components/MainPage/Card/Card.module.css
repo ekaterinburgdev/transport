@@ -10,6 +10,8 @@
     --CardSubtitleColor: inherit;
 
     position: relative;
+    z-index: 1;
+
     display: flex;
     flex-direction: column;
 
@@ -29,13 +31,19 @@
     overflow: hidden;
 }
 
-.Card:hover {
-    filter: brightness(0.97);
+@media (hover: hover) {
+    .Card:hover {
+        filter: brightness(0.98);
+    }
+}
+
+.Card:active {
+    filter: brightness(0.95);
 }
 
 .CardTitle {
     position: relative;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 1.05;
     margin-bottom: 8px;
@@ -53,14 +61,6 @@
     margin: 0;
 }
 
-.CardBottomCapture {
-    font-size: 24px;
-}
-
-.CardBottomCapture_NoSubtitle {
-    font-size: 50px;
-}
-
 .CardTitle_Bg {
     padding: .5em .75em;
 }
@@ -70,16 +70,31 @@
 }
 
 .CardSubtitle {
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.35;
     margin-top: 15px;
     color: var(--CardSubtitleColor);
+}
+
+
+@media screen and (min-width: 375px) {
+    .Card {
+        padding: 16px;
+    }
 }
 
 @media screen and (min-width: 768px) {
     .Card {
         padding: 32px;
         border-radius: 24px;
+    }
+
+    .CardBottomCapture {
+        font-size: 24px;
+    }
+    
+    .CardBottomCapture_NoSubtitle {
+        font-size: 50px;
     }
 
     .CardTitle {
@@ -102,6 +117,6 @@
     }
 
     .CardSubtitle {
-        font-size: clamp(20px, 1.2vw, 24px);
+        font-size: clamp(20px, 1.3vw, 24px);
     }
 }

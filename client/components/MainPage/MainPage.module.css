@@ -61,7 +61,7 @@
 }
 
 .MainPageCardGrid > *:first-child,
-.MainPageCardGrid > *:last-child {
+.MainPageCardGrid > *:nth-last-child(3) {
     grid-area: span 1 / span 2;
     aspect-ratio: 2 / 1;
     align-self: stretch;
@@ -76,15 +76,6 @@
 
 
 @media screen and (min-width: 1200px) {
-    .MainPageCardGrid > *:first-child {
-        aspect-ratio: auto;
-    }
-    
-    .MainPageCardGrid > *:last-child {
-        grid-area: auto;
-        aspect-ratio: 1 / 1;
-    }
-
     .MainPageCardGrid {
         grid-template-columns: repeat(3,1fr);
     }
