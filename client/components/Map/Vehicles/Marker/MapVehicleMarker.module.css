@@ -3,11 +3,6 @@
     transform-origin: 20px 28px;
 }
 
-.MapVehicleMarker picture,
-.MapVehicleMarker picture * {
-    pointer-event: none;
-}
-
 @keyframes enlarge {
     from {
         transform: scale(0);
