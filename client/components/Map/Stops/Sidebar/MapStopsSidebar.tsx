@@ -13,6 +13,7 @@ import { IconFont } from 'components/UI/Typography/IconFont/IconFont';
 import { StopType } from 'transport-common/types/masstrans';
 
 import styles from './MapStopsSidebar.module.css';
+import t from 'utils/typograph';
 
 export type MapStopsSidebarProps = {
     type: StopType;
@@ -53,7 +54,7 @@ export function MapStopsSidebar({ type, name }: MapStopsSidebarProps) {
                                     <IconFont key={t} name={IconFontCharsNames[t]} />
                                 ))}
                         </Typography>
-                        <Typography variant="h3">{name}</Typography>
+                        <Typography variant="h3">{t(name)}</Typography>
                     </div>
                 </div>
                 <Divider />
@@ -73,11 +74,11 @@ export function MapStopsSidebar({ type, name }: MapStopsSidebarProps) {
                                             backgroundColor: VEHICLE_TYPE_COLORS[vehicle.type],
                                         }}
                                     >
-                                        {vehicle.route}
+                                        {t(vehicle.route)}
                                     </div>
                                     <div>
                                         <span className={cn(styles.MapStopsSidebarVehicleEndpoint)}>
-                                            {vehicle.to}
+                                            {t(vehicle.to)}
                                         </span>
                                         {Boolean(vehicle.through.length) && (
                                             <>

@@ -4,6 +4,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import L from 'leaflet';
 import classNames from 'classnames/bind';
+import t from 'utils/typograph';
 
 import {
     ClientUnit,
@@ -395,7 +396,7 @@ export function MapVehiclesSidebar({
                                         <PageText
                                             className={cn(styles.MapVehiclesSidebarStationName)}
                                         >
-                                            {stop.title}
+                                            {t(stop.title)}
                                         </PageText>
                                         {'arriveTime' in stop && (
                                             <PageText>{stop.arriveTime}</PageText>
@@ -459,10 +460,10 @@ export function MapVehiclesSidebar({
                                                             styles.MapVehiclesSidebarStationName,
                                                         )}
                                                     >
-                                                        {stop.title}
+                                                        {t(stop.title)}
                                                     </PageText>
                                                     {'arriveTime' in stop && (
-                                                        <PageText>{stop.arriveTime}</PageText>
+                                                        <PageText>{t(stop.arriveTime)}</PageText>
                                                     )}
                                                 </li>
                                             ))}
@@ -480,7 +481,7 @@ export function MapVehiclesSidebar({
                                         <PageText
                                             className={cn(styles.MapVehiclesSidebarStationName)}
                                         >
-                                            {endStop.title}
+                                            {t(endStop.title)}
                                         </PageText>
 
                                         {'arriveTime' in endStop && (
@@ -587,7 +588,7 @@ export function MapVehiclesSidebar({
                                                         styles.MapVehiclesSidebarAdditionalTitle,
                                                     )}
                                                 >
-                                                    {unitInfo.model}
+                                                    {t(unitInfo.model)}
                                                 </span>
                                             )}
                                             {Boolean(unitInfo.model && unitInfo.factory) && <br />}
@@ -597,7 +598,7 @@ export function MapVehiclesSidebar({
                                                         styles.MapVehiclesSidebarAdditionalSubitle,
                                                     )}
                                                 >
-                                                    {unitInfo.factory}
+                                                    {t(unitInfo.factory)}
                                                 </span>
                                             )}
                                         </div>
