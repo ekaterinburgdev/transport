@@ -39,7 +39,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
         const { map } = this.props;
 
         map.addEventListener('zoomend', () => {
-            this.updateTranslate();
+            setTimeout(this.updateTranslate, 0);
         });
     }
 
