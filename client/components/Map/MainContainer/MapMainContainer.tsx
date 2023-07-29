@@ -14,6 +14,8 @@ import { MapWelcomeMessage } from 'components/Map/WelcomeMessage/MapWelcomeMessa
 import styles from './MapMainContainer.module.css';
 import 'leaflet/dist/leaflet.css';
 
+const tileServerUrl = `https://tiles.ekaterinburg.io/styles/basic-white/{z}/{x}/{y}${devicePixelRatio > 1 ? '@2x' : ''}.png`
+
 const cn = classNames.bind(styles);
 
 function MapMainContainer({ zoom = 16, showControls = true }) {
