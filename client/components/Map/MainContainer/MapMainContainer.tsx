@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 
 import { sidebarService } from 'services/sidebar/sidebar';
 
-import { COORDS_EKATERINBURG } from 'common/constants/coords';
+import { COORDS_EKATERINBURG, BOUNDS_EKATERINBURG } from 'common/constants/coords';
 
 import { MapLocation } from 'components/Map/Location/MapLocation';
 import { MapTransport } from 'components/Map/Transport/MapTransport';
@@ -17,8 +17,6 @@ import 'leaflet/dist/leaflet.css';
 const cn = classNames.bind(styles);
 
 function MapMainContainer({ zoom = 16, showControls = true }) {
-    const position: [number, number] = COORDS_EKATERINBURG;
-
     const [sidebar, setSidebar] = useState<React.ReactElement>(null);
 
     useEffect(() => {
@@ -31,16 +29,18 @@ function MapMainContainer({ zoom = 16, showControls = true }) {
                 sidebarService.open({ component: <MapWelcomeMessage /> });
                 localStorage.setItem('hasVisited', '1');
             }
-        } catch (e) {}
+        } catch (e) { }
     }, []);
 
     return (
         <MapContainer
-            center={position}
+            center={COORDS_EKATERINBURG}
             attributionControl={null}
             zoomControl={false}
             zoom={zoom}
             zoomDelta={0.6}
+            minZoom={14}
+            maxBounds={BOUNDS_EKATERINBURG}
             scrollWheelZoom
             doubleClickZoom={false}
             className={cn(styles.Map)}
