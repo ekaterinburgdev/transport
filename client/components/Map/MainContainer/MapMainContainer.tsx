@@ -41,7 +41,7 @@ function MapMainContainer({ zoom = 16, showControls = true }) {
             zoomControl={false}
             zoom={zoom}
             zoomDelta={0.6}
-            minZoom={14}
+            minZoom={13}
             maxBounds={BOUNDS_EKATERINBURG}
             scrollWheelZoom
             doubleClickZoom={false}
