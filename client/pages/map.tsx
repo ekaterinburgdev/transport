@@ -7,13 +7,9 @@ export default function Map() {
     return (
         <>
             <Head>
-                <title>Карта транспорта</title>
-                <style>{`
-                    html,
-                    body {
-                        overflow: hidden;
-                    }
-                `}</style>
+                <title>Карта транспорта Екатеринбурга</title>
+                <link rel="preconnect" href="https://tiles.ekaterinburg.io" />
+                <link rel="preconnect" href="https://map-api.ekaterinburg.io" />
             </Head>
 
             <MapComponent />
