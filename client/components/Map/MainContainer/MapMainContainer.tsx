@@ -27,7 +27,7 @@ function MapMainContainer({ zoom = 16, showControls = true }) {
         try {
             const hasVisited = localStorage.getItem('hasVisited');
 
-            if (!hasVisited) {
+            if (!hasVisited && showControls) {
                 sidebarService.open({ component: <MapWelcomeMessage /> });
                 localStorage.setItem('hasVisited', '1');
             }
