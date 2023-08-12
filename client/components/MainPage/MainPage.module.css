@@ -82,7 +82,12 @@
 
     .MainPageLogo {
         font-size: 20px;
+        line-height: 20px;
         margin-bottom: 32px;
+        margin-top: 20px;
+        align-content: center;
+        justify-content: center;
+        font-weight: 400;
     }
 }
 

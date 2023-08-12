@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import { CardProps } from './Card.types';
-
 import styles from './Card.module.css';
 import t from 'utils/typograph';
 import React from "react";
