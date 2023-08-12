@@ -22,20 +22,14 @@
 .CardTrafficLight_Green {
     color: white;
     background-image: url("/icons/traffic-light_green.svg");
-    background-color: #F5FBF5;
-    box-shadow: 0 0 0 500px #F5FBF5;
 }
 
 .CardTrafficLight_Yellow {
     color: #141D34;
-    background-color: #fcf9e5;
-    box-shadow: 0 0 0 500px #fcf9e5;
     background-image: url("/icons/traffic-light_yellow.svg");
 }
 
 .CardTrafficLight_Red {
     color: white;
     background-image: url("/icons/traffic-light_red.svg");
-    background-color: #FEF6F6;
-    box-shadow: 0 0 0 500px #FEF6F6;
 }
