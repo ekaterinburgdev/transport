@@ -3,7 +3,7 @@
     justify-content: center;
     overflow: hidden;
     background-size: 150% auto;
-    padding-bottom: 22vw;
+    padding-bottom: 80px
 }
 
 .MainPageInner {
@@ -16,19 +16,28 @@
 .MainPageLogo {
     display: flex;
     align-items: center;
-    margin-top: 0.15em;
-    margin-bottom: 80px;
     color: #123;
-    font-weight: 500;
-    font-size: min(8vw, 80px);
     line-height: 1;
+    /*margin-top: 0.15em;*/
+    /*margin-bottom: 80px;*/
+    /*font-weight: 500;*/
+    /*font-size: min(8vw, 80px);*/
+
+    font-size: 20px;
+    margin-bottom: 32px;
+    margin-top: 20px;
+    justify-content: center;
+    font-weight: 400;
 }
 
 .MainPageLogo svg {
+    width: 60px;
+    height: 60px;
+    margin-right: 8px;
     flex-shrink: 0;
-    width: 160px;
-    height: 160px;
-    margin-right: 46px;
+    /*width: 160px;*/
+    /*height: 160px;*/
+    /*margin-right: 46px;*/
 }
 
 .MainPageTitle {
@@ -69,32 +78,27 @@
 @media screen and (min-width: 768px) {
     .MainPage {
         background-size: 100% auto;
-        padding-bottom: 16vw;
     }
 }
-
-@media screen and (max-width: 1000px) {
-    .MainPageLogo svg {
-        width: 60px;
-        height: 60px;
-        margin-right: 8px;
-    }
-
-    .MainPageLogo {
-        font-size: 20px;
-        line-height: 20px;
-        margin-bottom: 32px;
-        margin-top: 20px;
-        align-content: center;
-        justify-content: center;
-        font-weight: 400;
-    }
-}
-
 
 @media screen and (min-width: 1200px) {
     .MainPageCardGrid {
         grid-template-columns: repeat(3,1fr);
+    }
+
+    .MainPageLogo svg {
+        width: 160px;
+        height: 160px;
+        margin-right: 46px;
+        flex-shrink: 0;
+    }
+
+    .MainPageLogo {
+        justify-content: start;
+        margin-top: 0.15em;
+        margin-bottom: 80px;
+        font-weight: 500;
+        font-size: min(8vw, 80px);
     }
 }
 

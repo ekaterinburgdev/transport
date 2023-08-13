@@ -130,6 +130,6 @@
 
     .CardSubtitle {
         font-size: clamp(16px, 16px, 24px);
-        line-height: 22px;
+        line-height: 1.375em;
     }
 }
