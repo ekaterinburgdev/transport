@@ -32,7 +32,7 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems }: MainPageType
             <div className={cn(styles.MainPageInner)}>
                 <div className={cn(styles.MainPageLogo)}>
                     <Logo />
-                    <h1 className={cn(styles.MainPageTitle)}>Транспорт Екатеринбурга</h1>
+                    <h1 className={cn(styles.MainPageTitle)}>Транспорт<br/>Екатеринбурга</h1>
                 </div>
 
                 <div className={styles.MainPageCardGrid}>
@@ -57,8 +57,6 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems }: MainPageType
 
                 <Marquee items={marqueeItems.map(({ attributes: { message } }) => message)} />
             </div>
-
-            <div className={styles.MainPageFooter}></div>
         </div>
     );
 }

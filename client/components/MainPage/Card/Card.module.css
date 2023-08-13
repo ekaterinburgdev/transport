@@ -81,6 +81,18 @@
     .Card {
         padding: 16px;
     }
+
+    .CardTitle {
+        font-size: clamp(16px, 20px, 20px);
+    }
+
+    .CardBottomCapture {
+        font-size: 20px;
+    }
+
+    .CardBottomCapture_NoSubtitle {
+        font-size: 34px;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -94,7 +106,7 @@
     }
     
     .CardBottomCapture_NoSubtitle {
-        font-size: 50px;
+        font-size: 48px;
     }
 
     .CardTitle {
@@ -117,6 +129,7 @@
     }
 
     .CardSubtitle {
-        font-size: clamp(20px, 1.3vw, 24px);
+        font-size: clamp(16px, 16px, 24px);
+        line-height: 1.375em;
     }
 }

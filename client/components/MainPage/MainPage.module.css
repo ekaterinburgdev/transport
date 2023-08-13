@@ -2,9 +2,8 @@
     display: flex;
     justify-content: center;
     overflow: hidden;
-    background: url(./Footer.svg) repeat-x center bottom;
     background-size: 150% auto;
-    padding-bottom: 22vw;
+    padding-bottom: 80px
 }
 
 .MainPageInner {
@@ -17,19 +16,28 @@
 .MainPageLogo {
     display: flex;
     align-items: center;
-    margin-top: 0.15em;
-    margin-bottom: .8em;
     color: #123;
-    font-weight: 500;
-    font-size: min(8vw, 176px);
     line-height: 1;
+    /*margin-top: 0.15em;*/
+    /*margin-bottom: 80px;*/
+    /*font-weight: 500;*/
+    /*font-size: min(8vw, 80px);*/
+
+    font-size: 20px;
+    margin-bottom: 32px;
+    margin-top: 20px;
+    justify-content: center;
+    font-weight: 400;
 }
 
 .MainPageLogo svg {
+    width: 60px;
+    height: 60px;
+    margin-right: 8px;
     flex-shrink: 0;
-    width: 2.25em;
-    height: 2.25em;
-    margin-right: .25em;
+    /*width: 160px;*/
+    /*height: 160px;*/
+    /*margin-right: 46px;*/
 }
 
 .MainPageTitle {
@@ -70,14 +78,27 @@
 @media screen and (min-width: 768px) {
     .MainPage {
         background-size: 100% auto;
-        padding-bottom: 16vw;
     }
 }
-
 
 @media screen and (min-width: 1200px) {
     .MainPageCardGrid {
         grid-template-columns: repeat(3,1fr);
+    }
+
+    .MainPageLogo svg {
+        width: 160px;
+        height: 160px;
+        margin-right: 46px;
+        flex-shrink: 0;
+    }
+
+    .MainPageLogo {
+        justify-content: start;
+        margin-top: 0.15em;
+        margin-bottom: 80px;
+        font-weight: 500;
+        font-size: min(8vw, 80px);
     }
 }
 
