@@ -1,13 +1,6 @@
 .Card {
-    --CardTitleColor: inherit;
     --CardTitleBgrColor: transparent;
-
-    --CardTitleUnderlineColor: inherit;
-
-    --CardBgrColor: transparent;
     --CardBgrImage: none;
-
-    --CardSubtitleColor: inherit;
 
     position: relative;
     z-index: 1;
@@ -25,10 +18,114 @@
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: 100% 100%;
-    background-color: var(--CardBgrColor);
+    color: white;
     background-image: var(--CardBgrImage);
     transition: .15s ease;
     overflow: hidden;
+}
+
+.Card__Public {
+    background-color: var(--cards-public-bgr);
+    color: var(--cards-public-text);
+}
+
+.Card__Public .CardTitle {
+    text-decoration-color: rgba(4, 72, 21, .15);
+}
+
+.Card__Public:hover {
+    background-color: var(--cards-public-bgr-hover);
+    color: white;
+}
+
+.Card__Pedestrian {
+    background-color: var(--cards-pedestrian-bgr);
+    color: var(--cards-pedestrian-text);
+}
+
+.Card__Pedestrian .CardTitle {
+    text-decoration-color: rgba(76, 63, 0, .15);
+}
+
+.Card__Pedestrian:hover {
+    background-color: var(--cards-pedestrian-bgr-hover);
+    color: white;
+}
+
+.Card__Auto {
+    background-color: var(--cards-automobile-bgr);
+    color: var(--cards-automobile-text);
+}
+
+.Card__Auto .CardTitle {
+    text-decoration-color: rgba(92, 17, 10, .15);
+}
+
+.Card__Auto:hover {
+    background-color: var(--cards-automobile-bgr-hover);
+    color: white;
+}
+
+.Card__Other {
+    background-color: var(--cards-other-bgr);
+    color: var(--cards-other-text);
+}
+
+.Card__Other .CardTitle {
+    text-decoration-color: rgba(12, 27, 39, .15);
+}
+
+.Card__Other:hover {
+    background-color: var(--cards-other-bgr-hover);
+    color: white;
+}
+
+.CardTransportA11y_BusIcon {
+    -webkit-mask: url("/icons/bus-dark.svg") no-repeat center;
+    mask: url("/icons/bus-dark.svg") no-repeat center;
+}
+
+.CardTransportA11y_BusIcon, .CardTransportA11y_TramIcon, .CardTransportA11y_TrollIcon {
+    width: .9em;
+    height: 90px;
+    background-color: var(--cards-pedestrian-text);
+}
+
+.CardTransportA11y_TramIcon {
+    -webkit-mask: url("/icons/tram-dark.svg") no-repeat center;
+    mask: url("/icons/tram-dark.svg") no-repeat center;
+}
+
+.CardTransportA11y_TrollIcon {
+    -webkit-mask: url("/icons/trol-dark.svg") no-repeat center;
+    mask: url("/icons/trol-dark.svg") no-repeat center;
+}
+
+.CardTransportA11y_BusIcon:hover, .CardTransportA11y_TramIcon:hover, .CardTransportA11y_TrollIcon:hover {
+    width: .9em;
+    height: 90px;
+    background-color: var(--cards-pedestrian-text);
+}
+
+.Card:hover .CardTransportA11y_TrollIcon {
+    width: .9em;
+    -webkit-mask: url("/icons/trol-dark.svg") no-repeat center;
+    mask: url("/icons/trol-dark.svg") no-repeat center;
+    background-color: white;
+}
+
+.Card:hover .CardTransportA11y_TramIcon {
+    width: .9em;
+    -webkit-mask: url("/icons/tram-dark.svg") no-repeat center;
+    mask: url("/icons/tram-dark.svg") no-repeat center;
+    background-color: white;
+}
+
+.Card:hover .CardTransportA11y_BusIcon {
+    width: .9em;
+    -webkit-mask: url("/icons/bus-dark.svg") no-repeat center;
+    mask: url("/icons/bus-dark.svg") no-repeat center;
+    background-color: white;
 }
 
 @media (hover: hover) {
@@ -47,16 +144,14 @@
     font-weight: 500;
     line-height: 1.05;
     margin-bottom: 8px;
-    color: var(--CardTitleColor);
     background-color: var(--CardTitleBgrColor);
     text-decoration: underline;
-    text-decoration-color: rgba(var(--CardTitleUnderlineColor), 0.2);
+    text-decoration-color: rgba(255, 255, 255, 0.2);
     text-underline-offset: 3px;
     transition: .15s ease text-decoration;
 }
 
 .CardBottomCapture, .CardBottomCapture_NoSubtitle {
-    color: var(--CardTitleColor);
     font-weight: 500;
     margin: 0;
 }
@@ -66,14 +161,26 @@
 }
 
 .Card:hover .CardTitle {
-    text-decoration-color: rgba(var(--CardTitleUnderlineColor), 0.6);
+    text-decoration-color: rgba(255, 255, 255, 0.6);
 }
 
 .CardSubtitle {
     font-size: 13px;
     line-height: 1.35;
     margin-top: 15px;
-    color: var(--CardSubtitleColor);
+}
+
+
+.Card_Bgr_Image {
+    height: 100%;
+    width: 100%;
+    opacity: 0.2;
+}
+
+.Card:hover .Card_Bgr_Image {
+    color: white;
+    opacity: 0.6;
+    background-color: #cb3100;
 }
 
 

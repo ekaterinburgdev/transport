@@ -1,3 +1,4 @@
+export type TCardType = "public" | "automobile" | "pedestrian" | "other";
 export interface Card {
     id: number;
     attributes: {
@@ -29,7 +30,7 @@ export interface Card {
                 };
             };
         };
-        type: CardType;
+        type: TCardType;
         priority: number;
         size: CardSize;
         cardId: null;
@@ -84,12 +85,6 @@ export interface Marquee {
         publishedAt: Date;
     };
 }
-
-enum CardType {
-    All = 'all',
-    Citizen = 'citizen',
-}
-
 enum CardSize {
     L = 'L',
     M = 'M',

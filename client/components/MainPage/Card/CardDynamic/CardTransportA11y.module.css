@@ -1,5 +1,4 @@
 .CardTransportA11y {
-    color: #4C3F00;
     font-size: 1.5em;
 }
 
@@ -7,10 +6,7 @@
     display: flex;
     gap: 1em;
     margin: 0;
-}
-
-.CardTransportA11yItem {
-    font-weight: 600;
+    fill: currentColor;
 }
 
 .CardTransportA11yItem {
