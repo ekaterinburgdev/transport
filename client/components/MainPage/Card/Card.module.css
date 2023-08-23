@@ -86,6 +86,13 @@
         font-size: clamp(16px, 20px, 20px);
     }
 
+    .CardSubtitle {
+        font-size: 12px;
+        line-height: 1.35;
+        margin-top: 9px;
+        color: var(--CardSubtitleColor);
+    }
+
     .CardBottomCapture {
         font-size: 20px;
     }
