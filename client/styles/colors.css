@@ -1,22 +1,36 @@
 :root {
     --background-primary: white;
     --text-primary: black;
-    --background-secondary: #f2f2f2;
-    --text-secondary: #1e2841;
+    --background-secondary: #F2F2F2;
+    --text-secondary: #1E2841;
 
-    --functional: #55647d;
-    --functional-tram: #9baac3;
+    --functional: #55647D;
+    --functional-tram: #9BAAC3;
 
     --divider: rgba(0, 0, 0, 0.12);
 
-    --bus: #00b400;
-    --bus-translucent: #6dc76d;
-    --tram: #ff640f;
-    --tram-translucent: #ed9f74;
-    --troll: #00b4ff;
-    --troll-translucent: #80d9ff;
+    --bus: #00B400;
+    --bus-translucent: #6DC76D;
+    --tram: #FF640F;
+    --tram-translucent: #ED9F74;
+    --troll: #00B4FF;
+    --troll-translucent: #80D9FF;
 
-    --card-automobiles-bgr: #fef6f6;
+    --cards-other-bgr: #F8F9FC;
+    --cards-other-bgr-hover: #00B4FF;
+    --cards-other-text: #0C1B27;
+
+    --cards-pedestrian-bgr: #FAF4EF;
+    --cards-pedestrian-bgr-hover: #FF640F;
+    --cards-pedestrian-text: #4C3F00;
+
+    --cards-public-bgr: #F5FBF5;
+    --cards-public-bgr-hover: #00B400;
+    --cards-public-text: rgb(4, 72, 21);
+
+    --cards-automobile-bgr: #FEF6F6;
+    --cards-automobile-bgr-hover: #E63223;
+    --cards-automobile-text: #5C110A;
 }
 
 /* TODO: dark theme */

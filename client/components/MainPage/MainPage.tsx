@@ -40,6 +40,7 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems }: MainPageType
                         .sort((a, b) => a.attributes.priority - b.attributes.priority)
                         .map(({ id, attributes }) => {
                             return <Card
+                                type={attributes.type}
                                 title={attributes.title}
                                 titleColor={attributes.titleColor}
                                 titleBackground={attributes.titleBackground}
