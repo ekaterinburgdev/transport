@@ -25,6 +25,7 @@ jobs:
           source ~/.nvm/nvm.sh
 
           cd transport-api-test.na4u.ru/transport
+          git reset
           git fetch
           git checkout origin/main
 
