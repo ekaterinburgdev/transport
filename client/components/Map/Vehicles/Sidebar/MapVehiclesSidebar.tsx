@@ -1,9 +1,12 @@
 // FIXME: cure divatosis
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import L from 'leaflet';
 import classNames from 'classnames/bind';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { store } from 'state';
 import t from 'utils/typograph';
 
 import {
@@ -42,6 +45,10 @@ import {
 import { getPointsRow } from './MapVehiclesSidebar.utils';
 
 import styles from './MapVehiclesSidebar.module.css';
+import { setCurrentStop } from 'state/features/public-transport';
+import { sidebarService } from 'services/sidebar/sidebar';
+import { MapStopsSidebar } from 'components/Map/Stops/Sidebar/MapStopsSidebar';
+import { State } from 'common/types/state';
 
 export type MapVehiclesSidebarProps = {
     type: StopType;
@@ -73,6 +80,7 @@ export function MapVehiclesSidebar({
     depoTitle,
     coords,
 }: MapVehiclesItemProps) {
+    const dispatch = useDispatch<typeof store.dispatch>();
     const [from, to] = [firstStation, lastStation];
     const [stops, setStops] = useState<UnitArriveStop[]>([]);
     const [unitInfo, setUnitInfo] = useState<UnitInfo>(null);
@@ -187,8 +195,40 @@ export function MapVehiclesSidebar({
     );
     const endStop = useMemo(() => stops[stops.length - 1], [stops]);
 
+    const allStops = useSelector((state: State) => state.publicTransport.stops);
+    const setSelectedStop = useCallback(
+        (stopId: string) => {
+            const stop = allStops.find((stopFullData) => stopFullData.attributes.stopId === stopId);
+
+            if (!stop) {
+                return;
+            }
+
+            const { attributes: stopData } = stop;
+
+            dispatch(
+                setCurrentStop({
+                    currentStop: stopId,
+                    shouldClear: false,
+                }),
+            );
+
+            sidebarService.open({
+                component: <MapStopsSidebar type={stopData.type} name={stopData.title} />,
+                onClose: () => dispatch(setCurrentStop(null)),
+            });
+        },
+        [dispatch],
+    );
+
     return (
-        <div className={cn(styles.MapVehiclesSidebar)}>
+        <div
+            className={cn(styles.MapVehiclesSidebar)}
+            style={{
+                // @ts-ignore
+                '--vehicle-color': VEHICLE_TYPE_COLORS[type],
+            }}
+        >
             <div className={cn(styles.MapVehiclesSidebarWrapper)}>
                 {unitInfo?.image.data && (
                     <div className={cn(styles.MapVehiclesSidebarVehicleImageWrapper)}>
@@ -294,7 +334,10 @@ export function MapVehiclesSidebar({
                         >
                             {/* TODO: вытащить li в компонент */}
                             {nearestStopIndex !== 0 && (
-                                <li className={cn(styles.MapVehiclesSidebarStation)}>
+                                <li
+                                    className={cn(styles.MapVehiclesSidebarStop)}
+                                    onClick={() => setSelectedStop(stops[0].stopId)}
+                                >
                                     <div
                                         className={cn(
                                             styles.MapVehiclesSidebarBullet,
@@ -306,7 +349,7 @@ export function MapVehiclesSidebar({
                                     />
                                     <PageText
                                         className={cn(
-                                            styles.MapVehiclesSidebarStationName,
+                                            styles.MapVehiclesSidebarStopName,
                                             styles.MapVehiclesSidebarStartStation,
                                         )}
                                     >
@@ -348,7 +391,10 @@ export function MapVehiclesSidebar({
                                     </div>
                                     {afterOpened &&
                                         afterStart.map((stop) => (
-                                            <li className={cn(styles.MapVehiclesSidebarStation)}>
+                                            <li
+                                                className={cn(styles.MapVehiclesSidebarStop)}
+                                                onClick={() => setSelectedStop(stop.stopId)}
+                                            >
                                                 <div
                                                     className={cn(styles.MapVehiclesSidebarBullet)}
                                                     style={{
@@ -358,7 +404,7 @@ export function MapVehiclesSidebar({
                                                 />
                                                 <PageText
                                                     className={cn(
-                                                        styles.MapVehiclesSidebarStationName,
+                                                        styles.MapVehiclesSidebarStopName,
                                                     )}
                                                 >
                                                     {stop.title}
@@ -372,7 +418,10 @@ export function MapVehiclesSidebar({
                                     className={cn(styles.MapVehiclesSidebarActiveBorder)}
                                     style={{ backgroundColor: VEHICLE_TYPE_COLORS[type] }}
                                 />
-                                <li className={cn(styles.MapVehiclesSidebarStation)}>
+                                <li
+                                    className={cn(styles.MapVehiclesSidebarStop)}
+                                    onClick={() => setSelectedStop(stops[nearestStopIndex].stopId)}
+                                >
                                     <div className={cn(styles.MapVehiclesSidebarVehicleMarker)}>
                                         <MapVehicleMarker
                                             id="sidebar"
@@ -383,19 +432,20 @@ export function MapVehiclesSidebar({
                                             course={180}
                                         />
                                     </div>
-                                    <PageText className={cn(styles.MapVehiclesSidebarStationName)}>
+                                    <PageText className={cn(styles.MapVehiclesSidebarStopName)}>
                                         {stops[nearestStopIndex]?.title}
                                     </PageText>
                                 </li>
                                 {afterNearest.map((stop) => (
-                                    <li className={cn(styles.MapVehiclesSidebarStation)}>
+                                    <li
+                                        className={cn(styles.MapVehiclesSidebarStop)}
+                                        onClick={() => setSelectedStop(stop.stopId)}
+                                    >
                                         <div
                                             className={cn(styles.MapVehiclesSidebarBullet)}
                                             style={{ borderColor: VEHICLE_TYPE_COLORS[type] }}
                                         />
-                                        <PageText
-                                            className={cn(styles.MapVehiclesSidebarStationName)}
-                                        >
+                                        <PageText className={cn(styles.MapVehiclesSidebarStopName)}>
                                             {t(stop.title)}
                                         </PageText>
                                         {'arriveTime' in stop && (
@@ -445,7 +495,8 @@ export function MapVehiclesSidebar({
                                         {beforeOpened &&
                                             beforeEnd.map((stop) => (
                                                 <li
-                                                    className={cn(styles.MapVehiclesSidebarStation)}
+                                                    className={cn(styles.MapVehiclesSidebarStop)}
+                                                    onClick={() => setSelectedStop(stop.stopId)}
                                                 >
                                                     <div
                                                         className={cn(
@@ -457,7 +508,7 @@ export function MapVehiclesSidebar({
                                                     />
                                                     <PageText
                                                         className={cn(
-                                                            styles.MapVehiclesSidebarStationName,
+                                                            styles.MapVehiclesSidebarStopName,
                                                         )}
                                                     >
                                                         {t(stop.title)}
@@ -470,7 +521,10 @@ export function MapVehiclesSidebar({
                                     </div>
                                 )}
                                 {stops.length > 0 && nearestStopIndex !== stops.length - 1 && (
-                                    <li className={cn(styles.MapVehiclesSidebarStation)}>
+                                    <li
+                                        className={cn(styles.MapVehiclesSidebarStop)}
+                                        onClick={() => setSelectedStop(endStop.stopId)}
+                                    >
                                         <div
                                             className={cn(
                                                 styles.MapVehiclesSidebarBullet,
@@ -478,9 +532,7 @@ export function MapVehiclesSidebar({
                                             )}
                                             style={{ borderColor: VEHICLE_TYPE_COLORS[type] }}
                                         />
-                                        <PageText
-                                            className={cn(styles.MapVehiclesSidebarStationName)}
-                                        >
+                                        <PageText className={cn(styles.MapVehiclesSidebarStopName)}>
                                             {t(endStop.title)}
                                         </PageText>
 

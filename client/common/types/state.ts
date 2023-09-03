@@ -14,12 +14,22 @@ export interface State {
 }
 
 export type CurrentVehiclePayload = State['publicTransport']['currentVehicle'];
-export interface SetCurrentVehiclePayload {
+export interface CurrentVehicleOptions {
+    shouldClear?: boolean;
+}
+export type CurrentVehiclePayloadWithOptions = CurrentVehiclePayload & CurrentVehicleOptions;
+export interface SetCurrentVehiclePayload extends CurrentVehicleOptions {
     currentVehicle: CurrentVehiclePayload;
     currentRoute: State['publicTransport']['currentRoute'];
 }
 export type CurrentStopPayload = State['publicTransport']['currentStop'];
-export interface SetCurrentStopPayload {
+export interface CurrentStopOptions {
+    shouldClear?: boolean;
+}
+export interface CurrentStopPayloadWithOptions extends CurrentStopOptions {
+    currentStop: CurrentStopPayload;
+}
+export interface SetCurrentStopPayload extends CurrentStopOptions {
     currentStop: CurrentStopPayload;
     stopInfo: State['publicTransport']['stopInfo'];
 }

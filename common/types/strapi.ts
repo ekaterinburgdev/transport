@@ -6,20 +6,16 @@ export enum StrapiContentTypes {
     UnitInfo = 'unit-info',
 }
 
-export interface StrapiStop {
+export interface StrapiBase<A> {
     id: number;
-    attributes: Stop;
+    attributes: A;
 }
 
-export interface StrapiUnitInfo {
-    id: number;
-    attributes: UnitInfo;
-}
+export type StrapiStop = StrapiBase<Stop>;
 
-export interface StrapiTree {
-    id: number;
-    attributes: TransportTreeOfType;
-}
+export type StrapiUnitInfo = StrapiBase<UnitInfo>;
+
+export type StrapiTree = StrapiBase<TransportTreeOfType>;
 
 export interface StrapiLoginResponse {
     user: string;

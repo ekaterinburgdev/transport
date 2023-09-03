@@ -1,0 +1,12 @@
+.MapStopsSidebarStopsList {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.MapStopsSidebarStopsList::-webkit-scrollbar {
+    display: none;
+}

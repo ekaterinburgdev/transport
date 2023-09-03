@@ -1,25 +1,43 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { uniq } from 'lodash';
+import { isEmpty, uniq } from 'lodash';
 
 import { massTransApi } from 'api/masstrans/masstrans';
 import {
     SetCurrentStopPayload,
     SetCurrentVehiclePayload,
     SetStopsPayload,
-    CurrentVehiclePayload,
     State,
     CurrentStopPayload,
+    CurrentVehiclePayloadWithOptions,
+    CurrentVehiclePayload,
+    CurrentStopPayloadWithOptions,
 } from 'common/types/state';
 
 import { initialState } from '../constants/public-transport';
 
+const SLICE_NAME = 'publicTransport';
+
+function isCurrentVehiclePayload(obj: unknown): obj is CurrentVehiclePayload {
+    return Boolean(
+        (obj as CurrentVehiclePayload).num &&
+            (obj as CurrentVehiclePayload).routeId &&
+            (obj as CurrentVehiclePayload).routeDirection &&
+            (obj as CurrentVehiclePayload).type,
+    );
+}
+
 export const setCurrentVehicle = createAsyncThunk(
-    'publicTransport/setCurrentVehicle',
-    async (currentVehicle: CurrentVehiclePayload): Promise<SetCurrentVehiclePayload> => {
-        if (!currentVehicle) {
+    `${SLICE_NAME}/setCurrentVehicle`,
+    async (
+        currentVehiclePayload: CurrentVehiclePayloadWithOptions,
+    ): Promise<SetCurrentVehiclePayload> => {
+        const { shouldClear = true, ...currentVehicle } = currentVehiclePayload || {};
+
+        if (!isCurrentVehiclePayload(currentVehicle)) {
             return {
-                currentVehicle,
+                currentVehicle: null,
                 currentRoute: null,
+                shouldClear,
             };
         }
 
@@ -34,17 +52,21 @@ export const setCurrentVehicle = createAsyncThunk(
                 type: currentVehicle.type,
                 routeDirection: currentVehicle.routeDirection,
             },
+            shouldClear,
         };
     },
 );
 
 export const setCurrentStop = createAsyncThunk(
-    'publicTransport/setCurrentStop',
-    async (currentStop: CurrentStopPayload): Promise<SetCurrentStopPayload> => {
+    `${SLICE_NAME}/setCurrentStop`,
+    async (currentStopPayload: CurrentStopPayloadWithOptions): Promise<SetCurrentStopPayload> => {
+        const { currentStop, shouldClear = true } = currentStopPayload || {};
+
         if (!currentStop) {
             return {
                 currentStop,
                 stopInfo: [],
+                shouldClear,
             };
         }
 
@@ -53,12 +75,13 @@ export const setCurrentStop = createAsyncThunk(
         return {
             currentStop,
             stopInfo,
+            shouldClear,
         };
     },
 );
 
 const publicTransportSlice = createSlice({
-    name: 'publicTransport',
+    name: SLICE_NAME,
     initialState,
     reducers: {
         setStops(state: State['publicTransport'], action: PayloadAction<SetStopsPayload>) {
@@ -80,20 +103,24 @@ const publicTransportSlice = createSlice({
         builder.addCase(
             setCurrentVehicle.fulfilled,
             (state, action: PayloadAction<SetCurrentVehiclePayload>) => {
-                const { currentVehicle, currentRoute } = action.payload;
+                const { currentVehicle, currentRoute, shouldClear } = action.payload;
 
                 state.currentVehicle = currentVehicle;
                 state.currentRoute = currentRoute;
-
-                state.currentStop = null;
-                state.stopInfo = [];
-                state.stopVehicles = [];
 
                 if (!currentRoute) {
                     state.vehicleStops = [];
 
                     return;
                 }
+
+                if (!shouldClear) {
+                    return;
+                }
+
+                state.currentStop = null;
+                state.stopInfo = [];
+                state.stopVehicles = [];
 
                 const racesInDirection = currentRoute.races.find(
                     (race) => race.raceType === currentVehicle.routeDirection,
@@ -107,7 +134,7 @@ const publicTransportSlice = createSlice({
         builder.addCase(
             setCurrentStop.fulfilled,
             (state, action: PayloadAction<SetCurrentStopPayload>) => {
-                const { currentStop, stopInfo } = action.payload;
+                const { currentStop, stopInfo, shouldClear } = action.payload;
 
                 const stopVehicles = uniq(
                     stopInfo?.map((info) => ({
@@ -120,6 +147,10 @@ const publicTransportSlice = createSlice({
                 state.currentStop = currentStop;
                 state.stopInfo = stopInfo;
                 state.stopVehicles = stopVehicles;
+
+                if (!shouldClear) {
+                    return;
+                }
 
                 state.currentVehicle = null;
                 state.currentRoute = null;

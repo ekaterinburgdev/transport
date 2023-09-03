@@ -50,7 +50,7 @@ export function MapVehicles({ vehicles, type }: MapVehiclesProps) {
 
             const isStopActive = currentStop || Boolean(currentStopVehicles.length);
 
-            if (isStopActive) {
+            if (isStopActive && !currentVehicle) {
                 return currentStopVehicles.some(
                     (stopVehicle) =>
                         stopVehicle.route === vehicle.num &&

@@ -1,0 +1,67 @@
+.MapStopsSidebarVehicle {
+    display: flex;
+    gap: 32px;
+    cursor: pointer;
+    border-radius: 4px;
+    outline: 8px solid transparent;
+}
+
+.MapStopsSidebarVehicle:not(.MapStopsSidebarVehicle_isSelected):hover {
+    background-color: #eaeaea;
+    outline: 8px solid #eaeaea;
+}
+
+.MapStopsSidebarVehicle_isSelected {
+    background-color: var(--vehicle-color);
+    color: #fff;
+    outline: 8px solid var(--vehicle-color);
+}
+
+.MapStopsSidebarVehicleInfo {
+    display: flex;
+    gap: 16px;
+    flex: 1;
+}
+
+.MapStopsSidebarVehicleRoute {
+    flex-shrink: 0;
+
+    width: 58px;
+    height: 32px;
+    border-radius: 3px;
+
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 32px;
+    text-align: center;
+
+    color: #fff;
+    background-color: var(--vehicle-color);
+}
+
+.MapStopsSidebarVehicleRouteBus {
+    background-color: var(--bus);
+}
+
+.MapStopsSidebarVehicleRouteTram {
+    background-color: var(--tram);
+}
+
+.MapStopsSidebarVehicleRouteTroll {
+    background-color: var(--troll);
+}
+
+.MapStopsSidebarVehicleEndpoint {
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.MapStopsSidebarVehicleKeypoints,
+.MapStopsSidebarVehicleArriveTime {
+    font-size: 16px;
+    line-height: 18px;
+}
+
+.MapStopsSidebarVehicleKeypoints {
+    font-weight: 300;
+}
