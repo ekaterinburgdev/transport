@@ -3,18 +3,18 @@
     gap: 32px;
     cursor: pointer;
     border-radius: 4px;
-    outline: 8px solid transparent;
+    box-shadow: 0 0 0 8px transparent;
 }
 
 .MapStopsSidebarVehicle:not(.MapStopsSidebarVehicle_isSelected):hover {
     background-color: #eaeaea;
-    outline: 8px solid #eaeaea;
+    box-shadow: 0 0 0 8px #eaeaea;
 }
 
 .MapStopsSidebarVehicle_isSelected {
     background-color: var(--vehicle-color);
     color: #fff;
-    outline: 8px solid var(--vehicle-color);
+    box-shadow: 0 0 0 8px var(--vehicle-color);
 }
 
 .MapStopsSidebarVehicleInfo {
