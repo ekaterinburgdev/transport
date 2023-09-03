@@ -6,9 +6,9 @@ export enum StrapiContentTypes {
     UnitInfo = 'unit-info',
 }
 
-export interface StrapiBase<A> {
+export interface StrapiBase<AttributesType> {
     id: number;
-    attributes: A;
+    attributes: AttributesType;
 }
 
 export type StrapiStop = StrapiBase<Stop>;

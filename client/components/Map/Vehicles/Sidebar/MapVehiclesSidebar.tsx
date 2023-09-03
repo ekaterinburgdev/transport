@@ -224,10 +224,11 @@ export function MapVehiclesSidebar({
     return (
         <div
             className={cn(styles.MapVehiclesSidebar)}
-            style={{
-                // @ts-ignore
-                '--vehicle-color': VEHICLE_TYPE_COLORS[type],
-            }}
+            style={
+                {
+                    '--vehicle-color': VEHICLE_TYPE_COLORS[type],
+                } as React.CSSProperties
+            }
         >
             <div className={cn(styles.MapVehiclesSidebarWrapper)}>
                 {unitInfo?.image.data && (

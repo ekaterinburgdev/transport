@@ -23,7 +23,7 @@ export function MapStopsSidebarStopsList() {
             ))}
             {stopInfo.length === 0 && (
                 <Typography variant="h4">
-                    {t('О нет! В ближайшее время транспорта тут не будет')}
+                    {t('О, нет! В ближайшее время транспорта тут не будет')}
                 </Typography>
             )}
         </MapStopsSidebarRow>

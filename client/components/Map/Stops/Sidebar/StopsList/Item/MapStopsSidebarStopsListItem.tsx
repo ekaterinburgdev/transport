@@ -63,10 +63,11 @@ export function MapStopsSidebarStopsListItem({ vehicle }: MapStopsSidebarStopsLi
                 [styles.MapStopsSidebarVehicle_isSelected]: currentVehicleRoute === vehicle.route,
             })}
             onClick={setSelectedVehicle}
-            style={{
-                // @ts-ignore
-                '--vehicle-color': VEHICLE_TYPE_COLORS[vehicle.type],
-            }}
+            style={
+                {
+                    '--vehicle-color': VEHICLE_TYPE_COLORS[vehicle.type],
+                } as React.CSSProperties
+            }
         >
             <div className={cn(styles.MapStopsSidebarVehicleInfo)}>
                 <div className={cn(styles.MapStopsSidebarVehicleRoute)}>{vehicle.route}</div>
