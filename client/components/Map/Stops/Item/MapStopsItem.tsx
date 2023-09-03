@@ -78,7 +78,7 @@ export function MapStopsItem({ type, id, name, coords }: MapStopsItemProps) {
                     if (currentStop !== id) {
                         sidebarService.open({
                             component: <MapStopsSidebar type={type} name={name} />,
-                            onClose: () => dispatch(setCurrentStop(null)),
+                            onClose: () => dispatch(setCurrentStop({ currentStop: null })),
                         });
 
                         dispatch(setCurrentStop({ currentStop: id }));
