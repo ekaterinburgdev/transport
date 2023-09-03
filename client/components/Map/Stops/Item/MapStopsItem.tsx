@@ -25,9 +25,10 @@ export function MapStopsItem({ type, id, name, coords }: MapStopsItemProps) {
     const currentVehicle = useSelector((state: State) => state.publicTransport.currentVehicle);
 
     const icon = useMemo(() => {
+        const hasActiveStop = currentStop !== null;
         const isVehicleActive = Boolean(currentVehicleStops.length);
 
-        if (isVehicleActive) {
+        if (isVehicleActive && !hasActiveStop) {
             const isStopActive = currentVehicleStops.includes(id);
 
             if (isStopActive) {
@@ -46,10 +47,9 @@ export function MapStopsItem({ type, id, name, coords }: MapStopsItemProps) {
 
         const iconObject = getIconObjectByTypes(type);
 
-        const isActive = currentStop === id;
-        const hasActiveStop = currentStop !== null;
-
         let icon = iconObject.idle;
+
+        const isActive = currentStop === id;
 
         if (!isActive && hasActiveStop) {
             icon = iconObject.inactive;
@@ -81,7 +81,7 @@ export function MapStopsItem({ type, id, name, coords }: MapStopsItemProps) {
                             onClose: () => dispatch(setCurrentStop(null)),
                         });
 
-                        dispatch(setCurrentStop(id));
+                        dispatch(setCurrentStop({ currentStop: id }));
                     }
                 },
             }}

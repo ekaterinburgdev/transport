@@ -235,11 +235,16 @@
     background-color: var(--tram-translucent);
 }
 
-.MapVehiclesSidebarStation {
+.MapVehiclesSidebarStop {
     display: flex;
     gap: 16px;
     padding: 16px 0 16px 22px;
     position: relative;
+    cursor: pointer;
+}
+
+.MapVehiclesSidebarStop:hover .MapVehiclesSidebarStopName {
+    color: var(--vehicle-color);
 }
 
 .MapVehiclesSidebarStartStation {
@@ -288,8 +293,10 @@
     bottom: 26px;
 }
 
-.MapVehiclesSidebarStationName {
+.MapVehiclesSidebarStopName {
     flex: 1;
+
+    transition: color 150ms ease-out;
 }
 
 .MapVehiclesSidebarHiddenStationWrapper {

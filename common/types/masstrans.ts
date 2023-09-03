@@ -39,6 +39,7 @@ export interface Stop {
 export interface StopInfoItem {
     arriveTime: string;
     route: string;
+    routeId: number;
     type: ClientUnit;
     to: string;
     routeDirection: string;

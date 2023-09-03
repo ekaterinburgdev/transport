@@ -79,6 +79,7 @@ export function MapLocation() {
 
         userMarkerRef.current = new MovingMarker(COORDS_EKATERINBURG, {
             icon: USER_ICON,
+            pane: 'location',
         }).addTo(map);
     }, [map]);
 
