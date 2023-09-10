@@ -8,8 +8,8 @@ export default function Map() {
         <>
             <Head>
                 <title>Карта транспорта Екатеринбурга</title>
-                <link rel="preconnect" href="https://tiles.ekaterinburg.io" />
-                <link rel="preconnect" href="https://map-api.ekaterinburg.io" />
+                <link rel="preconnect" href="https://tiles.ekaterinburg.city" />
+                <link rel="preconnect" href="https://map-api.ekaterinburg.city" />
             </Head>
 
             <MapComponent />

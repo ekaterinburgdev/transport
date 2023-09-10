@@ -4,7 +4,7 @@ import { fetchApi } from 'api/utils/fetch';
 export const MainPageApi = {
     getCards: async () => {
         return await fetchApi(
-            'https://transport-cms.ekaterinburg.io/api/cards/?populate=backgroundImage',
+            'https://transport-cms.ekaterinburg.city/api/cards/?populate=backgroundImage',
             { dataField: 'data' },
         );
     },
@@ -35,7 +35,7 @@ export const MainPageApi = {
     },
 
     getMarqueeItems: async () => {
-        return await fetchApi('https://transport-cms.ekaterinburg.io/api/marquees', {
+        return await fetchApi('https://transport-cms.ekaterinburg.city/api/marquees', {
             dataField: 'data',
         });
     }

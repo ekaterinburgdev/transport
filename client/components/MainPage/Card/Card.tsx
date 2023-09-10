@@ -31,7 +31,7 @@ export function Card({
                 "--CardTitleBgrColor": titleBackground,
                 "--CardTitleUnderlineColor": titleColor && hexToRgb(titleColor),
                 "--CardBgrColor": backgroundColor,
-                "--CardBgrImage": backgroundImage && `url(https://transport-cms.ekaterinburg.io${backgroundImage})`,
+                "--CardBgrImage": backgroundImage && `url(https://transport-cms.ekaterinburg.city${backgroundImage})`,
                 "--CardSubtitleColor": titleColor
             } as React.CSSProperties}
         >

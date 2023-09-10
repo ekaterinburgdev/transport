@@ -1,7 +1,6 @@
 {
   "name": "transport",
-  "version": "1.0.0",
-  "homepage": "https://transport.ekaterinburg.io",
+  "homepage": "https://transport.ekaterinburg.city",
   "license": "MIT",
   "private": true,
   "scripts": {
