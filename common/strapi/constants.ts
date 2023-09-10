@@ -1,4 +1,4 @@
-export const STRAPI_URL = 'https://transport-cms.ekaterinburg.io';
+export const STRAPI_URL = 'https://transport-cms.ekaterinburg.city';
 // email of Authenticated User
 export const EMAIL = process.env.STRAPI_EMAIL;
 // password of Authenticated User
