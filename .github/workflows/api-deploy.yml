@@ -25,9 +25,11 @@ jobs:
           source ~/.nvm/nvm.sh
 
           cd transport-api-test.na4u.ru/transport
-          git clean -f
+          git checkout main
           git fetch
-          git checkout origin/main
+          git reset --hard origin/main
+          git clean -df
+          git pull
 
           export APP_PORT=${{ secrets.API_SERVER_PORT }}
           nvm use
