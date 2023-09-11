@@ -10,7 +10,7 @@ function ArticlePage({ title, description }: ArticleProps) {
         <>
         
             <Head>
-                <title>Транспорт Екатеринбурга — {title}</title>
+                <title>{`Транспорт Екатеринбурга — ${title}`}</title>
             </Head>
 
             <Article title={title} description={description} />
