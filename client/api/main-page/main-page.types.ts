@@ -1,32 +1,36 @@
 export type TCardType = "public" | "car" | "pedestrian" | "other";
 
+export type background = {
+    data: {
+        attributes: {
+            name: string;
+            alternativeText: string;
+            caption: string;
+            width: number;
+            height: number;
+            formats: { thumbnail: Thumbnail };
+            hash: string;
+            ext: string;
+            mime: string;
+            size: number;
+            url: string;
+            previewUrl: null;
+            provider: string;
+            provider_metadata: null;
+            createdAt: Date;
+            updatedAt: Date;
+        }
+    }
+};
+
 export interface Card {
     id: number;
     attributes: {
         title: string;
+        titleBackgroundColor: string;
         url: null | string;
-        backgroundImage: {
-            data: {
-                attributes: {
-                    name: string;
-                    alternativeText: string;
-                    caption: string;
-                    width: number;
-                    height: number;
-                    formats: { thumbnail: Thumbnail };
-                    hash: string;
-                    ext: string;
-                    mime: string;
-                    size: number;
-                    url: string;
-                    previewUrl: null;
-                    provider: string;
-                    provider_metadata: null;
-                    createdAt: Date;
-                    updatedAt: Date;
-                };
-            };
-        };
+        backgroundImage: background;
+        backgroundImageHover: background;
         type: TCardType;
         priority: number;
         cardId: null;

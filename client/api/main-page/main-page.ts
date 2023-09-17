@@ -4,7 +4,7 @@ import { fetchApi } from 'api/utils/fetch';
 export const MainPageApi = {
     getCards: async () => {
         return await fetchApi(
-            'https://transport-cms.ekaterinburg.city/api/cards/?populate=backgroundImage',
+            'https://transport-cms.ekaterinburg.city/api/cards/?populate=backgroundImage,backgroundImageHover',
             { dataField: 'data' },
         );
     },
