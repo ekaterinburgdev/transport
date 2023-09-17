@@ -24,7 +24,7 @@
 }
 
 .Card_Public {
-    background-color: var(--cards-public-bgr);
+    background-color: var(--cards-public-bg);
     color: var(--cards-public-text);
 }
 
@@ -33,12 +33,12 @@
 }
 
 .Card_Public:hover {
-    background-color: var(--cards-public-bgr-hover);
+    background-color: var(--cards-public-bg-hover);
     color: white;
 }
 
 .Card_Pedestrian {
-    background-color: var(--cards-pedestrian-bgr);
+    background-color: var(--cards-pedestrian-bg);
     color: var(--cards-pedestrian-text);
 }
 
@@ -47,13 +47,13 @@
 }
 
 .Card_Pedestrian:hover {
-    background-color: var(--cards-pedestrian-bgr-hover);
+    background-color: var(--cards-pedestrian-bg-hover);
     color: white;
 }
 
 .Card_Car {
-    background-color: var(--cards-automobile-bgr);
-    color: var(--cards-automobile-text);
+    background-color: var(--cards-car-bg);
+    color: var(--cards-car-text);
 }
 
 .Card_Car .CardTitle {
@@ -61,12 +61,12 @@
 }
 
 .Card_Car:hover {
-    background-color: var(--cards-automobile-bgr-hover);
+    background-color: var(--cards-car-bg-hover);
     color: white;
 }
 
 .Card_Other {
-    background-color: var(--cards-other-bgr);
+    background-color: var(--cards-other-bg);
     color: var(--cards-other-text);
 }
 
@@ -75,7 +75,7 @@
 }
 
 .Card_Other:hover {
-    background-color: var(--cards-other-bgr-hover);
+    background-color: var(--cards-other-bg-hover);
     color: white;
 }
 
