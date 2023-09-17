@@ -1,44 +1,43 @@
 import classNames from 'classnames/bind';
 import { CardProps } from './Card.types';
-import styles from './Card.module.css';
 import t from 'utils/typograph';
-import React, { ReactElement } from "react";
+import React from "react";
+
+import { STRAPI_URL } from 'transport-common/strapi/constants';
+
+import styles from './Card.module.css';
 
 const cn = classNames.bind(styles);
 
 export function Card({
     title,
+    titleBackgroundColor,
     type,
     url,
     backgroundImage,
+    backgroundImageHover,
     dynamicContent,
     headerCaption,
     footerCaption
 }: CardProps) {
-    const getStylesByType = (type: CardProps["type"]) => {
-        switch (type) {
-            case "public":
-                return cn(styles.Card, styles.Card_Public)
-            case "car":
-                return cn(styles.Card, styles.Card_Car)
-            case "other":
-                return cn(styles.Card, styles.Card_Other)
-            case "pedestrian":
-                return cn(styles.Card, styles.Card_Pedestrian)
-            default:
-                return cn(styles.Card)
-        }
+    const cardStyle = {
+        "public": styles.Card_Public,
+        "car": styles.Card_Car,
+        "other": styles.Card_Other,
+        "pedestrian": styles.Card_Pedestrian
     }
 
     return (
         <a
-            className={getStylesByType(type)}
+            className={cn(styles.Card, cardStyle[type])}
             href={url}
             style={{
-                "--CardBgImage": backgroundImage && `url(https://transport-cms.ekaterinburg.city${backgroundImage})`,
+                "--CardTitleBgColor": titleBackgroundColor,
+                "--CardBgImage": backgroundImage && `url(${STRAPI_URL}${backgroundImage})`,
+                "--CardBgImageHover": backgroundImageHover && `url(${STRAPI_URL}${backgroundImageHover})`,
             } as React.CSSProperties}
         >
-            {title && <div className={cn(styles.CardTitle)}>
+            {title && <div className={cn(styles.CardTitle, { [styles.CardTitle_Bg]: titleBackgroundColor })}>
                 {t(title)}
             </div>}
             {headerCaption && <p className={cn(styles.CardHeaderCaption)}>

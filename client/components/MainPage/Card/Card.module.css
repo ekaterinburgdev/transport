@@ -1,6 +1,7 @@
 .Card {
-    --CardTitleBgrColor: transparent;
+    --CardTitleBgColor: transparent;
     --CardBgImage: none;
+    --CardBgImageHover: var(--CardBgImage, none);
 
     position: relative;
     z-index: 1;
@@ -19,8 +20,20 @@
     background-position: 100% 100%;
     color: white;
     background-image: var(--CardBgImage);
-    transition: .15s ease background-color;
+    transition: .15s ease background-color, .15s ease background-image, .15s ease filter;
     overflow: hidden;
+}
+
+@media (hover: hover) {
+    .Card:hover {
+        background-image: var(--CardBgImageHover, var(--CardBgImage));
+    }
+
+    /* Preload hover images */
+    .Card:before {
+        content: '';
+        background-image: var(--CardBgImageHover);
+    }
 }
 
 .Card_Public {
@@ -79,14 +92,8 @@
     color: white;
 }
 
-@media (hover: hover) {
-    .Card:hover {
-        filter: brightness(0.98);
-    }
-}
-
 .Card:active {
-    filter: brightness(0.9);
+    filter: brightness(0.95);
 }
 
 .CardTitle {
@@ -95,11 +102,21 @@
     font-weight: 500;
     line-height: 1.05;
     margin-bottom: 8px;
-    background-color: var(--CardTitleBgrColor);
+    background-color: var(--CardTitleBgColor);
     text-decoration: underline;
     text-decoration-color: rgba(255, 255, 255, 0.2);
     text-underline-offset: 3px;
     transition: .15s ease color, .15s ease text-decoration;
+}
+
+.CardTitle.CardTitle_Bg {
+    color: white;
+    padding: .5em .75em;
+    text-decoration-color: rgba(255, 255, 255, 0.3);
+}
+
+.Card:active .CardTitle.CardTitle_Bg {
+    text-decoration-color: rgba(255, 255, 255, 0.8);
 }
 
 .CardDynamic {
@@ -111,10 +128,6 @@
     font-weight: 500;
     margin-top: auto;
     margin-bottom: 0;
-}
-
-.CardTitle_Bg {
-    padding: .5em .75em;
 }
 
 .Card:hover .CardTitle {
