@@ -89,6 +89,7 @@ export class MasstransService {
             arriveTime: item.tc_arrivetime,
             route: item.mr_num,
             routeDirection: item.rl_racetype,
+            routeId: parseInt(item.mr_id, 10),
             type: item.type,
             to: item.laststation_title,
             // TODO: get through stations from GetRoute

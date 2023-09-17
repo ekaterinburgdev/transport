@@ -17,14 +17,14 @@ export function Article({ title, description }: ArticleProps) {
                 <span className={cn(styles.ArticleBackCaption)}>Назад</span>
             </Link>
 
-            <h1 className={cn(styles.ArticleTitle)}>
+            {title && <h1 className={cn(styles.ArticleTitle)}>
                 {title}
-            </h1>
+            </h1>}
 
-            <div
+            {description && <div
                 className={cn(styles.ArticleContent)}
                 dangerouslySetInnerHTML={{ __html: t(md().render(description)) }}
-            />
+            />}
         </article>
     )
 }

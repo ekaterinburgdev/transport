@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, Pane, TileLayer } from 'react-leaflet';
 import classNames from 'classnames/bind';
 
 import { sidebarService } from 'services/sidebar/sidebar';
@@ -14,7 +14,9 @@ import { MapWelcomeMessage } from 'components/Map/WelcomeMessage/MapWelcomeMessa
 import styles from './MapMainContainer.module.css';
 import 'leaflet/dist/leaflet.css';
 
-const tileServerUrl = `https://tiles.ekaterinburg.io/styles/basic-white/{z}/{x}/{y}${devicePixelRatio > 1 ? '@2x' : ''}.png`
+const tileServerUrl = `https://tiles.ekaterinburg.city/styles/basic-white/{z}/{x}/{y}${
+    devicePixelRatio > 1 ? '@2x' : ''
+}.png`;
 
 const cn = classNames.bind(styles);
 
@@ -31,7 +33,7 @@ function MapMainContainer({ zoom = 16, showControls = true }) {
                 sidebarService.open({ component: <MapWelcomeMessage /> });
                 localStorage.setItem('hasVisited', '1');
             }
-        } catch (e) { }
+        } catch (e) {}
     }, []);
 
     return (
@@ -47,12 +49,15 @@ function MapMainContainer({ zoom = 16, showControls = true }) {
             doubleClickZoom={false}
             className={cn(styles.Map)}
         >
-            <TileLayer url="https://tiles.ekaterinburg.io/styles/basic-white/{z}/{x}/{y}@2x.png" />
+            <TileLayer url={tileServerUrl} />
 
-            {showControls && <>
-                <MapLocation />
-                <MapZoomControl position="bottomright" />
-            </>}
+            {showControls && (
+                <>
+                    <Pane name="location" style={{ zIndex: 400 }} />
+                    <MapLocation />
+                    <MapZoomControl position="bottomright" />
+                </>
+            )}
 
             <MapTransport />
 

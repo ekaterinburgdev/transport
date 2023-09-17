@@ -1,0 +1,20 @@
+.MapStopsSidebarHeader {
+    display: flex;
+    gap: 16px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    padding-right: 80px;
+
+    background-color: #fff;
+}
+
+.MapStopsSidebarHeaderWrapper {
+    position: sticky;
+    top: 0;
+}
+
+.MapStopsSidebarHeaderInfo {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+}
