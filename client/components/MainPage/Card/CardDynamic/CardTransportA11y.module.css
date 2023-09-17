@@ -14,7 +14,7 @@
     align-items: center;
     gap: .15em;
     font-weight: 500;
-    line-height: 1;
+    line-height: 1.35;
 }
 
 .CardTransportA11yItem img {
@@ -27,6 +27,30 @@
 
 .CardTransportA11yItem dd {
     margin: 0;
+}
+
+.CardTransportA11y__Icon {
+    width: .9em;
+    height: 1em;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+}
+
+.CardTransportA11y__Icon_Bus {
+    background-image: url(./icon-bus.svg);
+}
+
+.CardTransportA11y__Icon_Tram {
+    background-image: url(./icon-tram.svg);
+}
+
+.CardTransportA11y__Icon_Troll {
+    background-image: url(./icon-troll.svg);
+}
+    
+a:hover .CardTransportA11y__Icon {
+    filter: brightness(0) invert(1);
 }
 
 @media screen and (min-width: 768px) {
