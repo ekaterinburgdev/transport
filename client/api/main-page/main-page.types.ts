@@ -1,13 +1,10 @@
-export type TCardType = "public" | "automobile" | "pedestrian" | "other";
+export type TCardType = "public" | "car" | "pedestrian" | "other";
+
 export interface Card {
     id: number;
     attributes: {
         title: string;
-        titleColor: string;
-        titleBackground: null;
         url: null | string;
-        invert: boolean | null;
-        backgroundColor: null | string;
         backgroundImage: {
             data: {
                 attributes: {
@@ -32,10 +29,9 @@ export interface Card {
         };
         type: TCardType;
         priority: number;
-        size: CardSize;
         cardId: null;
         headerCaption: null | string;
-        bottomCaption: null | string;
+        footerCaption: null | string;
         dynamicId: string;
         createdAt: Date;
         updatedAt: Date;
@@ -85,8 +81,4 @@ export interface Marquee {
         publishedAt: Date;
     };
 }
-enum CardSize {
-    L = 'L',
-    M = 'M',
-    S = 'S',
-}
+

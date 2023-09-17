@@ -42,14 +42,10 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems }: MainPageType
                             return <Card
                                 type={attributes.type}
                                 title={attributes.title}
-                                titleColor={attributes.titleColor}
-                                titleBackground={attributes.titleBackground}
                                 url={attributes.url}
-                                backgroundColor={attributes.backgroundColor}
                                 backgroundImage={attributes?.backgroundImage?.data?.attributes?.url}
                                 headerCaption={attributes.headerCaption}
-                                bottomCaption={attributes.bottomCaption}
-                                invert={attributes.invert}
+                                footerCaption={attributes.footerCaption}
                                 dynamicContent={getDynamicContent(attributes.dynamicId)}
                                 key={id}
                             />
