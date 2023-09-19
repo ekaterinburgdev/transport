@@ -1,4 +1,9 @@
+export const SITE_URL = 'https://transport.ekaterinburg.city';
 export const STRAPI_URL = 'https://transport-cms.ekaterinburg.city';
+export const TRANSPORT_API_URL = 'https://transport-api.ekaterinburg.city';
+export const TILE_SERVER_URL = 'https://tiles.ekaterinburg.city';
+export const TRAFFIC_JAMS_URL = 'https://ekb-probki.vercel.app/api';
+
 // email of Authenticated User
 export const EMAIL = process.env.STRAPI_EMAIL;
 // password of Authenticated User

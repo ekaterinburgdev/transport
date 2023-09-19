@@ -3,5 +3,5 @@
     "installCommand": "pnpm -r install",
     "outputDirectory": "client/.next",
     "framework": "nextjs",
-    "rewrites": [{ "source": "/api/:match*", "destination": "https://transport-api-test.na4u.ru/api/:match*" }]
+    "rewrites": [{ "source": "/api/:match*", "destination": "https://transport-api.ekaterinburg.city/api/:match*" }]
 }
