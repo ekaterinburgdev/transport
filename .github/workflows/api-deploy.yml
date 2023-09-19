@@ -1,4 +1,4 @@
-name: API prod deploy
+name: Transport API deploy
 on:
   push:
     branches:
@@ -20,23 +20,23 @@ jobs:
         username: ${{ secrets.API_SERVER_USERNAME }}
         password: ${{ secrets.API_SERVER_PASSWORD }}
         script: |
-          # Fix NVM appleboy/ssh-action
-          export NVM_DIR=~/.nvm
-          source ~/.nvm/nvm.sh
-
-          cd transport-api-test.na4u.ru/transport
+          cd ${{ secrets.API_SERVER_FOLDER }}
           git checkout main
           git fetch
           git reset --hard origin/main
           git clean -df
           git pull
+          
+          # Fix NVM appleboy/ssh-action
+          export NVM_DIR=~/.nvm
+          source ~/.nvm/nvm.sh
+          nvm use
 
           export APP_PORT=${{ secrets.API_SERVER_PORT }}
-          nvm use
+          
           pnpm -r --filter transport-server --filter transport-common i
           pnpm build:common
           pnpm build:server
 
-          # Start app (BUG: pm2 not working)
-          pm2 delete transport-server
-          pm2 start node api/build/index.js --name transport-server
+          pm2 restart transport-server
+          pm2 start --name transport-server pnpm -- start:server
