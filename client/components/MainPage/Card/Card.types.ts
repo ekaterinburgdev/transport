@@ -1,15 +1,15 @@
 import { ReactElement } from "react";
+import {TCardType} from "api/main-page/main-page.types";
 
 export type CardProps = {
+    type: TCardType | undefined;
     title: string;
-    titleColor: string;
-    titleBackground: string;
+    titleBackgroundColor: string;
     url: string;
-    backgroundColor: string;
     backgroundImage: string;
+    backgroundImageHover: string;
     headerCaption: string;
-    bottomCaption: string;
-    invert: boolean;
+    footerCaption: string;
     dynamicContent: ReactElement;
     key: number;
 };

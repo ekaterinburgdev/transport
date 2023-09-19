@@ -1,40 +1,41 @@
+export type TCardType = "public" | "car" | "pedestrian" | "other";
+
+export type background = {
+    data: {
+        attributes: {
+            name: string;
+            alternativeText: string;
+            caption: string;
+            width: number;
+            height: number;
+            formats: { thumbnail: Thumbnail };
+            hash: string;
+            ext: string;
+            mime: string;
+            size: number;
+            url: string;
+            previewUrl: null;
+            provider: string;
+            provider_metadata: null;
+            createdAt: Date;
+            updatedAt: Date;
+        }
+    }
+};
+
 export interface Card {
     id: number;
     attributes: {
         title: string;
-        titleColor: string;
-        titleBackground: null;
+        titleBackgroundColor: string;
         url: null | string;
-        invert: boolean | null;
-        backgroundColor: null | string;
-        backgroundImage: {
-            data: {
-                attributes: {
-                    name: string;
-                    alternativeText: string;
-                    caption: string;
-                    width: number;
-                    height: number;
-                    formats: { thumbnail: Thumbnail };
-                    hash: string;
-                    ext: string;
-                    mime: string;
-                    size: number;
-                    url: string;
-                    previewUrl: null;
-                    provider: string;
-                    provider_metadata: null;
-                    createdAt: Date;
-                    updatedAt: Date;
-                };
-            };
-        };
-        type: CardType;
+        backgroundImage: background;
+        backgroundImageHover: background;
+        type: TCardType;
         priority: number;
-        size: CardSize;
         cardId: null;
         headerCaption: null | string;
-        bottomCaption: null | string;
+        footerCaption: null | string;
         dynamicId: string;
         createdAt: Date;
         updatedAt: Date;
@@ -85,13 +86,3 @@ export interface Marquee {
     };
 }
 
-enum CardType {
-    All = 'all',
-    Citizen = 'citizen',
-}
-
-enum CardSize {
-    L = 'L',
-    M = 'M',
-    S = 'S',
-}
