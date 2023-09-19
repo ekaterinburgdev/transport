@@ -18,7 +18,7 @@ jobs:
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
 
-          cd transport-api-test.na4u.ru/transport
+          cd ${{ secrets.API_SERVER_FOLDER }}
           export STRAPI_EMAIL="${{ secrets.STRAPI_EMAIL }}"
           export STRAPI_PASSWORD="${{ secrets.STRAPI_PASSWORD }}"
 
