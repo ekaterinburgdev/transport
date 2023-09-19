@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 node_modules
 /.pnp
@@ -12,8 +10,16 @@ node_modules
 .next
 out
 
-# production
+# Nextjs build
 client/build
+
+# TypeScript build
+common/strapi/*.js*
+common/types/*.js*
+common/utils/*.js*
+schedulers/masstrans/*.js*
+schedulers/transphoto/*.js*
+schedulers/utils/*.js*
 
 # misc
 .DS_Store
@@ -37,6 +43,3 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 api/build
-
-# idea
-.idea
