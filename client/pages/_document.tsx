@@ -1,11 +1,11 @@
 import React from 'react';
 import { Html, Head, Main, NextScript } from 'next/document';
+import { SITE_URL } from 'transport-common/strapi/constants';
 
 export default function Document() {
     const siteTitle = 'Транспорт Екатеринбурга';
-    const siteUrl = 'https://transport.ekaterinburg.city/';
     const siteDescription = 'Всё про транспорт Екатеринбурга. Цена проезда, карта транспорта, расписание маршрутов, статус пробок и правила парковок.';
-    const ogImage = `${siteUrl}og-preview.jpg`;
+    const ogImage = `${SITE_URL}/og-preview.jpg`;
 
     return (
         <Html lang="ru">
@@ -14,13 +14,13 @@ export default function Document() {
                 <meta name="description" content={siteDescription} />
 
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content={siteUrl} />
+                <meta property="og:url" content={SITE_URL} />
                 <meta property="og:title" content={siteTitle} />
                 <meta property="og:description" content={siteDescription} />
                 <meta property="og:image" content={ogImage} />
 
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content={siteUrl} />
+                <meta property="twitter:url" content={SITE_URL} />
                 <meta property="twitter:title" content={siteTitle} />
                 <meta property="twitter:description" content={siteDescription} />
                 <meta property="twitter:image" content={ogImage} />

@@ -56,7 +56,7 @@ async function updateUnitInfoInStrapi(
 
                 const response = await uploadFile(form, jwt);
 
-                imageId = response[0]?.id;
+                imageId = response?.[0]?.id;
             }
 
             console.log('start publishing');

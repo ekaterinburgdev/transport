@@ -1,21 +1,17 @@
-.CardTrafficLight__Container {
-    display: flex;
-    align-self: end;
-}
-
 .CardTrafficLight {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 2em;
-    height: 1.8em;
-    padding-top: 0.15em;
+    width: 1.9em;
+    height: 1.7em;
+    padding-top: 0.1em;
     padding-left: 0.25em;
     background-position: right bottom;
     background-size: contain;
     background-repeat: no-repeat;
     font-weight: 500;
-    font-size: clamp(48px, 4vw, 100px);
+    font-size: clamp(48px, 5vw, 100px);
+    margin-left: auto;
 }
 
 .CardTrafficLight_Green {

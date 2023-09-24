@@ -199,7 +199,9 @@ async function getTransportInfoFromPage(url: string) {
     console.log(document.querySelector('.pages span')?.textContent);
 
     return {
-        nextPageUrl: nextPagePath.startsWith('?') ? origin + pathname + nextPagePath : nextPagePath,
+        nextPageUrl: nextPagePath?.startsWith('?')
+            ? origin + pathname + nextPagePath
+            : nextPagePath,
         data: result,
     };
 }

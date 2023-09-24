@@ -1,13 +1,7 @@
 .Card {
-    --CardTitleColor: inherit;
-    --CardTitleBgrColor: transparent;
-
-    --CardTitleUnderlineColor: inherit;
-
-    --CardBgrColor: transparent;
-    --CardBgrImage: none;
-
-    --CardSubtitleColor: inherit;
+    --CardTitleBgColor: transparent;
+    --CardBgImage: none;
+    --CardBgImageHover: var(--CardBgImage, none);
 
     position: relative;
     z-index: 1;
@@ -16,7 +10,6 @@
     flex-direction: column;
 
     align-items: flex-start;
-    justify-content: space-between;
     height: 100%;
 
     padding: 16px;
@@ -25,16 +18,78 @@
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: 100% 100%;
-    background-color: var(--CardBgrColor);
-    background-image: var(--CardBgrImage);
-    transition: .15s ease;
+    color: white;
+    background-image: var(--CardBgImage);
+    transition: .15s ease background-color, .15s ease background-image, .15s ease filter;
     overflow: hidden;
 }
 
 @media (hover: hover) {
     .Card:hover {
-        filter: brightness(0.98);
+        background-image: var(--CardBgImageHover, var(--CardBgImage));
     }
+
+    /* Preload hover images */
+    .Card:before {
+        content: '';
+        background-image: var(--CardBgImageHover);
+    }
+}
+
+.Card_Public {
+    background-color: var(--cards-public-bg);
+    color: var(--cards-public-text);
+}
+
+.Card_Public .CardTitle {
+    text-decoration-color: rgba(4, 72, 21, .15);
+}
+
+.Card_Public:hover {
+    background-color: var(--cards-public-bg-hover);
+    color: white;
+}
+
+.Card_Pedestrian {
+    background-color: var(--cards-pedestrian-bg);
+    color: var(--cards-pedestrian-text);
+}
+
+.Card_Pedestrian .CardTitle {
+    text-decoration-color: rgba(76, 63, 0, .15);
+}
+
+.Card_Pedestrian:hover {
+    background-color: var(--cards-pedestrian-bg-hover);
+    color: white;
+}
+
+.Card_Car {
+    background-color: var(--cards-car-bg);
+    color: var(--cards-car-text);
+}
+
+.Card_Car .CardTitle {
+    text-decoration-color: rgba(92, 17, 10, .15);
+}
+
+.Card_Car:hover {
+    background-color: var(--cards-car-bg-hover);
+    color: white;
+}
+
+.Card_Other {
+    background-color: var(--cards-other-bg);
+    color: var(--cards-other-text);
+}
+
+.Card_Other .CardTitle {
+    text-decoration-color: rgba(12, 27, 39, .15);
+}
+
+.Card_Other:hover {
+    background-color: var(--cards-other-bg-hover);
+    color: white;
 }
 
 .Card:active {
@@ -47,35 +102,43 @@
     font-weight: 500;
     line-height: 1.05;
     margin-bottom: 8px;
-    color: var(--CardTitleColor);
-    background-color: var(--CardTitleBgrColor);
+    background-color: var(--CardTitleBgColor);
     text-decoration: underline;
-    text-decoration-color: rgba(var(--CardTitleUnderlineColor), 0.2);
+    text-decoration-color: rgba(255, 255, 255, 0.2);
     text-underline-offset: 3px;
-    transition: .15s ease text-decoration;
+    transition: .15s ease color, .15s ease text-decoration;
 }
 
-.CardBottomCapture, .CardBottomCapture_NoSubtitle {
-    color: var(--CardTitleColor);
-    font-weight: 500;
-    margin: 0;
-}
-
-.CardTitle_Bg {
+.CardTitle.CardTitle_Bg {
+    color: white;
     padding: .5em .75em;
+    text-decoration-color: rgba(255, 255, 255, 0.3);
+}
+
+.Card:active .CardTitle.CardTitle_Bg {
+    text-decoration-color: rgba(255, 255, 255, 0.8);
+}
+
+.CardDynamic {
+    width: 100%;
+    margin-top: auto;
+}
+
+.CardFooterCaption, .CardFooterCaption_NoSubtitle {
+    font-weight: 500;
+    margin-top: auto;
+    margin-bottom: 0;
 }
 
 .Card:hover .CardTitle {
-    text-decoration-color: rgba(var(--CardTitleUnderlineColor), 0.6);
+    text-decoration-color: rgba(255, 255, 255, 0.6);
 }
 
-.CardSubtitle {
+.CardHeaderCaption {
     font-size: 13px;
     line-height: 1.35;
     margin-top: 15px;
-    color: var(--CardSubtitleColor);
 }
-
 
 @media screen and (min-width: 375px) {
     .Card {
@@ -83,22 +146,15 @@
     }
 
     .CardTitle {
-        font-size: clamp(16px, 20px, 20px);
+        font-size: clamp(16px, 1vw, 20px);
     }
 
-    .CardSubtitle {
-        font-size: 12px;
-        line-height: 1.35;
-        margin-top: 9px;
-        color: var(--CardSubtitleColor);
-    }
-
-    .CardBottomCapture {
+    .CardFooterCaption {
         font-size: 20px;
     }
 
-    .CardBottomCapture_NoSubtitle {
-        font-size: 34px;
+    .CardFooterCaption_NoSubtitle {
+        font-size: clamp(16px, 1vw, 34px);
     }
 }
 
@@ -108,11 +164,11 @@
         border-radius: 24px;
     }
 
-    .CardBottomCapture {
+    .CardFooterCaption {
         font-size: 24px;
     }
-    
-    .CardBottomCapture_NoSubtitle {
+
+    .CardFooterCaption_NoSubtitle {
         font-size: 48px;
     }
 
@@ -121,7 +177,7 @@
         border-radius: 8px;
     }
 
-    .CardSubtitle {
+    .CardHeaderCaption {
         font-size: 24px;
     }
 }
@@ -135,8 +191,12 @@
         font-size: clamp(24px, 1.5vw, 32px);
     }
 
-    .CardSubtitle {
-        font-size: clamp(16px, 16px, 24px);
-        line-height: 1.375em;
+    .CardHeaderCaption {
+        font-size: clamp(16px, 1.1vw, 24px);
+    }
+
+    .CardFooterCaption {
+        font-size: clamp(20px, 3vw, 3em);
+        line-height: 1.3;
     }
 }

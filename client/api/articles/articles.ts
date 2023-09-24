@@ -1,13 +1,14 @@
 import { fetchApi } from 'api/utils/fetch';
+import { STRAPI_URL } from 'transport-common/strapi/constants';
 
 export const articlesApi = {
     getArticles: () =>
-        fetchApi('https://transport-cms.ekaterinburg.city/api/articles?fields=slug', {
+        fetchApi(`${STRAPI_URL}/api/articles?fields=slug`, {
             dataField: 'data',
         }),
     getArticle: (slug: string) =>
         fetchApi(
-            `https://transport-cms.ekaterinburg.city/api/articles?filters[slug][$eq]=${encodeURIComponent(
+            `${STRAPI_URL}/api/articles?filters[slug][$eq]=${encodeURIComponent(
                 slug,
             )}`,
             { dataField: 'data' },

@@ -1,61 +1,57 @@
 import classNames from 'classnames/bind';
 import { CardProps } from './Card.types';
-import styles from './Card.module.css';
 import t from 'utils/typograph';
-import React from "react";
+import React from 'react';
+
+import { STRAPI_URL } from 'transport-common/strapi/constants';
+
+import styles from './Card.module.css';
+
+const CARD_TYPES_CLASSNAMES = {
+    public: styles.Card_Public,
+    car: styles.Card_Car,
+    other: styles.Card_Other,
+    pedestrian: styles.Card_Pedestrian,
+};
 
 const cn = classNames.bind(styles);
 
-const hexToRgb = (hex) => {
-    const [r, g, b] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
-    return `${r}, ${g}, ${b}`;
-};
-
 export function Card({
     title,
-    titleColor,
-    titleBackground,
+    titleBackgroundColor,
+    type,
     url,
-    backgroundColor,
     backgroundImage,
+    backgroundImageHover,
+    dynamicContent,
     headerCaption,
-    bottomCaption,
-    dynamicContent
+    footerCaption,
 }: CardProps) {
     return (
         <a
-            className={cn(styles.Card)}
+            className={cn(styles.Card, CARD_TYPES_CLASSNAMES[type])}
             href={url}
-            style={{
-                "--CardTitleColor": titleColor,
-                "--CardTitleBgrColor": titleBackground,
-                "--CardTitleUnderlineColor": titleColor && hexToRgb(titleColor),
-                "--CardBgrColor": backgroundColor,
-                "--CardBgrImage": backgroundImage && `url(https://transport-cms.ekaterinburg.city${backgroundImage})`,
-                "--CardSubtitleColor": titleColor
-            } as React.CSSProperties}
-        >
-           <div>
-               {title && <div className={cn(styles.CardTitle, { [styles.CardTitle_Bg]: Boolean(titleBackground) })}>
-                   {t(title)}
-               </div>}
-               {headerCaption && <p className={cn(styles.CardSubtitle)}>
-                   {headerCaption}
-               </p>}
-           </div>
-
-            {
-                dynamicContent
-                    ? dynamicContent
-                    : <div>
-                        {bottomCaption &&
-                            <p className={headerCaption ?
-                                cn(styles.CardBottomCapture)
-                                : cn(styles.CardBottomCapture_NoSubtitle)}>
-                            {bottomCaption}
-                        </p>}
-                    </div>
+            style={
+                {
+                    '--CardTitleBgColor': titleBackgroundColor,
+                    '--CardBgImage': backgroundImage && `url(${STRAPI_URL}${backgroundImage})`,
+                    '--CardBgImageHover':
+                        backgroundImageHover && `url(${STRAPI_URL}${backgroundImageHover})`,
+                } as React.CSSProperties
             }
+        >
+            {title && (
+                <div
+                    className={cn(styles.CardTitle, {
+                        [styles.CardTitle_Bg]: titleBackgroundColor,
+                    })}
+                >
+                    {t(title)}
+                </div>
+            )}
+            {headerCaption && <p className={cn(styles.CardHeaderCaption)}>{t(headerCaption)}</p>}
+            {footerCaption && <p className={cn(styles.CardFooterCaption)}>{t(footerCaption)}</p>}
+            {dynamicContent && <div className={cn(styles.CardDynamic)}>{dynamicContent}</div>}
         </a>
     );
 }
