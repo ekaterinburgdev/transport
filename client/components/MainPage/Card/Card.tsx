@@ -50,7 +50,7 @@ export function Card({
                 </div>
             )}
             {headerCaption && <p className={cn(styles.CardHeaderCaption)}>{t(headerCaption)}</p>}
-            {footerCaption && <p className={cn(styles.CardFooterCaption)}>{t(footerCaption)}</p>}
+            {footerCaption && <p className={headerCaption ? cn(styles.CardFooterCaption) : cn(styles.CardFooterCaption_NoSubtitle)}>{t(footerCaption)}</p>}
             {dynamicContent && <div className={cn(styles.CardDynamic)}>{dynamicContent}</div>}
         </a>
     );
