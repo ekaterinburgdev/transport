@@ -16,8 +16,7 @@
 .MainPageLogo {
     display: flex;
     align-items: center;
-    margin-top: 1em;
-    margin-bottom: 1.3em;
+    margin: 1.1em 0;
     color: #123;
     font-size: min(8vw, 176px);
     line-height: 1;
@@ -33,10 +32,9 @@
 }
 
 .MainPageTitle {
-    font-size: .67em;
     font-weight: 400;
-    margin: 0;
-    margin-bottom: 0.4vw;
+    margin: 0 0 0.4vw;
+    font-size: 20px;
 }
 
 .MainPageCardGrid {
@@ -46,6 +44,27 @@
     align-items: stretch;
     gap: 24px;
     margin-bottom: 24px;
+}
+
+@media screen and (min-width: 576px) {
+    .MainPageInner {
+        padding: 2em 1.5em ;
+    }
+
+    .MainPageTitle {
+        font-weight: 500;
+        font-size: 30px;
+    }
+
+    .MainPageLogo {
+        margin: 0.3em  1em;
+    }
+
+    .MainPageLogo svg {
+        width: 1.4em;
+        height: 1.4em;
+        margin-right: .4em;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -67,22 +86,46 @@
     align-self: stretch;
 }
 
+
 @media screen and (min-width: 768px) {
     .MainPage {
         background-size: 100% auto;
     }
 
+    .MainPageInner {
+        padding: 3em 1.5em ;
+    }
+
     .MainPageTitle {
         font-weight: 500;
-        font-size: 1em;
+        font-size: 0.6em;
     }
 
     .MainPageLogo {
         justify-content: start;
-        margin-top: 0.15em;
-        margin-bottom: 80px;
-        font-weight: 500;
-        font-size: min(8vw, 80px);
+        margin: 0 auto 0.8em 0.65em;
+    }
+
+    .MainPageLogo svg {
+        width: 1.3em;
+        height: 1.3em;
+        margin-right: .4em;
+    }
+}
+
+@media screen and (min-width: 991px) {
+    .MainPageInner {
+        padding: 3.5em 1.5em ;
+    }
+
+    .MainPageLogo {
+        justify-content: start;
+        margin: 0 auto 0.7em 0.5em;
+    }
+
+    .MainPageLogo svg {
+        width: 1.2em;
+        height: 1.2em;
     }
 }
 
@@ -91,15 +134,40 @@
         grid-template-columns: repeat(3,1fr);
     }
 
+    .MainPageTitle {
+        font-size: 0.62em;
+    }
+
+    .MainPageLogo {
+        margin-left: .3em;
+    }
+
     .MainPageLogo svg {
-        width: 2em;
-        height: 2em;
-        margin-right: 46px;
+        width: 1.35em;
+        height: 1.35em;
         flex-shrink: 0;
+    }
+
+    .MainPageInner {
+        padding: 3.6em .2em;
     }
 }
 
 @media screen and (min-width: 1440px) {
+    .MainPage {
+        background-size: 100% 10px;
+    }
+
+    .MainPageInner {
+        padding: 4em 1.5em;
+        margin: 0;
+    }
+
+    .MainPageLogo {
+        justify-content: start;
+        margin: 0 auto 0.7em 0;
+    }
+
     .MainPageCardGrid {
         grid-template-columns: repeat(4,1fr);
     }
