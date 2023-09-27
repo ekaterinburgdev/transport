@@ -145,16 +145,38 @@
         padding: 16px;
     }
 
-    .CardTitle {
-        font-size: clamp(16px, 1vw, 20px);
+    .CardTitle   {
+        font-size: max(16px, 4vw);
     }
 
-    .CardFooterCaption {
-        font-size: 20px;
+    .CardHeaderCaption {
+        font-size: clamp(12px, 3vw, 20px);
     }
 
     .CardFooterCaption_NoSubtitle {
-        font-size: clamp(16px, 1vw, 34px);
+        font-size: clamp(20px, 7vw, 34px);
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .Card {
+        padding: 32px;
+    }
+
+    .CardTitle {
+        font-size: max(24px, 4vw);
+    }
+
+    .CardHeaderCaption {
+        font-size: clamp(16px, 4vw, 20px);
+    }
+
+    .CardFooterCaption {
+        font-size: max(24px, 3vw);
+    }
+
+    .CardFooterCaption_NoSubtitle {
+        font-size: max(8vw, 48px);
     }
 }
 
@@ -164,10 +186,6 @@
         border-radius: 24px;
     }
 
-    .CardFooterCaption {
-        font-size: 24px;
-    }
-    
     .CardFooterCaption_NoSubtitle {
         font-size: 48px;
     }
@@ -196,7 +214,13 @@
     }
 
     .CardFooterCaption {
-        font-size: clamp(20px, 3vw, 3em);
+        font-size: clamp(20px, 2vw, 34px);
         line-height: 1.3;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .CardFooterCaption_NoSubtitle {
+        font-size: clamp(30px, 3vw, 48px);
     }
 }

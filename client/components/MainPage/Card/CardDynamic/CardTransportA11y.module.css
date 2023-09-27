@@ -48,13 +48,19 @@
 .CardTransportA11y__Icon_Troll {
     background-image: url(./icon-troll.svg);
 }
-    
+
 a:hover .CardTransportA11y__Icon {
     filter: brightness(0) invert(1);
 }
 
+@media screen and (min-width: 576px) {
+    .CardTransportA11y {
+        font-size: 7vw;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .CardTransportA11y {
-        font-size: 3em;
+        font-size: max(30px, 3vw, 3em);
     }
 }
