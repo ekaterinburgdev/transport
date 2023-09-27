@@ -18,3 +18,13 @@
 .CardMap__Widget * {
     pointer-events: none;
 }
+
+@media (hover: hover) {
+    a:has(.CardMap):hover {
+        filter: brightness(0.965);
+    }
+}
+
+a:has(.CardMap):active {
+    filter: brightness(0.91);
+}
