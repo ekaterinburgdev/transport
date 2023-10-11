@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import _ from 'lodash';
+import sha1 from 'js-sha1';
 
 import {
     ServerRoute,
@@ -166,6 +167,8 @@ export class EkaterinburgRfModel {
 
         this.incrementRequestId();
 
+        let { magicStr, guidStr } = shaenc(method, this.requestId, this.sid);
+
         const requestBody = {
             id: this.requestId,
             jsonrpc,
@@ -173,6 +176,7 @@ export class EkaterinburgRfModel {
             params: {
                 ...params,
                 sid: this.sid,
+                magic: magicStr,
             },
         };
 
@@ -181,7 +185,10 @@ export class EkaterinburgRfModel {
             body: JSON.stringify(requestBody),
         };
 
-        let response = await fetch(marhsrutEkaterinburgRfJsonRpcLink, fetchOptions);
+        const requestUrl = new URL(marhsrutEkaterinburgRfJsonRpcLink);
+        requestUrl.searchParams.append('m', guidStr);
+
+        let response = await fetch(requestUrl.href, fetchOptions);
         let body = (await response.json()) as JsonRpcResponse<R>;
 
         const isSessionError = await this.processSessionError(body);
@@ -192,9 +199,15 @@ export class EkaterinburgRfModel {
             requestBody.params.sid = this.sid;
             requestBody.id = this.requestId;
 
+            ({ magicStr, guidStr } = shaenc(method, this.requestId, this.sid));
+            requestBody.params.magic = magicStr;
+
             fetchOptions.body = JSON.stringify(requestBody);
 
-            response = await fetch(marhsrutEkaterinburgRfJsonRpcLink, fetchOptions);
+            const retryRequestUrl = new URL(marhsrutEkaterinburgRfJsonRpcLink);
+            retryRequestUrl.searchParams.append('m', guidStr);
+
+            response = await fetch(retryRequestUrl.href, fetchOptions);
             body = (await response.json()) as JsonRpcResponse<R>;
         }
 
@@ -224,4 +237,34 @@ export class EkaterinburgRfModel {
     private incrementRequestId() {
         this.requestId++;
     }
+}
+
+// Getting magic values for requests to ekaterinburg.rf
+function shaenc(method: JsonRpcMethods, id: number, sid: string) {
+    // connecting into one string
+    const str = method + '-' + id + '-' + sid;
+
+    // calculating hash
+    const shaStr = sha1(str);
+
+    // turn first and last 16 symbols into GUID
+    const guidStr =
+        shaStr.substr(0, 8) +
+        '-' +
+        shaStr.substr(8, 4) +
+        '-' +
+        shaStr.substr(12, 4) +
+        '-' +
+        shaStr.substr(24, 4) +
+        '-' +
+        shaStr.substr(28, 12);
+
+    // turn 8 middle symbols into magic string
+    const magicStr = shaStr.substr(16, 8);
+
+    // formatting result
+    return {
+        magicStr,
+        guidStr,
+    };
 }
