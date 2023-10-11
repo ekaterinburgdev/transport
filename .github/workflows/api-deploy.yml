@@ -6,7 +6,6 @@ on:
     paths-ignore:
       - README.md
       - .gitignore
-      - .github
       - client/**
 jobs:
   deploy:
@@ -38,5 +37,5 @@ jobs:
           pnpm build:common
           pnpm build:server
 
-          pm2 restart transport-server
+          pm2 delete transport-server
           pm2 start --name transport-server pnpm -- start:server
