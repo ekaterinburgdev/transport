@@ -7,6 +7,8 @@
     flex-direction: column;
 
     font-family: 'Iset Sans', sans-serif;
+    /* TODO: Remove area for Ecosystem logo */
+    padding-bottom: 80px;
 }
 
 .MapVehiclesSidebarCloseButton {
