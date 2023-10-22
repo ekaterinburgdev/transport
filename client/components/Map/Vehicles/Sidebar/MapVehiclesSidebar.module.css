@@ -59,7 +59,7 @@
 .MapVehiclesSidebarRoute {
     font-weight: 500;
     font-size: 32px;
-    line-height: 42px;
+    line-height: 1.125;
     text-align: center;
     width: 65px;
     border-radius: 4px;
@@ -144,7 +144,7 @@
     padding: 0;
     list-style: none;
     position: relative;
-    padding-left: 16px;
+    padding-left: 21px;
 }
 
 .MapVehiclesSidebarHeaderStation {
@@ -159,7 +159,7 @@
     content: '';
     width: 3px;
     position: absolute;
-    left: -14px;
+    left: -18px;
     background-color: #d2d9e8;
 }
 
@@ -181,13 +181,14 @@
     height: 11px;
     width: 11px;
     background-color: white;
-    left: -18px;
+    left: -22px;
     border: 3px solid #d2d9e8;
-    transform: translateY(-50%);
+    transform: translateY(-100%);
 }
 
 .MapVehiclesSidebarHeaderBullet_fill {
     background-color: #d2d9e8;
+    transform: translateY(-50%)
 }
 
 .MapVehiclesSidebarHeaderBullet_warning {
@@ -335,7 +336,7 @@
 }
 
 .MapVehiclesSidebarAdditionalWrapper {
-    padding: 40px 24px 50px;
+    padding: 40px 24px 0;
     display: flex;
     flex-direction: column;
     gap: 32px;
