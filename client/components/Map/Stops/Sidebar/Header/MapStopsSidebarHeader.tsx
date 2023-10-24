@@ -31,7 +31,9 @@ export function MapStopsSidebarHeader({ types, name }: MapStopsSidebarHeaderProp
                             <IconFont key={t} name={IconFontCharsNames[t]} />
                         ))}
                     </Typography>
-                    <Typography variant="h3">{t(name)}</Typography>
+                    <Typography variant="h4">
+                        {t(name)}
+                    </Typography>
                 </div>
             </MapStopsSidebarRow>
             <Divider />

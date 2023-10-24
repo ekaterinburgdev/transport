@@ -1,10 +1,17 @@
 .MapStopsSidebarStopsList {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-
+    gap: 26px;
+    padding-top: 18px;
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+@media screen and (min-width: 768px) {
+    .MapStopsSidebarStopsList {
+        gap: 30px;
+        padding-bottom: 18px;
+    }
 }
 
 .MapStopsSidebarStopsList::-webkit-scrollbar {

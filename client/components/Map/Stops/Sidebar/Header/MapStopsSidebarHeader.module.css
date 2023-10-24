@@ -6,6 +6,7 @@
     padding-right: 80px;
 
     background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .MapStopsSidebarHeaderWrapper {
@@ -15,6 +16,7 @@
 
 .MapStopsSidebarHeaderInfo {
     display: flex;
+    align-items: center;
     gap: 10px;
     flex: 1;
 }

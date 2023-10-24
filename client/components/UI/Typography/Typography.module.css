@@ -17,26 +17,50 @@
 }
 
 .h1 {
-    font-size: 128px;
-    line-height: 128px;
+    font-size: 104px;
+    line-height: 1;
 }
 
 .h2 {
-    font-size: 48px;
-    line-height: 52px;
+    font-size: 39px;
+    line-height: 1.08;
 }
 
 .h3 {
     font-size: 32px;
-    line-height: 36px;
+    line-height: 1.11;
 }
 
 .h4 {
-    font-size: 22px;
-    line-height: 28px;
+    font-size: 26px;
+    line-height: 1.12;
 }
 
 .caption {
     font-size: 18px;
-    line-height: 24px;
+    line-height: 1.33;
+}
+
+@media screen and (min-width: 768px) {
+    .h1 {
+        font-size: 128px;
+        line-height: 1;
+    }
+    
+    .h2 {
+        font-size: 48px;
+        line-height: 1.08;
+    }
+
+    .h3 {
+        font-size: 40px;
+    }
+
+    .h4 {
+        font-size: 32px;
+    }
+
+    .caption {
+        font-size: 16px;
+    }
 }

@@ -1,3 +1,10 @@
 .MapStopsSidebarRow {
-    padding: 16px 24px;
+    padding: 20px 20px 8px;
+}
+
+@media screen and (min-width: 768px) {
+    .MapStopsSidebarRow {
+        padding-top: 16px;
+        padding-bottom: 12px;
+    }
 }

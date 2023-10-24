@@ -298,7 +298,9 @@ export function MapVehiclesSidebar({
                     <ul className={cn(styles.MapVehiclesSidebarDirection)}>
                         <li className={cn(styles.MapVehiclesSidebarHeaderStation)}>
                             <div className={cn(styles.MapVehiclesSidebarHeaderBullet)} />
-                            <Typography variant="h3">{from}</Typography>
+                            <Typography variant="h4">
+                                {from}
+                            </Typography>
                         </li>
                         <li className={cn(styles.MapVehiclesSidebarHeaderStation)}>
                             <div
@@ -311,7 +313,7 @@ export function MapVehiclesSidebar({
                                 )}
                             />
                             <Typography
-                                variant="h3"
+                                variant="h4"
                                 className={cn({ [styles.MapVehiclesSidebarTo_warning]: warning })}
                             >
                                 {to}
