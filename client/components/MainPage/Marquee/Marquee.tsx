@@ -11,8 +11,10 @@ export function Marquee({ items }: MarqueeProps) {
     return (
         <div className={cn(styles.Marquee)}>
             <div className={cn(styles.MarqueeInner)}>
-                {items.map((item) => (
-                    <div className={cn(styles.MarqueeItem)}>{item}</div>
+                {items.map(({ id, message }) => (
+                    <div key={id} className={cn(styles.MarqueeItem)}>
+                        {message}
+                    </div>
                 ))}
             </div>
         </div>

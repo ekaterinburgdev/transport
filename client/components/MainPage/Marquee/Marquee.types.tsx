@@ -1,3 +1,8 @@
 export type MarqueeProps = {
-    items: string[];
+    items: MarqueeItem[],
 };
+
+type MarqueeItem = {
+    id: number,
+    message: string,
+}
