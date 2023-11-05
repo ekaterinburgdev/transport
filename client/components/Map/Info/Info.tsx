@@ -30,7 +30,7 @@ export function Info() {
                 localStorage.setItem('hasVisited', '1');
             }
         } catch (e) {}
-    }, []);
+    }, [setIsOpen]);
 
     const toggleSidebar = useCallback(() => {
         if (isOpen) {
