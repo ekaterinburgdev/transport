@@ -64,18 +64,19 @@ function MapMainContainer({ zoom = 16, showControls = true }) {
             )}
 
             <MapTransport />
+            {showControls && (
+                <div
+                    className={cn(
+                        POSITION_CLASSES.topleft,
+                        sidebarStyles.leafletSidebar,
+                        styles.MapSidebar,
+                    )}
+                >
+                    <MapSearchBar />
 
-            <div
-                className={cn(
-                    POSITION_CLASSES.topleft,
-                    sidebarStyles.leafletSidebar,
-                    styles.MapSidebar,
-                )}
-            >
-                <MapSearchBar />
-
-                {sidebar}
-            </div>
+                    {sidebar}
+                </div>
+            )}
         </MapContainer>
     );
 }
