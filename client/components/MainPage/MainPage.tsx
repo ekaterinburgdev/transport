@@ -16,6 +16,8 @@ import { Marquee } from './Marquee/Marquee';
 const cn = classNames.bind(styles);
 
 export function MainPage({ cards, cardsDynamicData, marqueeItems }: MainPageTypes) {
+    const marqueeItemsData = marqueeItems.map(({ id, attributes: { message } }) => ({ id, message }))
+    
     const getDynamicContent = (dynamicId) => {
         switch (dynamicId) {
             case 'a11y-transport':
@@ -23,7 +25,7 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems }: MainPageType
             case 'traffic-jams':
                 return <CardTrafficJams score={cardsDynamicData.trafficJams} />
             case 'map':
-                return <CardMap  />
+                return <CardMap />
         }
     }
 
@@ -32,7 +34,7 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems }: MainPageType
             <div className={cn(styles.MainPageInner)}>
                 <div className={cn(styles.MainPageLogo)}>
                     <Logo />
-                    <h1 className={cn(styles.MainPageTitle)}>Транспорт<br/>Екатеринбурга</h1>
+                    <h1 className={cn(styles.MainPageTitle)}>Транспорт<br />Екатеринбурга</h1>
                 </div>
 
                 <div className={styles.MainPageCardGrid}>
@@ -54,7 +56,7 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems }: MainPageType
                         })}
                 </div>
 
-                <Marquee items={marqueeItems.map(({ attributes: { message } }) => message)} />
+                <Marquee items={marqueeItemsData} />
             </div>
         </div>
     );
