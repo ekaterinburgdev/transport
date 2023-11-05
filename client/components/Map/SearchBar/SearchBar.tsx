@@ -16,8 +16,6 @@ import { searchThroughUnits } from './SearchBar.helpers';
 
 const cn = classNames.bind(styles);
 
-const INPUT_PLACEHOLDER = 'Поиск';
-
 export function MapSearchBar() {
     const searchBarRef = useRef<HTMLDivElement>(null);
     const [searchResult, setSearchResult] = useState<{ stops: StrapiStop[]; units: Unit[] }>({
@@ -78,7 +76,7 @@ export function MapSearchBar() {
                 <img src="/icons/search.svg" alt="" />
                 <input
                     type="search"
-                    placeholder={INPUT_PLACEHOLDER}
+                    placeholder="Поиск"
                     onInput={onSearch}
                     className={cn(styles.MapSearchBar__input)}
                 />
