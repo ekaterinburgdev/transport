@@ -30,23 +30,7 @@
     align-items: center;
     gap: 16px;
     flex: 1;
-}
-
-.MapStopsSidebarVehicleRoute {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-
-    width: 58px;
-    height: 32px;
-    border-radius: 3px;
-
-    font-weight: 500;
-    font-size: 22px;
-
-    color: #fff;
-    background-color: var(--vehicle-color);
 }
 
 .MapStopsSidebarVehicleRouteBus {

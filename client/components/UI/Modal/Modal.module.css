@@ -1,8 +1,4 @@
 .Modal {
-    max-height: calc(100vh - 150px);
-    margin-top: 16px;
-    margin-left: 16px;
-    width: 448px;
     border-radius: 16px;
 
     overflow-y: scroll;
@@ -101,6 +97,7 @@
 
 @media screen and (max-width: 768px) {
     .Modal {
+        position: fixed;
         width: calc(100% - 16px);
         margin: 0;
         max-height: calc(100% - 90px);

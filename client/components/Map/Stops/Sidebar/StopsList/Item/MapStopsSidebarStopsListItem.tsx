@@ -5,13 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StopInfoItem } from 'transport-common/types/masstrans';
 
 import { VEHICLE_TYPE_COLORS } from 'common/constants/colors';
+import { State } from 'common/types/state';
+import { MapVehiclesRoute } from 'components/Map/Vehicles/Route/MapVehiclesRoute';
 import { store } from 'state';
 import { setCurrentVehicle } from 'state/features/public-transport';
 import t from 'utils/typograph';
 
-import styles from './MapStopsSidebarStopsListItem.module.css';
 import { getTimeToArrive } from './MapStopsSidebarStopsListItem.utils';
-import { State } from 'common/types/state';
+
+import styles from './MapStopsSidebarStopsListItem.module.css';
 
 const cn = classNames.bind(styles);
 
@@ -45,6 +47,7 @@ export function MapStopsSidebarStopsListItem({ vehicle }: MapStopsSidebarStopsLi
                 type: vehicle.type,
                 routeId: vehicle.routeId,
                 shouldClear: false,
+                shouldFlyTo: true,
             }),
         );
     }, [
@@ -70,7 +73,7 @@ export function MapStopsSidebarStopsListItem({ vehicle }: MapStopsSidebarStopsLi
             }
         >
             <div className={cn(styles.MapStopsSidebarVehicleInfo)}>
-                <div className={cn(styles.MapStopsSidebarVehicleRoute)}>{vehicle.route}</div>
+                <MapVehiclesRoute type={vehicle.type} num={vehicle.route} />
                 <div>
                     <span className={cn(styles.MapStopsSidebarVehicleEndpoint)}>
                         {t(vehicle.to)}

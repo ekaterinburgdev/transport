@@ -1,26 +1,37 @@
-import { Route, StopInfoItem, Unit } from 'transport-common/types/masstrans';
+import { ClientUnit, Route, StopInfoItem, Unit } from 'transport-common/types/masstrans';
 import { StrapiStop } from 'transport-common/types/strapi';
 
 export interface State {
     publicTransport: {
-        currentVehicle: Pick<Unit, 'num' | 'routeId' | 'routeDirection' | 'type'> | null;
+        currentVehicle:
+            | (Pick<Unit, 'num' | 'routeId' | 'routeDirection' | 'type'> & CurrentVehicleOptions)
+            | null;
         currentStop: string | null;
-        currentRoute: Route & Pick<Unit, 'type' | 'routeDirection'>;
+        currentRoute: Route & Pick<Unit, 'type' | 'routeDirection'> & CurrentRouteOptions;
         stops: StrapiStop[];
         vehicleStops: StrapiStop['attributes']['stopId'][];
         stopVehicles: Pick<StopInfoItem, 'route' | 'type' | 'routeDirection'>[];
         stopInfo: StopInfoItem[];
+        units: Record<ClientUnit, Unit[]>;
     };
 }
 
+export interface CurrentVehicleSettings {
+    shouldFilterByRouteDirection?: boolean;
+}
 export type CurrentVehiclePayload = State['publicTransport']['currentVehicle'];
 export interface CurrentVehicleOptions {
     shouldClear?: boolean;
+    shouldFlyTo?: boolean;
+    shouldFilterByRouteDirection?: boolean;
 }
 export type CurrentVehiclePayloadWithOptions = CurrentVehiclePayload & CurrentVehicleOptions;
+export interface CurrentRouteOptions {
+    shouldFlyTo?: boolean;
+}
 export interface SetCurrentVehiclePayload extends CurrentVehicleOptions {
     currentVehicle: CurrentVehiclePayload;
-    currentRoute: State['publicTransport']['currentRoute'];
+    currentRoute: State['publicTransport']['currentRoute'] & CurrentRouteOptions;
 }
 export type CurrentStopPayload = State['publicTransport']['currentStop'];
 export interface CurrentStopOptions {
@@ -34,3 +45,6 @@ export interface SetCurrentStopPayload extends CurrentStopOptions {
     stopInfo: State['publicTransport']['stopInfo'];
 }
 export type SetStopsPayload = State['publicTransport']['stops'];
+
+export type SetUnitsPayload =
+    State['publicTransport']['units'][keyof State['publicTransport']['units']];

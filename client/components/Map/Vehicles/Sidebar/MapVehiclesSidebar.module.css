@@ -56,16 +56,6 @@
     align-items: center;
 }
 
-.MapVehiclesSidebarRoute {
-    font-weight: 500;
-    font-size: 32px;
-    line-height: 1.125;
-    text-align: center;
-    width: 65px;
-    border-radius: 4px;
-    color: white;
-}
-
 .MapVehiclesSidebarVehicleFeatures {
     padding: 4px 6px;
     display: flex;

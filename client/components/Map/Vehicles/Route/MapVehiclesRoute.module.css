@@ -1,0 +1,28 @@
+.MapVehiclesRoute {
+    font-weight: 500;
+    text-align: center;
+    border-radius: 4px;
+    color: white;
+    padding: 0 5px;
+}
+
+.MapVehiclesRouteSize_s {
+    line-height: 1.25;
+    min-width: 50px;
+
+    font-size: 24px;
+}
+
+.MapVehiclesRouteSize_m {
+    line-height: 1.14;
+    min-width: 57px;
+
+    font-size: 28px;
+}
+
+.MapVehiclesRouteSize_l {
+    line-height: 1.31;
+    min-width: 65px;
+
+    font-size: 32px;
+}

@@ -1,0 +1,46 @@
+.MapSearchBarUnitResult__wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+
+    background-color: #fff;
+
+    font-family: inherit;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.05;
+
+    padding: 8px;
+    gap: 16px;
+
+    transition: background-color 150ms ease-out;
+
+    & span {
+        font-size: 28px;
+        line-height: 1.16;
+    }
+
+    &:hover {
+        background-color: #f4f4f4;
+    }
+}
+
+.MapSearchBarUnitResult__selected {
+    background-color: #f4f4f4;
+}
+
+.MapSearchBarUnitResult__text {
+    margin: 0;
+    text-align: left;
+    color: #000;
+}
+
+.MapSearchBarUnitResult__text_shallow {
+    color: #55647D;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.1;
+}

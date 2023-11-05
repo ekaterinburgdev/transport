@@ -1,4 +1,5 @@
 import { State } from 'common/types/state';
+import { ClientUnit } from 'transport-common/types/masstrans';
 
 export const initialState: State['publicTransport'] = {
     currentStop: null,
@@ -8,4 +9,9 @@ export const initialState: State['publicTransport'] = {
     vehicleStops: [],
     stopVehicles: [],
     stopInfo: [],
+    units: {
+        [ClientUnit.Bus]: [],
+        [ClientUnit.Tram]: [],
+        [ClientUnit.Troll]: [],
+    },
 };

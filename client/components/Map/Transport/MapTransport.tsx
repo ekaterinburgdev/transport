@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { Pane, useMapEvent } from 'react-leaflet';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { Pane, useMap, useMapEvent } from 'react-leaflet';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { ClientUnit, Unit } from 'transport-common/types/masstrans';
+import { ClientUnit } from 'transport-common/types/masstrans';
 
 import { massTransApi } from 'api/masstrans/masstrans';
 import { sidebarService } from 'services/sidebar/sidebar';
-import { clearCurrent } from 'state/features/public-transport';
+import { clearCurrent, setBuses, setTrams, setTrolls } from 'state/features/public-transport';
 import { MapRoutes } from 'components/Map/Routes/MapRoutes';
 import { MapStops } from 'components/Map/Stops/MapStops';
 import { MapVehicles } from 'components/Map/Vehicles/MapVehicles';
+import { State } from 'common/types/state';
 
 export function MapTransport() {
     const dispatch = useDispatch();
-    const [trolls, setTrolls] = useState<Unit[]>([]);
-    const [trams, setTrams] = useState<Unit[]>([]);
-    const [buses, setBuses] = useState<Unit[]>([]);
+    const map = useMap();
+
+    const currentRoute = useSelector((state: State) => state.publicTransport.currentRoute);
+    const currentVehicle = useSelector((state: State) => state.publicTransport.currentVehicle);
 
     const updateTransport = async () => {
         const [tramsRes, trollsRes, busesRes] = await Promise.all([
@@ -24,9 +26,9 @@ export function MapTransport() {
             massTransApi.getVehicles(ClientUnit.Bus),
         ]);
 
-        trollsRes && setTrolls(trollsRes);
-        tramsRes && setTrams(tramsRes);
-        busesRes && setBuses(busesRes);
+        trollsRes && dispatch(setTrolls(trollsRes));
+        tramsRes && dispatch(setTrams(tramsRes));
+        busesRes && dispatch(setBuses(busesRes));
     };
 
     useEffect(() => {
@@ -42,13 +44,32 @@ export function MapTransport() {
         sidebarService.close();
     });
 
+    useEffect(() => {
+        if (!currentVehicle && !currentRoute) {
+            return;
+        }
+
+        const { routeDirection } = currentVehicle;
+        const { races, shouldFlyTo } = currentRoute;
+
+        if (!shouldFlyTo) {
+            return;
+        }
+
+        const race = races.find((race) => race.raceType === routeDirection);
+
+        const bounds = race.stops.map((stop) => stop.coords);
+
+        map.flyToBounds(bounds);
+    }, [currentVehicle, currentRoute]);
+
     return (
         <>
             {/* Render vehicles */}
             <Pane name="vehicles" style={{ zIndex: 550 }}>
-                <MapVehicles vehicles={trolls} type={ClientUnit.Troll} />
-                <MapVehicles vehicles={trams} type={ClientUnit.Tram} />
-                <MapVehicles vehicles={buses} type={ClientUnit.Bus} />
+                <MapVehicles type={ClientUnit.Troll} />
+                <MapVehicles type={ClientUnit.Tram} />
+                <MapVehicles type={ClientUnit.Bus} />
             </Pane>
 
             {/* Render selected route */}
