@@ -46,6 +46,7 @@ export class UserPlacemarkControl extends L.Control {
         `;
 
         L.DomEvent.on(button, 'click', () => this.onClick(container), this);
+        L.DomEvent.disableClickPropagation(container);
 
         this.map.addEventListener('drag', () => {
             this.setFreeState(container);
