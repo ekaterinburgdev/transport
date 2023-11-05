@@ -1,13 +1,13 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import classNames from 'classnames/bind';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Unit } from 'transport-common/types/masstrans';
 
+import { State } from 'common/types/state';
 import { store } from 'state';
 import { setCurrentVehicle } from 'state/features/public-transport';
 import { sidebarService } from 'services/sidebar/sidebar';
-import { MapVehiclesSidebar } from 'components/Map/Vehicles/Sidebar/MapVehiclesSidebar';
 import { MapVehiclesRoute } from 'components/Map/Vehicles/Route/MapVehiclesRoute';
 
 import styles from './UnitResult.module.css';
@@ -16,6 +16,7 @@ const cn = classNames.bind(styles);
 
 export function MapSearchBarUnitResult(props: Unit) {
     const dispatch = useDispatch<typeof store.dispatch>();
+    const currentVehicle = useSelector((state: State) => state.publicTransport.currentVehicle);
 
     const setSelectedVehicle = useCallback(
         (unit: Unit) => {
@@ -34,9 +35,18 @@ export function MapSearchBarUnitResult(props: Unit) {
         [dispatch],
     );
 
+    const isSelected = useMemo(() => {
+        return (
+            currentVehicle?.num === props.num &&
+            currentVehicle?.routeDirection === props.routeDirection
+        );
+    }, [currentVehicle?.num, props.num, currentVehicle?.routeDirection, props.routeDirection]);
+
     return (
-        <div
-            className={cn(styles.MapSearchBarUnitResult__wrapper)}
+        <button
+            className={cn(styles.MapSearchBarUnitResult__wrapper, {
+                [styles.MapSearchBarUnitResult__selected]: isSelected,
+            })}
             onClick={() => setSelectedVehicle(props)}
         >
             <MapVehiclesRoute type={props.type} num={props.num} />
@@ -48,6 +58,6 @@ export function MapSearchBarUnitResult(props: Unit) {
             >
                 {props.firstStation} – {props.lastStation}
             </p>
-        </div>
+        </button>
     );
 }

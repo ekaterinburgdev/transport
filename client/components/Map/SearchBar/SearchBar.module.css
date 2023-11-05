@@ -22,11 +22,7 @@
     border-radius: 4px;
 
     background-color: #fff;
-
-    flex-direction: row;
     gap: 8px;
-
-    align-self: stretch;
 }
 
 .MapSearchBar__form_withResult {
@@ -39,39 +35,18 @@
     border: none;
     outline: none;
 
-    font-family: 'Iset Sans', sans-serif;
+    font-family: inherit;
     font-weight: 400;
     font-size: 18px;
     line-height: 24px;
 
-    -moz-appearance: textfield;
-    -webkit-appearance: textfield;
-    appearance: textfield;
-
-    &::-webkit-input-placeholder {
-        color: #000;
-    }
-
-    &:-moz-placeholder {
-        color: #000;
-        opacity:  1;
-    }
-
-    &::-moz-placeholder {
-        color: #000;
-        opacity:  1;
-    }
-
-    &:-ms-input-placeholder {
-        color: #000;
-    }
-
-    &::-ms-input-placeholder {
-        color: #000;
-    }
-
     &::placeholder {
         color: #000;
+        opacity: 1;
+    }
+
+    &:focus::placeholder {
+        opacity: 0;
     }
 
     &::-webkit-search-cancel-button {
@@ -90,6 +65,10 @@
         pointer-events: all;
         cursor: pointer;
     }
+}
+
+.MapSearch__form:focus-within {
+    outline: 2px solid #282828;
 }
 
 .MapSearchBar__results {

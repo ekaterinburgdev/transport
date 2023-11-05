@@ -1,16 +1,16 @@
 .MapSearchBarStopResult__wrapper {
     display: flex;
-    flex-direction: row;
     align-items: center;
     cursor: pointer;
+    border: none;
 
     background-color: #fff;
 
-    font-family: 'Iset Sans', sans-serif;
+    font-family: inherit;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
-    line-height: 105%;
+    line-height: 1.05;
 
     padding: 8px;
     gap: 10px;
@@ -19,7 +19,7 @@
 
     & span {
         font-size: 28px;
-        line-height: 24px;
+        line-height: 1.16;
     }
 
     &:hover {
@@ -27,6 +27,11 @@
     }
 }
 
+.MapSearchBarStopResult__wrapper_selected {
+    background-color: #f4f4f4;
+}
+
 .MapSearchBarStopResult__text {
     margin: 0;
+    text-align: left;
 }

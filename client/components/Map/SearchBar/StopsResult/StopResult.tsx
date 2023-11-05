@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMap } from 'react-leaflet';
@@ -19,6 +19,7 @@ export function MapSearchBarStopResult({ type, stopId, title }: Stop) {
     const dispatch = useDispatch<typeof store.dispatch>();
     const map = useMap();
     const allStops = useSelector((state: State) => state.publicTransport.stops);
+    const currentStop = useSelector((state: State) => state.publicTransport.currentStop);
 
     const setSelectedStop = useCallback(
         (stopId: string) => {
@@ -46,13 +47,19 @@ export function MapSearchBarStopResult({ type, stopId, title }: Stop) {
         [dispatch, allStops],
     );
 
+    const isSelected = useMemo(() => {
+        return currentStop === stopId;
+    }, [currentStop, stopId]);
+
     return (
-        <div
-            className={cn(styles.MapSearchBarStopResult__wrapper)}
+        <button
+            className={cn(styles.MapSearchBarStopResult__wrapper, {
+                [styles.MapSearchBarStopResult__wrapper_selected]: isSelected,
+            })}
             onClick={() => setSelectedStop(stopId)}
         >
-            <img src={`/icons/${type === StopType.TrollBus ? 'bus-troll' : type}.svg`} />
+            <img src={`/icons/${type === StopType.TrollBus ? 'bus-troll' : type}.svg`} alt="" />
             <p className={cn(styles.MapSearchBarStopResult__text)}>{title}</p>
-        </div>
+        </button>
     );
 }

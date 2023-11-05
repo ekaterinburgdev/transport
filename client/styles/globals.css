@@ -38,6 +38,7 @@ a {
 
 .leaflet-container {
 	background: rgb(225, 225, 225) !important;
+    font-family: inherit !important;
 }
 
 /* TODO dark theme

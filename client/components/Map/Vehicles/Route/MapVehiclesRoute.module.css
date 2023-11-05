@@ -7,21 +7,21 @@
 }
 
 .MapVehiclesRouteSize_s {
-    line-height: 30px;
+    line-height: 1.25;
     min-width: 50px;
 
     font-size: 24px;
 }
 
 .MapVehiclesRouteSize_m {
-    line-height: 32px;
+    line-height: 1.14;
     min-width: 57px;
 
     font-size: 28px;
 }
 
 .MapVehiclesRouteSize_l {
-    line-height: 42px;
+    line-height: 1.31;
     min-width: 65px;
 
     font-size: 32px;
