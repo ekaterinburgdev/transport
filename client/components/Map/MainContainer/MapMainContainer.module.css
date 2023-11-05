@@ -10,8 +10,20 @@
     max-width: 448px;
     width: 100%;
 
+    pointer-events: none !important;
+
     display: grid;
     gap: 16px;
 
     grid-template: fit-content(50%) 1fr / 1fr;
+
+    z-index: 1001 !important;
+
+    & > * {
+        pointer-events: all;
+    }
+}
+
+.MapAdditionalButtons {
+    padding: 24px 16px;
 }
