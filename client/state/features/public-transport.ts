@@ -1,16 +1,17 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { isEmpty, uniq } from 'lodash';
+import { uniq } from 'lodash';
 
+import { ClientUnit } from 'transport-common/types/masstrans';
 import { massTransApi } from 'api/masstrans/masstrans';
 import {
     SetCurrentStopPayload,
     SetCurrentVehiclePayload,
     SetStopsPayload,
     State,
-    CurrentStopPayload,
     CurrentVehiclePayloadWithOptions,
     CurrentVehiclePayload,
     CurrentStopPayloadWithOptions,
+    SetUnitsPayload,
 } from 'common/types/state';
 
 import { initialState } from '../constants/public-transport';
@@ -31,7 +32,11 @@ export const setCurrentVehicle = createAsyncThunk(
     async (
         currentVehiclePayload: CurrentVehiclePayloadWithOptions,
     ): Promise<SetCurrentVehiclePayload> => {
-        const { shouldClear = true, ...currentVehicle } = currentVehiclePayload || {};
+        const {
+            shouldClear = true,
+            shouldFlyTo = false,
+            ...currentVehicle
+        } = currentVehiclePayload || {};
 
         if (!isCurrentVehiclePayload(currentVehicle)) {
             return {
@@ -51,6 +56,7 @@ export const setCurrentVehicle = createAsyncThunk(
                 ...currentRoute,
                 type: currentVehicle.type,
                 routeDirection: currentVehicle.routeDirection,
+                shouldFlyTo,
             },
             shouldClear,
         };
@@ -97,6 +103,21 @@ const publicTransportSlice = createSlice({
             state.stopInfo = [];
             state.stopVehicles = [];
             state.vehicleStops = [];
+        },
+        setTrolls(state: State['publicTransport'], action: PayloadAction<SetUnitsPayload>) {
+            const trolls = action.payload;
+
+            state.units[ClientUnit.Troll] = trolls;
+        },
+        setTrams(state: State['publicTransport'], action: PayloadAction<SetUnitsPayload>) {
+            const trams = action.payload;
+
+            state.units[ClientUnit.Tram] = trams;
+        },
+        setBuses(state: State['publicTransport'], action: PayloadAction<SetUnitsPayload>) {
+            const buses = action.payload;
+
+            state.units[ClientUnit.Bus] = buses;
         },
     },
     extraReducers: (builder) => {
@@ -160,6 +181,7 @@ const publicTransportSlice = createSlice({
     },
 });
 
-export const { clearCurrent, setStops } = publicTransportSlice.actions;
+export const { clearCurrent, setStops, setBuses, setTrams, setTrolls } =
+    publicTransportSlice.actions;
 
 export const publicTransportReducer = publicTransportSlice.reducer;

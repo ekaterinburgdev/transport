@@ -12,7 +12,7 @@ import { State } from 'common/types/state';
 import { sidebarService } from 'services/sidebar/sidebar';
 
 import { MapVehicleMarker } from '../Marker/MapVehicleMarker';
-import { MapVehiclesSidebar } from '../Sidebar/MapVehiclesSidebar';
+import { MapVehiclesSidebar, MapVehiclesSidebarProps } from '../Sidebar/MapVehiclesSidebar';
 
 import { startMoveInDirection, clearIntervals } from './MapVehiclesItem.utils';
 import { EAST_COURSE_RANGE } from './MapVehiclesItem.constants';
@@ -103,7 +103,7 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
         const { routeDirection, routeId, num, setCurrentVehicle, type } = this.props;
 
         sidebarService.open({
-            component: <MapVehiclesSidebar {...this.props} />,
+            component: <MapVehiclesSidebar {...(this.props as MapVehiclesSidebarProps)} />,
             onClose: () => setCurrentVehicle(null),
         });
 

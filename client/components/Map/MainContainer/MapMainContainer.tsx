@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { MapContainer, Pane, TileLayer } from 'react-leaflet';
 import classNames from 'classnames/bind';
+import sidebarStyles from 'styles/leaflet-sidebar.module.css';
 
 import { sidebarService } from 'services/sidebar/sidebar';
 
 import { COORDS_EKATERINBURG, BOUNDS_EKATERINBURG } from 'common/constants/coords';
+import { POSITION_CLASSES } from 'common/constants/positions';
 
 import { MapLocation } from 'components/Map/Location/MapLocation';
 import { MapTransport } from 'components/Map/Transport/MapTransport';
 import { MapZoomControl } from 'components/Map/ZoomControl/MapZoomControl';
 import { MapWelcomeMessage } from 'components/Map/WelcomeMessage/MapWelcomeMessage';
+
+import { MapSearchBar } from '../SearchBar/SearchBar';
 
 import styles from './MapMainContainer.module.css';
 import 'leaflet/dist/leaflet.css';
@@ -61,7 +65,17 @@ function MapMainContainer({ zoom = 16, showControls = true }) {
 
             <MapTransport />
 
-            {sidebar}
+            <div
+                className={cn(
+                    POSITION_CLASSES.topleft,
+                    sidebarStyles.leafletSidebar,
+                    styles.MapSidebar,
+                )}
+            >
+                <MapSearchBar />
+
+                {sidebar}
+            </div>
         </MapContainer>
     );
 }

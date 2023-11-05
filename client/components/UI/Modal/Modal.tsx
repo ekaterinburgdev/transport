@@ -2,8 +2,6 @@ import React, { useRef } from 'react';
 import classNames from 'classnames/bind';
 
 import { sidebarService } from 'services/sidebar/sidebar';
-import sidebarStyles from 'styles/leaflet-sidebar.module.css';
-import { POSITION_CLASSES } from 'common/constants/positions';
 import { ModalPosition, useModalSheet } from 'hooks/useModalSheet/useModalSheet';
 import { useDisablePropagation } from 'hooks/useDisablePropagation';
 
@@ -23,12 +21,7 @@ export function Modal({ children }: React.PropsWithChildren) {
     return (
         <div
             ref={ref}
-            className={cn(
-                POSITION_CLASSES.topleft,
-                styles.Modal,
-                sidebarStyles.leafletSidebar,
-                styles[`Modal_${currentPosition}`],
-            )}
+            className={cn(styles.Modal, styles[`Modal_${currentPosition}`])}
             id="modal-scroll-container"
         >
             <div

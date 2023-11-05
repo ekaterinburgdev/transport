@@ -11,7 +11,7 @@ import { MapStopsSidebarStopsListItem } from './Item/MapStopsSidebarStopsListIte
 import styles from './MapStopsSidebarStopsList.module.css';
 
 export function MapStopsSidebarStopsList() {
-    const stopInfo = useSelector((state: State) => state.publicTransport.stopInfo);
+    const stopInfo = useSelector((state: State) => state.publicTransport.stopInfo || []);
 
     return (
         <MapStopsSidebarRow mix={styles.MapStopsSidebarStopsList}>

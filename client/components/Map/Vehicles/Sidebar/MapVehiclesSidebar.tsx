@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import L from 'leaflet';
 import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from 'react-redux';
+import { useMap } from 'react-leaflet';
 
 import { store } from 'state';
 import t from 'utils/typograph';
@@ -12,7 +13,7 @@ import t from 'utils/typograph';
 import {
     ClientUnit,
     ImageSizes,
-    StopType,
+    Unit,
     UnitArriveStop,
     UnitInfo,
 } from 'transport-common/types/masstrans';
@@ -49,11 +50,11 @@ import { setCurrentStop } from 'state/features/public-transport';
 import { sidebarService } from 'services/sidebar/sidebar';
 import { MapStopsSidebar } from 'components/Map/Stops/Sidebar/MapStopsSidebar';
 import { State } from 'common/types/state';
+import { MapVehiclesRoute } from '../Route/MapVehiclesRoute';
 
-export type MapVehiclesSidebarProps = {
-    type: StopType;
-    name: string;
-};
+export interface MapVehiclesSidebarProps extends Unit {
+    warning: MapVehiclesItemProps['warning'];
+}
 
 const cn = classNames.bind(styles);
 
@@ -79,12 +80,13 @@ export function MapVehiclesSidebar({
     lastStation,
     depoTitle,
     coords,
-}: MapVehiclesItemProps) {
+}: MapVehiclesSidebarProps) {
     const dispatch = useDispatch<typeof store.dispatch>();
     const [from, to] = [firstStation, lastStation];
     const [stops, setStops] = useState<UnitArriveStop[]>([]);
     const [unitInfo, setUnitInfo] = useState<UnitInfo>(null);
     const latLngCoords = useMemo(() => new L.LatLng(...coords), [coords]);
+    const map = useMap();
 
     useEffect(() => {
         massTransApi.getVehicleInfo(id).then((stopsRes) => {
@@ -213,6 +215,8 @@ export function MapVehiclesSidebar({
                 }),
             );
 
+            map.flyTo(stopData.coords, 15);
+
             sidebarService.open({
                 component: <MapStopsSidebar type={stopData.type} name={stopData.title} />,
                 onClose: () => dispatch(setCurrentStop(null)),
@@ -246,14 +250,7 @@ export function MapVehiclesSidebar({
                 )}
                 <div className={cn(styles.MapVehiclesSidebarVehicleInfoWrapper)}>
                     <div className={cn(styles.MapVehiclesSidebarVehicleInfo)}>
-                        <div
-                            className={cn(styles.MapVehiclesSidebarRoute)}
-                            style={{
-                                backgroundColor: VEHICLE_TYPE_COLORS[type],
-                            }}
-                        >
-                            {num}
-                        </div>
+                        <MapVehiclesRoute type={type} num={num} size="l" />
                         <div className={cn(styles.MapVehiclesSidebarVehicleFeatures)}>
                             {warning && (
                                 <abbr title={featuresTitle.warning} style={{ fontSize: 0 }}>

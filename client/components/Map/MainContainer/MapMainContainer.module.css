@@ -2,3 +2,21 @@
     width: 100%;
     height: 100%;
 }
+
+.MapSidebar {
+    position: relative;
+    max-height: calc(100vh - 100px);
+    padding: 24px 16px;
+    width: 448px;
+
+    display: grid;
+    gap: 16px;
+
+    grid-template: fit-content(50%) 1fr / 1fr;
+}
+
+@media screen and (max-width: 768px) {
+    .MapSidebar {
+        width: 100%;
+    }
+}

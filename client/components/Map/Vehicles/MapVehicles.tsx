@@ -10,13 +10,13 @@ import { useSelector } from 'react-redux';
 import { State } from 'common/types/state';
 
 export type MapVehiclesProps = {
-    vehicles: Unit[];
     type: ClientUnit;
 };
 
-export function MapVehicles({ vehicles, type }: MapVehiclesProps) {
+export function MapVehicles({ type }: MapVehiclesProps) {
     const [hidden, setHidden] = useState(false);
     const [bounds, setBounds] = useState<L.LatLngBounds>(null);
+    const vehicles = useSelector((state: State) => state.publicTransport.units[type]);
     const currentVehicle = useSelector((state: State) => state.publicTransport.currentVehicle);
     const currentStopVehicles = useSelector((state: State) => state.publicTransport.stopVehicles);
     const currentStop = useSelector((state: State) => state.publicTransport.currentStop);
