@@ -130,7 +130,11 @@ const publicTransportSlice = createSlice({
                     action.payload;
 
                 state.currentVehicle = currentVehicle;
-                state.currentVehicle.shouldFilterByRouteDirection = shouldFilterByRouteDirection;
+                if (state.currentVehicle) {
+                    state.currentVehicle.shouldFilterByRouteDirection =
+                        shouldFilterByRouteDirection;
+                }
+
                 state.currentRoute = currentRoute;
 
                 if (!currentRoute) {

@@ -20,6 +20,7 @@ const INPUT_PLACEHOLDER = 'Поиск';
 
 export function MapSearchBar() {
     const searchBarRef = useRef<HTMLDivElement>(null);
+    const [hasSearch, setHasSearch] = useState(false);
     const [searchResult, setSearchResult] = useState<{ stops: StrapiStop[]; units: Unit[] }>({
         stops: [],
         units: [],
@@ -33,6 +34,8 @@ export function MapSearchBar() {
     const onSearch = useCallback(
         (event) => {
             const searchText = (event.target as HTMLInputElement).value.toLowerCase();
+
+            setHasSearch(Boolean(searchText));
 
             if (!searchText) {
                 setSearchResult({ stops: [], units: [] });
@@ -68,7 +71,12 @@ export function MapSearchBar() {
     }, []) as React.FormEventHandler;
 
     return (
-        <div className={cn(styles.MapSearchBar)} ref={searchBarRef}>
+        <div
+            className={cn(styles.MapSearchBar, {
+                [styles.MapSearchBar_withText]: hasSearch,
+            })}
+            ref={searchBarRef}
+        >
             <form
                 className={cn(styles.MapSearchBar__form, {
                     [styles.MapSearchBar__form_withResult]: hasResults,

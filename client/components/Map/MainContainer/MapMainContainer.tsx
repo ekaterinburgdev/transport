@@ -12,8 +12,8 @@ import { MapLocation } from 'components/Map/Location/MapLocation';
 import { MapTransport } from 'components/Map/Transport/MapTransport';
 import { MapZoomControl } from 'components/Map/ZoomControl/MapZoomControl';
 import { MapWelcomeMessage } from 'components/Map/WelcomeMessage/MapWelcomeMessage';
-
-import { MapSearchBar } from '../SearchBar/SearchBar';
+import { MapSearchBar } from 'components/Map/SearchBar/SearchBar';
+import { Info } from 'components/Map/Info/Info';
 
 import styles from './MapMainContainer.module.css';
 import 'leaflet/dist/leaflet.css';
@@ -65,17 +65,28 @@ function MapMainContainer({ zoom = 16, showControls = true }) {
 
             <MapTransport />
             {showControls && (
-                <div
-                    className={cn(
-                        POSITION_CLASSES.topleft,
-                        sidebarStyles.leafletSidebar,
-                        styles.MapSidebar,
-                    )}
-                >
-                    <MapSearchBar />
+                <>
+                    <div
+                        className={cn(
+                            POSITION_CLASSES.topleft,
+                            sidebarStyles.leafletSidebar,
+                            styles.MapSidebar,
+                        )}
+                    >
+                        <MapSearchBar />
 
-                    {sidebar}
-                </div>
+                        {sidebar}
+                    </div>
+                    <div
+                        className={cn(
+                            POSITION_CLASSES.topright,
+                            sidebarStyles.leafletSidebar,
+                            styles.MapAdditionalButtons,
+                        )}
+                    >
+                        <Info />
+                    </div>
+                </>
             )}
         </MapContainer>
     );
