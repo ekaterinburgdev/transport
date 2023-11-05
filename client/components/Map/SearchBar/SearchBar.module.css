@@ -44,6 +44,8 @@
     font-size: 18px;
     line-height: 24px;
 
+    background-color: transparent;
+
     &::placeholder {
         color: #000;
         opacity: 1;

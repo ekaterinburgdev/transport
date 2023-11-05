@@ -35,6 +35,7 @@
 .MapSearchBarUnitResult__text {
     margin: 0;
     text-align: left;
+    color: #000;
 }
 
 .MapSearchBarUnitResult__text_shallow {
