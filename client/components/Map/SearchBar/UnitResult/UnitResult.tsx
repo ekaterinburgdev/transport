@@ -18,22 +18,20 @@ export function MapSearchBarUnitResult(props: Unit) {
     const dispatch = useDispatch<typeof store.dispatch>();
     const currentVehicle = useSelector((state: State) => state.publicTransport.currentVehicle);
 
-    const setSelectedVehicle = useCallback(
-        (unit: Unit) => {
-            dispatch(
-                setCurrentVehicle({
-                    num: unit.num,
-                    routeDirection: unit.routeDirection,
-                    type: unit.type,
-                    routeId: unit.routeId,
-                    shouldFlyTo: true,
-                }),
-            );
+    const setSelectedVehicle = useCallback(() => {
+        dispatch(
+            setCurrentVehicle({
+                num: props.num,
+                routeDirection: props.routeDirection,
+                type: props.type,
+                routeId: props.routeId,
+                shouldFlyTo: true,
+                shouldFilterByRouteDirection: true,
+            }),
+        );
 
-            sidebarService.close();
-        },
-        [dispatch],
-    );
+        sidebarService.close();
+    }, [dispatch, props.num, props.routeDirection, props.type, props.routeId]);
 
     const isSelected = useMemo(() => {
         return (
@@ -47,7 +45,7 @@ export function MapSearchBarUnitResult(props: Unit) {
             className={cn(styles.MapSearchBarUnitResult__wrapper, {
                 [styles.MapSearchBarUnitResult__selected]: isSelected,
             })}
-            onClick={() => setSelectedVehicle(props)}
+            onClick={() => setSelectedVehicle()}
         >
             <MapVehiclesRoute type={props.type} num={props.num} />
             <p

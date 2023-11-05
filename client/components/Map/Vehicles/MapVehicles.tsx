@@ -63,7 +63,14 @@ export function MapVehicles({ type }: MapVehiclesProps) {
                 return true;
             }
 
-            return currentVehicle.num === vehicle.num && currentVehicle.type === vehicle.type;
+            const isSameRoute =
+                currentVehicle.num === vehicle.num && currentVehicle.type === vehicle.type;
+
+            if (!currentVehicle.shouldFilterByRouteDirection) {
+                return isSameRoute;
+            }
+
+            return isSameRoute && currentVehicle.routeDirection === vehicle.routeDirection;
         },
         [currentStopVehicles, currentVehicle, currentStop, bounds],
     );

@@ -35,6 +35,7 @@ export const setCurrentVehicle = createAsyncThunk(
         const {
             shouldClear = true,
             shouldFlyTo = false,
+            shouldFilterByRouteDirection = false,
             ...currentVehicle
         } = currentVehiclePayload || {};
 
@@ -59,6 +60,7 @@ export const setCurrentVehicle = createAsyncThunk(
                 shouldFlyTo,
             },
             shouldClear,
+            shouldFilterByRouteDirection,
         };
     },
 );
@@ -124,9 +126,11 @@ const publicTransportSlice = createSlice({
         builder.addCase(
             setCurrentVehicle.fulfilled,
             (state, action: PayloadAction<SetCurrentVehiclePayload>) => {
-                const { currentVehicle, currentRoute, shouldClear } = action.payload;
+                const { currentVehicle, currentRoute, shouldClear, shouldFilterByRouteDirection } =
+                    action.payload;
 
                 state.currentVehicle = currentVehicle;
+                state.currentVehicle.shouldFilterByRouteDirection = shouldFilterByRouteDirection;
                 state.currentRoute = currentRoute;
 
                 if (!currentRoute) {

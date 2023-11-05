@@ -3,7 +3,9 @@ import { StrapiStop } from 'transport-common/types/strapi';
 
 export interface State {
     publicTransport: {
-        currentVehicle: Pick<Unit, 'num' | 'routeId' | 'routeDirection' | 'type'> | null;
+        currentVehicle:
+            | (Pick<Unit, 'num' | 'routeId' | 'routeDirection' | 'type'> & CurrentVehicleOptions)
+            | null;
         currentStop: string | null;
         currentRoute: Route & Pick<Unit, 'type' | 'routeDirection'> & CurrentRouteOptions;
         stops: StrapiStop[];
@@ -14,10 +16,14 @@ export interface State {
     };
 }
 
+export interface CurrentVehicleSettings {
+    shouldFilterByRouteDirection?: boolean;
+}
 export type CurrentVehiclePayload = State['publicTransport']['currentVehicle'];
 export interface CurrentVehicleOptions {
     shouldClear?: boolean;
     shouldFlyTo?: boolean;
+    shouldFilterByRouteDirection?: boolean;
 }
 export type CurrentVehiclePayloadWithOptions = CurrentVehiclePayload & CurrentVehicleOptions;
 export interface CurrentRouteOptions {

@@ -21,31 +21,28 @@ export function MapSearchBarStopResult({ type, stopId, title }: Stop) {
     const allStops = useSelector((state: State) => state.publicTransport.stops);
     const currentStop = useSelector((state: State) => state.publicTransport.currentStop);
 
-    const setSelectedStop = useCallback(
-        (stopId: string) => {
-            const stop = allStops.find((stopFullData) => stopFullData.attributes.stopId === stopId);
+    const setSelectedStop = useCallback(() => {
+        const stop = allStops.find((stopFullData) => stopFullData.attributes.stopId === stopId);
 
-            if (!stop) {
-                return;
-            }
+        if (!stop) {
+            return;
+        }
 
-            const { attributes: stopData } = stop;
+        const { attributes: stopData } = stop;
 
-            dispatch(
-                setCurrentStop({
-                    currentStop: stopId,
-                }),
-            );
+        dispatch(
+            setCurrentStop({
+                currentStop: stopId,
+            }),
+        );
 
-            map.flyTo(stopData.coords, 15);
+        map.flyTo(stopData.coords, 15);
 
-            sidebarService.open({
-                component: <MapStopsSidebar type={stopData.type} name={stopData.title} />,
-                onClose: () => dispatch(setCurrentStop(null)),
-            });
-        },
-        [dispatch, allStops],
-    );
+        sidebarService.open({
+            component: <MapStopsSidebar type={stopData.type} name={stopData.title} />,
+            onClose: () => dispatch(setCurrentStop(null)),
+        });
+    }, [dispatch, allStops, stopId]);
 
     const isSelected = useMemo(() => {
         return currentStop === stopId;
@@ -56,7 +53,7 @@ export function MapSearchBarStopResult({ type, stopId, title }: Stop) {
             className={cn(styles.MapSearchBarStopResult__wrapper, {
                 [styles.MapSearchBarStopResult__wrapper_selected]: isSelected,
             })}
-            onClick={() => setSelectedStop(stopId)}
+            onClick={() => setSelectedStop()}
         >
             <img src={`/icons/${type === StopType.TrollBus ? 'bus-troll' : type}.svg`} alt="" />
             <p className={cn(styles.MapSearchBarStopResult__text)}>{title}</p>
