@@ -9,6 +9,7 @@ export class ZoomControl extends L.Control.Zoom {
     onAdd() {
         const container = L.DomUtil.create('div', cn(styles.ZoomControl));
 
+        L.DomEvent.disableClickPropagation(container);
         // TS tells that those buttons do not exist in ZoomControl
         // @ts-ignore
         // eslint-disable-next-line no-underscore-dangle
