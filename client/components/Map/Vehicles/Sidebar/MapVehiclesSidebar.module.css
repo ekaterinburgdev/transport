@@ -53,15 +53,12 @@
 .MapVehiclesSidebarVehicleInfo {
     display: flex;
     gap: 8px;
-    align-items: center;
 }
 
 .MapVehiclesSidebarVehicleFeatures {
     padding: 4px 6px;
     display: flex;
     gap: 5px;
-    align-items: center;
-    justify-content: center;
 }
 
 .MapVehiclesSidebarVehicleFeatureIcon_bus > path {
@@ -79,10 +76,10 @@
 .MapVehiclesSidebarVelocity {
     position: relative;
     display: flex;
+    align-items: center;
     flex-direction: column;
     width: 40px;
     height: 40px;
-    align-items: center;
     font-weight: 600;
     font-size: 18px;
     line-height: 20px;
@@ -329,26 +326,21 @@
     padding: 40px 24px 0;
     display: flex;
     flex-direction: column;
-    gap: 32px;
 }
 
 .MapVehiclesSidebarAdditional {
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    align-items: center;
-    text-align: center;
+    gap: 40px;
 }
 
 .MapVehiclesSidebarAdditionalTitle {
-    text-align: center;
 }
 
 .MapVehiclesSidebarOperatorWrapper {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    align-items: center;
 }
 
 .MapVehiclesSidebarAdditionalLabel {
@@ -357,8 +349,9 @@
     line-height: 13px;
     letter-spacing: 0.06em;
     color: var(--text-primary);
-    opacity: 40%;
+    opacity: .4;
     text-transform: uppercase;
+    padding-left: 2px;
 }
 
 .MapVehiclesSidebarAdditionalTitle {
@@ -374,7 +367,6 @@
 
 .MapVehiclesSidebarBoardId {
     color: #cb3100;
-    font: 400 72px/65px Marshrut, sans-serif;
 }
 
 .MapVehiclesSidebarLabelWrapper {
@@ -422,18 +414,19 @@
 
 .MapVehiclesSidebarRegion {
     margin-top: -8px;
-    font: 600 12px/14px Inter, sans-serif;
+    font-size: 12px;
+    line-height: 1.16;
 }
 
 .MapVehiclesSidebarModelWrapper {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    align-items: center;
 }
 
 .MapVehiclesSidebarFactoryNumber {
-    font: 500 72px/59px Isonorm, sans-serif;
+    font-size: 72px;
+    line-height: 1.22;
 }
 
 .MapVehiclesSidebarManufactureYear {
