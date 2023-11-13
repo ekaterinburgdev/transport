@@ -7,7 +7,7 @@ export function useCardSmoothCorners(cardRef: MutableRefObject<HTMLAnchorElement
         const setCorners = (entry: ResizeObserverEntry) => {
             const { width, height } = entry.contentRect;
             const cornerRadius = parseInt(window.getComputedStyle(entry.target).borderRadius, 10);
-            const clipPath = getSvgPath({ width, height, cornerRadius, cornerSmoothing: 0.6 });
+            const clipPath = getSvgPath({ width, height, cornerRadius, cornerSmoothing: 0.8 });
             cardRef.current.style.clipPath = `path('${clipPath}')`;
         }
 
