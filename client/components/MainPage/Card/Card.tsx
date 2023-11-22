@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import classNames from 'classnames/bind';
 import t from 'utils/typograph';
 import { STRAPI_URL } from 'transport-common/strapi/constants';
-import { useCardSmoothCorners } from './useCardSmoothCorners';
+import { useSmoothCorners } from './useSmoothCorners';
 
 import { CardProps } from './Card.types';
 
@@ -29,7 +29,9 @@ export function Card({
     footerCaption,
 }: CardProps) {
     const cardRef = useRef<HTMLAnchorElement>(null);
-    useCardSmoothCorners(cardRef);
+    const cardTitleRef = useRef<HTMLDivElement>(null);
+    useSmoothCorners(cardRef);
+    useSmoothCorners(cardTitleRef);
 
     return (
         <a
@@ -45,20 +47,19 @@ export function Card({
                 } as React.CSSProperties
             }
         >
-            <div className={cn(styles.CardInner)}>
-                {title && (
-                    <div
-                        className={cn(styles.CardTitle, {
-                            [styles.CardTitle_Bg]: titleBackgroundColor,
-                        })}
-                    >
-                        {t(title)}
-                    </div>
-                )}
-                {headerCaption && <p className={cn(styles.CardHeaderCaption)}>{t(headerCaption)}</p>}
-                {footerCaption && <p className={headerCaption ? cn(styles.CardFooterCaption) : cn(styles.CardFooterCaption_NoSubtitle)}>{t(footerCaption)}</p>}
-                {dynamicContent && <div className={cn(styles.CardDynamic)}>{dynamicContent}</div>}
-            </div>
+            {title && (
+                <div
+                    className={cn(styles.CardTitle, {
+                        [styles.CardTitle_Bg]: titleBackgroundColor,
+                    })}
+                    ref={cardTitleRef}
+                >
+                    {t(title)}
+                </div>
+            )}
+            {headerCaption && <p className={cn(styles.CardHeaderCaption)}>{t(headerCaption)}</p>}
+            {footerCaption && <p className={headerCaption ? cn(styles.CardFooterCaption) : cn(styles.CardFooterCaption_NoSubtitle)}>{t(footerCaption)}</p>}
+            {dynamicContent && <div className={cn(styles.CardDynamic)}>{dynamicContent}</div>}
         </a>
     );
 }
