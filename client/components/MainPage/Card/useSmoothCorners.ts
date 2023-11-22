@@ -11,7 +11,8 @@ function setCorners(entry: ResizeObserverEntry) {
         width: left + width + right,
         height: top + height + bottom,
         cornerRadius: parseInt(styles.borderRadius, 10),
-        cornerSmoothing: Number(styles.getPropertyValue('--smooth-corners'))
+        cornerSmoothing: Number(styles.getPropertyValue('--smooth-corners')),
+        preserveSmoothing: true
     });
 
     element.style.clipPath = `path('${clipPath}')`;
