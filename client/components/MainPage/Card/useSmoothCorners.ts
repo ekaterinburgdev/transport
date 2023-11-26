@@ -1,18 +1,17 @@
-import type { MutableRefObject } from "react";
-import { useEffect } from "react";
-import { getSvgPath } from "figma-squircle";
+import type { MutableRefObject } from 'react';
+import { useEffect } from 'react';
+import { getSvgPath } from 'figma-squircle';
 
 function setCorners(entry: ResizeObserverEntry) {
     const element = entry.target as HTMLElement;
     const styles = window.getComputedStyle(element);
-    const { width, height, top, right, bottom, left } = entry.contentRect;
-    
+    const { top, right, bottom, left } = entry.contentRect;
+
     const clipPath = getSvgPath({
-        width: left + width + right,
-        height: top + height + bottom,
+        width: left + right,
+        height: top + bottom,
         cornerRadius: parseInt(styles.borderRadius, 10),
         cornerSmoothing: Number(styles.getPropertyValue('--smooth-corners')),
-        preserveSmoothing: true
     });
 
     element.style.clipPath = `path('${clipPath}')`;
