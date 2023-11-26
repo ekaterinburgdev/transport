@@ -9,11 +9,11 @@ import { useSmoothCorners } from '../Card/useSmoothCorners';
 const cn = classNames.bind(styles);
 
 export function Marquee({ items }: MarqueeProps) {
-    const MarqueeEl = useRef(null);
-    useSmoothCorners(MarqueeEl);
+    const MarqueeRef = useRef(null);
+    useSmoothCorners(MarqueeRef);
 
     return (
-        <div className={cn(styles.Marquee)} ref={MarqueeEl}>
+        <div className={cn(styles.Marquee)} ref={MarqueeRef}>
             <div className={cn(styles.MarqueeInner)}>
                 {items.map(({ id, message }) => (
                     <div key={id} className={cn(styles.MarqueeItem)}>
