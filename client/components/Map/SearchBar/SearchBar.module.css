@@ -9,6 +9,7 @@
     flex-direction: column;
     gap: 2px;
 
+    max-width: 448px;
     height: max-content;
     max-height: calc(45vh - 100px);
 
@@ -103,9 +104,10 @@
     border-radius: 0px 0px 4px 4px;
 }
 
-@media screen and (max-width: 514px) {
+@media screen and (max-width: 768px) {
     .MapSearchBar {
         width: calc(var(--search-mobile-mini-width) + 2 * var(--search-border-width));
+        max-width: none;
 
         border-color: transparent;
         border-radius: 40px;

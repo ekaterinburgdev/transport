@@ -7,7 +7,6 @@
     position: relative;
     max-height: calc(100vh - 100px);
     padding: 12px;
-    max-width: 448px;
     width: 100%;
 
     display: grid;
@@ -19,6 +18,12 @@
 
     & > * {
         pointer-events: all;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .MapSidebar {
+        max-width: 448px;
     }
 }
 
