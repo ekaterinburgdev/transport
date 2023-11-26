@@ -5,6 +5,7 @@
     height: 48px;
     border-radius: 50%;
     color: #000;
+    padding: 1px 6px;
 
     display: flex;
     justify-content: center;

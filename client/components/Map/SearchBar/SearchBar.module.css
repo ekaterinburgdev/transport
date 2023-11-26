@@ -33,7 +33,6 @@
     height: 48px;
     width: 100%;
 
-    padding: 12px 16px;
     border-radius: 86px;
 
     background-color: #fff;
@@ -53,9 +52,13 @@
 
 .MapSearchBar__input {
     width: 100%;
-    padding: 0;
+    padding: 12px 16px 12px 48px;
     border: none;
     outline: none;
+
+    background-image: url('/icons/search.svg');
+    background-repeat: no-repeat;
+    background-position: 16px 50%;
 
     font-family: inherit;
     font-weight: 400;
@@ -83,6 +86,10 @@
         width: 24px;
         height: 24px;
         margin: 0;
+    }
+
+    &::-webkit-search-decoration {
+        display: none;
     }
 }
 
