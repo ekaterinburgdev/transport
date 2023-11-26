@@ -6,7 +6,7 @@
 .MapSidebar {
     position: relative;
     max-height: calc(100vh - 100px);
-    padding: 24px 16px;
+    padding: 12px;
     max-width: 448px;
     width: 100%;
 
@@ -29,7 +29,7 @@
 
 .MapAdditionalButtons {
     display: flex;
-    padding: 28px 16px;
+    padding: 16px;
 
     gap: 8px;
 }

@@ -41,6 +41,12 @@ a {
     font-family: inherit !important;
 }
 
+/* TODO ecosystem fix */
+[class*="modal__toggle"] > div {
+    transform: scale(.632) translateY(-12px) translateX(11px);
+    transform-origin: left bottom;
+}
+
 /* TODO dark theme
 @media (prefers-color-scheme: dark) {
     html {
