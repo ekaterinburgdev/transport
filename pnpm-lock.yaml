@@ -38,7 +38,7 @@ importers:
         version: 4.17.21
       node-fetch:
         specifier: ^2.7.0
-        version: 2.7.0
+        version: 2.7.0(encoding@0.1.13)
       transport-common:
         specifier: workspace:*
         version: link:../common
@@ -85,6 +85,9 @@ importers:
       express:
         specifier: ^4.18.2
         version: 4.18.2
+      figma-squircle:
+        specifier: ^0.3.1
+        version: 0.3.1
       http-proxy-middleware:
         specifier: ^2.0.6
         version: 2.0.6
@@ -3919,6 +3922,10 @@ packages:
       reusify: 1.0.4
     dev: true
 
+  /figma-squircle@0.3.1:
+    resolution: {integrity: sha512-cyb7fbNaJgM3XrMXRq/B4NPUILfbrSRHjqt+0/3OGBOejJKNLnFKTXSMSAjdqbw2bSo2Y2eCnYXvaRgshBnWQw==}
+    dev: false
+
   /file-entry-cache@6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}
     engines: {node: ^10.12.0 || >=12.0.0}
@@ -4950,18 +4957,6 @@ packages:
 
   /node-fetch@2.6.9:
     resolution: {integrity: sha512-DJm/CJkZkRjKKj4Zi4BsKVZh3ValV5IR5s7LVZnW+6YMh0W1BfNA8XSs6DLMGYlId5F3KnA70uu2qepcR08Qqg==}
-    engines: {node: 4.x || >=6.0.0}
-    peerDependencies:
-      encoding: ^0.1.0
-    peerDependenciesMeta:
-      encoding:
-        optional: true
-    dependencies:
-      whatwg-url: 5.0.0
-    dev: false
-
-  /node-fetch@2.7.0:
-    resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
     engines: {node: 4.x || >=6.0.0}
     peerDependencies:
       encoding: ^0.1.0

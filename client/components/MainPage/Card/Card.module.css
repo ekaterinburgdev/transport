@@ -2,24 +2,25 @@
     --CardTitleBgColor: transparent;
     --CardBgImage: none;
     --CardBgImageHover: var(--CardBgImage, none);
-
+    
     position: relative;
     z-index: 1;
 
     display: flex;
     flex-direction: column;
-
     align-items: flex-start;
+
     height: 100%;
 
+    --smooth-corners: 0.8;
     padding: 16px;
     border-radius: 16px;
-    text-decoration: none;
+    background-image: var(--CardBgImage);
+    background-position: 100% 100%;
     background-size: 100% auto;
     background-repeat: no-repeat;
-    background-position: 100% 100%;
     color: white;
-    background-image: var(--CardBgImage);
+    text-decoration: none;
     transition: .15s ease background-color, .15s ease background-image, .15s ease filter;
     overflow: hidden;
 }
@@ -110,8 +111,8 @@
 }
 
 .CardTitle.CardTitle_Bg {
-    color: white;
     padding: .5em .75em;
+    color: white;
     text-decoration-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -125,9 +126,9 @@
 }
 
 .CardFooterCaption, .CardFooterCaption_NoSubtitle {
-    font-weight: 500;
     margin-top: auto;
     margin-bottom: 0;
+    font-weight: 500;
 }
 
 .Card:hover .CardTitle {
@@ -135,9 +136,9 @@
 }
 
 .CardHeaderCaption {
+    margin-top: 15px;
     font-size: 13px;
     line-height: 1.35;
-    margin-top: 15px;
 }
 
 @media screen and (min-width: 375px) {
@@ -159,7 +160,7 @@
 }
 
 @media screen and (min-width: 576px) {
-    .Card {
+    .CardInner {
         padding: 32px;
     }
 
@@ -191,8 +192,9 @@
     }
 
     .CardTitle {
-        font-size: 32px;
+        --smooth-corners: 0.8;
         border-radius: 8px;
+        font-size: 32px;
     }
 
     .CardHeaderCaption {

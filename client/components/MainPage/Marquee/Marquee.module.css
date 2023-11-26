@@ -5,6 +5,7 @@
     font-size: 16px;
     padding: 1em 0;
     border-radius: 24px;
+    --smooth-corners: 0.8;
     overflow: hidden;
     color: rgb(230, 50, 35);
     text-shadow: 0px 0px 16px #E63223;
