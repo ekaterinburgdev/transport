@@ -31,7 +31,10 @@ export function Card({
     const cardRef = useRef<HTMLAnchorElement>(null);
     const cardTitleRef = useRef<HTMLDivElement>(null);
     useSmoothCorners(cardRef);
-    useSmoothCorners(cardTitleRef);
+
+    if (titleBackgroundColor) {
+        useSmoothCorners(cardTitleRef);
+    }
 
     return (
         <a
@@ -58,7 +61,17 @@ export function Card({
                 </div>
             )}
             {headerCaption && <p className={cn(styles.CardHeaderCaption)}>{t(headerCaption)}</p>}
-            {footerCaption && <p className={headerCaption ? cn(styles.CardFooterCaption) : cn(styles.CardFooterCaption_NoSubtitle)}>{t(footerCaption)}</p>}
+            {footerCaption && (
+                <p
+                    className={
+                        headerCaption
+                            ? cn(styles.CardFooterCaption)
+                            : cn(styles.CardFooterCaption_NoSubtitle)
+                    }
+                >
+                    {t(footerCaption)}
+                </p>
+            )}
             {dynamicContent && <div className={cn(styles.CardDynamic)}>{dynamicContent}</div>}
         </a>
     );
