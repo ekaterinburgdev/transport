@@ -81,7 +81,6 @@ export function MapSearchBar() {
                 })}
                 onSubmit={onSubmit}
             >
-                <img src="/icons/search.svg" alt="" />
                 <input
                     type="search"
                     placeholder="Поиск"
