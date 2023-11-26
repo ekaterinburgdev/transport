@@ -18,22 +18,18 @@ import styles from './MapStopsSidebarHeader.module.css';
 const cn = classNames.bind(styles);
 
 export interface MapStopsSidebarHeaderProps extends Pick<MapStopsSidebarProps, 'name'> {
-    types: Exclude<StopType, StopType.TrollBus>[];
+    type: StopType;
 }
 
-export function MapStopsSidebarHeader({ types, name }: MapStopsSidebarHeaderProps) {
+export function MapStopsSidebarHeader({ type, name }: MapStopsSidebarHeaderProps) {
+    const iconSrc = `/icons/${type === StopType.TrollBus ? 'bus-troll' : type}.svg`;
+
     return (
         <div className={cn(styles.MapStopsSidebarHeaderWrapper)}>
             <MapStopsSidebarRow mix={styles.MapStopsSidebarHeader}>
                 <div className={cn(styles.MapStopsSidebarHeaderInfo)}>
-                    <Typography variant="h3">
-                        {types.map((t) => (
-                            <IconFont key={t} name={IconFontCharsNames[t]} />
-                        ))}
-                    </Typography>
-                    <Typography variant="h4">
-                        {t(name)}
-                    </Typography>
+                    <img className={cn(styles.MapStopsSidebarHeaderIcon)} src={iconSrc} />
+                    <Typography variant="h4">{t(name)}</Typography>
                 </div>
             </MapStopsSidebarRow>
             <Divider />
