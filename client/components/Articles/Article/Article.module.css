@@ -39,8 +39,9 @@
 }
 
 .ArticleTitle {
-    font-size: 48px;
-    line-height: 1.05;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.2;
 }
 
 
@@ -49,25 +50,25 @@
 }
 
 .ArticleContent h2 {
-    font-size: 32px;
+    font-size: 22px;
     font-weight: 500;
-    line-height: 1.08;
-    margin-top: 1.75em;
-    margin-bottom: .25em;
+    line-height: 1.2;
+    margin-top: 1.4em;
+    margin-bottom: .3em;
 }
 
 .ArticleContent h3 {
-    font-size: 28px;
+    font-size: 18px;
     font-weight: 500;
-    line-height: 1.125;
-    margin-top: 1.75em;
-    margin-bottom: .25em;
+    line-height: 1.2;
+    margin-top: 1.9em;
+    margin-bottom: .8em;
 }
 
 .ArticleContent h4 {
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 500;
-    line-height: 1.27;
+    line-height: 1.35;
     margin-top: 1.75em;
     margin-bottom: .25em;
 }
@@ -75,14 +76,14 @@
 .ArticleContent ol,
 .ArticleContent ul,
 .ArticleContent p {
-    font-size: 20px;
+    font-size: 14px;
     line-height: 1.35;
     margin-bottom: 1.1em;
 }
 
 .ArticleContent li {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: .5em;
+    margin-bottom: .5em;
 }
 
 .ArticleContent ul {
@@ -95,6 +96,20 @@
     padding-right: .5em;
     margin-left: -1.5em;
     opacity: .45;
+}
+
+.ArticleContent blockquote {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.35;
+    padding: 16px;
+    border-radius: 16px;
+    background: #F4F6FB;
+    margin: 0;
+}
+
+.ArticleContent blockquote p {
+    margin: 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -112,11 +127,11 @@
     }
     
     .ArticleContent h3 {
-        font-size: 40px;
+        font-size: 32px;
     }
     
     .ArticleContent h4 {
-        font-size: 32px;
+        font-size: 22px;
     }
     
     .ArticleContent ol,
