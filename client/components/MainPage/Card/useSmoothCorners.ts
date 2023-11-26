@@ -27,12 +27,12 @@ if ('ResizeObserver' in globalThis) {
     });
 }
 
-export function useSmoothCorners(cardRef: MutableRefObject<HTMLElement>) {
+export function useSmoothCorners(elRef: MutableRefObject<HTMLElement>) {
     useEffect(() => {
-        smoothCornersObserver.observe(cardRef.current);
+        smoothCornersObserver.observe(elRef.current);
 
         return () => {
-            smoothCornersObserver.unobserve(cardRef.current);
+            smoothCornersObserver.unobserve(elRef.current);
         };
     }, []);
 }
