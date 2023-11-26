@@ -10,8 +10,6 @@
     max-width: 448px;
     width: 100%;
 
-    pointer-events: none !important;
-
     display: grid;
     gap: 16px;
 
@@ -24,6 +22,14 @@
     }
 }
 
+/* need more specificity because of leafletSidebar */
+.MapSidebar.MapSidebar.MapSidebar.MapSidebar {
+    pointer-events: none !important;
+}
+
 .MapAdditionalButtons {
+    display: flex;
     padding: 24px 16px;
+
+    gap: 8px;
 }

@@ -7,6 +7,7 @@ import { ALL_PROJECTS, PROJECT_TRANSPORT, ProjectsPanel, Theme } from 'ekb';
 import { store } from 'state';
 
 import 'styles/globals.css';
+import 'styles/tally-widget.css';
 import 'ekb/style.css';
 
 type AppProps<PropsType extends object> = {
