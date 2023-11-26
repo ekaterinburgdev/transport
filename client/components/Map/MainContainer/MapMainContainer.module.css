@@ -7,7 +7,6 @@
     position: relative;
     max-height: calc(100vh - 100px);
     padding: 12px;
-    max-width: 448px;
     width: 100%;
 
     display: grid;
