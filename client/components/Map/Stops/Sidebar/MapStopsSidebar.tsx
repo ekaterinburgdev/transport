@@ -16,13 +16,9 @@ export type MapStopsSidebarProps = {
 const cn = classNames.bind(styles);
 
 export function MapStopsSidebar({ type, name }: MapStopsSidebarProps) {
-    const iconTypes = useMemo(() => {
-        return type.split('-').reverse() as Exclude<StopType, StopType.TrollBus>[];
-    }, [type]);
-
     return (
         <div className={cn(styles.MapStopsSidebar)}>
-            <MapStopsSidebarHeader name={t(name)} types={iconTypes} />
+            <MapStopsSidebarHeader name={t(name)} type={type} />
             <MapStopsSidebarStopsList />
         </div>
     );
