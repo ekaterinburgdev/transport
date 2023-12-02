@@ -1,8 +1,6 @@
 import fetch from 'node-fetch';
 import _ from 'lodash';
 
-import { getCurrentTimestamp } from '../../utils/get-current-timestamp';
-
 import {
     ServerRoute,
     ServerStopArriveUnit,
@@ -28,6 +26,7 @@ import {
     GetStopArriveResponse,
 } from './ekaterinburg-rf.types';
 
+import { getCurrentTimestamp } from '../../utils/get-current-timestamp';
 import { getRequestToken } from '../../utils/get-request-token';
 
 const fetchCommonOptions = {
