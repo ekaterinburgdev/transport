@@ -161,7 +161,7 @@ export class EkaterinburgRfModel {
                 ts: getCurrentTimestamp()
             }),
         });
-        
+
         const body = (await response.json()) as JsonRpcResponse<InitSessionResponse>;
         this.sid = body.result.sid;
     }
