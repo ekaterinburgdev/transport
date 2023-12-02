@@ -9,7 +9,6 @@ import {
     ServerUnitArrive,
 } from 'transport-common/types/ekaterinburg-rf';
 
-
 import { ClientUnit, TransportTree } from 'transport-common/types/masstrans';
 import { createStrapiMethods } from 'transport-common/strapi/create-methods';
 import { StrapiContentTypes, StrapiTree } from 'transport-common/types/strapi';
