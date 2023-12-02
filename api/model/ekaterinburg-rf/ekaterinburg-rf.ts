@@ -2,11 +2,15 @@ import fetch from 'node-fetch';
 import _ from 'lodash';
 import crypto from 'crypto';
 
+import { getCurrentTimestamp } from '../../utils/get-current-timestamp';
+
 import {
     ServerRoute,
     ServerStopArriveUnit,
     ServerUnitArrive,
 } from 'transport-common/types/ekaterinburg-rf';
+
+
 import { ClientUnit, TransportTree } from 'transport-common/types/masstrans';
 import { createStrapiMethods } from 'transport-common/strapi/create-methods';
 import { StrapiContentTypes, StrapiTree } from 'transport-common/types/strapi';
@@ -16,6 +20,7 @@ import {
     JsonRpcMethods,
     marhsrutEkaterinburgRfJsonRpcLink,
 } from './ekaterinburg-rf.constants';
+
 import {
     JsonRpcResponse,
     GetUnitsResponse,
@@ -152,11 +157,11 @@ export class EkaterinburgRfModel {
                 jsonrpc,
                 method: JsonRpcMethods.StartSession,
                 params: {},
+                ts: getCurrentTimestamp()
             }),
         });
-
+        
         const body = (await response.json()) as JsonRpcResponse<InitSessionResponse>;
-
         this.sid = body.result.sid;
     }
 
@@ -170,15 +175,17 @@ export class EkaterinburgRfModel {
         const token = getRequestToken(method, this.requestId, this.sid);
 
         const requestBody = {
-            id: this.requestId,
             jsonrpc,
             method,
+            id: this.requestId,
+            ts: getCurrentTimestamp(),
             params: {
                 ...params,
                 sid: this.sid,
                 magic: token.magic,
             },
         };
+        
 
         const fetchOptions = {
             ...fetchCommonOptions,
@@ -241,7 +248,7 @@ export class EkaterinburgRfModel {
 
 // Getting request token for requests to ekaterinburg.rf
 function getRequestToken(method: JsonRpcMethods, id: number, sid: string) {
-    const token = `${method}-${id}-${sid}`;
+    const token = `${method}~ekt~${id}~${sid}`;
     const tokenEnc = crypto.createHash('sha1').update(token).digest('hex');
 
     // transorm first and last 16 symbols into GUID
