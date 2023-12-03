@@ -1,6 +1,6 @@
 import { createStrapiMethods } from 'transport-common/strapi/create-methods';
+import { TRANSPORT_API_URL } from 'transport-common/strapi/constants';
 import { StrapiContentTypes, StrapiStop, StrapiUnitInfo } from 'transport-common/types/strapi';
-
 import { ClientUnit, Route, StopInfoItem, UnitArriveStop } from 'transport-common/types/masstrans';
 import { fetchApi } from 'api/utils/fetch';
 
@@ -9,7 +9,7 @@ const strapiUnitInfo = createStrapiMethods(StrapiContentTypes.UnitInfo);
 
 export const massTransApi = {
     getVehicles: (type: ClientUnit) =>
-        fetchApi(`/api/masstrans/${type}`, {
+        fetchApi(`${TRANSPORT_API_URL}/api/masstrans/${type}`, {
             dataField: 'data',
             cache: 'no-store',
         }),
@@ -41,12 +41,12 @@ export const massTransApi = {
         ) as Promise<StrapiUnitInfo[]>;
     },
     getRoute: (routeId: number) =>
-        fetchApi(`/api/masstrans/route/${routeId}`, {
+        fetchApi(`${TRANSPORT_API_URL}/api/masstrans/route/${routeId}`, {
             dataField: 'data',
             cache: 'no-store',
         }) as Promise<Route>,
     getStopInfo: (stopId: string) =>
-        fetchApi(`/api/masstrans/stop/${stopId}`, {
+        fetchApi(`${TRANSPORT_API_URL}/api/masstrans/stop/${stopId}`, {
             dataField: 'data',
             cache: 'no-store',
         }) as Promise<StopInfoItem[]>,
