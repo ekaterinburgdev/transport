@@ -2,7 +2,7 @@
   "name": "transport-client",
   "version": "1.0.0",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next dev",
     "build": "next build",
     "lint": "next lint",
     "check-types": "tsc --noEmit"
