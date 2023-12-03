@@ -28,49 +28,6 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
 
-  api:
-    dependencies:
-      express:
-        specifier: ^4.18.2
-        version: 4.18.2
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
-      node-fetch:
-        specifier: ^2.7.0
-        version: 2.7.0(encoding@0.1.13)
-      transport-common:
-        specifier: workspace:*
-        version: link:../common
-      ts-node:
-        specifier: ^10.9.1
-        version: 10.9.1(@types/node@18.17.15)(typescript@4.9.5)
-      tslib:
-        specifier: ^2.6.2
-        version: 2.6.2
-      typescript:
-        specifier: ^4.9.5
-        version: 4.9.5
-    devDependencies:
-      '@types/express':
-        specifier: ^4.17.17
-        version: 4.17.17
-      '@types/js-sha1':
-        specifier: ^0.6.0
-        version: 0.6.0
-      '@types/lodash':
-        specifier: ^4.14.198
-        version: 4.14.198
-      '@types/node':
-        specifier: ^18.17.15
-        version: 18.17.15
-      '@types/node-fetch':
-        specifier: ^2.6.4
-        version: 2.6.4
-      nodemon:
-        specifier: ^2.0.22
-        version: 2.0.22
-
   client:
     dependencies:
       '@reduxjs/toolkit':
@@ -230,7 +187,7 @@ importers:
         version: link:../common
       transport-server:
         specifier: workspace:*
-        version: link:../api
+        version: link:../server
     devDependencies:
       '@types/jsdom':
         specifier: ^21.1.1
@@ -253,6 +210,49 @@ importers:
       typescript:
         specifier: ^4.8.4
         version: 4.9.5
+
+  server:
+    dependencies:
+      express:
+        specifier: ^4.18.2
+        version: 4.18.2
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      node-fetch:
+        specifier: ^2.7.0
+        version: 2.7.0(encoding@0.1.13)
+      transport-common:
+        specifier: workspace:*
+        version: link:../common
+      ts-node:
+        specifier: ^10.9.1
+        version: 10.9.1(@types/node@18.17.15)(typescript@4.9.5)
+      tslib:
+        specifier: ^2.6.2
+        version: 2.6.2
+      typescript:
+        specifier: ^4.9.5
+        version: 4.9.5
+    devDependencies:
+      '@types/express':
+        specifier: ^4.17.17
+        version: 4.17.17
+      '@types/js-sha1':
+        specifier: ^0.6.0
+        version: 0.6.0
+      '@types/lodash':
+        specifier: ^4.14.198
+        version: 4.14.198
+      '@types/node':
+        specifier: ^18.17.15
+        version: 18.17.15
+      '@types/node-fetch':
+        specifier: ^2.6.4
+        version: 2.6.4
+      nodemon:
+        specifier: ^2.0.22
+        version: 2.0.22
 
 packages:
 
@@ -378,7 +378,7 @@ packages:
       debug: 4.3.4
       lodash.debounce: 4.0.8
       resolve: 1.22.1
-      semver: 6.3.0
+      semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2490,12 +2490,12 @@ packages:
     resolution: {integrity: sha512-F0SAmZ8iUtS//m8DmCTA0jlh6TDKkHQyK6xc6V4KDTyZKA9dnvX9/3sRTVQrWm79glUAZbnmmNcdYwUIHWVybw==}
     engines: {node: '>=0.4.0'}
     hasBin: true
-    dev: true
 
   /acorn@8.8.2:
     resolution: {integrity: sha512-xjIYgE8HBrkpd/sJqOGNspf8uHG+NOHGOw6a/Urj8taM2EXfdNAH2oFcPeIFfsv3+kz/mJrS5VuMqbNLjCa2vw==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+    dev: true
 
   /agent-base@6.0.2:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
@@ -6067,7 +6067,7 @@ packages:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
       '@types/node': 18.17.15
-      acorn: 8.8.2
+      acorn: 8.10.0
       acorn-walk: 8.2.0
       arg: 4.1.3
       create-require: 1.1.1

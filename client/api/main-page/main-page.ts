@@ -19,13 +19,20 @@ export const MainPageApi = {
 
     getA11yTransportCounters: async () => {
         const countA11yUnits = async (type) => {
-            const units = <Unit[]>await fetchApi(
-                `${TRANSPORT_API_URL}/api/masstrans/${type}`,
-                { dataField: 'data' }
-            );
-            return units
-                .filter(({ accessibility }) => accessibility)
-                .length;
+            let units = []
+
+            try {
+                units = <Unit[]>await fetchApi(
+                    `${TRANSPORT_API_URL}/api/masstrans/${type}`,
+                    { dataField: 'data' }
+                )
+
+                return units
+                    .filter(({ accessibility }) => accessibility)
+                    .length;
+            } catch (e) {
+                return 0
+            }
         }
 
         return {
