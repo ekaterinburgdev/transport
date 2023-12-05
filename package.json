@@ -12,7 +12,8 @@
     "build:common": "pnpm -r --filter transport-common build",
     "build:client": "pnpm -r --filter transport-client build",
     "start:server": "pnpm -r --filter transport-server start",
-    "devPreinstall": "husky install"
+    "devPreinstall": "husky install",
+    "postinstall": "pnpm build:common"
   },
   "devDependencies": {
     "husky": "^8.0.3",
