@@ -4,7 +4,7 @@ Ekaterinburg transport website prototype. FAQs and map of public transport.
 
 **[transport.ekaterinburg.city](https://transport.ekaterinburg.city)**
 
-<img width="60%" alt="" src="https://github.com/ekaterinburgdev/transport/assets/22644149/27211a8e-212b-461e-a921-f3874362b962">
+<img src="https://github.com/ekaterinburgdev/transport/assets/22644149/ae45333e-19de-493d-a967-86bc78c6e9e6" width="65%" alt="" />
 
 
 ## About
