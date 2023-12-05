@@ -32,6 +32,7 @@ jobs:
           nvm use
 
           export APP_PORT=${{ secrets.API_SERVER_PORT }}
+          export NODE_ENV=production
           
           pnpm -r --filter transport-server --filter transport-common i
           pnpm build:common
