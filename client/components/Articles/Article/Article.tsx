@@ -9,13 +9,13 @@ import t from 'utils/typograph';
 
 const cn = classNames.bind(styles);
 
-export function Article({ title, description }: ArticleProps) {
+export function Article({ title, description, external }: ArticleProps) {
     return (
-        <article className={cn(styles.Article)}>
-            <Link className={cn(styles.ArticleBack)} href="/">
+        <article className={cn(styles.Article, { [styles.Article_external]: external })}>
+            {!external && <Link className={cn(styles.ArticleBack)} href="/">
                 <span className={cn(styles.ArticleBackArrow)}>←</span>
                 <span className={cn(styles.ArticleBackCaption)}>Назад</span>
-            </Link>
+            </Link>}
 
             {title && <h1 className={cn(styles.ArticleTitle)}>
                 {title}
@@ -23,7 +23,7 @@ export function Article({ title, description }: ArticleProps) {
 
             {description && <div
                 className={cn(styles.ArticleContent)}
-                dangerouslySetInnerHTML={{ __html: t(md().render(description)) }}
+                dangerouslySetInnerHTML={{ __html: t(md({ html: true }).render(description)) }}
             />}
         </article>
     )

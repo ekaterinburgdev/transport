@@ -1,142 +1,16 @@
 .Modal {
+    outline: none;
     border-radius: 16px;
-
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.Modal::-webkit-scrollbar {
-    display: none;
-}
-
-
-.ModalContent,
-.ModalContent > * {
-    border-radius: 16px;
-}
-
-.ModalDragArea {
-    display: none;
-    position: sticky;
-    top: 0;
-    left: 0;
-    margin-bottom: -76px;
-    height: 76px;
-    touch-action: none;
-    z-index: 1;
-}
-
-.ModalDragArea::before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 7px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    opacity: 0.5;
-    width: 50px;
-    height: 5px;
-    border-radius: 10px;
-    background: #9baac3;
-}
-
-.ModalCloseButton {
-    position: sticky;
-    float: right;
-    margin-bottom: -100%;
-    top: 0;
-    padding: 12px;
     border: 0;
-    background: none;
-    cursor: pointer;
-    z-index: 1;
-}
-
-.ModalCloseButtonWrapper {
-    display: flex;
-    justify-content: flex-end;
-    z-index: 100;
-
-    background-color: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(8px);
-    color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    border-radius: 50%;
-    transition: .15s ease;
-}
-
-.ModalCloseButtonWrapper svg {
-    width: 18px;
-    height: 18px;
+    box-shadow: 0 4px 64px rgba(0,0,0,.15);
+    padding: 32px 24px 24px;
+    margin: auto 16px;
 }
 
 @media screen and (min-width: 768px) {
-    .ModalCloseButtonWrapper svg {
-        width: 24px;
-        height: 24px;
-    }
-}
-
-@media (hover) {
-    .ModalCloseButton:hover .ModalCloseButtonWrapper {
-        background-color: rgba(255, 255, 255, 0.8);
-        color: rgba(0, 0, 0, 0.75);
-    }
-}
-
-.ModalCloseButton:active .ModalCloseButtonWrapper {
-    background-color: rgba(255, 255, 255, 0.95);
-    color: rgba(0, 0, 0, 1);
-}
-
-.ModalCloseIcon > path {
-    stroke: currentColor;
-    transition: .15s ease;
-}
-
-@media screen and (max-width: 768px) {
     .Modal {
-        position: fixed;
-        width: calc(100% - 16px);
-        margin: 0;
-        max-height: calc(100% - 90px);
-        left: 8px !important;
-        bottom: 0;
-        top: initial !important;
-        transition: height 150ms ease-out;
-        will-change: height;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-
-    .ModalContent {
-        display: flex;
-        flex-direction: column;
-        min-height: 100%;
-        overscroll-behavior-y: contain;
-    }
-
-    .ModalContent > * {
-        flex-grow: 1;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-
-    .Modal_fullOpen {
-        height: calc(100% - 90px);
-    }
-
-    .Modal_halfOpen {
-        height: 50%;
-    }
-
-    .Modal_hidden {
-        overflow: hidden;
-        height: 15%;
-    }
-
-    .ModalDragArea {
-        display: block;
+        max-width: 800px;
+        padding: 64px 56px 40px;
+        margin: auto;
     }
 }

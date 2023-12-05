@@ -1,46 +1,22 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
-
-import { sidebarService } from 'services/sidebar/sidebar';
-import { ModalPosition, useModalSheet } from 'hooks/useModalSheet/useModalSheet';
-import { useDisablePropagation } from 'hooks/useDisablePropagation';
-
-import Close from 'public/icons/close.svg';
 
 import styles from './Modal.module.css';
 
 const cn = classNames.bind(styles);
 
 export function Modal({ children }: React.PropsWithChildren) {
-    const ref = useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLDialogElement>(null);
 
-    useDisablePropagation(ref);
-
-    const [currentPosition, onDragEnd, onDrag] = useModalSheet(ModalPosition.HalfOpen);
+    useEffect(() => {
+        ref.current.showModal();
+        // Remove focus after open
+        (document.activeElement as HTMLElement).blur();
+    }, [])
 
     return (
-        <div
-            ref={ref}
-            className={cn(styles.Modal, styles[`Modal_${currentPosition}`])}
-            id="modal-scroll-container"
-        >
-            <div
-                className={cn(styles.ModalDragArea)}
-                onTouchMoveCapture={onDrag}
-                onTouchEndCapture={onDragEnd}
-            />
-            <button
-                type="button"
-                onClick={() => {
-                    sidebarService.close();
-                }}
-                className={cn(styles.ModalCloseButton)}
-            >
-                <span className={cn(styles.ModalCloseButtonWrapper)}>
-                    <Close className={cn(styles.ModalCloseIcon)} />
-                </span>
-            </button>
-            <div className={cn(styles.ModalContent)}>{children}</div>
-        </div>
+        <dialog className={cn('Modal')} ref={ref}>
+            {children}
+        </dialog>
     );
 }

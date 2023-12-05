@@ -1,4 +1,5 @@
 export type ArticleProps = {
-    title: string;
+    title?: string;
     description: string;
+    external?: boolean
 };

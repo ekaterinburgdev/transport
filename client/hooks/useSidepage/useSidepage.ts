@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 
-export enum ModalPosition {
+export enum SidepagePosition {
     FullOpen = 'fullOpen',
     HalfOpen = 'halfOpen',
     Hidden = 'hidden',
 }
 
 export const MODAL_POSITIONS = [
-    ModalPosition.FullOpen,
-    ModalPosition.HalfOpen,
-    ModalPosition.Hidden,
+    SidepagePosition.FullOpen,
+    SidepagePosition.HalfOpen,
+    SidepagePosition.Hidden,
 ];
 export const CHANGE_POSITION_DELTA = 60;
 
-export function useModalSheet(
-    startPosition = ModalPosition.FullOpen,
-): [ModalPosition, React.TouchEventHandler, React.TouchEventHandler] {
+export function useSidepage(
+    startPosition = SidepagePosition.FullOpen,
+): [SidepagePosition, React.TouchEventHandler, React.TouchEventHandler] {
     const [currentPositionIndex, setCurrentPositionIndex] = useState(
         MODAL_POSITIONS.findIndex((pos) => pos === startPosition),
     );
@@ -65,8 +65,8 @@ export function useModalSheet(
         if (currentDragPosition - dragStartPosition > CHANGE_POSITION_DELTA) {
             isDragFinished = true;
 
-            const modalElement = (event.target as HTMLElement).parentElement;
-            nextPosition(modalElement);
+            const SidepageElement = (event.target as HTMLElement).parentElement;
+            nextPosition(SidepageElement);
         }
 
         if (currentDragPosition - dragStartPosition < -CHANGE_POSITION_DELTA) {
