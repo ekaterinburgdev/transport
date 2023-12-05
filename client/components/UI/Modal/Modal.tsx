@@ -9,7 +9,9 @@ export function Modal({ children }: React.PropsWithChildren) {
     const ref = useRef<HTMLDialogElement>(null);
 
     useEffect(() => {
-        ref.current.showModal()
+        ref.current.showModal();
+        // Remove focus after open
+        (document.activeElement as HTMLElement).blur();
     }, [])
 
     return (
