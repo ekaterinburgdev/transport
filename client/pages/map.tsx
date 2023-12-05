@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { Map as MapComponent } from 'components/Map';
 import { STRAPI_URL, TILE_SERVER_URL } from 'transport-common/strapi/constants';
 import { Modal } from 'components/UI/Modal/Modal';
-import { Article } from 'components/Article/Article';
+import { Article } from 'components/Articles/Article/Article';
 
 const warningMessage = `### Почему карта транспорта не работает
 С осени 2022 года мы занимались развитием сайта: собирали информацию, разрабатывали интерфейс, настраивали отображение транспорта и готовили наш сайт к полноценному релизу.

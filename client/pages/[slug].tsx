@@ -2,8 +2,8 @@ import React from 'react';
 import Head from 'next/head';
 
 import { articlesApi } from 'api/articles/articles';
-import { ArticleProps } from 'components/Article/Article.types';
-import { Article } from 'components/Article/Article';
+import { ArticleProps } from 'components/Articles/Article/Article.types';
+import { Article } from 'components/Articles/Article/Article';
 
 function ArticlePage({ title, description }: ArticleProps) {
     return (
