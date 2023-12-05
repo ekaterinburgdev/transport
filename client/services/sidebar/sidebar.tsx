@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, ReactElement } from 'react';
 
-import { Modal } from 'components/UI/Modal/Modal';
+import { Sidepage } from 'components/UI/Sidepage/Sidepage';
 
 class SidebarService {
     static instance = null;
@@ -26,7 +26,7 @@ class SidebarService {
         onClose?: VoidFunction;
     }) => {
         this.onClose = onClose;
-        this.component = <Modal>{component}</Modal>;
+        this.component = <Sidepage>{component}</Sidepage>;
         this.setSidebar?.(this.component);
     };
 

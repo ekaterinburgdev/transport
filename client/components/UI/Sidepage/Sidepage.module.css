@@ -1,0 +1,142 @@
+.Sidepage {
+    border-radius: 16px;
+
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.Sidepage::-webkit-scrollbar {
+    display: none;
+}
+
+
+.SidepageContent,
+.SidepageContent > * {
+    border-radius: 16px;
+}
+
+.SidepageDragArea {
+    display: none;
+    position: sticky;
+    top: 0;
+    left: 0;
+    margin-bottom: -76px;
+    height: 76px;
+    touch-action: none;
+    z-index: 1;
+}
+
+.SidepageDragArea::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    opacity: 0.5;
+    width: 50px;
+    height: 5px;
+    border-radius: 10px;
+    background: #9baac3;
+}
+
+.SidepageCloseButton {
+    position: sticky;
+    float: right;
+    margin-bottom: -100%;
+    top: 0;
+    padding: 12px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.SidepageCloseButtonWrapper {
+    display: flex;
+    justify-content: flex-end;
+    z-index: 100;
+
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 50%;
+    transition: .15s ease;
+}
+
+.SidepageCloseButtonWrapper svg {
+    width: 18px;
+    height: 18px;
+}
+
+@media screen and (min-width: 768px) {
+    .SidepageCloseButtonWrapper svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (hover) {
+    .SidepageCloseButton:hover .SidepageCloseButtonWrapper {
+        background-color: rgba(255, 255, 255, 0.8);
+        color: rgba(0, 0, 0, 0.75);
+    }
+}
+
+.SidepageCloseButton:active .SidepageCloseButtonWrapper {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: rgba(0, 0, 0, 1);
+}
+
+.SidepageCloseIcon > path {
+    stroke: currentColor;
+    transition: .15s ease;
+}
+
+@media screen and (max-width: 768px) {
+    .Sidepage {
+        position: fixed;
+        width: calc(100% - 16px);
+        margin: 0;
+        max-height: calc(100% - 90px);
+        left: 8px !important;
+        bottom: 0;
+        top: initial !important;
+        transition: height 150ms ease-out;
+        will-change: height;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .SidepageContent {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        overscroll-behavior-y: contain;
+    }
+
+    .SidepageContent > * {
+        flex-grow: 1;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .Sidepage_fullOpen {
+        height: calc(100% - 90px);
+    }
+
+    .Sidepage_halfOpen {
+        height: 50%;
+    }
+
+    .Sidepage_hidden {
+        overflow: hidden;
+        height: 15%;
+    }
+
+    .SidepageDragArea {
+        display: block;
+    }
+}
