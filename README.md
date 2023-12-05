@@ -22,7 +22,7 @@ Ekaterinburg transport website prototype. FAQs and map of public transport.
 2. Install dependencies for `/client` and `/server` apps
 
     ```
-    pnpm -r install
+    pnpm install
     ```
 
 3. Run local server
