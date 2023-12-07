@@ -1,3 +1,6 @@
+> The project has not yet been announced. [We need help with accessing data in маршрут.екатеринбург.рф](https://github.com/ekaterinburgdev/transport/issues/100)
+
+
 # Ekaterinburg Transport
 
 Ekaterinburg transport website prototype. FAQs and map of public transport.
