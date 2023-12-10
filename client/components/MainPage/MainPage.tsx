@@ -31,8 +31,22 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems, articles }: Ma
 
     useEffect(() => {
         const handlePopState = (e: PopStateEvent) => {
-            if (e.state.url === '/') {
+            const slug = e.state.articleSlug;
+
+            if (e.state.url === '/' || slug === null) {
                 setOpenedArticle(null);
+
+                return;
+            }
+
+            if (e.state.articleSlug) {
+                const article = articles.find((a) => a.slug === slug);
+
+                if (!article) {
+                    return;
+                }
+
+                setOpenedArticle(article);
             }
         };
 
