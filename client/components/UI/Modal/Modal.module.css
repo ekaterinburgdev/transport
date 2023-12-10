@@ -61,7 +61,11 @@
 
     .Modal_AlignCenter {
         margin: auto;
-        max-height: calc(100vh - 92px);
+    }
+
+    .ModalInner {
+        max-height: inherit;
+        overflow: auto;
     }
 
     .ModalClose {
