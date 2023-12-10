@@ -53,7 +53,7 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems, articles }: Ma
         window.addEventListener('popstate', handlePopState);
 
         return () => window.removeEventListener('popstate', handlePopState);
-    }, [setOpenedArticle]);
+    }, [articles, setOpenedArticle]);
 
     const handleCardClick = useCallback(
         (url: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {

@@ -12,19 +12,32 @@ const cn = classNames.bind(styles);
 export function Modal({ title = null, children, onClose = () => {} }) {
     const ref = useRef<HTMLDialogElement>(null);
 
-    useEffect(() => {
-        ref.current.showModal();
-        // Remove focus after open
-        (document.activeElement as HTMLElement).blur();
-    }, []);
-
     const close = () => {
         ref.current.close();
     };
 
+    useEffect(() => {
+        ref.current.showModal();
+        // Remove focus after open
+        (document.activeElement as HTMLElement).blur();
+        
+        const handleClickOutside = (e) => {
+            if (ref.current.contains(e.target)) {
+                close();
+            }
+        }
+
+        document.addEventListener('click', handleClickOutside)
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside)
+        }
+    }, []);
+
+
     return (
         <dialog className={cn(styles.Modal)} ref={ref} onClose={onClose}>
-            <button className={cn(styles.ModalClose)} onClick={close}>
+            <button className={cn(styles.ModalClose)} onClick={close} aria-label="Закрыть">
                 <Close />
             </button>
 
