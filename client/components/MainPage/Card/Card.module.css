@@ -25,15 +25,19 @@
     overflow: hidden;
 }
 
-@media (hover: hover) {
-    .Card:hover {
-        background-image: var(--CardBgImageHover, var(--CardBgImage));
-    }
+.Card:hover {
+    background-image: var(--CardBgImageHover, var(--CardBgImage));
+}
 
-    /* Preload hover images */
-    .Card:before {
-        content: '';
-        background-image: var(--CardBgImageHover);
+/* Preload hover images */
+.Card:before {
+    content: '';
+    background-image: var(--CardBgImageHover);
+}
+
+@media (hover: hover) {
+    .Card:active {
+        filter: brightness(0.95);
     }
 }
 
@@ -91,10 +95,6 @@
 .Card_Other:hover {
     background-color: var(--cards-other-bg-hover);
     color: white;
-}
-
-.Card:active {
-    filter: brightness(0.95);
 }
 
 .CardTitle {
