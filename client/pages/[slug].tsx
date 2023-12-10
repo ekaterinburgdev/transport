@@ -18,16 +18,7 @@ function ArticlePage({ title, description }: ArticleProps) {
     );
 }
 
-export async function getStaticPaths() {
-    const articles = (await articlesApi.getArticles()) || [];
-
-    return {
-        paths: articles.map(({ attributes: { slug } }) => ({ params: { slug } })),
-        fallback: false,
-    };
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     const article = (await articlesApi.getArticle(params.slug)).at(0)?.attributes;
 
     return {
