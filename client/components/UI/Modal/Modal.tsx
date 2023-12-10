@@ -12,15 +12,36 @@ const cn = classNames.bind(styles);
 export function Modal({ title = null, children, onClose = () => {} }) {
     const ref = useRef<HTMLDialogElement>(null);
 
-    useEffect(() => {
-        ref.current.showModal();
-        // Remove focus after open
-        (document.activeElement as HTMLElement).blur();
-    }, []);
-
     const close = () => {
         ref.current.close();
     };
+
+    useEffect(() => {
+        console.log('render');
+        
+        ref.current.showModal();
+        // Remove focus after open
+        (document.activeElement as HTMLElement).blur();
+
+        const handleClickOutside = (e) => {
+            const bondings = ref.current.getBoundingClientRect();
+            if (
+                bondings.top > e.clientY ||
+                bondings.right < e.clientX ||
+                bondings.bottom < e.clientY ||
+                bondings.left > e.clientX
+            ) {
+                close()
+            }
+        }
+
+        document.addEventListener('click', handleClickOutside)
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside)
+        }
+    }, []);
+
 
     return (
         <dialog className={cn(styles.Modal)} ref={ref} onClose={onClose}>
