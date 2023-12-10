@@ -6,6 +6,6 @@ export interface Article {
         createdAt: Date;
         updatedAt: Date;
         publishedAt: Date;
-        url: string;
+        slug: string;
     };
 }

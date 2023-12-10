@@ -1,5 +1,6 @@
-import { ReactElement } from "react";
-import {TCardType} from "api/main-page/main-page.types";
+import React, { ReactElement } from 'react';
+
+import { TCardType } from 'api/main-page/main-page.types';
 
 export type CardProps = {
     type: TCardType | undefined;
@@ -12,4 +13,5 @@ export type CardProps = {
     footerCaption: string;
     dynamicContent: ReactElement;
     key: number;
+    onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 };

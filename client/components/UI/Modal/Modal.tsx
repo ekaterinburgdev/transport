@@ -9,32 +9,28 @@ import styles from './Modal.module.css';
 
 const cn = classNames.bind(styles);
 
-export function Modal({ title, children }) {
+export function Modal({ title = null, children, onClose = () => {} }) {
     const ref = useRef<HTMLDialogElement>(null);
 
     useEffect(() => {
         ref.current.showModal();
         // Remove focus after open
         (document.activeElement as HTMLElement).blur();
-    }, [])
+    }, []);
 
     const close = () => {
         ref.current.close();
-    }
+    };
 
     return (
-        <dialog className={cn(styles.Modal)} ref={ref}>
+        <dialog className={cn(styles.Modal)} ref={ref} onClose={onClose}>
             <button className={cn(styles.ModalClose)} onClick={close}>
                 <Close />
             </button>
 
-            <h1 className={cn(styles.ModalTitle)}>
-                {t(title)}
-            </h1>
+            {title && <h1 className={cn(styles.ModalTitle)}>{t(title)}</h1>}
 
-            <div className={cn(styles.ModalInner)}>
-                {children}
-            </div>
+            <div className={cn(styles.ModalInner)}>{children}</div>
         </dialog>
     );
 }
