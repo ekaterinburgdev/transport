@@ -29,6 +29,18 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems, articles }: Ma
     }));
     const [openedArticle, setOpenedArticle] = useState<ArticleType['attributes'] | null>(null);
 
+    useEffect(() => {
+        const handlePopState = (e: PopStateEvent) => {
+            if (e.state.url === '/') {
+                setOpenedArticle(null);
+            }
+        };
+
+        window.addEventListener('popstate', handlePopState);
+
+        return () => window.removeEventListener('popstate', handlePopState);
+    }, [setOpenedArticle]);
+
     const handleCardClick = useCallback(
         (url: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
             if (window.innerWidth <= MOBILE_WIDTH) {
