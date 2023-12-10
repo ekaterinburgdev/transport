@@ -5,8 +5,6 @@
     border-radius: 16px;
     width: 100%;
     animation: .2s ease-in-out fadeIn;
-    max-width: 100%;
-    max-height: 100%;
 }
 
 .Modal::backdrop {
@@ -19,7 +17,7 @@
     padding: 32px 24px 8px;
 }
 
-.ModalInner {
+.ModalContent {
     padding: 16px 24px 24px;
 }
 
@@ -53,9 +51,15 @@
     height: 18px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 991px) {
     .Modal {
-        max-width: 800px;
+        width: 100%;
+        max-width: 1080px;
+        margin: 56px auto;
+        max-height: calc(100vh - 112px);
+    }
+
+    .Modal_AlignCenter {
         margin: auto;
         max-height: calc(100vh - 92px);
     }
@@ -68,11 +72,16 @@
         width: 24px;
         height: 24px;
     }
-    
 
     .ModalTitle {
         font-size: 32px;
-        padding: 60px 56px 32px;
+        padding: 60px 68px 32px;
+    }
+    
+    .ModalContent {
+        padding: 12px 68px 48px;
+    }
+}
 
 @keyframes fadeIn {
     from {
