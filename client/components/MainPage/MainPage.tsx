@@ -29,26 +29,6 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems, articles }: Ma
     }));
     const [openedArticle, setOpenedArticle] = useState<ArticleType['attributes'] | null>(null);
 
-    useEffect(() => {
-        if (window.innerWidth <= MOBILE_WIDTH) {
-            return;
-        }
-
-        const cardSlug = window.location.hash;
-
-        if (cardSlug === '' || cardSlug === '#') {
-            return;
-        }
-
-        const article = articles.find((a) => `#${a.slug}` === cardSlug);
-
-        if (!article) {
-            return;
-        }
-
-        setOpenedArticle(article);
-    }, [articles, setOpenedArticle]);
-
     const handleCardClick = useCallback(
         (url: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
             if (window.innerWidth <= MOBILE_WIDTH) {
@@ -64,14 +44,14 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems, articles }: Ma
 
             e.preventDefault();
             setOpenedArticle(article);
-            window.location.hash = cardSlug;
+            window.history.pushState({ articleSlug: cardSlug }, '', `/${cardSlug}`);
         },
         [articles, setOpenedArticle],
     );
 
     const handleCloseModal = useCallback(() => {
         setOpenedArticle(null);
-        window.location.hash = '';
+        window.history.pushState({ articleSlug: null }, '', `/`);
     }, [setOpenedArticle]);
 
     const getDynamicContent = (dynamicId) => {

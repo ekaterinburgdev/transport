@@ -9,7 +9,7 @@ import styles from './Modal.module.css';
 
 const cn = classNames.bind(styles);
 
-export function Modal({ title = undefined, children, onClose = null }) {
+export function Modal({ title = null, children, onClose = null }) {
     const ref = useRef<HTMLDialogElement>(null);
 
     useEffect(() => {
