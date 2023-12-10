@@ -27,6 +27,7 @@ tp.disableRule([
     'common/space/delBeforePunctuation',
     'common/space/afterPunctuation',
     'common/nbsp/replaceNbsp',
+    'ru/other/phone-number'
 ]);
 
 export default function t(text) {
