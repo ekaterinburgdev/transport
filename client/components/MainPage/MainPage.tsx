@@ -39,7 +39,7 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems, articles }: Ma
                 return;
             }
 
-            if (e.state.articleSlug) {
+            if (slug) {
                 const article = articles.find((a) => a.slug === slug);
 
                 if (!article) {
