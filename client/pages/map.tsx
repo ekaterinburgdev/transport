@@ -6,8 +6,7 @@ import { STRAPI_URL, TILE_SERVER_URL } from 'transport-common/strapi/constants';
 import { Modal } from 'components/UI/Modal/Modal';
 import { Article } from 'components/Articles/Article/Article';
 
-const warningMessage = `### Почему карта транспорта не работает
-С осени 2022 года мы занимались развитием сайта: собирали информацию, разрабатывали интерфейс, настраивали отображение транспорта и готовили наш сайт к полноценному релизу.
+const warningMessage = `С осени 2022 года мы занимались развитием сайта: собирали информацию, разрабатывали интерфейс, настраивали отображение транспорта и готовили наш сайт к полноценному релизу.
 
 Мы использовали данные о движении транспорта и остановках с официального сайта <a href="http://xn--80axnakf7a.xn--80acgfbsl1azdqr.xn--p1ai/" target="_blank">маршрут.екатеринбург.рф</a>.
 
@@ -27,8 +26,11 @@ export default function Map() {
 
             <MapComponent />
 
-            <Modal>
-                <Article description={warningMessage} external />
+            <Modal title="Почему карта транспорта не работает">
+                <Article
+                    description={warningMessage}
+                    external
+                />
             </Modal>
         </>
     );

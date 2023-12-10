@@ -1,11 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 
+import t from 'utils/typograph';
+
+import Close from 'public/icons/close.svg';
+
 import styles from './Modal.module.css';
 
 const cn = classNames.bind(styles);
 
-export function Modal({ children }: React.PropsWithChildren) {
+export function Modal({ title, children }) {
     const ref = useRef<HTMLDialogElement>(null);
 
     useEffect(() => {
@@ -14,9 +18,23 @@ export function Modal({ children }: React.PropsWithChildren) {
         (document.activeElement as HTMLElement).blur();
     }, [])
 
+    const close = () => {
+        ref.current.close();
+    }
+
     return (
-        <dialog className={cn('Modal')} ref={ref}>
-            {children}
+        <dialog className={cn(styles.Modal)} ref={ref}>
+            <button className={cn(styles.ModalClose)} onClick={close}>
+                <Close />
+            </button>
+
+            <h1 className={cn(styles.ModalTitle)}>
+                {t(title)}
+            </h1>
+
+            <div className={cn(styles.ModalInner)}>
+                {children}
+            </div>
         </dialog>
     );
 }

@@ -1,16 +1,79 @@
 .Modal {
-    outline: none;
-    border-radius: 16px;
-    border: 0;
-    box-shadow: 0 4px 64px rgba(0,0,0,.15);
-    padding: 32px 24px 24px;
     margin: auto 16px;
+    padding: 0;
+    border: 0;
+    border-radius: 16px;
+    box-shadow: 0 4px 64px rgba(0,0,0,.15);
+    outline: none;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.Modal::backdrop {
+    background: rgba(12, 27, 39, .2);
+}
+
+.ModalTitle {
+    font-size: 24px;
+    margin: 0;
+    padding: 32px 24px 8px;
+}
+
+.ModalInner {
+    padding: 16px 24px 24px;
+}
+
+.ModalClose {
+    position: sticky;
+    top: 0;
+    float: right;
+    background: none;
+    border: 0;
+    padding: 24px;
+    color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: .15s ease;
+}
+
+@media (hover) {
+    .ModalClose:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+        color: rgba(0, 0, 0, 0.75);
+    }
+}
+
+.ModalClose:active {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: rgba(0, 0, 0, 1);
+}
+
+.ModalClose svg {
+    width: 18px;
+    height: 18px;
 }
 
 @media screen and (min-width: 768px) {
     .Modal {
         max-width: 800px;
-        padding: 64px 56px 40px;
         margin: auto;
+    }
+
+    .ModalClose {
+        padding: 32px;
+    }
+
+    .ModalClose svg {
+        width: 24px;
+        height: 24px;
+    }
+    
+
+    .ModalTitle {
+        font-size: 32px;
+        padding: 60px 56px 32px;
+    }
+    
+    .ModalInner {
+        padding: 0 56px 40px;
     }
 }
