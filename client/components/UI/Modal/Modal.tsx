@@ -17,8 +17,6 @@ export function Modal({ title = null, children, onClose = () => {} }) {
     };
 
     useEffect(() => {
-        console.log('render');
-        
         ref.current.showModal();
         // Remove focus after open
         (document.activeElement as HTMLElement).blur();
