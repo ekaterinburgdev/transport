@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import _ from 'lodash';
 
 import {
@@ -156,7 +155,7 @@ export class EkaterinburgRfModel {
                 jsonrpc,
                 method: JsonRpcMethods.StartSession,
                 params: {},
-                ts: getCurrentTimestamp()
+                ts: getCurrentTimestamp(),
             }),
         });
 
@@ -184,7 +183,6 @@ export class EkaterinburgRfModel {
                 magic: token.magic,
             },
         };
-        
 
         const fetchOptions = {
             ...fetchCommonOptions,
