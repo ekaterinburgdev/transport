@@ -7,10 +7,8 @@ export const articlesApi = {
             dataField: 'data',
         }),
     getArticle: (slug: string) =>
-        fetchApi(
-            `${STRAPI_URL}/api/articles?filters[slug][$eq]=${encodeURIComponent(
-                slug,
-            )}`,
-            { dataField: 'data' },
-        ),
+        fetchApi(`${STRAPI_URL}/api/articles?filters[slug][$eq]=${encodeURIComponent(slug)}`, {
+            dataField: 'data',
+        }),
+    getAllArticles: () => fetchApi(`${STRAPI_URL}/api/articles`, { dataField: 'data' }),
 };

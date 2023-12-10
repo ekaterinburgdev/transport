@@ -27,6 +27,7 @@ export function Card({
     dynamicContent,
     headerCaption,
     footerCaption,
+    onClick,
 }: CardProps) {
     const cardRef = useRef<HTMLAnchorElement>(null);
     const cardTitleRef = useRef<HTMLDivElement>(null);
@@ -40,6 +41,7 @@ export function Card({
         <a
             className={cn(styles.Card, CARD_TYPES_CLASSNAMES[type])}
             href={url}
+            onClick={onClick}
             ref={cardRef}
             style={
                 {

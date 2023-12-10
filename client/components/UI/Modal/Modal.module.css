@@ -33,6 +33,7 @@
     color: rgba(0, 0, 0, 0.5);
     cursor: pointer;
     transition: .15s ease;
+    border-radius: 50%;
 }
 
 @media (hover) {
@@ -56,6 +57,7 @@
     .Modal {
         max-width: 800px;
         margin: auto;
+        max-height: calc(100vh - 92px);
     }
 
     .ModalClose {
