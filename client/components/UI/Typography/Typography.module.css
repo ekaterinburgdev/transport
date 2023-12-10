@@ -9,16 +9,10 @@
     font-family: 'Iset Sans', sans-serif;
 }
 
-.h1,
 .h2,
 .h3,
 .h4 {
     font-weight: 500;
-}
-
-.h1 {
-    font-size: 104px;
-    line-height: 1;
 }
 
 .h2 {
