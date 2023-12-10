@@ -66,9 +66,8 @@ export class MapVehiclesItemComponent extends Component<MapVehiclesItemProps> {
         const isCourseEast = course > EAST_COURSE_RANGE.left && course < EAST_COURSE_RANGE.right;
 
         return new L.DivIcon({
-            iconSize: [33, 28],
-            iconAnchor: [16.5, 14],
-            popupAnchor: [0, -14],
+            iconSize: [22, 15],
+            iconAnchor: [11, 25],
             className: `${cn(styles.MapVehicle)}`,
             html: ReactDOMServer.renderToStaticMarkup(
                 <MapVehicleMarker
