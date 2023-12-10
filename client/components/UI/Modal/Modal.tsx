@@ -16,10 +16,6 @@ export function Modal({ title = null, children, onClose = () => {} }) {
         ref.current.showModal();
         // Remove focus after open
         (document.activeElement as HTMLElement).blur();
-
-        ref.current.addEventListener('close', onClose);
-
-        return () => ref.current?.removeEventListener('close', onClose);
     }, []);
 
     const close = () => {
@@ -27,7 +23,7 @@ export function Modal({ title = null, children, onClose = () => {} }) {
     };
 
     return (
-        <dialog className={cn(styles.Modal)} ref={ref}>
+        <dialog className={cn(styles.Modal)} ref={ref} onClose={onClose}>
             <button className={cn(styles.ModalClose)} onClick={close}>
                 <Close />
             </button>
