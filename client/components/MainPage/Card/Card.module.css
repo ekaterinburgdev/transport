@@ -17,7 +17,8 @@
     border-radius: 16px;
     background-image: var(--CardBgImage);
     background-position: 100% 100%;
-    background-size: 100% auto;
+    /* Fix bgimage offset */
+    background-size: calc(100% + 1px) auto;
     background-repeat: no-repeat;
     color: white;
     text-decoration: none;
