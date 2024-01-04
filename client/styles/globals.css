@@ -13,6 +13,7 @@ body {
 
 #__next {
     height: 100%;
+    overflow-y: auto;
 }
 
 a {
