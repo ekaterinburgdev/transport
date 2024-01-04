@@ -59,8 +59,13 @@
         max-height: calc(100vh - 112px);
     }
 
-    .Modal_AlignCenter {
-        margin: auto;
+    .Modal_Align-top {
+        margin-bottom: auto;
+    }
+
+    .Modal_Align-center {
+        margin-top: auto;
+        margin-bottom: auto;
     }
 
     .ModalInner {

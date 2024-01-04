@@ -1,6 +1,6 @@
 export type ModalProps = {
     title?: string,
-    alignCenter?: boolean,
+    align?: 'top' | 'center',
     maxWidth?: number,
     onClose?: () => void;
     children: React.ReactNode;

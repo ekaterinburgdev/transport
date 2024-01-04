@@ -13,11 +13,11 @@ const cn = classNames.bind(styles);
 
 export function Modal({
     title = null,
-    alignCenter = false,
+    align = 'top',
     maxWidth,
-    onClose = () => {},
+    onClose = () => { },
     children
-} : ModalProps) {
+}: ModalProps) {
     const ref = useRef<HTMLDialogElement>(null);
 
     const close = () => {
@@ -28,7 +28,7 @@ export function Modal({
         ref.current.showModal();
         // Remove focus after open
         (document.activeElement as HTMLElement).blur();
-        
+
         const handleClickOutside = (e) => {
             if (ref.current.contains(e.target)) {
                 close();
@@ -44,8 +44,8 @@ export function Modal({
 
 
     return (
-        <dialog 
-            className={cn(styles.Modal, { [`${styles.Modal_AlignCenter}`]: alignCenter })} 
+        <dialog
+            className={cn(styles.Modal, { [`${styles[`Modal_Align-${align}`]}`]: align })}
             style={{ maxWidth }}
             onClose={onClose}
             ref={ref}
