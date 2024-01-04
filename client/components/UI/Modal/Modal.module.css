@@ -93,7 +93,7 @@
         transform: translateY(-24px) translateZ(0);
     }
 
-    top {
+    to {
         opacity: 1;
         transform: translateZ(0);
     }
