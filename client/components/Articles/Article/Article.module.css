@@ -89,6 +89,9 @@
 .ArticleContent li {
     margin-top: .5em;
     margin-bottom: .5em;
+
+.ArticleContent li::marker {
+    color: #667999;
 }
 
 .ArticleContent ul {
