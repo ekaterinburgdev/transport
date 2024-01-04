@@ -4,6 +4,7 @@
     margin: 0 auto;
     padding: 32px 24px 40px;
     font-size: 20px;
+    font-weight: 300;
     line-height: 1.3;
 }
 
@@ -45,7 +46,7 @@
 .ArticleTitle {
     font-size: 24px;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1.12;
 }
 
 
@@ -56,19 +57,15 @@
 .ArticleContent h2 {
     font-size: 22px;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1.16;
     margin-top: 1.4em;
     margin-bottom: .3em;
-}
-
-.ArticleContent :first-child {
-    margin-top: 0;
 }
 
 .ArticleContent h3 {
     font-size: 18px;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1.25;
     margin-top: 1.9em;
     margin-bottom: .8em;
 }
@@ -76,7 +73,7 @@
 .ArticleContent h4 {
     font-size: 14px;
     font-weight: 500;
-    line-height: 1.35;
+    line-height: 1.25;
     margin-top: 1.75em;
     margin-bottom: .25em;
 }
@@ -85,13 +82,17 @@
 .ArticleContent ul,
 .ArticleContent p {
     font-size: 14px;
-    line-height: 1.35;
+    line-height: 1.4;
     margin-bottom: 1.1em;
 }
 
 .ArticleContent li {
-    margin-top: .5em;
-    margin-bottom: .5em;
+    margin-top: .75em;
+    margin-bottom: .75em;
+}
+
+.ArticleContent li::marker {
+    color: #667999;
 }
 
 .ArticleContent ul {
@@ -108,16 +109,20 @@
 
 .ArticleContent blockquote {
     font-size: 22px;
-    font-weight: 600;
     line-height: 1.35;
     padding: 16px;
     border-radius: 16px;
     background: #F4F6FB;
-    margin: 0;
+    margin: 8px 0;
 }
 
 .ArticleContent blockquote p {
     margin: 0;
+}
+
+.ArticleContent b,
+.ArticleContent strong {
+    font-weight: 500;
 }
 
 @media screen and (min-width: 768px) {
@@ -150,5 +155,10 @@
     .ArticleContent ul,
     .ArticleContent p {
         font-size: 22px;
+    }
+
+    .ArticleContent blockquote {
+        margin: 16px 0;
+        padding: 24px;
     }
 }
