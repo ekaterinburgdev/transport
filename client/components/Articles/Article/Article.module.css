@@ -109,12 +109,11 @@
 
 .ArticleContent blockquote {
     font-size: 22px;
-    font-weight: 600;
     line-height: 1.35;
     padding: 16px;
     border-radius: 16px;
     background: #F4F6FB;
-    margin: 0;
+    margin: 8px 0;
 }
 
 .ArticleContent blockquote p {
@@ -151,5 +150,10 @@
     .ArticleContent ul,
     .ArticleContent p {
         font-size: 22px;
+    }
+
+    .ArticleContent blockquote {
+        margin: 16px 0;
+        padding: 24px;
     }
 }
