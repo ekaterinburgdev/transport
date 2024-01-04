@@ -62,10 +62,6 @@
     margin-bottom: .3em;
 }
 
-.ArticleContent :first-child {
-    margin-top: 0;
-}
-
 .ArticleContent h3 {
     font-size: 18px;
     font-weight: 500;
