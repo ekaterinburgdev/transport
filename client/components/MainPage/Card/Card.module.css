@@ -42,6 +42,18 @@
     }
 }
 
+.Card_Size-small {
+    aspect-ratio: 1 / 1;
+    max-width: 100%;
+}
+
+.Card_Size-large {
+    grid-area: span 1 / span 2;
+    aspect-ratio: 2 / 1;
+    align-self: stretch;
+}
+
+
 .Card_Public {
     background-color: var(--cards-public-bg);
     color: var(--cards-public-text);

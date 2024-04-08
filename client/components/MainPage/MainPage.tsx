@@ -122,6 +122,7 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems, articles }: Ma
                                     headerCaption={attributes.headerCaption}
                                     footerCaption={attributes.footerCaption}
                                     dynamicContent={getDynamicContent(attributes.dynamicId)}
+                                    size={attributes.size}
                                     key={id}
                                     onClick={
                                         attributes.url.startsWith('/')

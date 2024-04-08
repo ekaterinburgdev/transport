@@ -22,6 +22,7 @@ export function Card({
     titleBackgroundColor,
     type,
     url,
+    size,
     backgroundImage,
     backgroundImageHover,
     dynamicContent,
@@ -39,7 +40,7 @@ export function Card({
 
     return (
         <a
-            className={cn(styles.Card, CARD_TYPES_CLASSNAMES[type])}
+            className={cn(styles.Card, CARD_TYPES_CLASSNAMES[type], { [`${styles[`Card_Size-${size}`]}`]: size })}
             href={url}
             onClick={onClick}
             ref={cardRef}
