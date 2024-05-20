@@ -21,7 +21,6 @@ export default function Map() {
                 <title>Карта транспорта Екатеринбурга</title>
                 <link rel="preconnect" href={TILE_SERVER_URL} />
                 <link rel="preconnect" href={STRAPI_URL} />
-                <script src="https://tally.so/widgets/embed.js" async></script>
             </Head>
 
             <MapComponent />
