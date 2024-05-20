@@ -17,6 +17,7 @@ import Logo from './Logo.svg';
 
 import styles from './MainPage.module.css';
 import { Marquee } from './Marquee/Marquee';
+import { Feedback } from 'components/Common/Feedback/Feedback';
 
 const cn = classNames.bind(styles);
 
@@ -101,6 +102,7 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems, articles }: Ma
                         <br />
                         Екатеринбурга
                     </h1>
+                    <Feedback size="l" />
                 </div>
 
                 <div className={styles.MainPageCardGrid}>

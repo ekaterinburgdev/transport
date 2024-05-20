@@ -1,0 +1,31 @@
+.MapFeedback {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 64px;
+    background: #f9d548;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 1.05;
+    text-decoration: none;
+}
+
+/* leaflet styles for links have more specificity */
+.MapFeedback.MapFeedback {
+    color: var(--text-primary);
+}
+
+.MapFeedback_Size-m,
+.MapFeedback_Size-l {
+    height: 48px;
+    padding: 8px 24px;
+}
+
+@media screen and (min-width: 768px) {
+    .MapFeedback_Size-l {
+        height: 65px;
+        padding: 24px 32px;
+        font-size: 24px;
+    }
+}

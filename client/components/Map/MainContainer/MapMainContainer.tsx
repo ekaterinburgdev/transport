@@ -14,7 +14,7 @@ import { MapZoomControl } from 'components/Map/ZoomControl/MapZoomControl';
 import { MapWelcomeMessage } from 'components/Map/WelcomeMessage/MapWelcomeMessage';
 import { MapSearchBar } from 'components/Map/SearchBar/SearchBar';
 import { Info } from 'components/Map/Info/Info';
-import { Feedback } from 'components/Map/Feedback/Feedback';
+import { Feedback } from 'components/Common/Feedback/Feedback';
 
 import styles from './MapMainContainer.module.css';
 import 'leaflet/dist/leaflet.css';
@@ -85,7 +85,7 @@ function MapMainContainer({ zoom = 16, showControls = true }) {
                             styles.MapAdditionalButtons,
                         )}
                     >
-                        <Feedback />
+                        <Feedback size="m" />
                         <Info />
                     </div>
                 </>
