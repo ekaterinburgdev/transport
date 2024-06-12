@@ -1,9 +1,9 @@
 .Modal {
-    margin: auto 16px;
+    margin: auto;
     padding: 0;
     border: 0;
     border-radius: 16px;
-    width: 100%;
+    width: calc(100%  - 32px);
     animation: .2s ease-in-out fadeIn;
 }
 
