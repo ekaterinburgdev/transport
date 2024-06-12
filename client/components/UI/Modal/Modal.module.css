@@ -54,9 +54,8 @@
 @media screen and (min-width: 768px) {
     .Modal {
         width: 100%;
-        max-width: 1080px;
+        max-width: 1400px;
         margin: 56px auto;
-        max-height: calc(100vh - 112px);
     }
 
     .Modal_Align-top {
@@ -84,11 +83,17 @@
 
     .ModalTitle {
         font-size: 32px;
-        padding: 60px 68px 32px;
+        padding: 60px 64px 16px;
     }
     
     .ModalContent {
-        padding: 12px 68px 48px;
+        padding: 12px 64px 48px;
+    }
+}
+
+@media screen and (min-height: 800px) {
+    .Modal {
+        max-height: calc(100vh - 112px);
     }
 }
 
