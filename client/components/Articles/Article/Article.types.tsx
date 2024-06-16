@@ -3,6 +3,6 @@ import { ReactElement } from "react";
 export type ArticleProps = {
     title?: string;
     description: string;
-    aside: ReactElement;
+    aside?: ReactElement;
     external?: boolean
 };
