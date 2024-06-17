@@ -1,6 +1,3 @@
-import fetch from 'node-fetch';
-import FormData from 'form-data';
-
 import { STRAPI_URL } from './constants';
 
 export async function deleteFile(id: number, jwt: string) {
@@ -20,7 +17,6 @@ export async function uploadFile(data: FormData, jwt: string) {
     try {
         const resp = await fetch(`${STRAPI_URL}/api/upload`, {
             headers: {
-                ...data.getHeaders(),
                 ...(jwt ? { Authorization: `Bearer ${jwt}` } : {}),
             },
             method: 'POST',

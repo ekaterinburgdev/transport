@@ -7,13 +7,10 @@
   },
   "dependencies": {
     "encoding": "^0.1.13",
-    "form-data": "^4.0.0",
-    "node-fetch": "^2.7.0",
     "tslib": "^2.6.2",
     "typescript": "^4.9.5"
   },
   "devDependencies": {
-    "@types/node": "^18.17.15",
-    "@types/node-fetch": "^2.6.4"
+    "@types/node": "^20.14.3"
   }
 }

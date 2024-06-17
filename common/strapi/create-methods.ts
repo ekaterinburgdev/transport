@@ -1,5 +1,3 @@
-import fetch, { Response } from 'node-fetch';
-
 import { StrapiContentTypes } from '../types/strapi';
 import { parallelRequests } from '../utils/parallelRequests';
 import { STRAPI_URL, REQUEST_PAGINATION_SIZE } from './constants';
@@ -123,7 +121,7 @@ export function createStrapiMethods(contentType: StrapiContentTypes, jwt?: strin
                     throw new Error(rawResult.statusText);
                 }
 
-                const result = await rawResult.json();
+                const result = await rawResult.json() as any;
 
                 if (result.error) {
                     throw new Error(JSON.stringify(result.error));
