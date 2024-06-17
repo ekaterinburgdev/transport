@@ -7,17 +7,17 @@
     "update:transphoto": "ts-node transphoto/index.ts"
   },
   "dependencies": {
-    "jsdom": "^23.0.1",
+    "jsdom": "^24.1.0",
     "lodash": "^4.17.21",
     "transport-common": "workspace:*",
     "transport-server": "workspace:*"
   },
   "devDependencies": {
-    "@types/jsdom": "^21.1.6",
-    "@types/lodash": "^4.14.202",
+    "@types/jsdom": "^21.1.7",
+    "@types/lodash": "^4.17.5",
     "@types/node": "^20.14.3",
-    "ts-node": "^10.9.1",
-    "tslib": "^2.6.2",
-    "typescript": "^5.3.2"
+    "ts-node": "^10.9.2",
+    "tslib": "^2.6.3",
+    "typescript": "^5.4.5"
   }
 }
