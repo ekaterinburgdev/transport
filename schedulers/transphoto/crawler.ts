@@ -1,6 +1,5 @@
 import { JSDOM } from 'jsdom';
 import { isUndefined } from 'lodash';
-import fetch from 'node-fetch';
 
 import { ClientUnit, UnitInfo } from 'transport-common/types/masstrans';
 

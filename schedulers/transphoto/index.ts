@@ -1,7 +1,4 @@
 import _ from 'lodash';
-import fetch from 'node-fetch';
-
-import FormData from 'form-data';
 
 import { createStrapiMethods } from 'transport-common/strapi/create-methods';
 import { deleteFile, uploadFile } from 'transport-common/strapi/upload';
@@ -49,7 +46,7 @@ async function updateUnitInfoInStrapi(
             let imageId: number | undefined = undefined;
 
             if (info.imageUrl) {
-                const imageFile = await fetch(info.imageUrl).then((res) => res.buffer());
+                const imageFile = await fetch(info.imageUrl).then((res : any) => res.buffer());
                 const form = new FormData();
 
                 form.append('files', imageFile, `${info.type}-${info.boardNumber}.jpg`);
@@ -78,7 +75,7 @@ async function updateUnitInfoInStrapi(
             }
 
             if (info.imageUrl && info.imageUrl !== infoFromStrapi.imageUrl) {
-                const imageFile = await fetch(info.imageUrl).then((res) => res.buffer());
+                const imageFile = await fetch(info.imageUrl).then((res : any) => res.buffer());
                 const form = new FormData();
 
                 form.append('files', imageFile, `${info.type}-${info.boardNumber}.jpg`);

@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 import { StrapiLoginResponse } from '../types/strapi';
 import { STRAPI_URL, EMAIL, PASSWORD } from './constants';
 
