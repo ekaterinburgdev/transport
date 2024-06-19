@@ -1,12 +1,13 @@
 import React, { ReactElement } from 'react';
 
-import { TCardType } from 'api/main-page/main-page.types';
+import { TCardSize, TCardType } from 'api/main-page/main-page.types';
 
 export type CardProps = {
     type: TCardType | undefined;
     title: string;
     titleBackgroundColor: string;
     url: string;
+    size: TCardSize | undefined,
     backgroundImage: string;
     backgroundImageHover: string;
     headerCaption: string;

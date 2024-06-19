@@ -1,4 +1,5 @@
 export type TCardType = "public" | "car" | "pedestrian" | "other";
+export type TCardSize = "large" | "small";
 
 export type background = {
     data: {
@@ -32,6 +33,7 @@ export interface Card {
         backgroundImage: background;
         backgroundImageHover: background;
         type: TCardType;
+        size: TCardSize;
         priority: number;
         cardId: null;
         headerCaption: null | string;
