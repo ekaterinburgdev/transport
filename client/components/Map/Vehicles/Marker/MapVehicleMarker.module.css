@@ -1,6 +1,6 @@
 .MapVehicleMarker {
     animation: 150ms ease-out enlarge;
-    transform-origin: 20px 28px;
+    transform-origin: 10px 20px;
 }
 
 @keyframes enlarge {
