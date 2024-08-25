@@ -1,37 +1,40 @@
 .Article {
-    color: #0C1B27;
-    max-width: 1000px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 32px 24px 40px;
-    font-size: 20px;
+    padding: 24px;
+    color: #0C1B27;
     font-weight: 300;
+    font-size: 20px;
     line-height: 1.3;
 }
 
 .Article_external {
-    padding: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
 }
 
 .ArticleBack {
     display: inline-flex;
-    align-items: center;
     gap: .5em;
-    white-space: nowrap;
+    align-items: center;
+    margin-bottom: 40px;
+    color: #0C1B27;
     font-size: 32px;
     line-height: 1;
     text-decoration: none;
+    white-space: nowrap;
     text-decoration-skip-ink: none;
-    color: #0C1B27;
 }
 
 .ArticleBackArrow {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     width: 1.25em;
     height: 1.25em;
-    background: rgba(12, 27, 39, 0.07);
     border-radius: 50%;
+    background: rgba(12, 27, 39, 0.07);
     transition: .1s ease;
 }
 
@@ -44,46 +47,55 @@
 }
 
 .ArticleTitle {
-    font-size: 24px;
+    margin-top: -0.05em;
+    margin-bottom: 1em;
     font-weight: 500;
+    font-size: 24px;
     line-height: 1.12;
 }
 
+.Article_external .ArticleContent {
+    padding-bottom: 0;
+}
 
 .ArticleContent a:hover {
     text-decoration: none;
 }
 
 .ArticleContent h2 {
-    font-size: 22px;
-    font-weight: 500;
-    line-height: 1.16;
     margin-top: 1.4em;
     margin-bottom: .3em;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.16;
 }
 
 .ArticleContent h3 {
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 1.25;
     margin-top: 1.9em;
     margin-bottom: .8em;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.25;
 }
 
 .ArticleContent h4 {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.25;
     margin-top: 1.75em;
     margin-bottom: .25em;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.25;
 }
 
 .ArticleContent ol,
 .ArticleContent ul,
 .ArticleContent p {
+    margin-bottom: 1.1em;
     font-size: 14px;
     line-height: 1.4;
-    margin-bottom: 1.1em;
+
+    &:first-child {
+        margin-top: 0;
+    }
 }
 
 .ArticleContent li {
@@ -95,25 +107,30 @@
     color: #667999;
 }
 
+.ArticleContent ol {
+    padding-left: 1em;
+}
+
 .ArticleContent ul {
+    padding-left: 1.5em;
     list-style-type: none;
 }
 
 .ArticleContent ul li:before {
     content: "—";
     display: inline-block;
-    padding-right: .5em;
     margin-left: -1.5em;
+    padding-right: .5em;
     opacity: .45;
 }
 
 .ArticleContent blockquote {
-    font-size: 22px;
-    line-height: 1.35;
+    margin: 8px 0;
     padding: 16px;
     border-radius: 16px;
     background: #F4F6FB;
-    margin: 8px 0;
+    font-size: 22px;
+    line-height: 1.35;
 }
 
 .ArticleContent blockquote p {
@@ -125,18 +142,39 @@
     font-weight: 500;
 }
 
+.ArticleAside {
+    flex-shrink: 0;
+    flex-basis: 25%;
+    margin-top: 56px;
+    padding: 24px 0;
+    border-top: 2px solid #eee;
+}
+
+.ArticleText {
+    flex-grow: 1;
+}
+
+.ArticleAsideFeedback {
+    display: none;
+    text-align: right;
+}
+
 @media screen and (min-width: 768px) {
     .Article {
-        padding-top: 64px;
-        padding-bottom: 80px;
+        padding: 32px;
     }
-
-    .Article_external {
-        padding: 0;
-    }
-
+    
     .ArticleTitle {
         font-size: 64px;
+    }
+
+    .ArticleBack {
+        margin-bottom: 64px;
+    }
+
+    .ArticleContent {
+        gap: 32px;
+        padding-bottom: 80px;
     }
     
     .ArticleContent h2 {
@@ -160,5 +198,23 @@
     .ArticleContent blockquote {
         margin: 16px 0;
         padding: 24px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .ArticleContent {
+        display: flex;
+        gap: 16px;
+    }
+    
+
+    .ArticleAside {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    .ArticleAsideFeedback {
+        display: block;
     }
 }

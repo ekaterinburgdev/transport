@@ -7,20 +7,15 @@ import styles from './Feedback.module.css';
 
 const cn = classNames.bind(styles);
 
-export function Feedback({
-    caption = 'Фидбек',
-    size
-} : FeedbackProps) {
+export function Feedback({ size } : FeedbackProps) {
     return (
         <a
             href="https://tally.so#tally-open=mRDkVd&tally-width=650&tally-overlay=1&tally-emoji-animation=none"
             target="_blank"
             rel="noreferrer"
-            className={cn(styles.MapFeedback, {
-                [styles[`MapFeedback_Size-${size}`]]: size
-            })}
+            className={cn(styles.Feedback, { [styles[`Feedback_Size-${size}`]]: size })}
         >
-            {caption}
+            Фидбек
         </a>
     );
 }

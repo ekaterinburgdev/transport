@@ -4,16 +4,21 @@ import Head from 'next/head';
 import { articlesApi } from 'api/articles/articles';
 import { ArticleProps } from 'components/Articles/Article/Article.types';
 import { Article } from 'components/Articles/Article/Article';
+import { Feedback } from 'components/Common/Feedback/Feedback';
 
-function ArticlePage({ title, description }: ArticleProps) {
+function ArticlePage({ title, description, sidebar }: ArticleProps) {
     return (
         <>
-        
+
             <Head>
                 <title>{`Транспорт Екатеринбурга — ${title}`}</title>
             </Head>
 
-            <Article title={title} description={description} />
+            <Article
+                title={title}
+                description={description}
+                sidebar={sidebar}
+            />
         </>
     );
 }

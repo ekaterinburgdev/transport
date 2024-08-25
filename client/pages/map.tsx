@@ -25,11 +25,8 @@ export default function Map() {
 
             <MapComponent />
 
-            <Modal title="Почему карта транспорта не работает" maxWidth={800} align="center">
-                <Article
-                    description={warningMessage}
-                    external
-                />
+            <Modal align="center" title="Почему карта транспорта не работает" maxWidth={800}>
+                <Article description={warningMessage} external />
             </Modal>
         </>
     );
