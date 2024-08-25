@@ -1,49 +1,63 @@
+html:has(.Modal) {
+    scrollbar-color: transparent transparent;
+}
+
 .Modal {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    width: calc(100% - 32px);
+    max-width: none;
     margin: auto;
+    max-height: none;
     padding: 0;
     border: 0;
-    border-radius: 16px;
-    width: calc(100%  - 32px);
+    background: transparent;
     animation: .2s ease-in-out fadeIn;
 }
 
+.Modal_Align-top {
+    margin-top: 16px;
+}
+
+.Modal_Align-center {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .Modal::backdrop {
-    background: rgba(12, 27, 39, .2);
+    background: rgba(12, 27, 39, .3);
 }
 
 .ModalTitle {
-    font-size: 24px;
     margin: 0;
-    padding: 32px 24px 8px;
+    padding: 24px 48px 0 24px;
+    font-size: 24px;
+}
+
+.ModalInner {
+    overflow: auto;
+    height: 100%;
+    border-radius: 8px;
+    background: white;
+    scrollbar-color: transparent transparent;
+}
+
+.ModalInner:hover {
+    scrollbar-color: #7d828a transparent;
 }
 
 .ModalContent {
-    padding: 16px 24px 24px;
+    padding: 0px 24px 8px;
 }
 
 .ModalClose {
-    position: sticky;
+    position: absolute;
     top: 0;
-    float: right;
-    background: none;
+    right: 0;
+    padding: 16px;
     border: 0;
-    padding: 24px;
-    color: rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    transition: .15s ease;
-    border-radius: 50%;
-}
-
-@media (hover) {
-    .ModalClose:hover {
-        background-color: rgba(255, 255, 255, 0.8);
-        color: rgba(0, 0, 0, 0.75);
-    }
-}
-
-.ModalClose:active {
-    background-color: rgba(255, 255, 255, 0.95);
-    color: rgba(0, 0, 0, 1);
+    background: none;
 }
 
 .ModalClose svg {
@@ -53,47 +67,91 @@
 
 @media screen and (min-width: 768px) {
     .Modal {
-        width: 100%;
-        max-width: 1400px;
-        margin: 56px auto;
+        width: calc(100% - 140px);
+        background: none;
     }
 
     .Modal_Align-top {
-        margin-bottom: auto;
-    }
-
-    .Modal_Align-center {
-        margin-top: auto;
-        margin-bottom: auto;
-    }
-
-    .ModalInner {
-        max-height: inherit;
-        overflow: auto;
+        margin-top: 56px;
     }
 
     .ModalClose {
-        padding: 32px;
+        position: absolute;
+        top: 0;
+        right: -12px;
+        display: flex;
+        padding: 12px;
+        border: 0;
+        border-radius: 50%;
+        background: #394760;
+        color: white;
+        cursor: pointer;
+        transition: background-color .15s ease, color .15s ease;
+        transform: translateX(100%);
     }
 
     .ModalClose svg {
-        width: 24px;
-        height: 24px;
+        width: 14px;
+        height: 14px;
+    }
+
+    @media (hover) {
+        .ModalClose:hover {
+            background: #273143;
+        }
+    }
+
+    .ModalClose:active {
+        background: #0f141b;
     }
 
     .ModalTitle {
+        padding: 60px 40px 0;
         font-size: 32px;
-        padding: 60px 64px 16px;
     }
-    
+
     .ModalContent {
-        padding: 12px 64px 48px;
+        padding: 8px;
     }
 }
 
-@media screen and (min-height: 800px) {
+@media screen and (min-width: 991px) {
     .Modal {
-        max-height: calc(100vh - 112px);
+        width: calc(100% - 154px);
+        max-width: 1360px;
+    }
+
+    .Modal_Align-top {
+        margin-top: 64px;
+    }
+
+    .ModalInner {
+        border-radius: 24px;
+    }
+
+    .ModalTitle {
+        padding: 60px 64px 0;
+        font-size: 32px;
+    }
+
+    .ModalContent {
+        padding: 24px 32px;
+    }
+
+    .ModalClose {
+        padding: 16px;
+        right: -12px;
+    }
+
+    .ModalClose svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media screen and (min-width: 991px) and (min-height: 800px) {
+    .Modal {
+        max-height: calc(100vh - 128px);
     }
 }
 

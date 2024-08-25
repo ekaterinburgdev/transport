@@ -19,6 +19,7 @@ export function Modal({
     children
 }: ModalProps) {
     const ref = useRef<HTMLDialogElement>(null);
+    const refInner = useRef<HTMLDivElement>(null);
 
     const close = () => {
         ref.current.close();
@@ -26,11 +27,12 @@ export function Modal({
 
     useEffect(() => {
         ref.current.showModal();
+        refInner.current.scrollTo(0, 0);
         // Remove focus after open
         (document.activeElement as HTMLElement).blur();
 
         const handleClickOutside = (e) => {
-            if (ref.current.contains(e.target)) {
+            if (ref.current === e.target) {
                 close();
             }
         }
@@ -50,15 +52,14 @@ export function Modal({
             onClose={onClose}
             ref={ref}
         >
-            <div className={cn(styles.ModalInner)}>
-                <button className={cn(styles.ModalClose)} onClick={close} aria-label="Закрыть">
-                    <Close />
-                </button>
-
+            <div className={cn(styles.ModalInner)} ref={refInner}>
                 {title && <h1 className={cn(styles.ModalTitle)}>{t(title)}</h1>}
-
                 <div className={cn(styles.ModalContent)}>{children}</div>
             </div>
+
+            <button className={cn(styles.ModalClose)} onClick={close} aria-label="Закрыть">
+                <Close />
+            </button>
         </dialog>
     );
 }

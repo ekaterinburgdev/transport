@@ -6,7 +6,7 @@ import { ArticleProps } from 'components/Articles/Article/Article.types';
 import { Article } from 'components/Articles/Article/Article';
 import { Feedback } from 'components/Common/Feedback/Feedback';
 
-function ArticlePage({ title, description }: ArticleProps) {
+function ArticlePage({ title, description, sidebar }: ArticleProps) {
     return (
         <>
 
@@ -17,7 +17,8 @@ function ArticlePage({ title, description }: ArticleProps) {
             <Article
                 title={title}
                 description={description}
-                aside={<Feedback size='l' />} />
+                sidebar={sidebar}
+            />
         </>
     );
 }

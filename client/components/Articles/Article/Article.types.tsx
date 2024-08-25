@@ -1,8 +1,6 @@
-import { ReactElement } from "react";
-
 export type ArticleProps = {
     title?: string;
     description: string;
-    aside?: ReactElement;
+    sidebar?: string;
     external?: boolean
 };
