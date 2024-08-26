@@ -6,6 +6,8 @@ import { useSmoothCorners } from './useSmoothCorners';
 
 import { CardProps } from './Card.types';
 
+import NewLink from './icon-external-link.svg';
+
 import styles from './Card.module.css';
 
 const CARD_TYPES_CLASSNAMES = {
@@ -32,6 +34,8 @@ export function Card({
 }: CardProps) {
     const cardRef = useRef<HTMLAnchorElement>(null);
     const cardTitleRef = useRef<HTMLDivElement>(null);
+    const isExternalUrl = url.includes('http');
+
     useSmoothCorners(cardRef);
 
     if (titleBackgroundColor) {
@@ -44,6 +48,7 @@ export function Card({
             href={url}
             onClick={onClick}
             ref={cardRef}
+            target={isExternalUrl ? '_blank' : ''}
             style={
                 {
                     '--CardTitleBgColor': titleBackgroundColor,
@@ -61,6 +66,7 @@ export function Card({
                     ref={cardTitleRef}
                 >
                     {t(title)}
+                    {isExternalUrl && <NewLink className={cn(styles.CardExternalLink)} />}
                 </div>
             )}
             {headerCaption && <p className={cn(styles.CardHeaderCaption)}>{t(headerCaption)}</p>}
