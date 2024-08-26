@@ -15,7 +15,7 @@ html:has(.Modal) {
     border: 0;
     background: transparent;
     transition: .15s ease-out;
-    animation: .2s ease-in-out fadeIn;
+    animation: .15s ease fadeIn;
 }
 
 .Modal:not([open]) {
@@ -23,6 +23,7 @@ html:has(.Modal) {
 }
 
 .Modal::backdrop {
+    transition: .15s ease;
     background: rgba(12, 27, 39, .3);
 }
 
@@ -51,6 +52,7 @@ html:has(.Modal) {
     border-radius: 16px 16px 0 0;
     background: white;
     scrollbar-color: transparent transparent;
+    transition: .15s ease;
 }
 
 .ModalInner:hover {
@@ -106,27 +108,32 @@ html:has(.Modal) {
 @media screen and (min-width: 768px) {
     .Modal {
         width: calc(100% - 120px);
-        height: fit-content;
-        max-height: calc(100% - 160px);
+        max-height: calc(100% - 80px);
         background: none;
     }
 
     .Modal_Align-top {
         margin-top: 80px;
         margin-bottom: 0;
+        height: calc(100% - 80px);
+    }
+
+    .Modal_Align-top .ModalInner {
+        border-radius: 24px 24px 0 0;
     }
     
     .Modal_Align-center {
         margin-top: auto;
         margin-bottom: auto;
+        height: fit-content;
+    }
+
+    .Modal_Align-center .ModalInner {
+        border-radius: 24px;
     }
 
     .ModalDragArea {
         display: none;
-    }
-
-    .ModalInner {
-        border-radius: 24px;
     }
 
     .ModalClose {
@@ -184,10 +191,6 @@ html:has(.Modal) {
         padding: 24px 32px;
     }
 
-    .ModalInner {
-        border-radius: 28px;
-    }
-
     .ModalClose {
         right: -8px;
         padding: 16px;
@@ -202,7 +205,7 @@ html:has(.Modal) {
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-24px) translateZ(0);
+        transform: translateY(32px) translateZ(0);
     }
 
     to {
