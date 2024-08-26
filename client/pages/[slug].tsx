@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { articlesApi } from 'api/articles/articles';
 import { ArticleProps } from 'components/Articles/Article/Article.types';
 import { Article } from 'components/Articles/Article/Article';
-import { Feedback } from 'components/Common/Feedback/Feedback';
+import { Feedback } from 'components/UI/Feedback/Feedback';
 
 function ArticlePage({ title, description, sidebar }: ArticleProps) {
     return (
