@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
-
+import { CardPosition, useSwipeableCard } from 'hooks/useSwipeableCard';
 import t from 'utils/typograph';
-
 import { ModalProps } from './Modal.types';
 
 import Close from 'public/icons/close.svg';
@@ -21,43 +20,52 @@ export function Modal({
     const ref = useRef<HTMLDialogElement>(null);
     const refInner = useRef<HTMLDivElement>(null);
 
+    const mobilePosition = align === 'center'
+        ? CardPosition.HalfOpen
+        : CardPosition.FullOpen;
+
+    const [currentPosition, onDragEnd, onDrag] = useSwipeableCard(mobilePosition);
+
     const close = () => {
         ref.current.close();
     };
 
+    const handleClickOutside = (e) => {
+        if (e.target === ref.current) {
+            close();
+        }
+    };
+
     useEffect(() => {
+        if (refInner.current) {
+            refInner.current.scrollTo(0, 0);
+        }
         ref.current.showModal();
-        refInner.current.scrollTo(0, 0);
-        // Remove focus after open
         (document.activeElement as HTMLElement).blur();
-
-        const handleClickOutside = (e) => {
-            if (ref.current === e.target) {
-                close();
-            }
-        }
-
-        document.addEventListener('click', handleClickOutside)
-
-        return () => {
-            document.removeEventListener('click', handleClickOutside)
-        }
     }, []);
-
 
     return (
         <dialog
-            className={cn(styles.Modal, { [`${styles[`Modal_Align-${align}`]}`]: align })}
+            className={cn(styles.Modal, {
+                [`${styles[`Modal_Align-${align}`]}`]: align,
+                [`${styles[`Modal_Position-${currentPosition}`]}`]: currentPosition,
+            })}
             style={{ maxWidth }}
+            onClick={handleClickOutside}
             onClose={onClose}
             ref={ref}
         >
             <div className={cn(styles.ModalInner)} ref={refInner}>
+                <div
+                    className={cn(styles.ModalDragArea)}
+                    onTouchMoveCapture={onDrag}
+                    onTouchEndCapture={onDragEnd}
+                />
                 {title && <h1 className={cn(styles.ModalTitle)}>{t(title)}</h1>}
                 <div className={cn(styles.ModalContent)}>{children}</div>
             </div>
 
-            <button className={cn(styles.ModalClose)} onClick={close} aria-label="Закрыть">
+            <button className={cn(styles.ModalClose)} onClick={() => close()} aria-label="Закрыть">
                 <Close />
             </button>
         </dialog>

@@ -6,39 +6,49 @@ html:has(.Modal) {
     display: flex;
     flex-direction: column;
     overflow: visible;
-    width: calc(100% - 32px);
+    width: calc(100% - 16px);
     max-width: none;
-    margin: auto;
     max-height: none;
+    margin-top: auto;
+    margin-bottom: 0;
     padding: 0;
     border: 0;
     background: transparent;
+    transition: .15s ease-out;
     animation: .2s ease-in-out fadeIn;
 }
 
-.Modal_Align-top {
-    margin-top: 16px;
-}
-
-.Modal_Align-center {
-    margin-top: auto;
-    margin-bottom: auto;
+.Modal:not([open]) {
+    display: none;
 }
 
 .Modal::backdrop {
     background: rgba(12, 27, 39, .3);
 }
 
+.Modal_Position-fullOpen {
+    height: calc(100% - 90px);
+}
+
+.Modal_Position-halfOpen {
+    height: 50%;
+}
+
+.Modal_Position-hidden {
+    overflow: hidden;
+    height: 15%;
+}
+
 .ModalTitle {
     margin: 0;
-    padding: 24px 48px 0 24px;
+    padding: 32px 56px 0 24px;
     font-size: 24px;
 }
 
 .ModalInner {
+    flex-grow: 1;
     overflow: auto;
-    height: 100%;
-    border-radius: 8px;
+    border-radius: 16px 16px 0 0;
     background: white;
     scrollbar-color: transparent transparent;
 }
@@ -48,31 +58,75 @@ html:has(.Modal) {
 }
 
 .ModalContent {
-    padding: 0px 24px 8px;
+    padding: 0px 24px;
+}
+
+.ModalDragArea {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    height: 76px;
+    margin-bottom: -76px;
+    touch-action: none;
+}
+
+.ModalDragArea::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    display: block;
+    width: 50px;
+    height: 5px;
+    border-radius: 10px;
+    background: #9baac3;
+    opacity: 0.5;
+    transform: translate(-50%, 0);
 }
 
 .ModalClose {
     position: absolute;
     top: 0;
     right: 0;
-    padding: 16px;
+    z-index: 1;
+    display: flex;
+    padding: 20px;
     border: 0;
+    border-radius: 50%;
     background: none;
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .ModalClose svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
 }
 
 @media screen and (min-width: 768px) {
     .Modal {
-        width: calc(100% - 140px);
+        width: calc(100% - 120px);
+        height: fit-content;
+        max-height: calc(100% - 160px);
         background: none;
     }
 
     .Modal_Align-top {
-        margin-top: 56px;
+        margin-top: 80px;
+        margin-bottom: 0;
+    }
+    
+    .Modal_Align-center {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .ModalDragArea {
+        display: none;
+    }
+
+    .ModalInner {
+        border-radius: 24px;
     }
 
     .ModalClose {
@@ -117,16 +171,8 @@ html:has(.Modal) {
 
 @media screen and (min-width: 991px) {
     .Modal {
-        width: calc(100% - 154px);
+        width: calc(100% - 150px);
         max-width: 1360px;
-    }
-
-    .Modal_Align-top {
-        margin-top: 64px;
-    }
-
-    .ModalInner {
-        border-radius: 24px;
     }
 
     .ModalTitle {
@@ -138,20 +184,18 @@ html:has(.Modal) {
         padding: 24px 32px;
     }
 
+    .ModalInner {
+        border-radius: 28px;
+    }
+
     .ModalClose {
+        right: -8px;
         padding: 16px;
-        right: -12px;
     }
 
     .ModalClose svg {
         width: 20px;
         height: 20px;
-    }
-}
-
-@media screen and (min-width: 991px) and (min-height: 800px) {
-    .Modal {
-        max-height: calc(100vh - 128px);
     }
 }
 

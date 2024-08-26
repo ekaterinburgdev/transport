@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import classNames from 'classnames/bind';
 
 import { sidebarService } from 'services/sidebar/sidebar';
-import { SidepagePosition, useSidepage } from 'hooks/useSidepage/useSidepage';
+import { CardPosition, useSwipeableCard } from 'hooks/useSwipeableCard';
 import { useDisablePropagation } from 'hooks/useDisablePropagation';
 
 import Close from 'public/icons/close.svg';
@@ -16,7 +16,7 @@ export function Sidepage({ children }: React.PropsWithChildren) {
 
     useDisablePropagation(ref);
 
-    const [currentPosition, onDragEnd, onDrag] = useSidepage(SidepagePosition.HalfOpen);
+    const [currentPosition, onDragEnd, onDrag] = useSwipeableCard(CardPosition.HalfOpen);
 
     return (
         <div
