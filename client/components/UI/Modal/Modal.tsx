@@ -26,13 +26,14 @@ export function Modal({
 
     const [currentPosition, onDragEnd, onDrag] = useSwipeableCard(mobilePosition);
 
-    const close = () => {
-        ref.current.close();
+    const handleClose = () => {
+        setTimeout(() => ref.current?.close());
+        setTimeout(() => onClose());
     };
 
     const handleClickOutside = (e) => {
         if (e.target === ref.current) {
-            close();
+            handleClose();
         }
     };
 
@@ -44,6 +45,12 @@ export function Modal({
         (document.activeElement as HTMLElement).blur();
     }, []);
 
+    useEffect(() => {
+        if (currentPosition === CardPosition.Hidden) {
+            setTimeout(() => handleClose(), 100);
+        }
+    }, [currentPosition]);
+
     return (
         <dialog
             className={cn(styles.Modal, {
@@ -52,7 +59,7 @@ export function Modal({
             })}
             style={{ maxWidth }}
             onClick={handleClickOutside}
-            onClose={onClose}
+            onClose={handleClose}
             ref={ref}
         >
             <div className={cn(styles.ModalInner)} ref={refInner}>
@@ -65,7 +72,7 @@ export function Modal({
                 <div className={cn(styles.ModalContent)}>{children}</div>
             </div>
 
-            <button className={cn(styles.ModalClose)} onClick={() => close()} aria-label="Закрыть">
+            <button className={cn(styles.ModalClose)} onClick={handleClose} aria-label="Закрыть">
                 <Close />
             </button>
         </dialog>

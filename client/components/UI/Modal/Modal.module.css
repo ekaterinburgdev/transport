@@ -14,8 +14,9 @@ html:has(.Modal) {
     padding: 0;
     border: 0;
     background: transparent;
-    transition: .15s ease-out;
+    transition: height .15s ease-out, opacity .15s ease-out;
     animation: .15s ease fadeIn;
+    touch-action: none;
 }
 
 .Modal:not([open]) {
@@ -35,9 +36,15 @@ html:has(.Modal) {
     height: 50%;
 }
 
-.Modal_Position-hidden {
+.Modal_Position-tinyOpen {
     overflow: hidden;
     height: 15%;
+}
+
+.Modal_Position-hidden {
+    transition: .1s ease;
+    height: 0;
+    opacity: 0;
 }
 
 .ModalTitle {
