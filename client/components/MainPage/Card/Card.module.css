@@ -111,6 +111,10 @@
 }
 
 .CardTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     position: relative;
     font-size: 16px;
     font-weight: 500;
@@ -124,6 +128,7 @@
 }
 
 .CardTitle.CardTitle_Bg {
+    width: auto;
     padding: .5em .75em;
     color: white;
     text-decoration-color: rgba(255, 255, 255, 0.3);
@@ -154,12 +159,17 @@
     line-height: 1.35;
 }
 
+.CardExternalLink {
+    margin-left: 16px;
+    flex-shrink: 0;
+}
+
 @media screen and (min-width: 375px) {
     .Card {
         padding: 24px;
     }
 
-    .CardTitle   {
+    .CardTitle {
         font-size: max(16px, 4vw);
     }
 
