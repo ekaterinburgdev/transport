@@ -38,10 +38,10 @@ export function Modal({
     };
 
     useEffect(() => {
+        ref.current.showModal();
         if (refInner.current) {
             refInner.current.scrollTo(0, 0);
         }
-        ref.current.showModal();
         (document.activeElement as HTMLElement).blur();
     }, []);
 
