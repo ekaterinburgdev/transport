@@ -5,7 +5,7 @@ import React from "react";
 
 const cn = classNames.bind(styles);
 const getTrafficLightByScore = (score: any) => {
-    const scoreNumber = parseInt(score?.toString());
+    const scoreNumber = Number(score);
     if (scoreNumber < 4) {
         return styles.CardTrafficLight_Green;
     } else if (scoreNumber < 7) {
@@ -17,7 +17,7 @@ const getTrafficLightByScore = (score: any) => {
 export function CardTrafficJams({ score }) {
     return (
         <div className={cn(styles.CardTrafficLight, getTrafficLightByScore(score))}>
-            {score}
+            {Number(score)}
         </div>
     )
 }
