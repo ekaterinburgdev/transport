@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 export enum CardPosition {
     FullOpen = 'fullOpen',
     HalfOpen = 'halfOpen',
+    TinyOpen = 'tinyOpen',
     Hidden = 'hidden',
 }
 
 export const CARD_POSITIONS = [
     CardPosition.FullOpen,
     CardPosition.HalfOpen,
+    CardPosition.TinyOpen,
     CardPosition.Hidden,
 ];
 export const CHANGE_POSITION_DELTA = 60;
@@ -42,7 +44,6 @@ export function useSwipeableCard(
     }
 
     function onDragEnd(event: React.TouchEvent) {
-        event.preventDefault();
         event.stopPropagation();
 
         isDragFinished = false;
@@ -50,8 +51,6 @@ export function useSwipeableCard(
     }
 
     function onDrag(event: React.TouchEvent) {
-        event.preventDefault();
-
         if (isDragFinished) {
             return;
         }

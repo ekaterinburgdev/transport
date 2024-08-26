@@ -104,7 +104,7 @@
         left: 8px !important;
         bottom: 0;
         top: initial !important;
-        transition: height 150ms ease-out;
+        transition: height .15s ease-out, opacity .15s ease-out;
         will-change: height;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
@@ -131,9 +131,14 @@
         height: 50%;
     }
 
-    .Sidepage_hidden {
+    .Sidepage_tinyOpen {
         overflow: hidden;
         height: 15%;
+    }
+
+    .Sidepage_hidden {
+        height: 0;
+        opacity: 0;
     }
 
     .SidepageDragArea {

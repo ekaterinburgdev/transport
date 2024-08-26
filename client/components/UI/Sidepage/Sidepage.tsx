@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 
 import { sidebarService } from 'services/sidebar/sidebar';
@@ -17,6 +17,14 @@ export function Sidepage({ children }: React.PropsWithChildren) {
     useDisablePropagation(ref);
 
     const [currentPosition, onDragEnd, onDrag] = useSwipeableCard(CardPosition.HalfOpen);
+
+    useEffect(() => {
+        if (currentPosition === CardPosition.Hidden) {
+            setTimeout(() => {
+                sidebarService.close();
+            }, 100)
+        }
+    }, [currentPosition]);
 
     return (
         <div
