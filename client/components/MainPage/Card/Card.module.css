@@ -111,6 +111,8 @@
 }
 
 .CardTitle {
+    --smooth-corners: 0.8;
+    border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -215,8 +217,6 @@
     }
 
     .CardTitle {
-        --smooth-corners: 0.8;
-        border-radius: 8px;
         font-size: 32px;
     }
 
