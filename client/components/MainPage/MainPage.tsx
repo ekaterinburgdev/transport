@@ -17,11 +17,9 @@ import Logo from './Logo.svg';
 
 import styles from './MainPage.module.css';
 import { Marquee } from './Marquee/Marquee';
-import { Feedback } from 'components/Common/Feedback/Feedback';
+import { Feedback } from 'components/UI/Feedback/Feedback';
 
 const cn = classNames.bind(styles);
-
-const MOBILE_WIDTH = 768;
 
 export function MainPage({ cards, cardsDynamicData, marqueeItems, articles }: MainPageTypes) {
     const marqueeItemsData = marqueeItems.map(({ id, attributes: { message } }) => ({
@@ -58,10 +56,6 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems, articles }: Ma
 
     const handleCardClick = useCallback(
         (url: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
-            if (window.innerWidth <= MOBILE_WIDTH) {
-                return;
-            }
-
             const cardSlug = url.slice(1);
             const article = articles.find((a) => a.slug === cardSlug);
 

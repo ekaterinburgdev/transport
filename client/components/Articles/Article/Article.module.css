@@ -1,6 +1,6 @@
 .Article {
     max-width: 1280px;
-    margin: 0 auto;
+    margin: 0 auto 40px;
     padding: 24px;
     color: #0C1B27;
     font-weight: 300;
@@ -14,35 +14,41 @@
     padding-left: 0;
 }
 
+.ArticleControls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
 .ArticleBack {
     display: inline-flex;
-    gap: .5em;
+    gap: .25em;
     align-items: center;
-    margin-bottom: 40px;
+    margin-left: -8px;
+    padding: 8px 16px 8px 8px;
     color: #0C1B27;
-    font-size: 32px;
+    font-size: 16px;
     line-height: 1;
     text-decoration: none;
     white-space: nowrap;
     text-decoration-skip-ink: none;
+    background: none;
+    border-radius: 12px;
+}
+
+.ArticleBack:hover {
+    background: rgba(0, 0, 0, .07);
+}
+
+.ArticleBack:active {
+    background: rgba(0, 0, 0, .08);
 }
 
 .ArticleBackArrow {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 1.25em;
-    height: 1.25em;
-    border-radius: 50%;
-    background: rgba(12, 27, 39, 0.07);
-    transition: .1s ease;
+    display: none;
 }
 
-.ArticleBack:hover .ArticleBackArrow {
-    background: rgba(12, 27, 39, 0.1);
-}
-
-.ArticleBack:hover .ArticleBackCaption {
+.ArticleBackCaption {
     text-decoration: underline;
 }
 
@@ -52,6 +58,10 @@
     font-weight: 500;
     font-size: 24px;
     line-height: 1.12;
+}
+
+.Article_external .ArticleTitle {
+    padding-right: 32px;
 }
 
 .Article_external .ArticleContent {
@@ -96,6 +106,10 @@
     &:first-child {
         margin-top: 0;
     }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 .ArticleContent li {
@@ -129,7 +143,7 @@
     padding: 16px;
     border-radius: 16px;
     background: #F4F6FB;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.35;
 }
 
@@ -154,45 +168,49 @@
     flex-grow: 1;
 }
 
-.ArticleAsideFeedback {
-    display: none;
-    text-align: right;
+
+@media screen and (min-width: 360px) {
+    .ArticleBackArrow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 1.25em;
+        height: 1.25em;
+        transition: .1s ease;
+    }
 }
 
 @media screen and (min-width: 768px) {
     .Article {
         padding: 32px;
-    }
-    
-    .ArticleTitle {
-        font-size: 64px;
+        padding-bottom: 16px;
     }
 
-    .ArticleBack {
-        margin-bottom: 64px;
+    .ArticleTitle {
+        font-size: 64px;
     }
 
     .ArticleContent {
         gap: 32px;
         padding-bottom: 80px;
     }
-    
+
     .ArticleContent h2 {
         font-size: 48px;
     }
-    
+
     .ArticleContent h3 {
         font-size: 32px;
     }
-    
+
     .ArticleContent h4 {
         font-size: 22px;
     }
-    
+
     .ArticleContent ol,
     .ArticleContent ul,
     .ArticleContent p {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .ArticleContent blockquote {
@@ -206,15 +224,23 @@
         display: flex;
         gap: 16px;
     }
-    
+
+    .ArticleBack {
+        font-size: 24px;
+        padding: 12px 28px 12px 12px;
+    }
 
     .ArticleAside {
         margin: 0;
         padding: 0;
         border: 0;
     }
+}
 
-    .ArticleAsideFeedback {
-        display: block;
+@media screen and (min-width: 1440px) {
+    .ArticleBack {
+        font-size: 26px;
+        margin-left: -16px;
+        margin-bottom: 72px;
     }
 }
