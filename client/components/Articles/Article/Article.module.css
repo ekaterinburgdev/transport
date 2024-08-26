@@ -130,7 +130,7 @@
     list-style-type: none;
 }
 
-.ArticleContent ul li:before {
+.ArticleContent ul > li:before {
     content: "—";
     display: inline-block;
     margin-left: -1.5em;
