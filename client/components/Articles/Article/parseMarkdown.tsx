@@ -15,7 +15,7 @@ export default function parseMarkdown(html) {
     md.renderer.rules.csc = (tokens, index) => {
         if (tokens[index].tag === 'card') {
             const props = parseToObject(tokens[index].markup);
-            tokens[index].content = renderToString(<Card size="small" {...props} />);
+            tokens[index].content = renderToString(<Card {...props} />);
         }
 
         return defaultCscBodyRender(tokens, index);
