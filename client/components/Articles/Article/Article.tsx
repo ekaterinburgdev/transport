@@ -1,18 +1,15 @@
 import React from 'react';
 import classNames from 'classnames/bind';
-import md from 'markdown-it';
+import parseMarkdown from './parseMarkdown';
+
 import { ArticleProps } from './Article.types';
 import Link from 'next/link';
 
-import styles from './Article.module.css';
-import t from 'utils/typograph';
 import { Feedback } from 'components/UI/Feedback/Feedback';
 
-const cn = classNames.bind(styles);
+import styles from './Article.module.css';
 
-function getContent(html) {
-    return t(md({ html: true }).render(html));
-}
+const cn = classNames.bind(styles);
 
 export function Article({ title, description, sidebar, external, onFeedbackClick }: ArticleProps) {
     return (
@@ -24,10 +21,11 @@ export function Article({ title, description, sidebar, external, onFeedbackClick
                 </Link>
                 <Feedback onClick={onFeedbackClick} size="l" />
             </div>}
+            
             <article className={cn(styles.ArticleContent)}>
                 <div className={cn(styles.ArticleText)}>
                     {title && <h1 className={cn(styles.ArticleTitle)}>{title}</h1>}
-                    {description && <div dangerouslySetInnerHTML={{ __html: getContent(description) }} />}
+                    {description && <div dangerouslySetInnerHTML={{ __html: parseMarkdown(description) }} />}
                 </div>
                 {sidebar !== undefined && <aside className={cn(styles.ArticleAside)}>
                     {external && (
@@ -35,7 +33,7 @@ export function Article({ title, description, sidebar, external, onFeedbackClick
                             <Feedback size="l" onClick={onFeedbackClick} />
                         </div>
                     )}
-                    {sidebar && <div dangerouslySetInnerHTML={{ __html: getContent(sidebar) }} />}
+                    {sidebar && <div dangerouslySetInnerHTML={{ __html: parseMarkdown(sidebar) }} />}
                 </aside>}
             </article>
         </div>

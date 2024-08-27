@@ -69,11 +69,11 @@
     padding-bottom: 0;
 }
 
-.ArticleContent a:hover {
+.ArticleText a:hover {
     text-decoration: none;
 }
 
-.ArticleContent h2 {
+.ArticleText h2 {
     margin-top: 1.4em;
     margin-bottom: .3em;
     font-weight: 500;
@@ -81,7 +81,7 @@
     line-height: 1.16;
 }
 
-.ArticleContent h3 {
+.ArticleText h3 {
     margin-top: 1.9em;
     margin-bottom: .8em;
     font-weight: 500;
@@ -89,7 +89,7 @@
     line-height: 1.25;
 }
 
-.ArticleContent h4 {
+.ArticleText h4 {
     margin-top: 1.75em;
     margin-bottom: .25em;
     font-weight: 500;
@@ -97,9 +97,9 @@
     line-height: 1.25;
 }
 
-.ArticleContent ol,
-.ArticleContent ul,
-.ArticleContent p {
+.ArticleText ol,
+.ArticleText ul,
+.ArticleText p {
     margin-bottom: 1.1em;
     font-size: 14px;
     line-height: 1.4;
@@ -113,25 +113,25 @@
     }
 }
 
-.ArticleContent li {
+.ArticleText li {
     margin-top: .75em;
     margin-bottom: .75em;
 }
 
-.ArticleContent li::marker {
+.ArticleText li::marker {
     color: #667999;
 }
 
-.ArticleContent ol {
+.ArticleText ol {
     padding-left: 1em;
 }
 
-.ArticleContent ul {
+.ArticleText ul {
     padding-left: 1.5em;
     list-style-type: none;
 }
 
-.ArticleContent ul > li:before {
+.ArticleText ul > li:before {
     content: "—";
     display: inline-block;
     margin-left: -1.5em;
@@ -139,7 +139,7 @@
     opacity: .45;
 }
 
-.ArticleContent blockquote {
+.ArticleText blockquote {
     margin: 8px 0;
     padding: 16px;
     border-radius: 16px;
@@ -148,12 +148,12 @@
     line-height: 1.35;
 }
 
-.ArticleContent blockquote p {
+.ArticleText blockquote p {
     margin: 0;
 }
 
-.ArticleContent b,
-.ArticleContent strong {
+.ArticleText b,
+.ArticleText strong {
     font-weight: 500;
 }
 
@@ -193,30 +193,30 @@
         font-size: 64px;
     }
 
-    .ArticleContent {
+    .ArticleText {
         gap: 32px;
         padding-bottom: 80px;
     }
 
-    .ArticleContent h2 {
+    .ArticleText h2 {
         font-size: 48px;
     }
 
-    .ArticleContent h3 {
+    .ArticleText h3 {
         font-size: 32px;
     }
 
-    .ArticleContent h4 {
+    .ArticleText h4 {
         font-size: 22px;
     }
 
-    .ArticleContent ol,
-    .ArticleContent ul,
-    .ArticleContent p {
+    .ArticleText ol,
+    .ArticleText ul,
+    .ArticleText p {
         font-size: 20px;
     }
 
-    .ArticleContent blockquote {
+    .ArticleText blockquote {
         margin: 16px 0;
         padding: 24px;
     }
@@ -251,7 +251,7 @@
 
 @media screen and (min-width: 1440px) {
     .ArticleContent {
-        gap: 96px;
+        gap: 64px;
     }
 
     .ArticleBack {

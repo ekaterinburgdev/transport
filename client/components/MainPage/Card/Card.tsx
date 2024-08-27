@@ -34,7 +34,7 @@ export function Card({
 }: CardProps) {
     const cardRef = useRef<HTMLAnchorElement>(null);
     const cardTitleRef = useRef<HTMLDivElement>(null);
-    const isExternalUrl = url.includes('http');
+    const isExternalUrl = url?.includes('http');
 
     useSmoothCorners(cardRef);
 
