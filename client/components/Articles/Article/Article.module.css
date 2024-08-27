@@ -12,6 +12,7 @@
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
+    margin-bottom: 24px;
 }
 
 .ArticleControls {
@@ -157,11 +158,13 @@
 }
 
 .ArticleAside {
-    flex-shrink: 0;
-    flex-basis: 25%;
-    margin-top: 56px;
-    padding: 24px 0;
+    margin-top: 40px;
+    padding-top: 24px;
     border-top: 2px solid #eee;
+}
+
+.ArticleAsideFeedback {
+    display: none;
 }
 
 .ArticleText {
@@ -222,7 +225,7 @@
 @media screen and (min-width: 1200px) {
     .ArticleContent {
         display: flex;
-        gap: 16px;
+        gap: 48px;
     }
 
     .ArticleBack {
@@ -231,13 +234,26 @@
     }
 
     .ArticleAside {
+        flex-shrink: 0;
+        flex-basis: 25%;
         margin: 0;
         padding: 0;
         border: 0;
     }
+
+    .ArticleAsideFeedback {
+        display: flex;
+        flex-direction: column;
+        margin-top: 8px;
+        margin-bottom: 48px;
+    }
 }
 
 @media screen and (min-width: 1440px) {
+    .ArticleContent {
+        gap: 96px;
+    }
+
     .ArticleBack {
         font-size: 26px;
         margin-left: -16px;
