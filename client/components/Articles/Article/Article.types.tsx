@@ -2,5 +2,6 @@ export type ArticleProps = {
     title?: string;
     description: string;
     sidebar?: string;
-    external?: boolean
+    external?: boolean;
+    onFeedbackClick?: () => void;
 };

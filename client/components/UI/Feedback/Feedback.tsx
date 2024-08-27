@@ -7,13 +7,14 @@ import styles from './Feedback.module.css';
 
 const cn = classNames.bind(styles);
 
-export function Feedback({ size } : FeedbackProps) {
+export function Feedback({ size, onClick } : FeedbackProps) {
     return (
         <a
             href="https://tally.so#tally-open=mRDkVd&tally-width=650&tally-overlay=1&tally-emoji-animation=none"
             target="_blank"
             rel="noreferrer"
             className={cn(styles.Feedback, { [styles[`Feedback_Size-${size}`]]: size })}
+            onClick={onClick}
         >
             Фидбек
         </a>
