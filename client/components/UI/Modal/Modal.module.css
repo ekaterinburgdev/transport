@@ -115,14 +115,13 @@ html:has(.Modal) {
 @media screen and (min-width: 768px) {
     .Modal {
         width: calc(100% - 120px);
-        max-height: calc(100% - 80px);
         background: none;
     }
 
     .Modal_Align-top {
-        margin-top: 80px;
+        margin-top: 70px;
         margin-bottom: 0;
-        height: calc(100% - 80px);
+        height: calc(100% - 70px);
     }
 
     .Modal_Align-top .ModalInner {
@@ -185,9 +184,14 @@ html:has(.Modal) {
 
 @media screen and (min-width: 991px) {
     .Modal {
-        width: calc(100% - 150px);
-        max-width: 1360px;
+        width: calc(100% - 140px);
+        max-width: 1200px;
     }
+
+    .Modal_Align-top .ModalInner {
+        border-radius: 32px 32px 0 0;
+    }
+    
 
     .ModalTitle {
         padding: 60px 64px 0;

@@ -93,7 +93,7 @@
     align-items: flex-start;
     width: 100%;
     position: relative;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 500;
     line-height: 1.05;
     margin-bottom: 8px;
@@ -127,14 +127,17 @@
 }
 
 .CardHeaderCaption {
-    margin-top: 15px;
-    font-size: 13px;
+    margin-top: 4px;
+    font-size: clamp(10px, 2.5vw, 20px);
     line-height: 1.35;
 }
 
 .CardExternalLink {
     flex-shrink: 0;
-    margin-left: 16px;
+    margin-top: 2px;
+    margin-left: 8px;
+    width: 1em;
+    height: 1em;
 }
 
 @media (hover: hover) {
@@ -177,6 +180,7 @@
     }
 
     .CardHeaderCaption {
+        margin-top: .775em;
         font-size: clamp(12px, 3vw, 20px);
     }
 
@@ -185,13 +189,13 @@
     }
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 768px) {
     .CardInner {
         padding: 32px;
     }
 
     .CardTitle {
-        font-size: max(24px, 4vw);
+        font-size: clamp(18px, 3vw, 24px);
     }
 
     .CardHeaderCaption {
@@ -203,22 +207,22 @@
     }
 
     .CardFooterCaption_NoSubtitle {
-        font-size: max(8vw, 48px);
+        font-size: clamp(12px, 4vw, 40px);
     }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 991px) {
     .Card {
         padding: 32px;
         border-radius: 24px;
     }
 
     .CardFooterCaption_NoSubtitle {
-        font-size: 48px;
+        font-size: 40px;
     }
 
     .CardTitle {
-        font-size: 32px;
+        font-size: 28px;
     }
 
     .CardHeaderCaption {

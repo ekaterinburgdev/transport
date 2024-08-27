@@ -29,8 +29,13 @@ export function Article({ title, description, sidebar, external }: ArticleProps)
                     {title && <h1 className={cn(styles.ArticleTitle)}>{title}</h1>}
                     {description && <div dangerouslySetInnerHTML={{ __html: getContent(description) }} />}
                 </div>
-                {sidebar && <aside className={cn(styles.ArticleAside)}>
-                    <div dangerouslySetInnerHTML={{ __html: getContent(sidebar) }} />
+                {sidebar !== undefined && <aside className={cn(styles.ArticleAside)}>
+                    {external && (
+                        <div className={cn(styles.ArticleAsideFeedback)}>
+                            <Feedback size="l" />
+                        </div>
+                    )}
+                    {sidebar && <div dangerouslySetInnerHTML={{ __html: getContent(sidebar) }} />}
                 </aside>}
             </article>
         </div>
