@@ -137,6 +137,7 @@ export function MainPage({ cards, cardsDynamicData, marqueeItems, articles }: Ma
                             title={openedArticle.title}
                             description={openedArticle.description}
                             sidebar={openedArticle.sidebar}
+                            onFeedbackClick={handleCloseModal}
                             external
                         />
                     </Modal>

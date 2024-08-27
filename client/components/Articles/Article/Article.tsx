@@ -14,7 +14,7 @@ function getContent(html) {
     return t(md({ html: true }).render(html));
 }
 
-export function Article({ title, description, sidebar, external }: ArticleProps) {
+export function Article({ title, description, sidebar, external, onFeedbackClick }: ArticleProps) {
     return (
         <div className={cn(styles.Article, { [styles.Article_external]: external })}>
             {!external && <div className={cn(styles.ArticleControls)}>
@@ -22,7 +22,7 @@ export function Article({ title, description, sidebar, external }: ArticleProps)
                     <span className={cn(styles.ArticleBackArrow)}>←</span>
                     <span className={cn(styles.ArticleBackCaption)}>На главную транспорта</span>
                 </Link>
-                <Feedback size="l" />
+                <Feedback onClick={onFeedbackClick} size="l" />
             </div>}
             <article className={cn(styles.ArticleContent)}>
                 <div className={cn(styles.ArticleText)}>
@@ -32,7 +32,7 @@ export function Article({ title, description, sidebar, external }: ArticleProps)
                 {sidebar !== undefined && <aside className={cn(styles.ArticleAside)}>
                     {external && (
                         <div className={cn(styles.ArticleAsideFeedback)}>
-                            <Feedback size="l" />
+                            <Feedback size="l" onClick={onFeedbackClick} />
                         </div>
                     )}
                     {sidebar && <div dangerouslySetInnerHTML={{ __html: getContent(sidebar) }} />}
